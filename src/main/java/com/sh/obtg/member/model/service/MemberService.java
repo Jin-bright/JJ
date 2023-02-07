@@ -19,6 +19,11 @@ public class MemberService {
 	
 	private MemberDao memberDao = new MemberDao();
 	
+	/**
+	 * 로그인 요청
+	 * @param memberId
+	 * @return
+	 */
 	public Member selectOneMember(String memberId) {
 		Connection conn = getConnection();
 		System.out.println(conn);
@@ -26,6 +31,8 @@ public class MemberService {
 		close(conn);
 		return member;
 	}
+	
+	
 	public int updateMemberRole(String memberId, String memberRole) {
 		Connection conn = getConnection();
 		int result = 0;
