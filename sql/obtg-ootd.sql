@@ -559,7 +559,7 @@ CREATE TABLE NSHARE_BOARD (
 	product_content	varchar2(4000)	NOT NULL,
 	product_price	 NUMBER  default 0,
 	product_reg_date	Date default sysdate,
-	product_size	number	NULL,
+	product_status	varchar(10) not	NULL, -- 사이즈 대신 상중하로 상품상태 변경
 	product_color	varchar2(50) NULL,
     product_read_count	number	default 0,
     product_gender char(5) not null,
@@ -573,6 +573,8 @@ create sequence SEQ_NSHARE_BOARD_product_id;
 
 select * from NSHARE_BOARD
 
+--alter table NSHARE_BOARD drop column product_size;
+--alter table NSHARE_BOARD add product_status varchar(10) not null;
 
 
 --4) 새로만든 share  첨부파일 테이블 
