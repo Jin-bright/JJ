@@ -229,13 +229,16 @@ a > img{
 
 /*글쓰기버튼*/
 input#btnAdd{
-	position : relative;
+
 	background-color : black;
 	color : white;
 	height : 32px;
 	width : 70px;
-	left : 1434px;
-	top : 86px;
+	margin-left : 1400px
+/* 	position : absolute;
+	top:100px;
+	left : 34px;
+ */
 }
 #btnAdd:hover{
 	font-weight : 900;

@@ -2,6 +2,7 @@
 <%@ page import="com.sh.obtg.member.model.dto.MemberRole" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -84,7 +85,7 @@
 	<h1  class="main-title"  >O B T G</h1>
 	<a class="menu__item" id="i-0" href="<%=request.getContextPath()%>/index.jsp"><span class="menu__text"><b>HOME</b></span></a>	
 	<a class="menu__item" id="i-1" href="<%=request.getContextPath()%>/ootd/ootdWholeList"><span class="menu__text">OOTD</span></a>
-	<a class="menu__item" id="i-2" href="<%=request.getContextPath()%>/share/shareWholeList"><span class="menu__text">SHARES</span></a>
+	<a class="menu__item" id="i-2" href="${pageContext.request.contextPath}/share/newShareWholeList"><span class="menu__text">SHARE</span></a>	
 	<a class="menu__item" id="i-4" href="<%= request.getContextPath() %>/column/columnList"><span class="menu__text">COLUMN</span></a>
   <div id="active"></div>
   <div id="active-2"></div>
