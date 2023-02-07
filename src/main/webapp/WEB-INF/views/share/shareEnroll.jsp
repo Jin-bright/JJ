@@ -29,7 +29,40 @@
 		enctype ="multipart/form-data"
 		method="post">
 		<table id="tbl-board-view">
-		
+
+		<tr>
+			<th>상품 이미지</th>
+			<td style="width:100px; height:100px; ">
+				<div id="col_img">
+					<img id="col_img_viewer" style="width : 100px">
+					<img id="col_img_viewer2" style="width : 100px">
+				</div>
+				
+				
+				<div  class="filebox">
+					<input class="upload-name" value="첨부파일" placeholder="첨부파일">
+	    			<label for="upFile1">파일찾기</label>
+					<input type="file" name="upFile1" id="upFile1" accept="image/*"  required /> <br />
+	
+				   	<input class="upload-name" value="첨부파일" placeholder="첨부파일">
+	    			<label for="upFile2">파일찾기</label>
+					<input type="file" name="upFile2"  id="upFile2" accept="image/*"  required>
+	    			   
+				</div>
+				
+				<%-- <input type="file" name="upFile1"  id="upFile1" accept="image/*"  required> --%>
+				<div id="imgexplain">
+				<p>- 첫번째 이미지로 노출됩니다.</p>
+				<p>- 이미지는 상품 등록 시 정사각형으로 잘려서 등록됩니다.</p>
+				</div>
+			</td>
+		</tr>
+	<!-- 	<tr>
+			<th> 상품이미지</th>
+			<td>			
+				<input type="file" name="upFile1"  id="upFile1" accept="image/*"  required>
+			</td>
+		</tr> -->
 		<tr >
 			<th style ="padding-top:20px; font-size : 24px">제 목</th>
 			<td style ="padding-top:20px" >
@@ -41,7 +74,7 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text"  class="inputtext" name="memberId" value="<%=loginMember.getMemberId() %>" readonly required/>
+				<input type="text"  class="inputtext" name="memberId" value="tigerhj" readonly required/>
 			</td>
 		</tr>
 		<tr>
@@ -80,20 +113,7 @@
 				<input type="checkbox" name="style" id="S9" value="아메카지" onclick='checkOnlyOne(this)' ><label for="S9">아메카지</label>	
 			</td>
 		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td>			
-				<input type="file" name="upFile1"  id="upFile1" accept="image/*"  required>
-			</td>
-		</tr>
-		<tr>
-			<th>미리보기</th>
-			<td style="width:100px; height:100px; ">
-				<div id="col_img">
-					<img id="col_img_viewer" style="width : 100px">
-				</div>
-			</td>
-		</tr>
+		
 		<tr>
 			<th  colspan="2" >
 			<div class="summernotecontainer">
@@ -131,6 +151,24 @@ document.querySelector("#upFile1").addEventListener('change', (e) => {
 	else {
 		// 파일 선택 취소한 경우
 		document.querySelector("#col_img_viewer").src = "";
+	}
+});
+
+document.querySelector("#upFile2").addEventListener('change', (e) => {
+	const img = e.target;
+	
+	if(img.files[0]){
+		// 파일 선택한 경우
+		const fr = new FileReader(); 
+		fr.readAsDataURL(img.files[0]); 
+		fr.onload = (e) => {
+			// 읽기 작업 완료시 호출될 load이벤트핸들러
+			document.querySelector("#col_img_viewer2").src = e.target.result; 
+		};
+	}
+	else {
+		// 파일 선택 취소한 경우
+		document.querySelector("#col_img_viewer2").src = "";
 	}
 });
 </script>

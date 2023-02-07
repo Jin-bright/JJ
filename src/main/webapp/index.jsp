@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/about.css" />
 
 <section class="swiper-container loading">

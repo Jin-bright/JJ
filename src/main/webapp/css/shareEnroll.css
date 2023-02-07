@@ -1,5 +1,30 @@
 @charset "EUC-KR";
 
+/* file custom  */
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+.filebox label { 
+	/* 파일찾기   */
+    display: inline-block;
+    padding: 10px 10px;
+    color: #fff;
+
+    background-color: #999999;
+    cursor: pointer;
+    height: 30px;
+    margin-left: 10px;
+    font-size : 14px;
+}
+
+
+
+
 .satustext{
 	 width : 60px;
 	 margin-left : 5px;
