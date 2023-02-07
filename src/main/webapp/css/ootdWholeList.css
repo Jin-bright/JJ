@@ -1,0 +1,187 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.search {
+  width: 100%;
+  position: relative;
+  margin-top : 30px;
+  margin-bottom : 60px;
+  display: flex; 
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid black;
+  border-right: none;
+  padding: 5px;
+  height: 35px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: black;
+}
+
+.searchButton {
+  width: 38px;
+  height: 34px;
+  border: 1px solid black;
+  background: black;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wrap{
+  width: 550px;
+  height : 20px;
+  position: absolute;
+  top: 460px;
+  left: 54%;
+  transform: translate(-50%, -50%);
+}
+/*Resize the wrap to see the search bar change!*/
+
+.maketd:hover  {
+    transform: scale(1.1);
+    background-color: orange;
+    transition : 0.5s;
+    text-decoration : white;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+#ootdboardlist{
+	margin:0 auto; 	
+	margin-left : 160px;
+	font-weight : 900;
+	font-family: 'Nanum Gothic Coding', monospace;		
+	text-align:center;
+	font-size : 33px;
+	padding-bottom : 10px
+}
+
+#ootdboardlist2{
+	margin-left : 160px;
+	font-size : 16px;
+	font-weight : 100;
+	font-family: 'Nanum Gothic Coding', monospace;		
+	text-align:center;	
+}
+
+
+table#tblBoard{
+	margin : 0 auto;
+	border-spacing : 20px;
+	border-collapse: separate;
+	table-layout:fixed; 
+	border : none;
+/* 	width:800px;   */
+	padding : 10px;
+}
+		
+
+
+
+.maketd{
+
+	font-weight : 500;	
+	border:1px solid orange; 
+	text-align:center;
+	font-family: 'Nanum Gothic Coding', monospace;
+	height : 200px;
+	width : 190px;	
+	margin : 0;
+	padding-bottom : 10px
+}
+
+img{
+	margin : 10px 10px 10px 10px;
+	height : 250px;
+	width : 170px;
+
+}
+
+a > img{
+	display : inline;
+	margin-left : -142px;
+	height : 250px;
+	width : 170px;
+
+}
+.atags{
+	display : inline-block;
+}
+
+
+/*글쓰기버튼*/
+input#btnAdd{
+	background-color : black;
+	color : white;
+	height : 32px;
+	width : 70px;
+	margin-left : 1285px;
+}
+#btnAdd:hover{
+	font-weight : 900;
+	font-size : 14px;
+	cursor : pointer;
+}
+
+
+
+
+/*페이지바*/
+div#pagebar{
+	margin-top:10px; 
+	text-align:center; 
+	background-color: #eeeeee;
+}
+
+div#pagebar span.cPage{
+/* 	//현재페이지 */
+	
+	color:black;
+	margin-right: 5px;
+	font-size : 22px;
+	font-weight : bold;
+	width:10px;	
+}
+
+
+
+div#pagebar span.cPage :hover{
+/* 	//현재페이지 */
+	
+background-color:gray; 
+}
+
+
+
+div#pagebar a{
+	margin-left : 5px;
+	margin-right: 5px;
+	color:black;
+	font-size : 20px;
+
+	width:10px;
+}
+
+div#pagebar a:hover{
+	background-color : #eeeeee;	
+	font-size:24px;
+	font-weight: 900;
+	text-decoration : underline;
+	font-weight : bold;
+}
+
+p.non{
+	text-align : left;
+	text-align:center;
+	font-family: 'Nanum Gothic Coding', monospace;	
+	color : orange;
+	font-weight : bolder;
+	margin-bottom : 0;
+}

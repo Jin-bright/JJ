@@ -1,0 +1,190 @@
+@charset "UTF-8";
+.main{
+	display: flex;
+}
+.container-menu{
+	width:250px;
+	background: #f9f4d2;
+}
+.container-li{
+	display: flex;
+    margin-left: -130px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+
+}
+.container-menu ul{
+	margin-left: 200px;
+    margin-top: 20px;
+    list-style: none;
+}
+.container-menu ul img{
+	width: 30px;
+	hight:30px;
+	float: left;
+	}
+
+.container-menu ul a li{
+	font-size:20px;
+	width : 200px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+
+	}
+hr{
+	border:1px solid black;
+}
+#msg-container {
+	min-height: 830px;
+	margin: 0 auto;
+	padding-top: 100px;
+	text-align: center;
+}
+#msg-wrap {
+	width: 800px;
+}
+#msg-wrap th {
+	background: #ffa5003b;
+	border-style: none;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+#msg-wrap td {
+	border-bottom: 1px solid dimgrey;
+	padding: 12px 0;
+}
+#check {
+	width: 35px;
+}
+#sen {
+	width: 120px;
+}
+#tit {
+	width: 480px;
+}
+#pagebar {
+/* 	background: #ffa5003b; */
+	margin-top: 20px;
+	cursor: pointer;
+}
+#pagebar:hover {
+	color: orange;
+}
+#msgBtn {
+	border-style: none;
+	background: none;
+	width: 100%;
+}
+#msgBtn :hover {
+	background: dimgrey;
+}
+/* 모달창 */
+.frmPopRe{
+ 	position: fixed; 
+    top: 50%; left: 30%;  
+    transform: translate(-50%, -50%); 
+    width: 25em; 
+    height: 26em; 
+    padding: 10px;
+    border: 1px solid grey;
+    background: white;
+    border-radius: 1em;
+    visibility: hidden;
+    z-index : 999;
+    border : 2px solid orange;
+}
+.showPopRe {
+	visibility: visible;
+	z-index: 999;
+}
+#msgTable{
+	width: 330px;
+	height: 300px;
+    background-color: F5F5DC;
+	margin : 0 auto;
+	border : 2px solid black; 
+	border-collapse:collapse;  
+	padding : 10px;
+	padding-top : 20px;
+}
+#msgContent, #content {
+	width: 150px;
+	height: 150px;
+}
+
+.msgtg{
+	width: 90px;
+	padding: 5px 5px 5px 10px ;
+}
+
+.msgtd{
+	height: 30px;
+}
+#msgsubmit{
+	background-color  : black;
+	border : 3px solid black;
+	color: white;
+	font-size:16px;
+	width:100px;
+	margin-left : 80px;
+	margin-top : 4px;
+	cursor: pointer;
+}
+#msgclose{
+	margin-top: 21px;
+	margin-left : 80px;
+	background-color  : black;
+	border : 3px solid black;
+	color: white;
+	font-size:16px;
+	text-align : center;
+	position : absolute;
+	top:345px;
+	left: 120px;
+	display: inline-block;
+	height :28px;
+	width:100px;
+	cursor: pointer;
+}
+#msgsubmit:hover {
+	background-color : orange;
+}
+
+
+#msgclose:hover {
+	background-color : red;
+}
+
+.frmwrapper{
+    position: fixed; 
+    top: 50%; left: 50%;  
+    transform: translate(-50%, -50%); 
+    width: 25em; 
+    height: 24em; 
+    padding: 10px;
+    border: 1px solid grey;
+    background: white;
+    border-radius: 1em;
+    visibility: hidden;
+    z-index : 999;
+    border : 2px solid orange;
+}
+
+.frmPopAn{
+ 	position: fixed; 
+    top: 50%; left: 60%;  
+    transform: translate(-50%, -50%); 
+    width: 25em; 
+    height: 26em; 
+    padding: 10px;
+    border: 1px solid grey;
+    background: white;
+    border-radius: 1em;
+    visibility: hidden;
+    z-index : 999;
+    border : 2px solid orange;
+}
+.showPopAn {
+	visibility: visible;
+	z-index: 999;
+}

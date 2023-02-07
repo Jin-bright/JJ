@@ -1,0 +1,70 @@
+@charset "UTF-8";
+#col_container {
+	margin-top: 65px;
+}
+.columns {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 750px;
+	height: 250px;
+	margin: 0 auto;
+	overflow: hidden;
+	/* border-style: solid; */
+}
+.col_wrap {
+	display: flex; 
+	align-items:center     
+}
+.col_wrap a {
+	display: contents;
+}
+.col_wrap > a > img {
+	display: flex;
+	align-items: center;
+	width: 290px;
+	background-color: steelblue; /* 사진 없을때 보려고 만든 용도  */
+}
+.col_wrap > a > img:hover {
+	box-shadow: 5px 3px 5px lightgrey;	
+}
+.col_txt {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 300px;
+	margin-left: 10px;
+}
+.col_txt > h2:hover, .col_txt > p:hover {
+	color: indianred;
+}
+.col_title {
+	font-size: 1.8em;
+	font-family: swipercons;
+}
+.col_subtitle {
+	font-family: swipercons;
+	font-size: 1em;
+	padding-top: .5em;
+}
+
+.pen {
+	display: inline-block;
+	width: 40px;
+	height: 50px;
+	margin: 1em 0 0 90em;
+	cursor: pointer;
+}
+#btn-more {
+	border-style: none;
+	margin: 3em;
+	width: 57em;
+	height: 2.2em;
+	background: linen;
+	color: black;
+	font-family: fangsong;
+	font-weight: 500;
+}
+#btn-more:hover {
+	background: #fa807266;
+}

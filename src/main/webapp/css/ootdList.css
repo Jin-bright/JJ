@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+
+ 
+#photo-container{
+/*사진담기는 큰 div	*/
+	border : 3px solid black;
+	margin : 0 auto;
+	width : 1000px;
+	padding : 10px 10px 10px 10px;
+}
+
+.card-body{
+	margin-top : 10px;
+	margin-bottom : 10px;
+}
+
+
+.cardEach{
+/*동적태그인데 될까 ?*/
+	width : 18em;
+	border : 1px solid black;
+	margin-left : 20px;
+	
+}
+
+/* ootdlist - 각각 이미지 */
+.card-img-top{
+	width:230px;
+	height : 330px;
+}
+
+.onerow{
+	border : 1px solid black;
+	margin-left : 20px;
+	margin-bottom : 20px;
+	
+}
+
+
+table#tbl-board{
+	width:800px; 
+	margin:0 auto; 
+	border:3px solid black; 
+	border-collapse:collapse; 
+	clear:both; 
+	padding : 20px
+}
+	
+table#tbl-board th{
+	font-weight : 500;
+	width : 20%;
+	padding : 20px
+}	
+	
+table#tbl-board th, table#tbl-board td {
+	border:1px solid; 
+	text-align:center;
+	font-family: 'Nanum Gothic Coding', monospace;	
+} 
+
+
+/*페이지바*/
+div#pagebar{
+	margin-top:10px; 
+	text-align:center; 
+	background-color: orange;
+}
+
+div#pagebar span.cPage{
+	color:black;
+	margin-right: 5px;
+	font-size : 20px;
+	width:10px;	
+}
+
+div#pagebar a{
+	margin-right: 5px;
+	color:black;
+	font-size : 20px;
+	width:10px;	
+	display : inline;
+}
+
+/** 새로 생성한 테이블 **/
+
+#type11{
+	margin : 0 auto;
+	border-spacing : 20px;
+	border-collapse: separate;
+}
+
+img{
+	margin : 10px 10px 10px 10px;
+	height : 260px;
+	width : 210px
+}
+
+.explain{
+	width : 220px;
+	margin-left:10px;
+}
+
+.newtablerowth{
+	margin : 20px;
+	border : 2px solid orange; 
+	height : 200px;
+	width : 180px
+}
+

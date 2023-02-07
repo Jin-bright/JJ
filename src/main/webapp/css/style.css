@@ -1,0 +1,354 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@900&family=Shrikhand&family=Solitreo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;500;600&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@900&family=Shrikhand&family=Solitreo&display=swap');
+/* 메뉴바  */
+ :root{
+	width: 100%;
+	height:100%;
+}  
+
+.main-title {
+	width : 400px; 
+	font-size : 70px;	
+	margin-left : 10PX;
+	font-weight: bold;
+	font-family: 'Shrikhand', cursive;
+	justify-content: left;
+	position: absolute;
+	left:30px;
+	
+}
+
+/* Variables */
+/* Variables */
+button:hover{
+	cursor: pointer;
+}
+
+
+/*----------------------------
+	The Navigation Menu
+-----------------------------*/
+
+
+#colorNav > ul{
+	width: 450px; /* Increase when adding more menu items */
+	margin:0 auto;
+}
+
+#colorNav > ul > li{ /* will style only the top level li */
+	list-style: none;
+	/* box-shadow: 0 0 10px rgba(100, 100, 100, 0.2) inset,1px 1px 1px #CCC; */
+	display: inline-block;
+	line-height: 1;
+	margin: 1px;
+	border-radius: 3px;
+	position:relative;
+}
+
+#colorNav > ul > li > a{
+	color:inherit;
+	text-decoration:none !important;
+	font-size:24px;
+	/* padding: 25px; */
+}
+
+#colorNav li ul{
+	position:absolute;
+	list-style:none;
+	text-align:center;
+	width:180px;
+	left:50%;
+	margin-left:-90px;
+	top:15px;
+	font:bold 12px 'Open Sans Condensed', sans-serif;
+	
+	/* This is important for the show/hide CSS animation */
+	max-height:0px;
+	overflow:hidden;
+	
+	-webkit-transition:max-height 0.4s linear;
+	-moz-transition:max-height 0.4s linear;
+	transition:max-height 0.4s linear;
+}
+
+#colorNav li ul li{
+	background-color:#313131;
+}
+
+#colorNav li ul li a{
+	padding:12px;
+	color:#fff !important;
+	text-decoration:none !important;
+	display:block;
+}
+
+#colorNav li ul li:nth-child(odd){ /* zebra stripes */
+	background-color:#363636;
+}
+
+#colorNav li ul li:hover{
+	background-color:#444;
+}
+
+#colorNav li ul li:first-child{
+	border-radius:3px 3px 0 0;
+	margin-top:25px;
+	position:relative;
+}
+
+#colorNav li ul li:first-child:before{ /* the pointer tip */
+	content:'';
+	position:absolute;
+	width:1px;
+	height:1px;
+	border:5px solid transparent;
+	border-bottom-color:#313131;
+	left:50%;
+	top:-10px;
+	margin-left:-5px;
+}
+
+#colorNav li ul li:last-child{
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/* This will trigger the CSS */
+/* transition animation on hover */
+
+#colorNav li:hover ul{
+	max-height:200px; /* Increase when adding more dropdown items */
+}
+
+
+/*------------------------------------*/
+/* :root{
+font-family: 'Noto Sans KR', sans-serif;	
+} */
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Generic */
+
+a, a:visited, a:focus, a:hover {
+	text-decoration: none;
+	color: #222222;
+}
+
+/**/
+#active,
+#active-2,
+#active-3,
+#active-4,
+#active-5 {
+  position: absolute;
+  left: 350px;
+  height: 30px;
+  width: 100px;
+  z-index: 0;
+  transition: left 0.5s ease-out;
+  border-radius: 10px;
+}
+
+#active-2,
+#active-3,
+#active-4,
+#active-5 {
+  position: absolute;
+  left: 350px;
+  width: 50px;
+  transition: left 0.5s ease-out 0.075s;
+}
+
+/**/
+header {
+	background : white;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: RIGHT;
+  align-items: center;
+  column-gap: 30px; 
+  position: relative;
+  height: 45px;
+  padding: 0 10px;
+  margin-right : 100px;
+  background: white;
+
+}
+
+
+.menu__item {
+  width: 130px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+/*   align-items: right; */
+  cursor: pointer;
+  float : right
+}
+
+
+.menu__text {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 100;
+  font-size : 15px;
+  color: black;
+  font-weight: 500;
+  font-family: 'Martian Mono', monospace;
+}
+
+/**/
+.is-icon-visible {
+  position: inherit;
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+  transition: 0.35s;
+}
+
+.is-text-visible {
+  color: white;
+}
+
+.is-item-animated {
+  animation: change 0.35s ease-out;
+  
+}
+
+
+
+#loginSignup{
+	/* 로그인버튼 */
+	height : 30px;
+	width : 140px;
+	background-color : white;
+	border : none;
+	position: absolute;
+	top : 10px;
+	left : 1520px;
+	font-weight: 500;
+	font-size : 13px;
+	font-family: 'Martian Mono', monospace;
+}
+
+#loginSignup:hover{
+	background-color: black;
+	color :white;
+	transition-duration : 0.4s;	
+}	
+
+/* header 윗 부분 배경색 넣기 */
+
+#headercolor{
+	background-color : white;
+}
+
+
+
+/* footer */
+footer {
+    position: relative;
+    margin: 0 auto;
+    padding: 30px;
+    border-top: 2px solid black;
+    background-color: white;
+}
+#footer-wrap {
+    font-size: 9px;
+}
+#footer_iogo {
+    font-size: 1.3em;
+}
+#footer_info {
+    display: inline-block;
+    padding-top: 10px;
+    cursor: pointer;
+}
+.youtube:hover {
+    content: url(../image/youtube_over.png);
+}
+.instagram:hover {
+    content: url(../image/instagram_over.png);
+}
+.github:hover {
+    content: url(../image/github_over.png);
+}
+.facebook:hover {
+    content: url(../image/facebook\ _over.png);
+}
+.footer_a:hover {
+    color: rgb(178, 73, 73);
+}
+.footer_a {
+	font-weight: 900;
+}
+#footer_sns {
+    display: flex;
+    column-gap: 12px;
+    
+    position: absolute;
+    right: 50px;
+    margin: 15px;
+}
+
+#footer_sns > img {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+#footer_txt {
+    padding-top: 15px;
+}
+#footer_span{
+	visibility: unset;
+	opacity: 1;
+	font-weight: 900;
+	color: black;
+}
+
+/* 알림 */
+.bell {
+	width: 20px;
+	height: 20px;
+	transform: translate(5px, 5px);
+	cursor: pointer;
+}
+.bell-hiden {
+	visibility: hidden;
+}
+.bell-twinkle {
+   animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+#report_wrap {
+	position: absolute;
+	width:250px;
+	padding: 10px;
+	transform: translate(-10px, 30px);
+	z-index: 999;
+}
+.report {
+	padding: 10px;
+	font-size: 12px;
+	text-align: center;
+	border: 1px solid RGB(17, 135, 254);
+	background: white;
+	cursor: pointer;
+}

@@ -1,0 +1,106 @@
+@charset "UTF-8";
+#memberList-container {
+	/*margin: 0 auto;
+	width: 1200px;
+	padding-bottom: 50px;
+	overflow: hidden;
+	min-height: 890px;*/
+	min-height: 949px;
+	text-align:center; 
+	padding-left: 200px; 
+}
+
+div#tableArea {
+	width: 400px;
+	margin: 0 auto;
+	border: 0;
+	font-size: 12px;
+}
+
+#tbl-member th {
+    background-color: lightgray;
+    color: black;
+    font-size: 20px;
+}
+
+
+#tbl-member td {
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	padding: 5px;
+	text-align: center;
+	padding: 12px;
+	font-size: 20px;
+}
+
+#tbl-member th:nth-child(1) {
+	width: 55px;
+}
+
+#tbl-member th:nth-child(3) {
+	width: 70px;
+}
+
+table#tbl-member {
+	/*border-collapse: collapse;
+	border-top: 3px solid gray;
+	width: 100%;*/
+    width: 100%;
+    margin: 0 auto;
+    border: 0;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+#tbl-member td>input {
+	cursor: pointer;
+	width: 70px;
+	height: 25px;
+	background-color: whitegray;
+	color: white;
+	border-radius: 10%;
+	border: 1px solid white;
+	outline: 0;
+}
+
+#tbl-member td>input:hover {
+	background-color: #fd9000;
+	color: white;
+	border: 1px solid transparent;
+	transition: all ease 0.3s;
+}
+/* 페이지바 */
+#pageBar {
+	margin-top: 30px;
+}
+
+#pageBar span {
+	border-radius: 15%;
+	padding: 9px 15px;
+	background-color: #fd9000;
+	text-decoration: none;
+	color: white;
+}
+
+#pageBar a {
+	border-radius: 15%;
+	padding: 9px 15px;
+	background-color: white;
+	text-decoration: none;
+	color: black;
+}
+
+#pageBar a:hover {
+	background-color: #fd9000;
+	color: white;
+	transition: all ease 0.5s;
+}
+
+#pageBar a:active {
+	background-color: #fd9000;
+	color: gray;
+}
+
+.cPage {
+	margin-right: 7px;
+}

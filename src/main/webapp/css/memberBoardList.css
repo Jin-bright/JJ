@@ -1,0 +1,55 @@
+@charset "UTF-8";
+#board-container {
+	text-align: center;
+	min-height: 830px;
+	max-width: 600px;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 50px;
+	transform: translate(-60px, 10px);
+}
+#nav-container {
+	font-size: 30px;
+	text-align: center;
+	margin-bottom: 25px;
+}
+#nav-container a:hover {
+	color: #ffd688;
+}
+#boardList-wrap {
+	margin-bottom: 60px;
+}
+#boardList-wrap td {
+	border: 1px solid orange;
+	padding: 25px;
+}
+#boardList-wrap td:hover{
+	background: #ffd688;
+}
+#boardList-wrap img {
+	width: 150px;
+	height: 185px;
+}
+#b_title {
+	text-align: center;
+	font-weight: 900;
+}
+#b_txt {
+	font-size: 13px;
+	text-align: center;
+	color: grey;
+}
+#sBtn {
+	width: 60px;
+	border-style: none;
+	color: wheat;
+	background: black;
+	padding: 3px;
+	margin: 10px 52px 0;
+}
+.category:hover {
+	border-bottom-style: solid;
+}
+#empty-box a:hover {
+	font-weight: 900;
+}

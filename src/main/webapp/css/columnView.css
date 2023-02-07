@@ -1,0 +1,53 @@
+@charset "UTF-8";
+#col_container {
+	margin: 0 auto;
+	padding: 80px;
+	text-align: center; 
+	position: relative;
+}
+#col_etc {
+	margin: 0 auto; 
+	width: 60em
+}
+#col_etc  span {
+	font-size: smaller; 
+	padding: 5px 0;
+}
+#col_etc > hr {
+	width: 60em;
+}
+#col_container h2 {
+	margin: 1em; 
+font-size: 35px;
+}
+#col_container h3 {
+	color: darkgrey;
+	margin-bottom: .8em;
+}
+#col_container p {
+	margin-top: 2em;
+}
+#editor {
+	display: block; 
+	margin-top: .3em;
+}
+#editor:hover {
+	color: indianred;
+	cursor: pointer;
+}
+#edit_wrap {
+	margin: 0 auto;
+	text-align: center;
+	padding-bottom: 3em;
+}
+#edit_wrap > input {
+	width: 70px;
+	height: 25px;
+	border-style: none;
+	background: dimgrey;
+	color: white;
+	cursor: pointer;
+}
+#edit_wrap > input:hover {
+	background: black;
+}

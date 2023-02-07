@@ -1,0 +1,41 @@
+@charset "UTF-8";
+#col_enroll {
+	margin: 100px;
+}
+table {
+	border: 3px solid black;
+	margin: 0 auto;
+}
+th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th {
+	text-align: center;
+    font-size: 13.5px;
+    padding: 8px 15px;
+}
+.col_txt  {
+    width: 600px;
+    border: none;
+    border-bottom: 2px solid grey;
+    padding-left: .5em;
+}
+#col_img {
+	display:table-cell;
+	border:2px dashed darkgray; 
+	width:350px; 
+	height:200px; 
+}
+.note-resizebar {
+	visibility: hidden;
+}
+#btn {
+	background-color: black;
+	color: white;
+	width: 90px;
+	height: 25px
+}
+.red {
+	color: red;
+}
