@@ -483,3 +483,113 @@ create table message (
 create sequence seq_message_no;
 
 select * from faq;
+
+-----------------------------------------------------------------------     NEW   JIN  DB 셋팅 ----------------------------------------------------------------------------
+--CREATE TABLE NMember (  -- 새로안만들고 기존 테이블에  필드로 주소를 추가하는걸로 ! 
+--	member_zipcode	varchar2(200)	NULL,
+--	member_street_address	varchar2(200)	NULL,
+--	member_detailed_address	varchar2(200)	NULL
+
+
+-- 1. 메인카테고리 
+CREATE TABLE Nmaincategory (
+	maincategory_id	varchar2(100)	NULL, -- PK 
+	maincategory_category	varchar2(100)	NULL,
+    
+    CONSTRAINT PK_Nmaincategory_maincategory_id PRIMARY KEY (maincategory_id)
+);
+
+insert into Nmaincategory values ('TOP', '상의');
+insert into Nmaincategory values ('BOTTOM', '하의');
+insert into Nmaincategory values ('ACCESSARY', '악세서리/패션잡화');
+insert into Nmaincategory values ('SHOES', '신발');
+SELECT * FROM  Nmaincategory;
+
+--2. 서브카테고리
+CREATE TABLE Nsubcategory (
+	subcategory_id	varchar2(100)	NULL, --PK
+	maincategory_id	varchar2(100)	NULL, --FK
+	subcategory_category	varchar2(100)	NULL,
+    
+    CONSTRAINT PK_Nsubcategory_subcategory_id PRIMARY KEY (subcategory_id),
+    CONSTRAINT FK_Nsubcategory_maincategory_id FOREIGN KEY (maincategory_id) REFERENCES Nmaincategory (maincategory_id) on delete set null 
+);
+-- SELECT * FROM Nsubcategory
+-- 데이터 넣기
+insert into Nsubcategory values ('T1', 'TOP',  '패딩' );
+insert into Nsubcategory values ('T2', 'TOP',  '코트');
+insert into Nsubcategory values ('T3', 'TOP',  '니트웨어');
+insert into Nsubcategory values ('T4', 'TOP',  '자켓');
+insert into Nsubcategory values ('T5', 'TOP',  '후드');
+insert into Nsubcategory values ('T6', 'TOP',  '긴팔티셔츠');
+insert into Nsubcategory values ('T7', 'TOP',  '반팔티셔츠');
+insert into Nsubcategory values ('T8', 'TOP',  '민소매');
+insert into Nsubcategory values ('T9', 'TOP',  '기타');
+
+insert into Nsubcategory values ('B1', 'BOTTOM',  '청바지' );
+insert into Nsubcategory values ('B2', 'BOTTOM',  '슬랙스');
+insert into Nsubcategory values ('B3', 'BOTTOM',  '반바지');
+insert into Nsubcategory values ('B4', 'BOTTOM',  '스커트');
+
+insert into Nsubcategory values ('A1', 'ACCESSARY',  '가방' );
+insert into Nsubcategory values ('A2', 'ACCESSARY',  '시계');
+insert into Nsubcategory values ('A3', 'ACCESSARY',  '주얼리');
+insert into Nsubcategory values ('A4', 'ACCESSARY',  '모자');
+insert into Nsubcategory values ('A5', 'ACCESSARY',  '스카프');
+insert into Nsubcategory values ('A6', 'ACCESSARY',  '아이웨어');
+insert into Nsubcategory values ('A7', 'ACCESSARY',  '기타');
+
+
+insert into Nsubcategory values ('S1', 'SHOES',  '운동화' );
+insert into Nsubcategory values ('S2', 'SHOES',  '부츠');
+insert into Nsubcategory values ('S3', 'SHOES',  '로퍼');
+insert into Nsubcategory values ('S4', 'SHOES',  '샌들');
+insert into Nsubcategory values ('S5', 'SHOES',  '슬리퍼');
+insert into Nsubcategory values ('S6', 'SHOES',  '구두');
+insert into Nsubcategory values ('S7', 'SHOES',  '기타');
+
+
+--3.  새로만든 share  테이블 - 게시글 등록 ★★★
+CREATE TABLE NSHARE_BOARD (  
+	product_id	number, --pk/seq
+	subcategory_id	varchar2(100)	NOT NULL, --fk
+	member_id	varchar2(50)	NULL, --fk
+	style_name	varchar2(20)	NOT NULL, -- fk
+	product_name	varchar2(100)	NOT NULL,
+	product_content	varchar2(4000)	NOT NULL,
+	product_price	 NUMBER  default 0,
+	product_reg_date	Date default sysdate,
+	product_status	varchar(10) not	NULL, -- 사이즈 대신 상중하로 상품상태 변경
+	product_color	varchar2(50) NULL,
+    product_read_count	number	default 0,
+    product_gender char(5) not null,
+    
+    CONSTRAINT PK_NSHARE_BOARD_product_id  PRIMARY KEY (product_id),
+    CONSTRAINT FK_NSHARE_BOARD_MEMBER_ID FOREIGN KEY (member_id) REFERENCES Member (member_id) on delete set null,
+    CONSTRAINT FK_NSHARE_BOARD_STYLE_NAME FOREIGN KEY (style_name) REFERENCES fashionstyle (style_no) on delete set null,
+    CONSTRAINT FK_NSHARE_BOARD_subcategory_id FOREIGN KEY (subcategory_id) REFERENCES Nsubcategory (subcategory_id) on delete set null
+);
+create sequence SEQ_NSHARE_BOARD_product_id;
+
+select * from NSHARE_BOARD
+
+--alter table NSHARE_BOARD drop column product_size;
+--alter table NSHARE_BOARD add product_status varchar(10) not null;
+
+
+--4) 새로만든 share  첨부파일 테이블 
+
+CREATE TABLE NSHARE_ATTACHMENT (
+	product_attachment_no	number	 not NULL, --pk
+	product_id	number 	not NULL, --fk
+	member_id	varchar2(100)	NULL, --fk
+    product_attachment_original_filename	varchar2(255)		NOT NULL,
+	product_attachment_renamed_filename	varchar2(255)		NOT NULL,
+	product_attachment_reg_date	Date default  sysdate,
+    
+    CONSTRAINT PK_NSHARE_ATTACHMENT_product_attachment_no PRIMARY KEY (product_attachment_no),
+    CONSTRAINT FK_NSHARE_ATTACHMENT_SHARE_product_id FOREIGN KEY (product_id) REFERENCES NSHARE_BOARD (product_id) on delete cascade
+);
+
+create sequence SEQ_NSHARE_ATTACHMENT_product_attachment_no;
+
