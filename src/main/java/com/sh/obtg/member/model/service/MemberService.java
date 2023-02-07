@@ -224,4 +224,16 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	/**
+	 * 아이디 찾기
+	 * @param email
+	 * @return
+	 */
+	public String findMemebrId(String email) {
+		Connection conn = getConnection();
+		String memberId = memberDao.findMemebrId(conn, email);
+		close(conn);
+		return memberId;
+	}
 }

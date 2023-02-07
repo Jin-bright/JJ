@@ -49,9 +49,7 @@ public class MemberLoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "아이디를 찾을 수 없거나 비밀번호가 일치하지 않습니다.");
-			String referer = request.getHeader("Referer");
-			response.sendRedirect(request.getContextPath() + "/");
+			response.sendRedirect(request.getContextPath() + "/member/login");
 		}
 	}
-
 }

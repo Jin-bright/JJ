@@ -453,4 +453,31 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	/**
+	 * 아이디 찾기
+	 * @param conn
+	 * @param email
+	 * @return
+	 */
+	public String findMemebrId(Connection conn, String email) {
+		// select member_id from member where email = ?
+		String sql = prop.getProperty("findMemebrId");
+		String memberId = null;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, email);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					memberId = rset.getString(1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻아이디 찾기 오류👻", e);
+		}
+		
+		return memberId;
+	}
 }
