@@ -32,8 +32,15 @@ public class MemberDao {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("[query load 완료!]" + prop);
+		System.out.println("**member-query load 완료!**" + prop);
 	}
+	
+	/**
+	 * 로그인 요청
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
 	public Member selectOneMember(Connection conn, String memberId) {
 		String sql = prop.getProperty("selectOneMember");
 		Member member = null;
@@ -61,8 +68,7 @@ public class MemberDao {
 		member.setBirthday(rset.getDate("birthday"));
 		member.setEnrollDate(rset.getTimestamp("enroll_date"));
 		member.setMemberRole(MemberRole.valueOf(rset.getString("member_role")));
-		member.setNickname(rset.getString("nickname"));
-		
+		member.setNickname(rset.getString("nickname"));	
 		System.out.println("[" + rset.getString("gender") + "]");
 		member.setGender(rset.getString("gender") != null ? 
 				Gender.valueOf(rset.getString("gender")) : null);

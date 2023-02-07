@@ -25,7 +25,6 @@ public class JdbcTemplate {
 		// /build/classes/datasource.properties 내용 불러오기
 		// / -> /build/classes
 		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
-		System.out.println( "이거실행되니 ? " + datasourceConfigPath);
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileReader(datasourceConfigPath));
