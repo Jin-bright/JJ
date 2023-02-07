@@ -1,13 +1,15 @@
 @charset "UTF-8";
-/* 로그인 */
-#login_container {
+/* 기본 */
+.container {
 	min-height: 700px;
 }
-.login_wrap {
+.wrap {
 	width: 400px;
 	margin: 0 auto;
 	padding: 60px 0 160px;
 }
+
+/* 로그인 */
 .login_title {
 	width: 200px;
 	font-size: 40px;
@@ -20,11 +22,11 @@
 	position: relative;
 	padding: 10px 0 14px;
 }
-.login_input {
+.login_input, .find_input {
 	width: 100%;
 	border-style: none;
-	border-bottom-style: solid;
-	padding: 5px 10px 5px 0;
+	border-bottom: 1px solid #c5c2c2;
+	padding: 8px 10px 5px 0;
 }
 .input_error {
 	visibility: hidden;
@@ -34,7 +36,7 @@
 .login_btn_box {
 	padding-top: 20px;
 }
-.login_btn {
+.login_btn, .find_btn{
 	width: 100%;
 	height: 40px;
 	font-weight: 700;
@@ -42,12 +44,69 @@
 	border-style: none;
 	background: black;
 	color: #fff;
+	cursor: pointer;
 }
 .etc_list {
 	display: flex;
 	justify-content: space-evenly;
 	padding-top: 20px;
+	font-size: 14px;
 }
 .etc_link {
 	list-style: none;
+	cursor: pointer;
+}
+
+/* 아이디찾기 */
+.findId_title {
+	font-size: 30px;
+	padding-bottom: 41px;
+	text-align: center;
+	border-bottom: 2px solid #000;
+}
+.ex_msg {
+	font-size: 14px;
+	text-align: center;
+	padding: 40px 0 30px;
+}
+.find_btn_box {
+	margin-top: 65px;
+	cursor: pointer;
+} 
+.after_box {
+	text-align: center;
+	padding: 40px 0;
+	font-size: 24px;
+	font-size: 25px;
+	font-weight: 900;
+	border-bottom: 2px solid #000;
+}
+.find_info {
+	padding-top: 30px;
+	text-align: center;
+}
+.find_info p {
+	font-size: 14px;
+	color: rgba(34,34,34,.5);
+}
+.find_info h4 {
+	font-size: 20px;
+}
+.success_btn_box {
+	padding-top: 50px;
+	display: flex;
+}
+.success_btn_box a {
+	width: 100%;
+	margin: 10px;
+	padding: 10px;
+	display: inline-flex;
+	justify-content: space-evenly;
+	border: 1px solid #d3d3d3;
+	border-radius: 12px;
+	color: rgba(34,34,34,.8);
+}
+.success_btn_box a:last-child {
+	background-color: #222;
+	color: #fff;
 }
