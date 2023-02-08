@@ -5,20 +5,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/member.css" />
-<section id="login_container">
-	<div class="login_wrap">
+<section class="container">
+	<div class="wrap">
 		<form action="${pageContext.request.contextPath}/member/login"
 			  method="post"
 			  name="loginFrm">
 			<h2 class="login_title">OBTG</h2>
 			<div class="login_box">
 				<h4>아이디</h4>
-				<input type="text" name="memberId" id="memberId" class="login_input" placeholder="아이디를 입력해주세요."/>
+				<input type="text" name="memberId" id="memberId" class="login_input" placeholder="아이디를 입력해주세요." required/>
 				<p class="input_error" id="id_error">올바른 아이디를 입력해주세요.</p>
 			</div>
 			<div class="login_box">
 				<h4>비밀번호</h4>
-				<input type="password" name="memberPwd" id="memberPwd" class="login_input" placeholder="비밀번호를 입력해주세요."/>
+				<input type="password" name="memberPwd" id="memberPwd" class="login_input" placeholder="비밀번호를 입력해주세요." required/>
 				<p class="input_error" id="pwd_error">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</p>
 			</div>
 			<div class="login_btn_box">
@@ -26,8 +26,8 @@
 			</div>
 		</form>
 		<ul class="etc_list">
-			<li class="etc_link">회원가입</li>
-			<li class="etc_link">아이디 찾기</li>
+			<li class="etc_link">회원가입</li> |
+			<li class="etc_link"><a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a></li> |
 			<li class="etc_link">비밀번호 찾기</li>
 		</ul>
 	</div>	
@@ -41,7 +41,6 @@ document.querySelector("#memberId").addEventListener('blur', (e) => {
     else
     	errorMsg.style.visibility = "hidden";
 });
-
 document.querySelector("#memberPwd").addEventListener('blur', (e) => {
 	const errorMsg = document.querySelector("#pwd_error");
     if(e.target.value.length === 0)
