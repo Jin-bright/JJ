@@ -12,15 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.sh.obtg.common.OotdFileRenamePolicy;
+import com.sh.obtg.share.model.dto.NshareAttachment;
+import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.dto.ShareAttachment;
 import com.sh.obtg.share.model.dto.ShareBoard;
 import com.sh.obtg.share.model.dto.Style;
+import com.sh.obtg.share.model.dto.Subcategory;
 import com.sh.obtg.share.model.service.ShareService;
 
 /**
  * Servlet implementation class ShareEnrollServlet
  */
-@WebServlet("/share/shareEnroll")
+@WebServlet("/share/newShareEnroll")
 public class ShareEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ShareService shareService = new ShareService();
@@ -29,7 +32,7 @@ public class ShareEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/share/shareEnroll.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/share/newShareEnroll.jsp")
 		.forward(request, response);	
 	
 	}
@@ -39,11 +42,9 @@ public class ShareEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 0. MultipartRequest객체 생성 - 요청메세지에서 파일을 읽어서(=input) 서버컴퓨터에서 저장 (=output) 까지 처리해준다 
-		// -- (HttpServletRequest arg0, String arg1, int arg2, String arg3, FileRenamePolicy arg4) throws IOException 
-		// 1. HttpServletRequest자리 / 2. String saveDirectory(실제저장할파일경로)/ 3.업로드할수있는파일최대크기 (꼭정해야됨) 일반파일은 10mb정도/ 4.인코딩(utf-8) / 5.파일이름정책객체? - 중복파일이 있는경우 어떻게할거냐  
 
-//		try {
-			String saveDirectory = getServletContext().getRealPath("/uploadshares/share"); //application 객체 반환  //  / <-- webroot를 가리킨다
+		try {
+			String saveDirectory = getServletContext().getRealPath("/uploadshares/newShare"); //application 객체 반환  //  / <-- webroot를 가리킨다
 			System.out.println("saveDirectory : " + saveDirectory  );
 			
 			int maxPostSize = 10*1024*1024;  //바이트단위로 줘야됨 (1kb = 1024byte  1mb - 1024*1kb ? )  
@@ -51,38 +52,30 @@ public class ShareEnrollServlet extends HttpServlet {
 			FileRenamePolicy policy = new OotdFileRenamePolicy(); //년월일_시분초밀리초_난수.tx  이렇게 만들거임 
 			
 			MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-			// 이까지 하면 파일이 서버컴텨에 저장된다 --서버저장하는거까지끝 --- 
 			// 여기까지 하고 . request가 아닌  MultipartRequest multiReq 값 꺼내는걸로 다 변경해줘야됨 
 
 			
 		    // 1. 사용자입력값 처리
-			String shareTitle = multiReq.getParameter("ShareTitle");
-			String shareWriter = multiReq.getParameter("memberId");
-			
-			String _shareCategory = multiReq.getParameter("ShareCategory");
+			String _subcategory_id = "";
+			if ( multiReq.getParameter("ShareCategory") != null ){		
+				_subcategory_id = multiReq.getParameter("ShareCategory");
+				System.out.println( _subcategory_id  );
+			}/**else if( multiReq.getParameter("ShareBottomCategory") != null ) {
+				_subcategory_id = multiReq.getParameter("ShareBottomCategory") ;
+				System.out.println( _subcategory_id  );
+			}else if( multiReq.getParameter("ShareAccessaryCategory") != null) {
+				_subcategory_id = multiReq.getParameter("ShareAccessaryCategory") ;
+				System.out.println( _subcategory_id  );
+			}**/
+			System.out.println( "enum 전 : " + _subcategory_id  );
 		
-			String shareCategory="";
-			
-			if( _shareCategory.equals("상의")) {
-				shareCategory = "상의";
-			}
-			else if( _shareCategory.equals("하의")) {
-				shareCategory = "하의";
-			}
-			else if( _shareCategory.equals("악세서리")) {
-				shareCategory = "악세서리및기타";
-			}
+	
+			Subcategory subcategory_id = Subcategory.valueOf( _subcategory_id ); //2 카테고리 
+			System.out.println("subcategory_id : "  + subcategory_id );
 
-			System.out.println("shareCategory : "  + shareCategory );
-			
-			String shareProductStatus = multiReq.getParameter("ShareProductStatus");
-			
-			
-			String _shareBuyDate = multiReq.getParameter("ShareBuyDate");
-			Date shareBuyDate = !"".equals(_shareBuyDate) ?  ( Date.valueOf(_shareBuyDate)) : null;
-			
-			
-			String _style = multiReq.getParameter("style");
+		
+			String member_id = multiReq.getParameter("memberId");//3.아이디
+			String _style = multiReq.getParameter("style"); 
 			if( _style.equals("러블리")) {
 				_style = "S1";
 			}else if( _style.equals("댄디")) {
@@ -103,66 +96,68 @@ public class ShareEnrollServlet extends HttpServlet {
 				_style = "S9";
 			}
 			
-			Style style = Style.valueOf(_style);
+			Style style_name = Style.valueOf(_style); //4.스타일
+			String product_name = multiReq.getParameter("ShareTitle");//5. 상품명
+			String product_content = multiReq.getParameter("editordata"); //6.내용
+			int product_price =  Integer.parseInt( multiReq.getParameter("productPrice"));//7.가격
+			String product_status = multiReq.getParameter("ShareState"); //9 거래전
+			String product_quality = multiReq.getParameter("ShareProductStatus"); //10.상중하
+			String product_color = multiReq.getParameter("sharecolor"); //11. 컬러
+			System.out.println("★색상 : " + product_color );
+			String product_gender = multiReq.getParameter("productGender"); //13. 성별
+
 			
+		
 			
-			
-			String shareContent = multiReq.getParameter("editordata");
-			String shareState = multiReq.getParameter("ShareState");
-			
-			
-			
-			System.out.println(" _style : " + _style );
-			System.out.println(" **style : " + style );
-			
-			// shareBoard 에 셋팅 
-			
-			ShareBoard shareBoard = new ShareBoard();
-			
-			shareBoard.setMemberId(shareWriter);
-			shareBoard.setShareTitle(shareTitle);
-			shareBoard.setShareContent(shareContent);
-			shareBoard.setShareCategory(shareCategory);
-			shareBoard.setShareBuyDate(shareBuyDate);
-			shareBoard.setShareProductStatus(shareProductStatus);
-			shareBoard.setShareState(shareState);
-			shareBoard.setStyleNo(style);
-			
+			// 2-1. NshareBoard 에 셋팅 
+			NshareBoard shareBoard = new NshareBoard();
+			shareBoard.setSubcategory_id(subcategory_id);
+			shareBoard.setMemberId(member_id);
+			shareBoard.setStyle_name(style_name);
+			shareBoard.setProduct_name(product_name);
+			shareBoard.setProduct_content(product_content);
+			shareBoard.setProduct_price(product_price);
+			shareBoard.setProduct_status(product_status);
+			shareBoard.setProduct_quality(product_quality);
+			shareBoard.setProduct_color(product_color);
+			shareBoard.setProduct_gender(product_gender);
 			System.out.println( "**shareBoard " + shareBoard );
 			
-			//업로드한 파일처리 
+			
+			
+			
+			//2-2. 업로드한 파일처리 
 			if( multiReq.getFile("upFile1") !=null ) {
-				ShareAttachment attach = new ShareAttachment();
-				attach.setOriginalFilename(multiReq.getOriginalFileName("upFile1"));
-				attach.setRenamedFilename( multiReq.getFilesystemName("upFile1")); 		// 2. 파일명 변경 (original -> renamed )?
+				NshareAttachment attach = new NshareAttachment();
+				attach.setOriginal_filename( multiReq.getOriginalFileName("upFile1"));
+				attach.setRenamed_filename(multiReq.getFilesystemName("upFile1") );
+				shareBoard.addAttachment(attach);
+			}
+			if( multiReq.getFile("upFile2") !=null ) {
+				NshareAttachment attach = new NshareAttachment();
+				attach.setOriginal_filename( multiReq.getOriginalFileName("upFile2"));
+				attach.setRenamed_filename(multiReq.getFilesystemName("upFile2") );
 				shareBoard.addAttachment(attach);
 			}
 	
+	
 			
-//share  -- dml -- insert문 
-//insertShareBoard = insert into SHARE_board values(seq_SHARE_board_no.nextval,?,?,?,default,default,?,?,?,?,?)
-
-	//2. 업무로직 - 쿼리 insertBoard = insert into board (no, title, writer, content) values (seq_board_no.nextval, ?, ?, ?)
-		    	int result = shareService.insertShareBoard(shareBoard); // board에 싹다넣어서 서비스요청 코드는 이거 하나임 ★★★★★내가한방식은안돼 
+// share게시글  -- dml -- insert문 
+// insertNShareBoard  = insert into NSHARE_BOARD values(seq_SHARE_board_no.nextval,?,?,?,?,?,?,default,?,?,?,default,?)
+			// 2-3. 업무로직 
+			int result = shareService.insertNShareBoard(shareBoard);
 		    	System.out.println( "성공 ??? " + result );
 	    	//3.리다이렉트
 //			    	response.sendRedirect(request.getContextPath()+"/ootd/boardView?no=" + board.getNo());
-		    	response.sendRedirect(request.getContextPath()+"/share/shareWholeList");
-
-			
-			
-			/**
-			 
+		    	request.setAttribute("shareBoard", shareBoard);//
+		    	response.sendRedirect(request.getContextPath()+"/share/newShareWholeList");
+		    	
 			}catch( Exception e) {
 				System.out.println("오류발생");
 				
 				e.printStackTrace();
 				request.getSession().setAttribute("msg", "share 게시글 등록중 오류가 발생했습니다." );
-				response.sendRedirect(request.getContextPath()+"/share/shareWholeList");
 			}
-			* 		
-			 */
-		    // 리다이렉트는 : board/boardList로 가게 -  메세지는 너무 뻔한경우는 걍 쓰지마 (왜냐면 이 글은 제일 최신으로 등록되니까 바로 확인가능 )
 
 	}
 }

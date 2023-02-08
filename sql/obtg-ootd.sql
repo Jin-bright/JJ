@@ -559,10 +559,12 @@ CREATE TABLE NSHARE_BOARD (
 	product_content	varchar2(4000)	NOT NULL,
 	product_price	 NUMBER  default 0,
 	product_reg_date	Date default sysdate,
-	product_status	varchar(10) not	NULL, -- 사이즈 대신 상중하로 상품상태 변경
-	product_color	varchar2(50) NULL,
+    product_color	varchar2(50) NULL,
     product_read_count	number	default 0,
     product_gender char(5) not null,
+    product_status	varchar(10) not	NULL,  --거래전/중/완료
+    product_quality  varchar(5) not null; -- 사이즈 대신 상중하로 상품상태 변경
+	
     
     CONSTRAINT PK_NSHARE_BOARD_product_id  PRIMARY KEY (product_id),
     CONSTRAINT FK_NSHARE_BOARD_MEMBER_ID FOREIGN KEY (member_id) REFERENCES Member (member_id) on delete set null,
@@ -572,17 +574,17 @@ CREATE TABLE NSHARE_BOARD (
 create sequence SEQ_NSHARE_BOARD_product_id;
 
 select * from NSHARE_BOARD
+select * from NSHARE_ATTACHMENT
 
 --alter table NSHARE_BOARD drop column product_size;
---alter table NSHARE_BOARD add product_status varchar(10) not null;
-
+-- alter table NSHARE_BOARD add product_quality  varchar(5) not null;
+--alter table NSHARE_ATTACHMENT drop column member_id;
 
 --4) 새로만든 share  첨부파일 테이블 
 
 CREATE TABLE NSHARE_ATTACHMENT (
 	product_attachment_no	number	 not NULL, --pk
 	product_id	number 	not NULL, --fk
-	member_id	varchar2(100)	NULL, --fk
     product_attachment_original_filename	varchar2(255)		NOT NULL,
 	product_attachment_renamed_filename	varchar2(255)		NOT NULL,
 	product_attachment_reg_date	Date default  sysdate,

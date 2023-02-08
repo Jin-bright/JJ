@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sh.obtg.share.model.dao.ShareboardDao;
+import com.sh.obtg.share.model.dto.NshareAttachment;
+import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.dto.ShareAttachment;
 import com.sh.obtg.share.model.dto.ShareBoard;
 import com.sh.obtg.share.model.dto.ShareBoardAndAttachment;
@@ -236,6 +238,41 @@ public class ShareService {
 		int FindtotalCount = shareBoardDao.getFindTotalCount(conn, param);
 		close(conn);
 		return FindtotalCount;
+	}
+
+
+	//★★★★ 새로 보드게시판에 게시글넣기 
+	public int insertNShareBoard(NshareBoard shareBoard) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			// 1. 게시글 등록 
+			result = shareBoardDao.insertNShareBoard(conn, shareBoard); //**트랜잭션1
+			
+			
+			// 2-1. 방금 등록된 board.no컬럼값을 조회 - 시퀀스 객체의 현재값 
+			int boardNo = shareBoardDao.selectLastNBoardNo(conn); // select seq_board_no.currval from dual //**트랜잭션2
+			System.out.println("  boardNo : " +  boardNo );
+			
+			shareBoard.setProduct_id(boardNo);//생성된 pk를 board객체에 다시 주입
+			
+			//첨부파일 등록은 반복문을 통해 여러번 처리되어야됨 
+			List<NshareAttachment> shareAttachments = shareBoard.getShareAttachments();
+			
+			if( !shareAttachments.isEmpty() ) {
+				for(NshareAttachment attach : shareAttachments) {
+					attach.setProduct_id(boardNo); // 게시글 넘버 - fk값 셋팅 필요 
+					result = shareBoardDao.insertNAttachment(conn,attach); // 2-2 첨부파일등록 
+				}
+			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 	
 }

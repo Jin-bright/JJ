@@ -29,10 +29,10 @@
 <br />
 
 <section id="board-container">
-	<h2 id="sharewrite"> SHARE 게시글 작성</h2> <br />
+	<h2 id="sharewrite"> SHARE 게시글 작성</h2> <br /><br /><br /><br />
 	<form
 		name="shareBoardEnrollFrm"
-		action="<%=request.getContextPath()%>/share/shareEnroll" 
+		action="<%=request.getContextPath()%>/share/newShareEnroll" 
 		enctype ="multipart/form-data"
 		method="post">
 		<table id="tbl-board-view">
@@ -51,7 +51,7 @@
 	
 				   	<input class="upload-name"  id="upload-name2" placeholder="첨부파일" readonly >
 	    			<label for="upFile2">파일찾기</label>
-					<input type="file" name="upFile2"  id="upFile2" accept="image/*"  required>  
+					<input type="file" name="upFile2"  id="upFile2" accept="image/*" >  
 				</div>
 				
 				<div id="imgexplain">
@@ -78,12 +78,12 @@
 		<tr>
 			<th>카테고리</th>
 			<td>
-				<select name="ShareCategory" onchange = "selectbig(this.value);">
+				<select  onchange = "selectbig(this.value);">
 				    <option value="상의" > 상의 </option>
 				    <option  value="하의" > 하의 </option>
 				    <option  value="악세서리및기타" > 악세서리및기타 </option>
 				</select>
-			    	<select name="ShareCategory" id="top">
+			    	<select name="ShareCategory"  id="top">
 			    		<option  name="ShareCategory"  value="T1" > 패딩 </option>
 			    		<option  name="ShareCategory"  value="T2" > 코트 </option>
 			    		<option  name="ShareCategory"  value="T3" > 니트웨어 </option>
@@ -94,24 +94,36 @@
 			    		<option  name="ShareCategory"  value="T8" >민소매</option>
 			    		<option  name="ShareCategory"  value="T9" >기타</option>	
 			    	</select>
-			    	
-			    	<select name="ShareCategory" id="bottom">
-			    		<option  name="ShareCategory"  value="B1" > 청바지 </option>
-			    		<option  name="ShareCategory"  value="B2" > 슬랙스 </option>
-			    		<option  name="ShareCategory"  value="B3" >반바지</option>
-			    		<option  name="ShareCategory"  value="B4" >스커트</option>
+				    <select name="ShareCategory" id="bottom">
+				    		<option  name="ShareCategory"  value="B1" > 청바지 </option>
+				    		<option  name="ShareCategory"  value="B2" > 슬랙스 </option>
+				    		<option name="ShareCategory" value="B3" >반바지</option>
+				    		<option  name="ShareCategory"  value="B4" >스커트</option>
 			    	</select>	
 			    		
-			    	<select name="ShareCategory" id="accessary">
+			    	<select  name="ShareCategory"  id="accessary">
 			    		<option  name="ShareCategory"  value="A1" >가방</option>
 			    		<option  name="ShareCategory"  value="A2" >시계</option>
 			    		<option  name="ShareCategory"  value="A3" >주얼리</option>
 			    		<option  name="ShareCategory"  value="A4" >모자</option>
 			    		<option  name="ShareCategory"  value="A5" >스카프</option>	
 			    	</select>
-			
-			
-			
+			    <%-- 
+			    	<select name="ShareBottomCategory" id="bottom">
+			    		<option  name="ShareBottomCategory"  value="B1" > 청바지 </option>
+			    		<option  name="ShareBottomCategory"  value="B2" > 슬랙스 </option>
+			    		<option name="ShareBottomCategory" value="B3" >반바지</option>
+			    		<option  name="ShareBottomCategory"  value="B4" >스커트</option>
+			    	</select>	
+			    		
+			    	<select  name="ShareAccessaryCategory"  id="accessary">
+			    		<option  name="ShareAccessaryCategory"  value="A1" >가방</option>
+			    		<option  name="ShareAccessaryCategory"  value="A2" >시계</option>
+			    		<option  name="ShareAccessaryCategory"  value="A3" >주얼리</option>
+			    		<option  name="ShareAccessaryCategory"  value="A4" >모자</option>
+			    		<option  name="ShareAccessaryCategory"  value="A5" >스카프</option>	
+			    	</select>
+				--%>	
 			</td>
 		</tr>
 		<tr>
@@ -205,8 +217,7 @@ const selectbig = (e) =>{
 		bottom.style.display = "none";
 	}
 	
-	
-	
+	console.log( e )
 };
 
 </script>

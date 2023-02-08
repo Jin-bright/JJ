@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-
+import com.sh.obtg.share.model.dto.NshareAttachment;
+import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.dto.ShareAttachment;
 import com.sh.obtg.share.model.dto.ShareBoard;
 import com.sh.obtg.share.model.dto.ShareBoardAndAttachment;
@@ -540,4 +541,70 @@ public class ShareboardDao {
 			
 			return FindtotalCount;
 		}//
+
+		
+		///////////////////////////////////////////////////////////////////////////////////////////
+		//★★★★새로게시긂번호구하기 
+		public int selectLastNBoardNo(Connection conn) {
+			String sql = prop.getProperty("selectLastNBoardNo");
+			int boardNo = 0;
+			
+			try(
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rset = pstmt.executeQuery()){
+				
+				if(rset.next()) {
+					boardNo = rset.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				throw new ShareBoardException(" 새로 진행하는 share 게시판 > 게시글번호 조회 오류!", e);
+			}
+			return boardNo;
+		}
+
+		//★★★★새로게시긂 넣기 - dml   
+// insert into NSHARE_BOARD values(seq_SHARE_board_no.nextval,?,?,?,?,?,?,default,?,?,?,default,?)		
+		public int insertNShareBoard(Connection conn, NshareBoard shareBoard) {
+			String sql = prop.getProperty("insertNShareBoard");
+			int result = 0;
+			
+			try( PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, shareBoard.getSubcategory_id().toString() );
+				pstmt.setString(2, shareBoard.getMemberId());
+				pstmt.setString(3, shareBoard.getStyle_name().toString());
+				pstmt.setString(4, shareBoard.getProduct_name());
+				pstmt.setString(5, shareBoard.getProduct_content());
+				pstmt.setInt(6, shareBoard.getProduct_price());
+				pstmt.setString(7, shareBoard.getProduct_color());
+				pstmt.setString(8, shareBoard.getProduct_gender());
+				pstmt.setString(9, shareBoard.getProduct_status());
+				pstmt.setString(10, shareBoard.getProduct_quality());
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				throw new ShareBoardException(" 새로 진행하는 share 게시판 > 게시글 등록 오류!", e);
+			}
+			return result;
+		}
+
+		//★★★★ 첨부파일 등록 
+// insertNAttachment = insert into SHARE_attachment(attach_no, board_no, original_filename, renamed_filename) values (seq_ootd_attachment_no.nextval,?,?,?)
+		public int insertNAttachment(Connection conn, NshareAttachment attach) {
+			String sql = prop.getProperty("insertNAttachment");
+				int result = 0; 
+				
+				try(PreparedStatement pstmt = conn.prepareStatement(sql)){ 
+					pstmt.setInt(1, attach.getProduct_id() );
+					pstmt.setString(2, attach.getOriginal_filename() );
+					pstmt.setString(3, attach.getRenamed_filename() );
+					
+					result = pstmt.executeUpdate();
+					
+				} catch (SQLException e) {
+					throw new ShareBoardException(" 첨부파일 등록 오류!", e);
+				}
+				
+				return result;
+		}
 }
