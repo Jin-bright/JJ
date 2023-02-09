@@ -236,4 +236,16 @@ public class MemberService {
 		close(conn);
 		return memberId;
 	}
+
+	/**
+	 * 비밀번호 찾기
+	 * @param param
+	 * @return
+	 */
+	public int findMemebrPwd(Map<String, String> param) {
+		Connection conn = getConnection();
+		int member = memberDao.findMemebrPwd(conn, param);
+		close(conn);
+		return member;
+	}
 }

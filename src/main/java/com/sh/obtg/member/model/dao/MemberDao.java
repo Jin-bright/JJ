@@ -480,4 +480,34 @@ public class MemberDao {
 		
 		return memberId;
 	}
+
+	/**
+	 * 비밀번호 찾기
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int findMemebrPwd(Connection conn, Map<String, String> param) {
+		// select count(*) from member where member_id = ? and email = ?
+		String sql = prop.getProperty("findMemebrPwd");
+		int member = 0;
+		String memberId = param.get("memberId");
+		String email = param.get("email");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, email);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					member = rset.getInt(1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻비밀번호 찾기 오류👻", e);
+		}
+		
+		return member;
+	}
 }

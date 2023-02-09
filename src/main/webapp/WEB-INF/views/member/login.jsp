@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/member.css" />
 <section class="container">
 	<div class="wrap">
@@ -28,7 +28,7 @@
 		<ul class="etc_list">
 			<li class="etc_link">회원가입</li> |
 			<li class="etc_link"><a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a></li> |
-			<li class="etc_link">비밀번호 찾기</li>
+			<li class="etc_link"><a href="${pageContext.request.contextPath}/member/findPassword">비밀번호 찾기</a></li>
 		</ul>
 	</div>	
 </section>
@@ -53,20 +53,21 @@ document.querySelector("#memberPwd").addEventListener('blur', (e) => {
 document.loginFrm.onsubmit = (e) => {
 	const memberId = document.querySelector("#memberId");
 	const memberPwd = document.querySelector("#memberPwd");
+	const idMsg = document.querySelector("#id_error");
+	const pwdMsg = document.querySelector("#pwd_error");
 	
 	/* 유효성검사 */
 	if(!/^[A-Za-z0-9]{4,}$/.test(memberId.value)){
-		alert("아이디는 영문자/숫자 4글자이상이어야합니다.");
+		idMsg.style.visibility = "visible";
 		memberId.select();
 		return false;
 	}
 	
 	if(!/^[A-Za-z0-9!@#$%]{4,}$/.test(memberPwd.value)){
-		// alert("비밀번호는는 영문자/숫자/특수문자(!@#$%) 4글자이상이어야 합니다.");
-		alert("비밀번호는 4글자 이상이어야 합니다.");
+		pwdMsg.style.visibility = "visible";
 		memberPwd.select();
 		return false;
 	}
 };
 </script>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
