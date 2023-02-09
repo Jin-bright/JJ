@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/member.css" />
 <section class="container">
 	<div class="wrap">
@@ -55,19 +55,23 @@ const findID = () => {
 			const div1 = document.createElement("div");
 			div1.classList.add('after_box');
 			const span = document.createElement("span");
-			span.innerText = "아이디 찾기에 성공하였습니다.";
+			/* 데이터 유무에 따른 처리 */
+			if(data != null) span.innerText = "아이디 찾기에 성공하였습니다.";				
+			else span.innerText = "아이디 찾기에 실패하였습니다.";
 			
 			const div2 = document.createElement("div");
 			div2.classList.add('find_info');
 			const p = document.createElement("p");
 			p.innerText = "아이디"
 			const h4 = document.createElement("h4");
-			h4.append(data);
+			/* 데이터 유무에 따른 처리 */
+			if(data != null) h4.append(data);
+			else h4.innerText = "존재하지 않은 이메일입니다.";
 			
 			const div3 = document.createElement("div");
 			div3.classList.add('success_btn_box');
 			const a1 = document.createElement("a");
-			a1.href = "#";
+			a1.href = "${pageContext.request.contextPath}/member/findPassword";
 			a1.innerText = "비밀번호찾기";
 			const a2 = document.createElement("a");
 			a2.href = "${pageContext.request.contextPath}/member/login";
@@ -84,4 +88,4 @@ const findID = () => {
 	});
 };
 </script>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
