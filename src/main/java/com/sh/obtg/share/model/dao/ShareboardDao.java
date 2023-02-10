@@ -17,6 +17,7 @@ import com.sh.obtg.share.model.dto.ShareAttachment;
 import com.sh.obtg.share.model.dto.ShareBoard;
 import com.sh.obtg.share.model.dto.ShareBoardAndAttachment;
 import com.sh.obtg.share.model.dto.Style;
+import com.sh.obtg.share.model.dto.Subcategory;
 import com.sh.obtg.share.model.exception.ShareBoardException;
 
 public class ShareboardDao {
@@ -154,7 +155,7 @@ public class ShareboardDao {
 				 }
 							
 			}catch (SQLException e) {
-				throw new ShareBoardException(" 전체 ootd 게시판 게시글 수 가져오기 실패!", e);
+				throw new ShareBoardException(" 쉐어 게시글 수 가져오기 실패!", e);
 			}
 			return totalCount;
 		}
@@ -570,16 +571,16 @@ public class ShareboardDao {
 			int result = 0;
 			
 			try( PreparedStatement pstmt = conn.prepareStatement(sql)){
-				pstmt.setString(1, shareBoard.getSubcategory_id().toString() );
+				pstmt.setString(1, shareBoard.getSubcategoryId().toString() );
 				pstmt.setString(2, shareBoard.getMemberId());
-				pstmt.setString(3, shareBoard.getStyle_name().toString());
-				pstmt.setString(4, shareBoard.getProduct_name());
-				pstmt.setString(5, shareBoard.getProduct_content());
-				pstmt.setInt(6, shareBoard.getProduct_price());
-				pstmt.setString(7, shareBoard.getProduct_color());
-				pstmt.setString(8, shareBoard.getProduct_gender());
-				pstmt.setString(9, shareBoard.getProduct_status());
-				pstmt.setString(10, shareBoard.getProduct_quality());
+				pstmt.setString(3, shareBoard.getStyleName().toString());
+				pstmt.setString(4, shareBoard.getProductName());
+				pstmt.setString(5, shareBoard.getProductContent());
+				pstmt.setInt(6, shareBoard.getProductPrice());
+				pstmt.setString(7, shareBoard.getProductColor());
+				pstmt.setString(8, shareBoard.getProductGender());
+				pstmt.setString(9, shareBoard.getProductStatus());
+				pstmt.setString(10, shareBoard.getProductQuality());
 				result = pstmt.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -595,9 +596,9 @@ public class ShareboardDao {
 				int result = 0; 
 				
 				try(PreparedStatement pstmt = conn.prepareStatement(sql)){ 
-					pstmt.setInt(1, attach.getProduct_id() );
-					pstmt.setString(2, attach.getOriginal_filename() );
-					pstmt.setString(3, attach.getRenamed_filename() );
+					pstmt.setInt(1, attach.getProductId() );
+					pstmt.setString(2, attach.getOriginalFilename() );
+					pstmt.setString(3, attach.getRenamedFilename() );
 					
 					result = pstmt.executeUpdate();
 					
@@ -606,5 +607,114 @@ public class ShareboardDao {
 				}
 				
 				return result;
+		}
+		
+		//★새로만드는 목록가져오는거 - 조인쿼리업이 게시판의일부 쿼리 + 사진테이블 가져올수있을까 
+		
+		public List<NshareBoard> viewNShareBoards(Connection conn, Map<String, Integer> param) {
+			String sql = prop.getProperty("viewNShareBoards");
+			List<NshareBoard> shareboards = new ArrayList<>();
+			
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setInt(1, param.get("start"));
+				pstmt.setInt(2, param.get("end"));
+				try( ResultSet rset = pstmt.executeQuery()){
+					while( rset.next()) {
+						NshareBoard shareboard = handleNshareBoard(rset);
+						shareboards.add(shareboard);	
+					}
+				}
+			} catch (SQLException e) {
+				throw new ShareBoardException(" 게시글전체조회 오류!", e);
+			}	
+			return shareboards;
+		}
+
+		//refactoring
+		private NshareBoard handleNshareBoard(ResultSet rset) throws SQLException {
+			NshareBoard shareboard = new NshareBoard();
+			shareboard.setProductId( rset.getInt("product_id"));
+			shareboard.setSubcategoryId( Subcategory.valueOf( rset.getString("subcategory_id")));
+			shareboard.setStyleName( Style.valueOf(  rset.getString("style_name")));
+			shareboard.setProductName( rset.getString("product_name"));
+			shareboard.setProductContent(rset.getString("product_content"));
+			shareboard.setProductPrice( rset.getInt("product_price"));
+			shareboard.setProductRegDate( rset.getDate("product_reg_date"));
+			shareboard.setProductColor( rset.getString("product_color"));
+			shareboard.setProductReadCount(rset.getInt("product_read_count"));
+			shareboard.setProductGender(rset.getString("product_gender"));
+			shareboard.setProductStatus( rset.getString("product_status"));
+			shareboard.setProductQuality( rset.getString("product_quality"));
+			return shareboard;
+		}
+
+		public List<NshareAttachment> viewNShareAttachment(Connection conn, Map<String, Integer> param) {
+			String sql = prop.getProperty("viewNShareAttachment"); // select * from ootd_Attachment where board_no = ?
+			List<NshareAttachment>shareAttachments = new ArrayList<>();
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setInt(1, param.get("start"));
+				pstmt.setInt(2, param.get("end"));
+				
+				try(ResultSet rset = pstmt.executeQuery()){
+					while(rset.next()) {
+						NshareAttachment shareAttachment = new NshareAttachment();
+						
+						shareAttachment.setProductAttachmentNo( rset.getInt("product_attachment_no"));
+						shareAttachment.setProductId( rset.getInt("product_id"));
+						shareAttachment.setOriginalFilename(rset.getString("product_attachment_original_filename"));
+						shareAttachment.setRenamedFilename(rset.getString("product_attachment_renamed_filename"));
+						shareAttachment.setRegDate( rset.getDate("product_attachment_reg_date"));
+						
+						shareAttachments.add(shareAttachment);			
+					}
+				}
+				
+			} catch (Exception e) {
+				throw new ShareBoardException("share 게시글 한건-(첨부파일테이블) 조회 오류!", e);
+			}
+			
+			return shareAttachments;
+		}
+/////////////////////
+		public List<NshareAttachment> viewNShareAttachment(Connection conn) {
+			String sql = prop.getProperty("viewNShareAttachmentre"); // select * from ootd_Attachment where board_no = ?
+			List<NshareAttachment>shareAttachments = new ArrayList<>();
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				try(ResultSet rset = pstmt.executeQuery()){
+					while(rset.next()) {
+						NshareAttachment shareAttachment = new NshareAttachment();
+						
+						shareAttachment.setProductAttachmentNo( rset.getInt("product_attachment_no"));
+						shareAttachment.setProductId( rset.getInt("product_id"));
+						shareAttachment.setOriginalFilename(rset.getString("product_attachment_original_filename"));
+						shareAttachment.setRenamedFilename(rset.getString("product_attachment_renamed_filename"));
+						shareAttachment.setRegDate( rset.getDate("product_attachment_reg_date"));
+						
+						shareAttachments.add(shareAttachment);			
+					}
+				}
+				
+			} catch (Exception e) {
+				throw new ShareBoardException("share 게시글 한건-(첨부파일테이블) 조회 오류!", e);
+			}
+			
+			return shareAttachments;
+		}
+
+		public List<NshareBoard> viewNShareBoards(Connection conn) {
+			String sql = prop.getProperty("viewNShareBoardsre");
+			List<NshareBoard> shareboards = new ArrayList<>();
+			
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				try( ResultSet rset = pstmt.executeQuery()){
+					while( rset.next()) {
+						NshareBoard shareboard = handleNshareBoard(rset);
+						shareboards.add(shareboard);	
+					}
+				}
+			} catch (SQLException e) {
+				throw new ShareBoardException(" 게시글전체조회 오류!", e);
+			}	
+			return shareboards;
 		}
 }

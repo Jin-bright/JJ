@@ -254,14 +254,14 @@ public class ShareService {
 			int boardNo = shareBoardDao.selectLastNBoardNo(conn); // select seq_board_no.currval from dual //**트랜잭션2
 			System.out.println("  boardNo : " +  boardNo );
 			
-			shareBoard.setProduct_id(boardNo);//생성된 pk를 board객체에 다시 주입
+			shareBoard.setProductId(boardNo);//생성된 pk를 board객체에 다시 주입
 			
 			//첨부파일 등록은 반복문을 통해 여러번 처리되어야됨 
 			List<NshareAttachment> shareAttachments = shareBoard.getShareAttachments();
 			
 			if( !shareAttachments.isEmpty() ) {
 				for(NshareAttachment attach : shareAttachments) {
-					attach.setProduct_id(boardNo); // 게시글 넘버 - fk값 셋팅 필요 
+					attach.setProductId(boardNo); // 게시글 넘버 - fk값 셋팅 필요 
 					result = shareBoardDao.insertNAttachment(conn,attach); // 2-2 첨부파일등록 
 				}
 			}
@@ -273,6 +273,44 @@ public class ShareService {
 			close(conn);
 		}
 		return result;
+	}
+
+
+	
+	//★새로만드는 목록가져오는거 - 게시판 가져오기 
+	public List<NshareBoard> viewNShareBoards(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<NshareBoard> shareboards = shareBoardDao.viewNShareBoards(conn, param);
+		close(conn);
+		
+		return shareboards;	
+	}
+
+//첨부파일게시글 다 가져오기 
+	public List<NshareAttachment> viewNShareAttachment(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<NshareAttachment>  shareAttachments = shareBoardDao.viewNShareAttachment(conn, param);
+		close(conn);
+		
+		return shareAttachments;
+	}
+
+
+	public List<NshareAttachment> viewNShareAttachment() {
+		Connection conn = getConnection();
+		List<NshareAttachment>  shareAttachments = shareBoardDao.viewNShareAttachment(conn);
+		close(conn);
+		
+		return shareAttachments;
+	}
+
+
+	public List<NshareBoard> viewNShareBoards() {
+		Connection conn = getConnection();
+		List<NshareBoard> shareboards = shareBoardDao.viewNShareBoards(conn);
+		close(conn);
+		
+		return shareboards;	
 	}
 	
 }

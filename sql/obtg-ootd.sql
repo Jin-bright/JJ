@@ -595,3 +595,44 @@ CREATE TABLE NSHARE_ATTACHMENT (
 
 create sequence SEQ_NSHARE_ATTACHMENT_product_attachment_no;
 
+
+--select e.* 
+--from ( select  row_number() over(order by board_no desc ) rnum, p.* from SHARE_attachment  p) e 
+--where rnum between ? and ?
+
+select a.*, product_price, product_name 
+from NSHARE_BOARD b join NSHARE_ATTACHMENT a
+    on b.product_id = a.product_id
+where b.product_id between 1 and 5;
+
+select e.*
+from    (select  rank() over(order by b.product_id asc)rnum, product_price, product_name, a.*
+             from NSHARE_BOARD b join NSHARE_ATTACHMENT a
+             on b.product_id = a.product_id) e
+where rnum between 1 and 5 
+
+
+select * from NSHARE_ATTACHMENT
+select * from NSHARE_BOARD
+
+--delete from NSHARE_BOARD where product_id = '4'
+
+commit;
+
+delete from NSHARE_ATTACHMENT where product_id = '3'
+
+--select e.* from ( select  row_number() over(order by board_no desc ) rnum, p.* from SHARE_attachment  p) e where rnum between 1 and 5 
+
+
+-- param 조회 
+select *
+from    (select  rank() over(order by b.product_id asc)rnum, b.*
+             from NSHARE_BOARD b)
+where rnum between 1 and 5 
+
+select *
+from    (select  rank() over(order by b.product_id asc)rnum, b.*
+             from NSHARE_ATTACHMENT b)
+
+
+select * from fashionstyle

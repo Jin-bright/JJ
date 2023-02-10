@@ -56,25 +56,27 @@ public class ShareEnrollServlet extends HttpServlet {
 
 			
 		    // 1. 사용자입력값 처리
-			String _subcategory_id = "";
-			if ( multiReq.getParameter("ShareCategory") != null ){		
-				_subcategory_id = multiReq.getParameter("ShareCategory");
-				System.out.println( _subcategory_id  );
-			}/**else if( multiReq.getParameter("ShareBottomCategory") != null ) {
-				_subcategory_id = multiReq.getParameter("ShareBottomCategory") ;
-				System.out.println( _subcategory_id  );
-			}else if( multiReq.getParameter("ShareAccessaryCategory") != null) {
-				_subcategory_id = multiReq.getParameter("ShareAccessaryCategory") ;
-				System.out.println( _subcategory_id  );
-			}**/
-			System.out.println( "enum 전 : " + _subcategory_id  );
+			String _subcategoryId = "";
+			_subcategoryId = multiReq.getParameter("real");
+			/*
+			 * if ( multiReq.getParameter("ShareCategory") != null ){ _subcategory_id =
+			 * multiReq.getParameter("ShareCategory"); System.out.println( _subcategory_id
+			 * ); }else if(multiReq.getParameter("ShareCategorybt") != null ) {
+			 * _subcategory_id = multiReq.getParameter("ShareCategorybt");
+			 * System.out.println( _subcategory_id ); }else
+			 * if(multiReq.getParameter("ShareCategoryac") != null ) { _subcategory_id =
+			 * multiReq.getParameter("ShareCategoryac"); System.out.println( _subcategory_id
+			 * ); }
+			 */
+		
+			System.out.println( "enum 전 : " + _subcategoryId  );
 		
 	
-			Subcategory subcategory_id = Subcategory.valueOf( _subcategory_id ); //2 카테고리 
-			System.out.println("subcategory_id : "  + subcategory_id );
+			Subcategory subcategoryId = Subcategory.valueOf( _subcategoryId ); //2 카테고리 
+			System.out.println("subcategory_id : "  + subcategoryId );
 
 		
-			String member_id = multiReq.getParameter("memberId");//3.아이디
+			String memberId = multiReq.getParameter("memberId");//3.아이디
 			String _style = multiReq.getParameter("style"); 
 			if( _style.equals("러블리")) {
 				_style = "S1";
@@ -96,31 +98,31 @@ public class ShareEnrollServlet extends HttpServlet {
 				_style = "S9";
 			}
 			
-			Style style_name = Style.valueOf(_style); //4.스타일
-			String product_name = multiReq.getParameter("ShareTitle");//5. 상품명
-			String product_content = multiReq.getParameter("editordata"); //6.내용
-			int product_price =  Integer.parseInt( multiReq.getParameter("productPrice"));//7.가격
-			String product_status = multiReq.getParameter("ShareState"); //9 거래전
-			String product_quality = multiReq.getParameter("ShareProductStatus"); //10.상중하
-			String product_color = multiReq.getParameter("sharecolor"); //11. 컬러
-			System.out.println("★색상 : " + product_color );
-			String product_gender = multiReq.getParameter("productGender"); //13. 성별
+			Style styleName = Style.valueOf(_style); //4.스타일
+			String productName = multiReq.getParameter("ShareTitle");//5. 상품명
+			String productContent = multiReq.getParameter("editordata"); //6.내용
+			int productPrice =  Integer.parseInt( multiReq.getParameter("productPrice"));//7.가격
+			String productStatus = multiReq.getParameter("ShareState"); //9 거래전
+			String productQuality = multiReq.getParameter("ShareProductStatus"); //10.상중하
+			String productColor = multiReq.getParameter("sharecolor"); //11. 컬러
+			System.out.println("★색상 : " + productColor );
+			String productGender = multiReq.getParameter("productGender"); //13. 성별
 
 			
 		
 			
 			// 2-1. NshareBoard 에 셋팅 
 			NshareBoard shareBoard = new NshareBoard();
-			shareBoard.setSubcategory_id(subcategory_id);
-			shareBoard.setMemberId(member_id);
-			shareBoard.setStyle_name(style_name);
-			shareBoard.setProduct_name(product_name);
-			shareBoard.setProduct_content(product_content);
-			shareBoard.setProduct_price(product_price);
-			shareBoard.setProduct_status(product_status);
-			shareBoard.setProduct_quality(product_quality);
-			shareBoard.setProduct_color(product_color);
-			shareBoard.setProduct_gender(product_gender);
+			shareBoard.setSubcategoryId(subcategoryId);
+			shareBoard.setMemberId(memberId);
+			shareBoard.setStyleName(styleName);
+			shareBoard.setProductName(productName);
+			shareBoard.setProductContent(productContent);
+			shareBoard.setProductPrice(productPrice);
+			shareBoard.setProductStatus(productStatus);
+			shareBoard.setProductQuality(productQuality);
+			shareBoard.setProductColor(productColor);
+			shareBoard.setProductGender(productGender);
 			System.out.println( "**shareBoard " + shareBoard );
 			
 			
@@ -129,14 +131,14 @@ public class ShareEnrollServlet extends HttpServlet {
 			//2-2. 업로드한 파일처리 
 			if( multiReq.getFile("upFile1") !=null ) {
 				NshareAttachment attach = new NshareAttachment();
-				attach.setOriginal_filename( multiReq.getOriginalFileName("upFile1"));
-				attach.setRenamed_filename(multiReq.getFilesystemName("upFile1") );
+				attach.setOriginalFilename( multiReq.getOriginalFileName("upFile1"));
+				attach.setRenamedFilename(multiReq.getFilesystemName("upFile1") );
 				shareBoard.addAttachment(attach);
 			}
 			if( multiReq.getFile("upFile2") !=null ) {
 				NshareAttachment attach = new NshareAttachment();
-				attach.setOriginal_filename( multiReq.getOriginalFileName("upFile2"));
-				attach.setRenamed_filename(multiReq.getFilesystemName("upFile2") );
+				attach.setOriginalFilename( multiReq.getOriginalFileName("upFile2"));
+				attach.setRenamedFilename(multiReq.getFilesystemName("upFile2") );
 				shareBoard.addAttachment(attach);
 			}
 	
@@ -157,6 +159,7 @@ public class ShareEnrollServlet extends HttpServlet {
 				
 				e.printStackTrace();
 				request.getSession().setAttribute("msg", "share 게시글 등록중 오류가 발생했습니다." );
+				response.sendRedirect(request.getContextPath()+"/share/newShareWholeList");
 			}
 
 	}
