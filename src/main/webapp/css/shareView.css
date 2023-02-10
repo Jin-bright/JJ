@@ -1,7 +1,119 @@
 @charset "UTF-8";
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
 
-/** p **/
+/**  전체 섹션  **/
+
+section{
+	flex-direction: row;
+	display: flex;
+	width : 1900px;
+/* 	height : 1000px */
+}
+
+/*  왼쪽 이미지  */
+
+#pictureDiv{
+	margin-top: 50px;
+	margin-left: 100px;
+	margin-right: 60px;
+}
+
+#fiximg{
+	margin-top: 50px;
+	margin-left: 70px;
+	width : 550px;
+	height : 550px;
+	border-radius: 20px 20px 20px 20px;
+}
+
+#contentDiv{
+	margin-top: 50px;
+	margin-left: 50px;
+
+}
+
+/*  오른쪽 테이블  */
+#contentTable{
+	height : 300px;
+	width : 700px;
+	border : 1px solid black;
+
+}
+
+#con{
+	
+	height:250px;
+}
+
+h1{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	font-size: 28px;
+}
+
+h4{
+	float : right
+}
+
+#contTable{
+	width : 700px;	
+	height : 100px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+}
+
+.valss{
+	text-align:  right;
+}
+
+.buttonss{
+	flex-direction: row;
+	display: flex;
+	width : 700px;
+	margin-bottom: 30px;
+}
+
+#viewProfile, #writeMessage{
+	width : 330px;
+	height: 60px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 23px;
+	color:white;
+}
+
+#viewProfile:hover{
+	background-color: #f34901;
+	transition : 0.4s
+}
+
+#writeMessage:hover{
+	background-color: #00a400;
+	transition : 0.4s
+}
+
+
+#viewProfile{
+	margin-right: 40px;
+	background-color: #ff6c00;
+	border: none;
+	border-radius: 10px 10px 10px 10px; 
+}
+#writeMessage{
+	background-color:#00d200;
+	border: none;
+	border-radius: 10px 10px 10px 10px; 
+}
+
+#likesbt{
+	width : 150px;
+	height: 40px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	color:white;
+}
+
+/* ///////////////// */
 
 .ootdnav {
     display: inline-block;

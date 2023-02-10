@@ -277,7 +277,7 @@ public class ShareService {
 
 
 	
-	//★새로만드는 목록가져오는거 - 게시판 가져오기 
+//★★★★★ 새로만드는 목록가져오는거 - 게시판 가져오기 
 	public List<NshareBoard> viewNShareBoards(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<NshareBoard> shareboards = shareBoardDao.viewNShareBoards(conn, param);
@@ -311,6 +311,22 @@ public class ShareService {
 		close(conn);
 		
 		return shareboards;	
+	}
+
+// 게시클 한개한개 조회할거야
+	public NshareBoard selectNewOneBoard(int no, boolean hasRead) {
+		Connection conn = getConnection();
+
+		//조회수 증가시키기 
+		if(!hasRead) updateReadCount(no, conn);
+
+		NshareBoard shareBoard  = shareBoardDao.selectNewOneBoard(conn, no);
+		List<NshareAttachment> shareAttachments = shareBoardDao.selectNAttachmentByBoardNo(conn, no);
+		shareBoard.setShareAttachments(shareAttachments);
+		
+		close(conn);
+		
+		return shareBoard; //게시글 한개 
 	}
 	
 }
