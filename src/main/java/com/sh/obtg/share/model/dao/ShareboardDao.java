@@ -635,6 +635,7 @@ public class ShareboardDao {
 			NshareBoard shareboard = new NshareBoard();
 			shareboard.setProductId( rset.getInt("product_id"));
 			shareboard.setSubcategoryId( Subcategory.valueOf( rset.getString("subcategory_id")));
+			shareboard.setMemberId( rset.getString("member_id"));
 			shareboard.setStyleName( Style.valueOf(  rset.getString("style_name")));
 			shareboard.setProductName( rset.getString("product_name"));
 			shareboard.setProductContent(rset.getString("product_content"));
@@ -717,4 +718,85 @@ public class ShareboardDao {
 			}	
 			return shareboards;
 		}
+
+		//게시글 1개 조회 - select * from NSHARE_BOARD where product_id 
+		public NshareBoard selectNewOneBoard(Connection conn, int no) {
+			String sql = prop.getProperty("selectNewOneBoard");
+			
+			NshareBoard	shareboard = null;
+			
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setInt(1, no);
+				
+				try(ResultSet rset = pstmt.executeQuery()){
+					while(rset.next()) {
+						shareboard = handleNshareBoard(rset);
+					}
+				}
+			} catch (SQLException e) {
+				throw new ShareBoardException(" new 게시글 한건 조회 오류!",e);
+						 
+			}
+			return shareboard;
+		}
+		
+		//게시글의 첨부파일  1개 조회 - select * from NSHARE_ATTACHMENT where product_id 
+		public List<NshareAttachment> selectNAttachmentByBoardNo(Connection conn, int no) {
+			String sql = prop.getProperty("selectNAttachmentByBoardNo"); // select * from ootd_Attachment where board_no = ?
+			List<NshareAttachment> shareAttachments = new ArrayList<>();
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setInt(1, no);
+				
+				try(ResultSet rset = pstmt.executeQuery()){
+					while(rset.next()) {
+						NshareAttachment shareAttachment = new NshareAttachment();
+						
+						shareAttachment.setProductAttachmentNo( rset.getInt("product_attachment_no"));
+						shareAttachment.setProductId( rset.getInt("product_id"));
+						shareAttachment.setOriginalFilename(rset.getString("product_attachment_original_filename"));
+						shareAttachment.setRenamedFilename(rset.getString("product_attachment_renamed_filename"));
+						shareAttachment.setRegDate( rset.getDate("product_attachment_reg_date"));
+						
+						shareAttachments.add(shareAttachment);			
+					}
+				}
+				
+			} catch (Exception e) {
+				throw new ShareBoardException("NEW 게시글 한건-(첨부파일테이블) 조회 오류!", e);
+			}
+			
+			return shareAttachments;
+		}
+		
+		
+
+		/*
+		 * //게시글 한개 조회 dql - select * from share_board where share_no = ? public
+		 * ShareBoard selectOneBoard(Connection conn, int no) { 
+		 * String sql = prop.getProperty("selectOneBoard"); ShareBoard shareBoard = null;
+		 * try(PreparedStatement pstmt = conn.prepareStatement(sql)){ 
+		 * pstmt.setInt(1,no);
+		 * 
+		 * try(ResultSet rset = pstmt.executeQuery()){ while(rset.next()) { shareBoard =
+		 * new ShareBoard();
+		 * 
+		 * shareBoard.setShareNo(no);
+		 * shareBoard.setMemberId(rset.getString("member_id"));
+		 * shareBoard.setShareTitle(rset.getString("SAHRE_TITLE"));
+		 * shareBoard.setShareContent( rset.getString("SAHRE_CONTENT"));
+		 * shareBoard.setShareReadCount(rset.getInt("SAHRE_READ_COUNT"));
+		 * shareBoard.setShareRegDate(rset.getDate("SAHRE_REG_DATE"));
+		 * shareBoard.setShareBuyDate(rset.getDate("SHARE_BUY_DATE"));
+		 * shareBoard.setShareProductStatus(rset.getString("SHARE_PRODUCT_STATUS"));
+		 * shareBoard.setShareCategory(rset.getString("SHARE_CATEGORY"));
+		 * shareBoard.setShareState(rset.getString("SHARE_STATE"));
+		 * shareBoard.setStyleNo( Style.valueOf( rset.getString("style")));
+		 * 
+		 * } }
+		 * 
+		 * } catch (Exception e) { throw new ShareBoardException(" share 게시글 한건 조회 오류!",
+		 * e); }
+		 * 
+		 * return shareBoard; }
+		 */
 }
