@@ -4,19 +4,19 @@ import java.sql.Date;
 
 public class NshareBoardEntity {
 
-	private int product_id;
-	private Subcategory subcategory_id; // enum 
+	private int productId;
+	private Subcategory subcategoryId; // enum 
 	private String memberId;
-	private Style style_name; // enum 
-	private String product_name;
-	private String product_content;
-	private int product_price;
-	private Date product_reg_date;
-	private String product_status; //거래전 - 거래중 - 거래완료
-	private String product_color;
-	private int product_read_count;
-	private String product_gender; //남/녀
-	private String product_quality; // 상 중 하 
+	private Style styleName; // enum 
+	private String productName;
+	private String productContent;
+	private int productPrice;
+	private Date productRegDate;
+	private String productStatus; //거래전 - 거래중 - 거래완료
+	private String productColor;
+	private int productReadCount;
+	private String productGender; //남/녀
+	private String productQuality; // 상 중 하 
 	
 	//기본생성자
 	public NshareBoardEntity() {
@@ -25,38 +25,38 @@ public class NshareBoardEntity {
 	}
 	
 	//매개변수
-	public NshareBoardEntity(int product_id, Subcategory subcategory_id, String memberId, Style style_name,
-			String product_name, String product_content, int product_price, Date product_reg_date,
-			String product_status, String product_color, int product_read_count, String product_gender,
-			String product_quality) {
+	public NshareBoardEntity(int productId, Subcategory subcategoryId, String memberId, Style styleName,
+			String productName, String productContent, int productPrice, Date productRegDate,
+			String productStatus, String productColor, int productReadCount, String productGender,
+			String productQuality) {
 		super();
-		this.product_id = product_id;
-		this.subcategory_id = subcategory_id;
+		this.productId = productId;
+		this.subcategoryId = subcategoryId;
 		this.memberId = memberId;
-		this.style_name = style_name;
-		this.product_name = product_name;
-		this.product_content = product_content;
-		this.product_price = product_price;
-		this.product_reg_date = product_reg_date;
-		this.product_status = product_status;
-		this.product_color = product_color;
-		this.product_read_count = product_read_count;
-		this.product_gender = product_gender;
-		this.product_quality = product_quality;
+		this.styleName = styleName;
+		this.productName = productName;
+		this.productContent = productContent;
+		this.productPrice = productPrice;
+		this.productRegDate = productRegDate;
+		this.productStatus = productStatus;
+		this.productColor = productColor;
+		this.productReadCount = productReadCount;
+		this.productGender = productGender;
+		this.productQuality = productQuality;
 	}
 	
 	// GET SET
-	public int getProduct_id() {
-		return product_id;
+	public int getProductId() {
+		return productId;
 	}
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
-	public Subcategory getSubcategory_id() {
-		return subcategory_id;
+	public Subcategory getSubcategoryId() {
+		return subcategoryId;
 	}
-	public void setSubcategory_id(Subcategory subcategory_id) {
-		this.subcategory_id = subcategory_id;
+	public void setSubcategoryId(Subcategory subcategoryId) {
+		this.subcategoryId = subcategoryId;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -64,77 +64,77 @@ public class NshareBoardEntity {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public Style getStyle_name() {
-		return style_name;
+	public Style getStyleName() {
+		return styleName;
 	}
-	public void setStyle_name(Style style_name) {
-		this.style_name = style_name;
+	public void setStyleName(Style styleName) {
+		this.styleName = styleName;
 	}
-	public String getProduct_name() {
-		return product_name;
+	public String getProductName() {
+		return productName;
 	}
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
-	public String getProduct_content() {
-		return product_content;
+	public String getProductContent() {
+		return productContent;
 	}
-	public void setProduct_content(String product_content) {
-		this.product_content = product_content;
+	public void setProductContent(String productContent) {
+		this.productContent = productContent;
 	}
-	public int getProduct_price() {
-		return product_price;
+	public int getProductPrice() {
+		return productPrice;
 	}
-	public void setProduct_price(int product_price) {
-		this.product_price = product_price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
-	public Date getProduct_reg_date() {
-		return product_reg_date;
+	public Date getProductRegDate() {
+		return productRegDate;
 	}
-	public void setProduct_reg_date(Date product_reg_date) {
-		this.product_reg_date = product_reg_date;
+	public void setProductRegDate(Date productRegDate) {
+		this.productRegDate = productRegDate;
 	}
-	public String getProduct_status() {
-		return product_status;
+	public String getProductStatus() {
+		return productStatus;
 	}
-	public void setProduct_status(String product_status) {
-		this.product_status = product_status;
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
 	}
-	public String getProduct_color() {
-		return product_color;
+	public String getProductColor() {
+		return productColor;
 	}
-	public void setProduct_color(String product_color) {
-		this.product_color = product_color;
+	public void setProductColor(String productColor) {
+		this.productColor = productColor;
 	}
-	public int getProduct_read_count() {
-		return product_read_count;
+	public int getProductReadCount() {
+		return productReadCount;
 	}
-	public void setProduct_read_count(int product_read_count) {
-		this.product_read_count = product_read_count;
+	public void setProductReadCount(int productReadCount) {
+		this.productReadCount = productReadCount;
 	}
-	public String getProduct_gender() {
-		return product_gender;
+	public String getProductGender() {
+		return productGender;
 	}
-	public void setProduct_gender(String product_gender) {
-		this.product_gender = product_gender;
+	public void setProductGender(String productGender) {
+		this.productGender = productGender;
 	}
-	public String getProduct_quality() {
-		return product_quality;
+	public String getProductQuality() {
+		return productQuality;
 	}
-	public void setProduct_quality(String product_quality) {
-		this.product_quality = product_quality;
+	public void setProductQuality(String productQuality) {
+		this.productQuality = productQuality;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "NshareBoardEntity [product_id=" + product_id + ", subcategory_id=" + subcategory_id + ", memberId="
-				+ memberId + ", style_name=" + style_name + ", product_name=" + product_name + ", product_content="
-				+ product_content + ", product_price=" + product_price + ", product_reg_date=" + product_reg_date
-				+ ", product_status=" + product_status + ", product_color=" + product_color + ", product_read_count="
-				+ product_read_count + ", product_gender=" + product_gender + ", product_quality=" + product_quality
-				+ "]";
+		return "NshareBoardEntity [productId=" + productId + ", subcategoryId=" + subcategoryId + ", memberId="
+				+ memberId + ", styleName=" + styleName + ", productName=" + productName + ", productContent="
+				+ productContent + ", productPrice=" + productPrice + ", productRegDate=" + productRegDate
+				+ ", productStatus=" + productStatus + ", productColor=" + productColor + ", productReadCount="
+				+ productReadCount + ", productGender=" + productGender + ", productQuality=" + productQuality + "]";
 	}
+	
+	
 	
 	
 	

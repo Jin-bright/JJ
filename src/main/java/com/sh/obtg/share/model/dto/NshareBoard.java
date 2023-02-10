@@ -18,13 +18,24 @@ public class NshareBoard extends NshareBoardEntity {
 	}
 
 
+	
+	//부모 + cnt
+	public NshareBoard(int productId, Subcategory subcategoryId, String memberId, Style styleName, String productName,
+			String productContent, int productPrice, Date productRegDate, String productStatus, String productColor,
+			int productReadCount, String productGender, String productQuality, int attachCnt) {
+		super(productId, subcategoryId, memberId, styleName, productName, productContent, productPrice, productRegDate,
+				productStatus, productColor, productReadCount, productGender, productQuality);
+		this.attachCnt = attachCnt;
+	}
+
+
 	//부모 + att
-	public NshareBoard(int product_id, Subcategory subcategory_id, String memberId, Style style_name,
-			String product_name, String product_content, int product_price, Date product_reg_date,
-			String product_status, String product_color, int product_read_count, String product_gender,
-			String product_quality, List<NshareAttachment> shareAttachments) {
-		super(product_id, subcategory_id, memberId, style_name, product_name, product_content, product_price,
-				product_reg_date, product_status, product_color, product_read_count, product_gender, product_quality);
+	public NshareBoard(int productId, Subcategory subcategoryId, String memberId, Style styleName, String productName,
+			String productContent, int productPrice, Date productRegDate, String productStatus, String productColor,
+			int productReadCount, String productGender, String productQuality,
+			List<NshareAttachment> shareAttachments) {
+		super(productId, subcategoryId, memberId, styleName, productName, productContent, productPrice, productRegDate,
+				productStatus, productColor, productReadCount, productGender, productQuality);
 		this.shareAttachments = shareAttachments;
 	}
 
@@ -50,21 +61,23 @@ public class NshareBoard extends NshareBoardEntity {
 
 
 	
-	//완전긴tostring..
-	@Override
+	
+    @Override
 	public String toString() {
-		return "NshareBoard [attachCnt=" + attachCnt + ", shareAttachments=" + shareAttachments + ", getProduct_id()="
-				+ getProduct_id() + ", getSubcategory_id()=" + getSubcategory_id() + ", getMemberId()=" + getMemberId()
-				+ ", getStyle_name()=" + getStyle_name() + ", getProduct_name()=" + getProduct_name()
-				+ ", getProduct_content()=" + getProduct_content() + ", getProduct_price()=" + getProduct_price()
-				+ ", getProduct_reg_date()=" + getProduct_reg_date() + ", getProduct_status()=" + getProduct_status()
-				+ ", getProduct_color()=" + getProduct_color() + ", getProduct_read_count()=" + getProduct_read_count()
-				+ ", getProduct_gender()=" + getProduct_gender() + ", getProduct_quality()=" + getProduct_quality()
+		return "NshareBoard [attachCnt=" + attachCnt + ", shareAttachments=" + shareAttachments + ", getProductId()="
+				+ getProductId() + ", getSubcategoryId()=" + getSubcategoryId() + ", getMemberId()=" + getMemberId()
+				+ ", getStyleName()=" + getStyleName() + ", getProductName()=" + getProductName()
+				+ ", getProductContent()=" + getProductContent() + ", getProductPrice()=" + getProductPrice()
+				+ ", getProductRegDate()=" + getProductRegDate() + ", getProductStatus()=" + getProductStatus()
+				+ ", getProductColor()=" + getProductColor() + ", getProductReadCount()=" + getProductReadCount()
+				+ ", getProductGender()=" + getProductGender() + ", getProductQuality()=" + getProductQuality()
 				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ "]";
 	}
 
-    public void addAttachment( NshareAttachment attah) {
+
+
+	public void addAttachment( NshareAttachment attah) {
     	this.shareAttachments.add(attah);
     }
 

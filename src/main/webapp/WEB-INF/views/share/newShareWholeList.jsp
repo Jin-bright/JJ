@@ -94,22 +94,25 @@
 
 <div class="sectiondivs"  id="sharelists">
 <!-- 리스트 출력 일단 서블릿만들고 실행해보기 -->
-<table>
-<c:forEach  items="${shareBoard}" var="board" varStatus="vs">
-	<%-- <c:if test="${integer.parseInt(vs.index)%2==0}">
+<table id="test">
+<tbody id="testTbody">
+<span id="gg">버튼역할</span>
+<span id="page"></span>
+<%-- <c:forEach  items="${shareBoard}" var="attach" varStatus="vs">
+	<c:if test="${integer.parseInt(vs.index)%2==0}">
 		<tr>
-	</c:if> --%>
-	<tr>
+	</c:if>
 		<td>
 			<p>${board}</p>
 			<img src="${pageContext.request.contextPath}/uploadshares/newShare/'${board[vs.index].getShareAttachments().get[vs.index].getRenamed_filename()}'" alt="" />	
 	<!-- 				    	shareBoard.getShareAttachments().get(0).getRenamed_filename() -->
 		</td>
 	</tr>
-<%-- 	<c:if test="${integer.parseInt(vs.index)%2==1}">
+	<c:if test="${integer.parseInt(vs.index)%2==1}">
 		</tr>
-	</c:if>--%>
- </c:forEach>
+	</c:if>
+ </c:forEach> --%>
+ </tbody>
 </table>
 
 </div>
@@ -134,4 +137,79 @@ function toggleAccordion() {
 
 items.forEach(item => item.addEventListener('click', toggleAccordion));
 </script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+<script>
+
+$.ajax({
+	url : "${pageContext.request.contextPath}/share/NewShareWholeListAjax",
+	method : "get",
+	success(data){
+		for( let i =0; i<data.length; i++){
+			alert( data[i])
+		}
+		
+	},
+	complete(){
+	}
+});//end ajax
+
+function htmlView(data) {
+	var result = document.querySelector("#testTbody");
+	result+="<tr>";
+	result+="<td>왜</td>";
+	result+="<td>안</td>";
+	result+="<td>나</td>";
+	result+="<td>와</td>";
+	result+="</tr>";
+	
+};
+/// ajax로 전체 리스트 출력가능할까  ?
+<%-- 	$(function () {
+		
+		$(window).scroll(function () {
+			let scrollHeight = $(window).scrollTop() + $(window).height();
+			let documentHeight = $(document).height();
+			
+			if( scrollHeight + 200 >= documentHeight ){
+				//for(i=0 ; i<10 ; i++){
+				//	$("#test").append("<h1>jquery 무한 스크롤</h1>");
+				$.ajax({
+					url : "${pageContext.request.contextPath}/share/NewShareWholeListAjax",
+					method : "get",
+					data : {page},
+					success(data){
+						console.log( data )
+						const tbody = document.querySelector("#testTbody");
+						const tr =  document.createElement("tr");
+						
+						
+						for( let i=0; i<data.length; i++){
+							if(i%2==0){
+								tbody.append('tr')
+							}
+							
+							const img = document.createElement("img");
+							img.src = "<%=request.getContextPath()%>/uploadshares/newShare/"+data[i].renamedFilename;
+							
+							
+							tbody.append(td);
+							td.append(img);
+						}
+					},
+					complete(){
+						
+					}
+					
+					
+				});//end ajax
+			//}
+			}
+		});
+		
+		for(i=0 ; i<20 ; i++){
+			$("test").append("<h1>jquery 무한 스크롤</h1>");
+		}
+	}); --%>
+</script>
+
+<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>

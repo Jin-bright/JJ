@@ -22,7 +22,7 @@
  --%>
 <style>
 
-#top,#bottom,#accessary {
+#top,#bottom,#accessary/* ,#shoes */ {
 	display : none;
 }
 </style>
@@ -41,21 +41,16 @@
 			<td >
 				<div id="col_img"  style="margin-top : 0px" >
 					<img id="col_img_viewer"  style="width : 255px; height : 170px; padding-right: 30px">
-					<img id="col_img_viewer2" style="width : 255px" >
 				</div>
 				
 				<div class="filebox">
 					<input class="upload-name"   id="upload-name1"  placeholder="첨부파일" readonly>
 	    			<label for="upFile1">파일찾기</label>
-					<input type="file" name="upFile1" id="upFile1" accept="image/*"  required /> <br />
-	
-				   	<input class="upload-name"  id="upload-name2" placeholder="첨부파일" readonly >
-	    			<label for="upFile2">파일찾기</label>
-					<input type="file" name="upFile2"  id="upFile2" accept="image/*" >  
+					<input type="file" name="upFile1" id="upFile1" accept="image/*"  required /> <br />	
 				</div>
 				
 				<div id="imgexplain">
-					<p>- 첫번째 이미지로 노출됩니다.</p>
+					<p>- 사진은 한개만 등록가능합니다. </p>
 					<p>- 이미지는 상품 등록 시 정사각형으로 잘려서 등록됩니다.</p>
 				</div>
 			</td>
@@ -78,52 +73,48 @@
 		<tr>
 			<th>카테고리</th>
 			<td>
-				<select  onchange = "selectbig(this.value);">
+				<select   onclick = "selectbig(this.value);">
 				    <option value="상의" > 상의 </option>
 				    <option  value="하의" > 하의 </option>
 				    <option  value="악세서리및기타" > 악세서리및기타 </option>
+				   <!--  <option  value="신발" > 신발 </option> -->
 				</select>
 			    	<select name="ShareCategory"  id="top">
-			    		<option  name="ShareCategory"  value="T1" > 패딩 </option>
-			    		<option  name="ShareCategory"  value="T2" > 코트 </option>
-			    		<option  name="ShareCategory"  value="T3" > 니트웨어 </option>
-			    		<option  name="ShareCategory"  value="T4" >자켓</option>
-			    		<option  name="ShareCategory"  value="T5" >후드</option>
-			    		<option  name="ShareCategory"  value="T6" >긴팔티셔츠</option>
-			    		<option  name="ShareCategory"  value="T7" >반팔티셔츠</option>
-			    		<option  name="ShareCategory"  value="T8" >민소매</option>
-			    		<option  name="ShareCategory"  value="T9" >기타</option>	
+			    		<option  value="T1" > 패딩 </option>
+			    		<option   value="T2" > 코트 </option>
+			    		<option   value="T3" > 니트웨어 </option>
+			    		<option    value="T4" >자켓</option>
+			    		<option    value="T5" >후드</option>
+			    		<option  value="T6" >긴팔티셔츠</option>
+			    		<option   value="T7" >반팔티셔츠</option>
+			    		<option   value="T8" >민소매</option>
+			    		<option  value="T9" >기타</option>	
 			    	</select>
 				    <select name="ShareCategory" id="bottom">
-				    		<option  name="ShareCategory"  value="B1" > 청바지 </option>
-				    		<option  name="ShareCategory"  value="B2" > 슬랙스 </option>
-				    		<option name="ShareCategory" value="B3" >반바지</option>
-				    		<option  name="ShareCategory"  value="B4" >스커트</option>
+				    		<option   value="B1" > 청바지 </option>
+				    		<option   value="B2" > 슬랙스 </option>
+				    		<option value="B3" >반바지</option>
+				    		<option  value="B4" >스커트</option>
 			    	</select>	
 			    		
 			    	<select  name="ShareCategory"  id="accessary">
-			    		<option  name="ShareCategory"  value="A1" >가방</option>
-			    		<option  name="ShareCategory"  value="A2" >시계</option>
-			    		<option  name="ShareCategory"  value="A3" >주얼리</option>
-			    		<option  name="ShareCategory"  value="A4" >모자</option>
-			    		<option  name="ShareCategory"  value="A5" >스카프</option>	
+			    		<option   value="A1" >가방</option>
+			    		<option   value="A2" >시계</option>
+			    		<option   value="A3" >주얼리</option>
+			    		<option   value="A4" >모자</option>
+			    		<option   value="A5" >스카프</option>
+			    		<option   value="A7" >기타</option>		
 			    	</select>
 			    <%-- 
-			    	<select name="ShareBottomCategory" id="bottom">
-			    		<option  name="ShareBottomCategory"  value="B1" > 청바지 </option>
-			    		<option  name="ShareBottomCategory"  value="B2" > 슬랙스 </option>
-			    		<option name="ShareBottomCategory" value="B3" >반바지</option>
-			    		<option  name="ShareBottomCategory"  value="B4" >스커트</option>
-			    	</select>	
-			    		
-			    	<select  name="ShareAccessaryCategory"  id="accessary">
-			    		<option  name="ShareAccessaryCategory"  value="A1" >가방</option>
-			    		<option  name="ShareAccessaryCategory"  value="A2" >시계</option>
-			    		<option  name="ShareAccessaryCategory"  value="A3" >주얼리</option>
-			    		<option  name="ShareAccessaryCategory"  value="A4" >모자</option>
-			    		<option  name="ShareAccessaryCategory"  value="A5" >스카프</option>	
-			    	</select>
-				--%>	
+			    	<select  name="ShareCategory"  id="shoes">
+			    		<option   value="S1" >운동화</option>
+			    		<option   value="S2" >부츠</option>
+			    		<option    value="S3" >로퍼</option>
+			    		<option    value="S4" >샌들</option>
+			    		<option   value="S5" >슬리퍼</option>
+			    		<option  value="S6" >구두</option>		
+				    	<option   value="S7" >기타</option>		
+			    	</select>--%>
 			</td>
 		</tr>
 		<tr>
@@ -192,6 +183,22 @@
 </section>
 <br /><br /><br />
 
+<script>
+$("select[name=ShareCategory]").change( function(){
+	console.log("찍히냐");
+	console.log( $(this).val() );
+	
+	$(this).attr('name', 'real');
+	console.log( $(this) );
+
+	console.log( $(this).val() );
+	
+	
+})
+
+
+
+</script>
 
 
 
@@ -202,22 +209,35 @@ const selectbig = (e) =>{
 	const top = document.querySelector("#top");
 	const bottom = document.querySelector("#bottom");
 	const accessary = document.querySelector("#accessary");
-	
+/* 	const shoes = document.querySelector("#shoes");
+ */	
 	if( e =="상의"){
 		top.style.display = "inline-block";
 		bottom.style.display = "none";
 		accessary.style.display = "none";
-	}else if( e =="하의"){
+	//	shoes.style.display = "none";
+	}
+	if( e =="하의"){
 		bottom.style.display = "inline-block";
 		top.style.display = "none";
 		accessary.style.display = "none";
-	}else if( e =="악세서리및기타"){
+	//	shoes.style.display = "none";
+	}
+	if( e =="악세서리및기타"){
 		accessary.style.display = "inline-block"
 		top.style.display = "none";
 		bottom.style.display = "none";
+	//	shoes.style.display = "none";	
 	}
+	/* if( e ==="신발"){
+		accessary.style.display = "none"
+		top.style.display = "none";
+		bottom.style.display = "none";
+		shoes.style.display = "inline-block";	
+	} */
 	
-	console.log( e )
+console.log( e );
+	
 };
 
 </script>
@@ -243,25 +263,6 @@ document.querySelector("#upFile1").addEventListener('change', (e) => {
 	}
 });
 
-document.querySelector("#upFile2").addEventListener('change', (e) => {
-	const img = e.target;
-	
-	if(img.files[0]){
-		// 파일 선택한 경우
-		const fr = new FileReader(); 
-		fr.readAsDataURL(img.files[0]); 
-		fr.onload = (e) => {
-			// 읽기 작업 완료시 호출될 load이벤트핸들러
-			document.querySelector("#col_img_viewer2").src = e.target.result; 
-			document.querySelector("#upload-name2").value = document.querySelector("#upFile2").value;
-		};
-	}
-	else {
-		// 파일 선택 취소한 경우
-		document.querySelector("#col_img_viewer2").src = "";
-
-	}
-});
 </script>
 
 <script>
@@ -379,7 +380,7 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 		return false;
 	}
 	
-	if( !upload ){ // \n은 따로 추가해줘야됨 (왜냐면 .애는 개행이 포함안되서 ) 
+	if( !upload ){ // 사진하나는 꼭첨부되어야한다
 		alert("사진을 첨부해주세요");
 		upload.select();
 		return false;
