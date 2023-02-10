@@ -28,6 +28,13 @@ public class FindIdServlet extends HttpServlet {
 			String memberId = memberService.findMemebrId(email);
 			System.out.println("아이디 : " + memberId);
 			
+			// 아이디 일부만 보여주기
+			if(memberId != null) {
+				for(int i = 3; i < memberId.length(); i++) {
+					memberId = memberId.replace(memberId.charAt(i), '*');
+				}
+			}
+			
 			response.setContentType("application/json; charset=utf-8");
 			new Gson().toJson(memberId, response.getWriter());		
 			
