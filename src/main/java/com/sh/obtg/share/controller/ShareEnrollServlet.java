@@ -159,6 +159,7 @@ public class ShareEnrollServlet extends HttpServlet {
 				
 				e.printStackTrace();
 				request.getSession().setAttribute("msg", "share 게시글 등록중 오류가 발생했습니다." );
+				response.sendRedirect(request.getContextPath()+"/share/newShareWholeList");
 			}
 
 	}

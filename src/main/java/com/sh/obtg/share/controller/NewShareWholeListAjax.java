@@ -41,21 +41,21 @@ public class NewShareWholeListAjax extends HttpServlet {
 //		param.put("end", end);
 		
 		//2. 업무로직 
-		List<NshareBoard> shareboards;
-		List<NshareAttachment> shareAttachments;
+//		List<NshareBoard> shareboards;
+//		List<NshareAttachment> shareAttachments;
 		
 		
 //		shareAttachments = shareService.viewNShareAttachment(param);
 //		shareboards = shareService.viewNShareBoards(param);
 	
 		
-		shareAttachments = shareService.viewNShareAttachment();
-		shareboards = shareService.viewNShareBoards();
+//		shareAttachments = shareService.viewNShareAttachment();
+//		shareboards = shareService.viewNShareBoards();
 		
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("shareboards", shareboards);
-		map.put("shareAttachments", shareAttachments);
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("shareboards", shareboards);
+//		map.put("shareAttachments", shareAttachments);
 	//	request.setAttribute("shareAttachments", shareAttachments);
 	//	request.setAttribute("shareboards", shareboards);
 
@@ -66,7 +66,7 @@ public class NewShareWholeListAjax extends HttpServlet {
 		
 		//3. json연결
 	//	response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(map, response.getWriter());
+	//	new Gson().toJson(map, response.getWriter());
 
 		
 	}

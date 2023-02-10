@@ -155,7 +155,7 @@ public class ShareboardDao {
 				 }
 							
 			}catch (SQLException e) {
-				throw new ShareBoardException(" 전체 ootd 게시판 게시글 수 가져오기 실패!", e);
+				throw new ShareBoardException(" 쉐어 게시글 수 가져오기 실패!", e);
 			}
 			return totalCount;
 		}

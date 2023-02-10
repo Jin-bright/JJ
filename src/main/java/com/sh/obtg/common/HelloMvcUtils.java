@@ -85,6 +85,8 @@ public class HelloMvcUtils {
 		// 1. 이전 영역
 		if(pageNo == 1) {
 			// 1 2 3 4 5 이므로 이동할 이전페이지 없음.
+		//	pagebar.append("<span> 이전 </span>\n"); // 현재페이지가 6인 경우 /mvc/admin/memberList?page=5
+
 		}
 		else {
 			pagebar.append("<a href='" + url + (pageNo - 1) + "'>이전</a>\n"); // 현재페이지가 6인 경우 /mvc/admin/memberList?page=5

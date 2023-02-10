@@ -1,7 +1,9 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
-* {
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
+
+*{
   box-sizing: border-box;
 }
 *::before, *::after {
@@ -35,12 +37,13 @@ section{
 	flex-direction: row;
 	display: flex;
 	width : 1900px;
-	height : 800px
+/* 	height : 1000px */
 }
 
 
 .container {
   margin-left : 192px;
+  margin-top : 70px;
   padding: 20px 20px 20px 20px;
   width: 200px;
 }
@@ -128,15 +131,59 @@ section{
   margin: 10px 0 10px 0
 }
 
-/* ///////////////////////////////// */
-#filters{
-/* 	border : 1px solid black; */
+/* ///////////    큰 div 2개    /////////////// */
+#filters{	
+/*	border : 1px solid black; */
 	width : 450px;
 }
 
 #sharelists{
 /* 	border : 1px solid green; */
 	width : 1400px;
+}
+
+
+/* ///////////    상품 출력 테이블     /////////////// */
+
+/*글쓰기버튼*/
+input#btnAdd{
+	background-color : black;
+	color : white;
+	height : 32px;
+	width : 70px;
+ 	position : absolute;
+	top:430px;
+	left : 1464px;
+}
+#btnAdd:hover{
+	font-weight : 900;
+	font-size : 14px;
+	cursor : pointer;
+}
+
+
+
+#itemTable{
+	margin-top : 70px;
+	height : 800px;
+}
+
+.itemimg{
+	width : 250px;
+	height : 250px;
+	border-radius: 20px 20px 20px 20px;
+}
+
+/* ///////////    상품 출력 테이블     /////////////// */
+
+.heartsempty{
+	width:15px;
+	height:15px;
+	display: inline-block;
+	position: relative;
+	left : 220px;
+	top : 50px;
+	
 }
 
 .search {
@@ -202,7 +249,27 @@ section{
 }
 
 
+/* 글자 설정  */
+#categories p{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+	font-weight: 700
+}
 
+#pn{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: 200;
+}
+
+.styles{
+	font-family: 'Martian Mono', monospace;
+	font-size: 14px;
+	font-weight: 600;
+	color:#00d200;
+	padding : 5px;
+	padding-left: 0
+}
 
 table#tblBoard{
 	margin-top : 100px;
@@ -366,61 +433,33 @@ a > img{
 
 
 
-/*글쓰기버튼*/
-input#btnAdd{
-
-	background-color : black;
-	color : white;
-	height : 32px;
-	width : 70px;
-	margin-left : 1400px
-/* 	position : absolute;
-	top:100px;
-	left : 34px;
- */
-}
-#btnAdd:hover{
-	font-weight : 900;
-	font-size : 14px;
-	cursor : pointer;
-}
-
 
 
 
 /*페이지바*/
 div#pagebar{
-	margin-top:10px; 
+	margin-bottom:10px; 
 	text-align:center; 
-	background-color : #eeeeee;
 }
 
 div#pagebar span.cPage{
 	color:black;
-	margin-right: 5px;
+	margin-right: 7px;
 	font-size : 20px;
 	width:10px;	
 }
 
 div#pagebar a{
 	margin-left : 5px;
-	margin-right: 5px;
+	margin-right: 10px;
 	color:black;
-	font-size : 18px;
+	font-size : 20px;
 	width:10px;	
 }
 div#pagebar a:hover{
 
-	font-size:24px;
+	font-size : 20px;
 	font-weight: 900;
 	text-decoration : underline
 }
 
-p.non{
-	text-align : left;
-	text-align:center;
-	font-family: 'Nanum Gothic Coding', monospace;	
-	color : orange;
-	font-weight : bolder;
-	margin-bottom : 0;
-}

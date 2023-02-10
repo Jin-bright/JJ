@@ -633,3 +633,6 @@ where rnum between 1 and 5
 select *
 from    (select  rank() over(order by b.product_id asc)rnum, b.*
              from NSHARE_ATTACHMENT b)
+
+
+select * from fashionstyle

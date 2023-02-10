@@ -21,8 +21,7 @@
 %>
  --%>
 <style>
-
-#top,#bottom,#accessary/* ,#shoes */ {
+#top,#bottom,#accessary,#shoes{
 	display : none;
 }
 </style>
@@ -59,7 +58,7 @@
 		<tr >
 			<th>상품명</th>
 			<td>
-				<input style="width : 500px;" class="inputtext" type="text" name="ShareTitle" placeholder="상품명을 입력해주세요." required>
+				<input style="width : 500px;" class="inputtext" type="text" name="ShareTitle" maxlength="18" placeholder="상품명을 입력해주세요." required>
 				<input class="satustext" type="text" name="ShareState" value="거래전" readonly />	
 			</td>
 		</tr>
@@ -103,18 +102,19 @@
 			    		<option   value="A3" >주얼리</option>
 			    		<option   value="A4" >모자</option>
 			    		<option   value="A5" >스카프</option>
+			    		<option   value="A6" >아이웨어</option>
 			    		<option   value="A7" >기타</option>		
 			    	</select>
-			    <%-- 
+			    
 			    	<select  name="ShareCategory"  id="shoes">
 			    		<option   value="S1" >운동화</option>
 			    		<option   value="S2" >부츠</option>
-			    		<option    value="S3" >로퍼</option>
-			    		<option    value="S4" >샌들</option>
+			    		<option   value="S3" >로퍼</option>
+			    		<option   value="S4" >샌들</option>
 			    		<option   value="S5" >슬리퍼</option>
-			    		<option  value="S6" >구두</option>		
+			    		<option   value="S6" >구두</option>		
 				    	<option   value="S7" >기타</option>		
-			    	</select>--%>
+			    	</select>
 			</td>
 		</tr>
 		<tr>
@@ -209,32 +209,32 @@ const selectbig = (e) =>{
 	const top = document.querySelector("#top");
 	const bottom = document.querySelector("#bottom");
 	const accessary = document.querySelector("#accessary");
-/* 	const shoes = document.querySelector("#shoes");
- */	
+ 	const shoes = document.querySelector("#shoes");
+ 	
 	if( e =="상의"){
 		top.style.display = "inline-block";
 		bottom.style.display = "none";
 		accessary.style.display = "none";
-	//	shoes.style.display = "none";
+		shoes.style.display = "none";
 	}
 	if( e =="하의"){
 		bottom.style.display = "inline-block";
 		top.style.display = "none";
 		accessary.style.display = "none";
-	//	shoes.style.display = "none";
+		shoes.style.display = "none";
 	}
 	if( e =="악세서리및기타"){
 		accessary.style.display = "inline-block"
 		top.style.display = "none";
 		bottom.style.display = "none";
-	//	shoes.style.display = "none";	
+		shoes.style.display = "none";	
 	}
-	/* if( e ==="신발"){
+	if( e ==="신발"){
 		accessary.style.display = "none"
 		top.style.display = "none";
 		bottom.style.display = "none";
 		shoes.style.display = "inline-block";	
-	} */
+	}
 	
 console.log( e );
 	
