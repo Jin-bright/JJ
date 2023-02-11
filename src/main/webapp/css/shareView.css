@@ -30,25 +30,58 @@ section{
 #contentDiv{
 	margin-top: 50px;
 	margin-left: 50px;
-
 }
 
-/*  오른쪽 테이블  */
+/* 	상태 가격 table */
+#contTable{
+	width : 700px;	
+	height : 60px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+}
+
+
+/*  그 밑 테이블 :  등록일 ~ */
 #contentTable{
-	height : 300px;
+/* 	height : 400px; */
 	width : 700px;
-	border : 1px solid black;
+/*  	border : 1px solid black;  */
 
 }
 
-#con{
+#contentTable td{
+	height: 25px
+}
 	
+
+.textd{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 100;
+	font-size: 15px;
+}
+
+#forStyle{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color:green;
+	font-style: italic;
+}
+
+h3{
+	margin-top : 40px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	font-size: 17px;
+}
+
+/* #con{
 	height:250px;
 }
-
+ */
 h1{
 	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 28px;
 }
 
@@ -56,30 +89,29 @@ h4{
 	float : right
 }
 
-#contTable{
-	width : 700px;	
-	height : 100px;
-	font-family: 'Noto Sans KR', sans-serif;
-	font-size: 15px;
-}
+
+
 
 .valss{
 	text-align:  right;
 }
 
 .buttonss{
+	margin-top: 30px;
 	flex-direction: row;
 	display: flex;
 	width : 700px;
-	margin-bottom: 30px;
+	margin-bottom: 60px;
 }
 
 #viewProfile, #writeMessage{
-	width : 330px;
-	height: 60px;
+	width : 200px;
+	height: 50px;
 	font-family: 'Noto Sans KR', sans-serif;
-	font-size: 23px;
+	font-size: 17px;
 	color:white;
+	border: none;
+	border-radius: 5px 5px 5px 5px;
 }
 
 #viewProfile:hover{
@@ -94,27 +126,118 @@ h4{
 
 
 #viewProfile{
-	margin-right: 40px;
-	background-color: #ff6c00;
-	border: none;
-	border-radius: 10px 10px 10px 10px; 
+	margin-right: 20px;
+	background-color: #ff6c00; 
 }
 #writeMessage{
-	background-color:#00d200;
-	border: none;
-	border-radius: 10px 10px 10px 10px; 
+	background-color:#1dd702;
 }
 
 #likesbt{
-	width : 150px;
-	height: 40px;
+	width : 130px;
+	height: 50px;
+	margin-right: 150px;
+	border-radius: 10px 10px 10px 10px; 
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 18px;
 	color:white;
+	border: none;
 }
 
-/* ///////////////// */
+.heartsempty{
+	width : 20px;
+	height: 20px;
+}
 
+
+/* /////////////////////////////////////// */
+
+.faq-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  	margin-left : 780px;
+
+  	margin-bottom: 200px;
+  	width: 600px;
+  	
+ 	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: 100
+}
+
+
+.faq-question {
+	 width: 500px;
+ 	 padding: 15px 0 15px 0;
+ 	 border-bottom: 1px dotted #ccc;
+}
+
+.panel-title {
+ /*  font-size: 24px; */
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 10px 10px 10 8px;
+  display: block;
+  cursor: pointer;
+}
+
+.panel-content {
+  width : 480px;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0 20px;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  position: relative;
+  opacity: 0;
+  -webkit-transition: .4s ease;
+  -moz-transition: .4s ease;
+  -o-transition: .4s ease;
+  transition: .4s ease;
+}
+
+.panel:checked ~ .panel-content{
+  height: auto;
+  opacity: 1;
+  padding: 8px 4px 4px 4px;
+}
+
+.plus {
+  position: absolute;
+  margin-left: -5px;
+/*   margin-top: -51px;  */
+  z-index: 5;
+  font-size: 22px;
+  line-height: 100%;
+  -webkit-user-select: none;    
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-transition: .2s ease;
+  -moz-transition: .2s ease;
+  -o-transition: .2s ease;
+  transition: .2s ease;
+}
+
+.panel:checked ~ .plus {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.panel {
+  display: none;
+}
+
+
+
+
+/* ///////////구매전필독 ///////////////// */
 .ootdnav {
     display: inline-block;
     font: 13px Helvetica, Tahoma, serif;
