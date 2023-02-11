@@ -119,17 +119,33 @@ section{
   will-change: opacity, max-height;
 }
 .accordion .accordion-content {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 200ms linear, max-height 200ms linear;
-  will-change: opacity, max-height;
+	padding : 5px;
+	  opacity: 0;
+	  max-height: 0;
+	  overflow: hidden;
+	  transition: opacity 200ms linear, max-height 200ms linear;
+	  will-change: opacity, max-height;
 }
 .accordion .accordion-content p {
   font-size: 1rem;
   font-weight: 300;
   margin: 10px 0 10px 0
 }
+
+.accordion .accordion-content label {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 10px 0 10px 0;
+  padding: 10px 8px 10px 8px ;
+}
+
+.accordion .accordion-content input {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 8px 0 8px 0;
+  padding: 10px 8px 10px 8px ;
+}
+
 
 /* ///////////    큰 div 2개    /////////////// */
 #filters{	

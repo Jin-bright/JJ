@@ -614,6 +614,8 @@ where rnum between 1 and 5
 
 select * from NSHARE_ATTACHMENT
 select * from NSHARE_BOARD
+select * from member
+
 
 --delete from NSHARE_BOARD where product_id = '4'
 
@@ -633,6 +635,20 @@ where rnum between 1 and 5
 select *
 from    (select  rank() over(order by b.product_id asc)rnum, b.*
              from NSHARE_ATTACHMENT b)
-
-
+----
 select * from fashionstyle
+select * from NSHARE_BOARD
+
+-- 상의찾기 sql 0212
+select * 
+from ( select  rank() over(order by b.product_id asc)rnum, b.*
+             from NSHARE_BOARD b
+             where subcategory_id like '%T%' )
+
+-- 페이지 적용했을떄 
+select * 
+from ( select  rank() over(order by b.product_id asc)rnum, b.*
+             from NSHARE_BOARD b
+             where subcategory_id like '%T%' )
+where rnum between 1 and 5             
+
