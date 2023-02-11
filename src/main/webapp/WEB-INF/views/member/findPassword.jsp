@@ -53,7 +53,7 @@ const findPwd = () => {
 	
 	/* 비밀번호찾기결과 */
 	$.ajax({
-		url : "${pageContext.request.contextPath}/member/find_pwd",
+		url : "${pageContext.request.contextPath}/member/findPassword",
 		data : {id : id.value, email : email.value},
 		dataType : "json",		
 		success(data){
@@ -91,6 +91,7 @@ const findPwd = () => {
 			a2.href = "${pageContext.request.contextPath}/member/login";
 			a2.innerText = "로그인";
 			
+			/* 회원정보 일치에 따른 처리 */
 			if(data.member == 1) div3.append(a2);
 			else div3.append(a1, a2);
 			div2.append(p, h4);

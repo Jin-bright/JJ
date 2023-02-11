@@ -19,7 +19,9 @@
 			<div>
 				<h4>이메일</h4>
 				<input type="email" name="email" id="email" class="find_input" placeholder="가입하신 이메일" required/>
-				<p class="input_error">이메일 형식이 올바르지 않습니다.</p>
+				<div class="msg_box">
+					<p class="input_error">이메일 형식이 올바르지 않습니다.</p>
+				</div>
 			</div>
 			<div class="find_btn_box">
 				<button class="find_btn" onclick="findID();">아이디찾기</button>
@@ -34,14 +36,14 @@ const findID = () => {
 	
 	/* 유효성검사 */
 	if(!/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/.test(email)){
-		errorMsg.style.visibility = "visible";
+		errorMsg.style.display = "unset";
 		email.select();
 		return false;
 	}
 	
 	/* 아이디찾기결과 */
 	$.ajax({
-		url : "${pageContext.request.contextPath}/member/find_Id",
+		url : "${pageContext.request.contextPath}/member/findId",
 		data : {email},
 		dataType : "json",		
 		success(data){

@@ -14,6 +14,7 @@ import com.sh.obtg.member.model.dto.Like;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.dto.MyPost;
 import com.sh.obtg.member.model.dto.MyPosts;
+import com.sh.obtg.member.model.dto.Style;
 
 public class MemberService {
 	
@@ -247,5 +248,29 @@ public class MemberService {
 		int member = memberDao.findMemebrPwd(conn, param);
 		close(conn);
 		return member;
+	}
+
+	/**
+	 * 스타일 목록 조회
+	 * @return
+	 */
+	public List<Style> selectStyleList() {
+		Connection conn = getConnection();
+		List<Style> styleList = memberDao.selectStyleList(conn);
+		close(conn);
+		return styleList;
+	}
+
+	/**
+	 * 중복 검사
+	 * @param type
+	 * @param email 
+	 * @return
+	 */
+	public int checkDuplicate(String type, String keyword) {
+		Connection conn = getConnection();
+		int count = memberDao.checkDuplicate(conn, type, keyword);
+		close(conn);
+		return count;
 	}
 }
