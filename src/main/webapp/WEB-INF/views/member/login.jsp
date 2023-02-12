@@ -34,19 +34,12 @@
 </section>
 <script>
 /* 필수 입력값 확인 */
-document.querySelector("#memberId").addEventListener('blur', (e) => {
-	const errorMsg = document.querySelector("#id_error");
-    if(e.target.value.length === 0)
-    	errorMsg.style.visibility = "visible"
-    else
-    	errorMsg.style.visibility = "hidden";
-});
-document.querySelector("#memberPwd").addEventListener('blur', (e) => {
-	const errorMsg = document.querySelector("#pwd_error");
-    if(e.target.value.length === 0)
-    	errorMsg.style.visibility = "visible"
-	else
-    	errorMsg.style.visibility = "hidden";
+document.querySelectorAll(".login_input").forEach((login) => {
+	login.onblur = (e) => {
+		if(e.target.value.length === 0){
+			e.target.nextElementSibling.classList.add("check");
+		}
+	};
 });
 
 /* 로그인요청 */
@@ -58,13 +51,13 @@ document.loginFrm.onsubmit = (e) => {
 	
 	/* 유효성검사 */
 	if(!/^[A-Za-z0-9]{4,}$/.test(memberId.value)){
-		idMsg.style.visibility = "visible";
+		idMsg.classList.add("check");
 		memberId.select();
 		return false;
 	}
 	
 	if(!/^[A-Za-z0-9!@#$%]{4,}$/.test(memberPwd.value)){
-		pwdMsg.style.visibility = "visible";
+		pwdMsg.classList.add("check");
 		memberPwd.select();
 		return false;
 	}
