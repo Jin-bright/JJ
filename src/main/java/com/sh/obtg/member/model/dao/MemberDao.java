@@ -217,6 +217,12 @@ public class MemberDao {
 		}
 		return result;
 	}
+	/**
+	 * 회원가입
+	 * @param conn
+	 * @param member
+	 * @return
+	 */
 	public int insertMember(Connection conn, Member member) {
 		String sql = prop.getProperty("insertMember");
 		int result = 0;
@@ -237,8 +243,8 @@ public class MemberDao {
 			
 			result = pstmt.executeUpdate();
 			
-		} catch (SQLException e) {
-			throw new MemberException("회원가입오류", e);
+		} catch (Exception e) {
+			throw new MemberException("👻회원가입 오류👻", e);
 		}
 		
 		return result;

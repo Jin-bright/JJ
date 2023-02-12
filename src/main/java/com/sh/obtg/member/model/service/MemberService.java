@@ -111,19 +111,29 @@ public class MemberService {
 		}
 		return result;
 	}
+	
+	/**
+	 * 회원가입
+	 * @param member
+	 * @return
+	 */
 	public int insertMember(Member member) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
 			result = memberDao.insertMember(conn, member);
 			commit(conn);
-		}catch(Exception e) {
+		} catch(Exception e) {
 			rollback(conn);
-		}finally {
+			throw e;
+		} finally {
 			close(conn);
 		}
+		
 		return result;
 	}
+	
+	
 	public int deleteMember(String memberId) {
 		int result = 0;
 		// 1. Connection객체 생성

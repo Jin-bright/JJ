@@ -16,12 +16,12 @@
 					임시 비밀번호를 알려드립니다.
 				</p>
 			</div>	
-			<div>
+			<div class="find_box">
 				<h4>아이디</h4>
 				<input type="text" name="memberId" id="memberId" class="find_input" placeholder="아이디를 입력해주세요." required/>
 				<p class="input_error" id="id_error">올바른 아이디를 입력해주세요.</p>
 			</div>
-			<div>
+			<div class="find_box">
 				<h4>이메일</h4>
 				<input type="email" name="email" id="email" class="find_input" placeholder="가입하신 이메일을 입력해주세요." required/>
 				<p class="input_error" id="email_error">이메일 형식이 올바르지 않습니다.</p>

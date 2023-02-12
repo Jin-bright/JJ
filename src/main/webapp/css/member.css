@@ -26,7 +26,7 @@
 	margin: 0 auto;
 	padding-bottom: 50px;
 }
-.login_box {
+.login_box, .find_box {
 	position: relative;
 	padding: 10px 0 14px;
 }
@@ -149,8 +149,7 @@
 .msg_box {
 	margin: 10px 0;
 }
-.enroll_btn {
-	width: 100%;
+.enroll_btn, .next_btn, .pre_btn{
 	height: 40px;
 	margin-top: 18px;
 	font-weight: 900;
@@ -160,13 +159,31 @@
 	border-radius: 7px;
 	cursor: pointer;
 }
+.enroll_btn, .pre_btn {
+	width: 48%;
+}
+.next_btn {
+	width: 100%;
+	display: block;
+	text-align: center; 
+	line-height: 40px;
+}
 .style_box td {
 	padding: 5px 10px 0 0;
 }
-.style {
+.style_name {
 	padding-left: 3px;
 	font-family: 'LINESeedKR-Bd';
 }
+.select_info {
+	display: none;
+}
 .check {
 	visibility: visible;
+}
+.hidden {
+	display: none;
+}
+.show {
+	display: block;
 }
