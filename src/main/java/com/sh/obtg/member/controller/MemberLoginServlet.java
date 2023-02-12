@@ -37,19 +37,19 @@ public class MemberLoginServlet extends HttpServlet {
 			Member member = memberService.selectOneMember(memberId);
 			
 			HttpSession session = request.getSession();
-			if(member != null && memberPwd.equals(member.getPassword()))
+			if(member != null && memberPwd.equals(member.getPassword())) {
 				session.setAttribute("loginMember", member);
-			else
+				// 리다이렉트
+				response.sendRedirect(request.getContextPath() + "/");
+			}
+			else {
 				session.setAttribute("msg", "아이디가 존재하지 않거나 비밀번호가 틀립니다.");		
-			
-			// 리다이렉트
-			String referer = request.getHeader("Referer");
-			response.sendRedirect(request.getContextPath() + "/");
+				// 리다이렉트
+				response.sendRedirect(request.getContextPath() + "/member/login");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("msg", "아이디를 찾을 수 없거나 비밀번호가 일치하지 않습니다.");
-			response.sendRedirect(request.getContextPath() + "/member/login");
 		}
 	}
 }

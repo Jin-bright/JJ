@@ -33,53 +33,25 @@
 <body>
 <header style="hight:263.67px;">
 <!--   메뉴바 -->
-<br /> <br /><br />
-<table id="tdloginSignup">
-<% if(loginMember == null) { %>
- <tr>
- 	<td><button id="loginSignup" value="로그인/회원가입" onclick="location.href = '${pageContext.request.contextPath}/member/login';"> LOGIN / SIGNUP </button></td>
- </tr>	
- 
+<table id="login_container">
+	<c:if test="${loginMember == null}">
+		<tr>
+			<td><button id="loginSignup" value="로그인/회원가입" onclick="location.href = '${pageContext.request.contextPath}/member/login';"> LOGIN / SIGNUP </button></td>
+		</tr>
+	</c:if>
+	<c:if test="${loginMember != null}">
+		<tr class="login_nav">
+			<td onclick="location.href = '${pageContext.request.contextPath}/member/memberView';">MY</td>
+			<c:if test="${loginMember.memberRole == MemberRole.A}">
+				<td onclick="location.href = '${pageContext.request.contextPath}/admin/memberList';">MANAGER</td>
+			</c:if>
+			<td onclick="location.href = '${pageContext.request.contextPath}/member/logout';">LOGOUT</td>
+		</tr>
+	</c:if>
 </table>
-<% } else { %>
 
-				 <table id="login" style="margin-left:50%; text-align:right;">
-					<tr>
-						<td>
-						<nav id="colorNav">
-    						<ul>
-       						 <li class="green">
-            					<a href="#"><img id="defaultimg" src="<%=request.getContextPath()%>/image/default.png" alt="defaultimg" style="width:30px; height:30px;"/></a>
- 							<% if(loginMember.getMemberRole() == MemberRole.A) { %>
-            						<ul>
-						                <li><a href="<%= request.getContextPath() %>/admin/memberList;">관리자페이지</a></li>
-						                <li><a href="<%= request.getContextPath() %>/member/logout;">로그아웃</a></li>
-							            </ul>
-							        </li>
-							    </ul>
-							</nav>
- 							 <%--<ul class="dd-menu">
-	      						<li><a href="<%= request.getContextPath() %>/admin/memberList;">관리자페이지</a></li>
-	      						<li><a href="<%= request.getContextPath() %>/member/logout;">로그아웃</a></li>
-	    					</ul>--%>
- 							<% } else{ %>
-							<ul class="dd-menu">
-	      						<li><a href="<%= request.getContextPath() %>/member/memberView;">My Page</a></li>
-	      						<li><a href="<%= request.getContextPath() %>/member/logout;">로그아웃</a></li>
-	    					</ul>
-							<%} %>
-							<%= loginMember.getNickname() %>님
-							<i style="position: absolute;"><img src="<%= request.getContextPath() %>/image/notification.png" alt="알림" class="bell bell-hiden" /></i>
-							<div id="report_wrap"></div>
-						</td>
-					</tr>
-				</table> 
-			
-			<% } %>
+<br /><br /><br />
 
-		<%--		<h1  class="main-title"  style="margin : 0 auto ">O B T G</h1> --%>
-
-<br />
 <!-- <hr style="border: solid 1px black; margin:0;"> -->
 <nav class="menu">
 	<h1  class="main-title"  >O B T G</h1>

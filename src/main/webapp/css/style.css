@@ -226,25 +226,42 @@ header {
 
 
 
-#loginSignup{
+#login_container{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 5px;
+	margin-right: 40px;
+}
+#loginSignup {
 	/* 로그인버튼 */
 	height : 30px;
 	width : 140px;
 	background-color : white;
 	border : none;
-	position: absolute;
-	top : 10px;
-	left : 1520px;
-	font-weight: 500;
 	font-size : 13px;
+	font-weight: 500;
 	font-family: 'Martian Mono', monospace;
 }
-
-#loginSignup:hover{
+#loginSignup:hover, .login_nav td:hover {
 	background-color: black;
 	color :white;
 	transition-duration : 0.4s;	
 }	
+
+/* 로그인시 */
+.profile {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.login_nav td {
+	color: #000000bf;
+	padding: 0 10px;
+	font-size : 15px;
+	cursor: pointer;
+	font-weight: 500;
+	font-family: 'Martian Mono', monospace;
+}
 
 /* header 윗 부분 배경색 넣기 */
 
