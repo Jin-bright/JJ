@@ -8,40 +8,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.service.MemberService;
 
-@WebServlet("/member/find_Id")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/member/checkDuplicate")
+public class CheckDuplicate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 
 	/**
-	 * 아이디찾기결과
+	 * 아이디, 이메일 중복 검사
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 사용자입력값
+			String memberId = request.getParameter("memberId");
+			System.out.println("memberId : " + memberId);
 			String email = request.getParameter("email");
-			System.out.println("email 값은? " + email);
+			System.out.println("email : " + email);
 			
-			// 업무로직 
-			String memberId = memberService.findMemebrId(email);
-			System.out.println("아이디 : " + memberId);
-			
-			// 아이디 일부만 보여주기
+			int checkNum = 0;
 			if(memberId != null) {
-				for(int i = 3; i < memberId.length(); i++) {
-					memberId = memberId.replace(memberId.charAt(i), '*');
-				}
+				checkNum = memberService.checkDuplicate("member_id", memberId);
+			}
+			else if(email != null) {
+				checkNum = memberService.checkDuplicate("email", email);
 			}
 			
 			response.setContentType("application/json; charset=utf-8");
-			new Gson().toJson(memberId, response.getWriter());		
+			new Gson().toJson(checkNum, response.getWriter());		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
-
 }

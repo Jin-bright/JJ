@@ -1,4 +1,12 @@
 @charset "UTF-8";
+/* 글꼴 */
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 /* 기본 */
 .container {
 	min-height: 700px;
@@ -18,7 +26,7 @@
 	margin: 0 auto;
 	padding-bottom: 50px;
 }
-.login_box {
+.login_box, .find_box {
 	position: relative;
 	padding: 10px 0 14px;
 }
@@ -29,8 +37,9 @@
 	padding: 8px 10px 5px 0;
 }
 .input_error {
+	position: absolute;
 	visibility: hidden;
-	color: red;
+	color: #f15746;
 	font-size: 12px;
 }
 .login_btn_box {
@@ -109,4 +118,72 @@
 .success_btn_box a:last-child {
 	background-color: #222;
 	color: #fff;
+}
+
+/* 회원가입 */
+.container {
+	font-family: 'LINESeedKR-Bd';
+}
+.enroll_title {
+	padding-bottom: 42px;
+	text-align: center;
+	font-size: 32px;
+}
+.sub_title {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.enroll_text {
+	width: 85%;
+	line-height: 18px;
+	border-style: none;
+	border-bottom: 2px solid #333;
+	padding: 9px 0 7px 0;
+}
+.enroll_box {
+	padding: 10px 0;
+}
+.enroll_box h4 {
+	font-size: 15px;
+}
+.msg_box {
+	margin: 10px 0;
+}
+.enroll_btn, .next_btn, .pre_btn{
+	height: 40px;
+	margin-top: 18px;
+	font-weight: 900;
+	background: black;
+	color: #fff;
+	border-style: none;
+	border-radius: 7px;
+	cursor: pointer;
+}
+.enroll_btn, .pre_btn {
+	width: 48%;
+}
+.next_btn {
+	width: 100%;
+	display: block;
+	text-align: center; 
+	line-height: 40px;
+}
+.style_box td {
+	padding: 5px 10px 0 0;
+}
+.style_name {
+	padding-left: 3px;
+	font-family: 'LINESeedKR-Bd';
+}
+.select_info {
+	display: none;
+}
+.check {
+	visibility: visible;
+}
+.hidden {
+	display: none;
+}
+.show {
+	display: block;
 }

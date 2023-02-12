@@ -20,6 +20,7 @@ import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.dto.MemberRole;
 import com.sh.obtg.member.model.dto.MyPost;
 import com.sh.obtg.member.model.dto.MyPosts;
+import com.sh.obtg.member.model.dto.Style;
 import com.sh.obtg.member.model.exception.MemberException;
 
 public class MemberDao {
@@ -216,6 +217,12 @@ public class MemberDao {
 		}
 		return result;
 	}
+	/**
+	 * 회원가입
+	 * @param conn
+	 * @param member
+	 * @return
+	 */
 	public int insertMember(Connection conn, Member member) {
 		String sql = prop.getProperty("insertMember");
 		int result = 0;
@@ -236,8 +243,8 @@ public class MemberDao {
 			
 			result = pstmt.executeUpdate();
 			
-		} catch (SQLException e) {
-			throw new MemberException("회원가입오류", e);
+		} catch (Exception e) {
+			throw new MemberException("👻회원가입 오류👻", e);
 		}
 		
 		return result;
@@ -454,6 +461,8 @@ public class MemberDao {
 		return result;
 	}
 
+	// 리팩토링 ver. [made by 정은]
+	
 	/**
 	 * 아이디 찾기
 	 * @param conn
@@ -474,7 +483,7 @@ public class MemberDao {
 				}
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new MemberException("👻아이디 찾기 오류👻", e);
 		}
 		
@@ -504,10 +513,64 @@ public class MemberDao {
 				}
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new MemberException("👻비밀번호 찾기 오류👻", e);
 		}
 		
 		return member;
+	}
+
+	/**
+	 * 스타일 목록 조회
+	 * @param conn
+	 * @return
+	 */
+	public List<Style> selectStyleList(Connection conn) {
+		// select * from fashionstyle
+		String sql = prop.getProperty("selectStyleList");
+		List<Style> styleList = new ArrayList<>();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rset = pstmt.executeQuery()) {
+			while(rset.next()) {
+				Style style = new Style();
+				style.setName(rset.getString("style"));
+				styleList.add(style);
+			}
+			
+		} catch (Exception e) {
+			throw new MemberException("👻스타일 목록 조회 오류👻", e);
+		}
+		
+		return styleList;
+	}
+
+	/**
+	 * 중복 검사
+	 * @param conn
+	 * @param type
+	 * @param keyword
+	 * @return
+	 */
+	public int checkDuplicate(Connection conn, String type, String keyword) {
+		// select count(*) from member where # = ?
+		String sql = prop.getProperty("checkDuplicate");
+		sql = sql.replace("#", type);
+		int count = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, keyword);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					count = rset.getInt(1);
+				}
+			}
+			
+		} catch (Exception e) {
+			throw new MemberException("👻중복검사 오류👻", e);
+		}
+		
+		return count;
 	}
 }

@@ -14,7 +14,7 @@
 			<div class="login_box">
 				<h4>아이디</h4>
 				<input type="text" name="memberId" id="memberId" class="login_input" placeholder="아이디를 입력해주세요." required/>
-				<p class="input_error" id="id_error">올바른 아이디를 입력해주세요.</p>
+				<p class="input_error" id="id_error">아이디를 정확히 입력해주세요.</p>
 			</div>
 			<div class="login_box">
 				<h4>비밀번호</h4>
@@ -26,7 +26,7 @@
 			</div>
 		</form>
 		<ul class="etc_list">
-			<li class="etc_link">회원가입</li> |
+			<li class="etc_link"><a href="${pageContext.request.contextPath}/member/memberEnroll">회원가입</a></li> |
 			<li class="etc_link"><a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a></li> |
 			<li class="etc_link"><a href="${pageContext.request.contextPath}/member/findPassword">비밀번호 찾기</a></li>
 		</ul>

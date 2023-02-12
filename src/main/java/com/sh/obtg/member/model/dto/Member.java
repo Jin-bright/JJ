@@ -3,9 +3,9 @@ package com.sh.obtg.member.model.dto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-
 public class Member {
 	
+	// field
 	private String memberId;
 	private String style;
 	private String name;
@@ -21,11 +21,8 @@ public class Member {
 	private String original;
 	private String renamed;
 	
-	
-	public Member() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	// constructor
+	public Member() {}
 	public Member(String memberId, String style, String name, String password, String email, String phone,
 			Date birthday, Timestamp enrollDate, MemberRole memberRole, String nickname, Gender gender,
 			String introduce, String original, String renamed) {
@@ -45,6 +42,8 @@ public class Member {
 		this.original = original;
 		this.renamed = renamed;
 	}
+	
+	// getter setter
 	public String getMemberId() {
 		return memberId;
 	}
@@ -129,6 +128,8 @@ public class Member {
 	public void setRenamed(String renamed) {
 		this.renamed = renamed;
 	}
+	
+	// toString
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", style=" + style + ", name=" + name + ", password=" + password
@@ -136,7 +137,5 @@ public class Member {
 				+ ", memberRole=" + memberRole + ", nickname=" + nickname + ", gender=" + gender + ", introduce="
 				+ introduce + ", original=" + original + ", renamed=" + renamed + "]";
 	}
-	
-	
 	
 }
