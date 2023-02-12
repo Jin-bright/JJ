@@ -51,10 +51,10 @@
 	      		<p style="color : gray; margin-left : 5px; font-size:15px"> 모든 카테고리 </p>
 	      		<span class="icon" aria-hidden="true"></span></button>
 	      <div class="accordion-content">
-	        <p> 상의 </p>
-	        <p> 하의 </p>
-	        <p> 악세서리 </p>
-	        <p> 신발 </p>
+	      	<input type="checkbox" name="searchKeyword" value="T" id="T" onclick="searchClothes(this);" /><label for="T">상의</label><br />
+	        <input type="checkbox" name="searchKeyword" value="B"  id="B" onclick="searchClothes(this);" /><label for="B">하의</label><br />
+	        <input type="checkbox" name="searchKeyword" value="A"  id="B" onclick="searchClothes(this);" /><label for="A">악세서리</label><br />
+	        <input type="checkbox" name="searchKeyword" value="S"  id="B" onclick="searchClothes(this);" /><label for="A">신발</label><br />
 	      </div>
 	    </div>
 	    
@@ -188,6 +188,39 @@ function toggleAccordion() {
 }
 
 items.forEach(item => item.addEventListener('click', toggleAccordion));
+</script>
+
+<%---- 비동기 필터 검색시작 !!!!! --%>
+<script>
+const searchClothes = (e) => {
+
+	const searchKeyword = document.getElementsByName("searchKeyword");
+	
+	searchKeyword.forEach((cb) => {
+	    cb.checked = false;
+	  })
+	  
+	 e.checked = true; 
+
+	console.log( e );
+	console.log( e.value );
+
+	const searchdata = e.value; //이걸로찾을거야
+	
+	$.ajax({
+		url:"${pageContext.request.contextPath}/share/shareWholeListTops",
+		method : "get",
+		data : {searchKeyword : searchdata },
+		success(data){
+			console.log( data );
+			
+			const table = document.querySelector("#itemTable");
+			table.innerHTML = "";
+			
+		}
+	});//end-ajax	
+}
+
 </script>
 
 <%-- <script>
