@@ -48,13 +48,13 @@
 	    <div class="accordion-item"> <!-- 아코디언 -->
 	      <button id="accordion-button-1" style="padding-top:10px" aria-expanded="false">
 	      		<span class="accordion-title"><b>카테고리</b></span>
-	      		<p style="color : gray; margin-left : 5px; font-size:15px"> 모든 카테고리 </p>
+	      		<p style="color : gray; margin-left : 5px; font-size:15px"> <a href="${pageContext.request.contextPath}/share/newShareWholeList">모든 카테고리</a></p>
 	      		<span class="icon" aria-hidden="true"></span></button>
 	      <div class="accordion-content">
-	      	<input type="checkbox" name="searchKeyword" value="T" id="T" onclick="searchClothes(this);" /><label for="T">상의</label><br />
-	        <input type="checkbox" name="searchKeyword" value="B"  id="B" onclick="searchClothes(this);" /><label for="B">하의</label><br />
-	        <input type="checkbox" name="searchKeyword" value="A"  id="B" onclick="searchClothes(this);" /><label for="A">악세서리</label><br />
-	        <input type="checkbox" name="searchKeyword" value="S"  id="B" onclick="searchClothes(this);" /><label for="A">신발</label><br />
+	      	<input type="checkbox" name="searchKeyword" value="T"  id="T" onclick="searchClothes(this);" /><label for="T">상의</label><br />
+	        <input type="checkbox" name="searchKeyword" value="B"  id="B"  onclick="searchClothes(this);" /><label for="B">하의</label><br />
+	        <input type="checkbox" name="searchKeyword" value="A"  id="A" onclick="searchClothes(this);" /><label for="A">악세서리</label><br />
+	        <input type="checkbox" name="searchKeyword" value="S"  id="S" onclick="searchClothes(this);" /><label for="S">신발</label><br />
 	      </div>
 	    </div>
 	    
@@ -171,6 +171,13 @@
 </section>
 <div id='pagebar' >${pagebar}</div> 
 
+
+<!--  검색용 더보기 버튼
+<div id='btn-more-container'>
+	<button id="btn-more" value="" > 더보기( <span id="pageaj"></span> / <span id="totalPage">검색시토탈페이지</span> ) </button>
+</div>
+-->
+
 <script>
 //메뉴토글
 const items = document.querySelectorAll(".accordion button");
@@ -190,111 +197,116 @@ function toggleAccordion() {
 items.forEach(item => item.addEventListener('click', toggleAccordion));
 </script>
 
+
+
+
+
 <%---- 비동기 필터 검색시작 !!!!! --%>
+
+
 <script>
 const searchClothes = (e) => {
 
 	const searchKeyword = document.getElementsByName("searchKeyword");
+	const page = document.querySelector("#pageaj");
 	
 	searchKeyword.forEach((cb) => {
 	    cb.checked = false;
-	  })
+	})
 	  
-	 e.checked = true; 
+	e.checked = true; 
 
-	console.log( e );
 	console.log( e.value );
 
 	const searchdata = e.value; //이걸로찾을거야
-	
+	console.log( e );
+
 	$.ajax({
-		url:"${pageContext.request.contextPath}/share/shareWholeListTops",
+		url:"${pageContext.request.contextPath}/share/findShareWholeListClothes",
 		method : "get",
-		data : {searchKeyword : searchdata },
+		data : {searchKeyword : searchdata},
 		success(data){
-			console.log( data );
+	
+			console.log ( data );
 			
 			const table = document.querySelector("#itemTable");
 			table.innerHTML = "";
+			
+			
+			const tbody =  document.createElement("tbody");
+			table.append( tbody );
+			
+			const tr1 =  document.createElement("tr");
+			tbody.append( tr1 );
+
+			
+			const tr2 =  document.createElement("tr");
+			tbody.append( tr2 );
+
+			
+			const tr3 =  document.createElement("tr");
+			tbody.append( tr3 );
+
+			
+			for( let i=0; i<data.shareAttachments.length; i++ ){
+				if( parseInt(i/4) == 0){
+					console.log( data.shareboards[i].subcategoryId )
+					tr1.innerHTML += 
+				      `<td>
+						 <div style="width:280px">
+						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
+					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
+					     </div>
+					     <div id="categories" style="margin-left:10px;" >
+					     	<c:if test="{data.shareboards[i].subcategoryId == 'T2'}"><p>니트웨어</p></c:if>
+							<c:if test="{data.shareboards[i].subcategoryId == 'T3'}"><p>니트웨어</p></c:if>
+					  		<c:if test="{data.shareboards[i].subcategoryId == 'T4'}"><p>자켓</p></c:if>
+					  		<c:if test="{data.shareboards[i].subcategoryId == 'T5'}"><p>후드</p></c:if>
+				  		</div>
+					     
+					     <div style="margin-left:10px;" >
+					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
+					     	<b><fmt:formatNumber value="${data.shareboards[i].productPrice}" pattern="#,###" />원</b>
+					  	</div>
+					  </td>`;					
+				}
+				if(parseInt(i/4)== 1 ){
+					tr2.innerHTML += 
+					  `<td>
+						<div style="width:280px">
+							<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+							<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
+							<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
+						</div>
+						<div style="margin-left:10px;" >
+					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
+					     	<b><fmt:formatNumber value="${data.shareboards[i].productPrice}" pattern="#,###" />원</b>
+					  	</div>
+						</td>`;
+				}
+				if( parseInt(i/4) == 2 ){
+				  tr3.innerHTML += 
+				    `<td><div style="width:280px">
+					    <img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+					    <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
+				  		<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a></div></td>`
+				}
+				
+			}
+			
+			console.log ( table );
+		
+		},
+		complete(data){
+			document.querySelector("#pagebar").innerHTML = "";
+	
 			
 		}
 	});//end-ajax	
 }
 
+
 </script>
-
-<%-- <script>
-
-$.ajax({
-	url : "${pageContext.request.contextPath}/share/NewShareWholeListAjax",
-	method : "get",
-	success(data){
-		for( let i =0; i<data.length; i++){
-			alert( data[i])
-		}
-		
-	},
-	complete(){
-	}
-});//end ajax
-
-function htmlView(data) {
-	var result = document.querySelector("#testTbody");
-	result+="<tr>";
-	result+="<td>왜</td>";
-	result+="<td>안</td>";
-	result+="<td>나</td>";
-	result+="<td>와</td>";
-	result+="</tr>";
-	
-};
-/// ajax로 전체 리스트 출력가능할까  ?
-	$(function () {
-		
-		$(window).scroll(function () {
-			let scrollHeight = $(window).scrollTop() + $(window).height();
-			let documentHeight = $(document).height();
-			
-			if( scrollHeight + 200 >= documentHeight ){
-				//for(i=0 ; i<10 ; i++){
-				//	$("#test").append("<h1>jquery 무한 스크롤</h1>");
-				$.ajax({
-					url : "${pageContext.request.contextPath}/share/NewShareWholeListAjax",
-					method : "get",
-					data : {page},
-					success(data){
-						console.log( data )
-						const tbody = document.querySelector("#testTbody");
-						const tr =  document.createElement("tr");
-						
-						
-						for( let i=0; i<data.length; i++){
-							if(i%2==0){
-								tbody.append('tr')
-							}
-							
-							const img = document.createElement("img");
-							img.src = "<%=request.getContextPath()%>/uploadshares/newShare/"+data[i].renamedFilename;
-							
-							
-							tbody.append(td);
-							td.append(img);
-						}
-					},
-					complete(){
-						
-					}
-					
-					
-				});//end ajax
-			//}
-			}
-		});
-		
-		for(i=0 ; i<20 ; i++){
-			$("test").append("<h1>jquery 무한 스크롤</h1>");
-		}
-	});
-</script> --%>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
