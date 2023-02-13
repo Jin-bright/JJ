@@ -561,7 +561,7 @@ CREATE TABLE NSHARE_BOARD (
 	product_reg_date	Date default sysdate,
     product_color	varchar2(50) NULL,
     product_read_count	number	default 0,
-    product_gender char(5) not null,
+    product_gender char(10) not null,
     product_status	varchar(10) not	NULL,  --거래전/중/완료
     product_quality  varchar(5) not null; -- 사이즈 대신 상중하로 상품상태 변경
 	
@@ -575,7 +575,8 @@ create sequence SEQ_NSHARE_BOARD_product_id;
 
 select * from NSHARE_BOARD
 select * from NSHARE_ATTACHMENT
-
+commit
+-- alter table NSHARE_BOARD modify product_gender  char(10) 
 --alter table NSHARE_BOARD drop column product_size;
 -- alter table NSHARE_BOARD add product_quality  varchar(5) not null;
 --alter table NSHARE_ATTACHMENT drop column member_id;
@@ -650,5 +651,21 @@ select *
 from ( select  rank() over(order by b.product_id asc)rnum, b.*
              from NSHARE_BOARD b
              where subcategory_id like '%T%' )
-where rnum between 1 and 5             
+where rnum between 1 and 10             
 
+
+
+select *
+from ( select  rank() over(order by b.product_id asc)rnum, a.*
+             from NSHARE_BOARD b join  NSHARE_ATTACHMENT a
+        on b.product_id = a.product_id
+             where b.subcategory_id like '%T%' )
+where rnum between 1 and 10     
+
+
+select *
+from ( select  rank() over(order by b.product_id asc)rnum, b.*
+             from NSHARE_BOARD b join  NSHARE_ATTACHMENT a
+        on b.product_id = a.product_id
+             where b.subcategory_id like '%T%' )
+where rnum between 1 and 10     

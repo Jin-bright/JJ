@@ -328,5 +328,22 @@ public class ShareService {
 		
 		return shareBoard; //게시글 한개 
 	}
+
+
+//카테고리 - 상의로  찾기 - select 
+	public List<NshareAttachment> findNShareAttachment(Map<String, Integer> param, String searchKeyword) {
+		Connection conn = getConnection();
+		List<NshareAttachment>  attachmenns = shareBoardDao.findNShareAttachment( conn, param, searchKeyword);
+		close(conn);
+		return attachmenns;
+	}
+
+//카테고리 - 상의로  찾기 - select - 글만 
+	public List<NshareBoard> findNShareBoards(Map<String, Integer> param, String searchKeyword) {
+		Connection conn = getConnection();
+		List<NshareBoard>  shareboards = shareBoardDao.findNShareBoards( conn, param, searchKeyword);
+		close(conn);
+		return shareboards;
+	}
 	
 }
