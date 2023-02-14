@@ -773,16 +773,23 @@ public class ShareboardDao {
 
 		
 		public List<NshareAttachment> findNShareAttachment(Connection conn, Map<String, Integer> param,
-				String searchKeyword) {
+				String searchKeyword, String searchType) {
 			
 			String sql = prop.getProperty("findNShareAttachment");
+			String searchTypes = searchType;
 			
+			sql = sql.replace("#", searchTypes);
+			
+			System.out.println( searchKeyword );
+			System.out.println( searchType );
 			List<NshareAttachment> shareAttachments = new ArrayList<>();
-			
+
 			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			//	pstmt.setString(1, searchType);
 				pstmt.setString(1, "%"+searchKeyword+"%");
 				pstmt.setInt(2, param.get("start"));
 				pstmt.setInt(3, param.get("end"));
+				
 				
 				try(ResultSet rset = pstmt.executeQuery() ){
 					while(rset.next()) {
@@ -804,12 +811,17 @@ public class ShareboardDao {
 			return shareAttachments;
 		}
 
-		public List<NshareBoard> findNShareBoards(Connection conn, Map<String, Integer> param, String searchKeyword) {
+		public List<NshareBoard> findNShareBoards(Connection conn, Map<String, Integer> param, String searchKeyword,
+				 String searchType) {
 			String sql = prop.getProperty("findNShareBoards");
+			String searchTypes = searchType;
+			
+			sql = sql.replace("#", searchTypes);
 			
 			List<NshareBoard> shareboards = new ArrayList<>();
 			
 			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+//				pstmt.setString(1, searchType);
 				pstmt.setString(1, "%"+searchKeyword+"%");
 				pstmt.setInt(2, param.get("start"));
 				pstmt.setInt(3, param.get("end"));
