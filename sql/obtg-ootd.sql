@@ -549,6 +549,17 @@ insert into Nsubcategory values ('S6', 'SHOES',  '구두');
 insert into Nsubcategory values ('S7', 'SHOES',  '기타');
 
 
+update Nsubcategory 
+set subcategory_id = 'SH1'
+where subcategory_category = '운동화'
+
+
+SELECT * FROM NSHARE_BOARD
+WHERE subcategory_id LIKE '%S%'
+
+SELECT * FROM NSHARE_BOARD
+
+
 --3.  새로만든 share  테이블 - 게시글 등록 ★★★
 CREATE TABLE NSHARE_BOARD (  
 	product_id	number, --pk/seq
@@ -561,7 +572,7 @@ CREATE TABLE NSHARE_BOARD (
 	product_reg_date	Date default sysdate,
     product_color	varchar2(50) NULL,
     product_read_count	number	default 0,
-    product_gender char(10) not null,
+    product_gender varchar2(10)  not null,
     product_status	varchar(10) not	NULL,  --거래전/중/완료
     product_quality  varchar(5) not null; -- 사이즈 대신 상중하로 상품상태 변경
 	
@@ -576,6 +587,14 @@ create sequence SEQ_NSHARE_BOARD_product_id;
 select * from NSHARE_BOARD
 select * from NSHARE_ATTACHMENT
 commit
+update NSHARE_BOARD
+set product_gender = '공용'
+where product_id in(42);
+
+update NSHARE_BOARD
+set product_gender = '여'
+where product_id in( 11,16,2,26,15,13,5,27,18,12,25);
+--alter table NSHARE_BOARD modify product_quality char(1)
 -- alter table NSHARE_BOARD modify product_gender  char(10) 
 --alter table NSHARE_BOARD drop column product_size;
 -- alter table NSHARE_BOARD add product_quality  varchar(5) not null;
@@ -654,7 +673,7 @@ from ( select  rank() over(order by b.product_id asc)rnum, b.*
 where rnum between 1 and 10             
 
 
-
+--- searchkeyword  b.subcategory_id // %T%'
 select *
 from ( select  rank() over(order by b.product_id asc)rnum, a.*
              from NSHARE_BOARD b join  NSHARE_ATTACHMENT a
@@ -669,3 +688,26 @@ from ( select  rank() over(order by b.product_id asc)rnum, b.*
         on b.product_id = a.product_id
              where b.subcategory_id like '%T%' )
 where rnum between 1 and 10     
+
+--- searchkeyword  b.product_gender  // %여%'
+select *
+from ( select  rank() over(order by b.product_id asc)rnum, a.*
+             from NSHARE_BOARD b join  NSHARE_ATTACHMENT a
+        on b.product_id = a.product_id
+             where b.product_color like '%substr('베이지CR',2)%' )
+where rnum between 1 and 10     
+
+
+
+select * 
+from ( select  rank() over(order by b.product_id desc)rnum, a.* 
+                from NSHARE_BOARD b join  NSHARE_ATTACHMENT a 
+                   on b.product_id = a.product_id 
+                where b.subcategory_id like '%T%' )
+                
+-------------
+select * from NSHARE_BOARD
+where STYLE_NAME   like  'S1'
+
+SELECT * FROM FASHIONSTYLE
+

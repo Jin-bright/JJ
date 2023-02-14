@@ -126,11 +126,11 @@
 			    		<option  name="sharecolor"  value="주황" >주황</option>
 			    		<option  name="sharecolor"  value="노랑" >노랑</option>
 			    		<option  name="sharecolor"  value="파랑" >파랑</option>
-			    		<option  name="sharecolor"  value="파랑" >하얀</option>
-			    		<option  name="sharecolor"  value="파랑" >초록</option>
-			    		<option  name="sharecolor"  value="파랑" >보라</option>
-			    		<option  name="sharecolor"  value="파랑" >베이지</option>
-			    		<option  name="sharecolor"  value="파랑" >하늘</option>						
+			    		<option  name="sharecolor"  value="하얀" >하얀</option>
+			    		<option  name="sharecolor"  value="초록" >초록</option>
+			    		<option  name="sharecolor"  value="보라" >보라</option>
+			    		<option  name="sharecolor"  value="베이지" >베이지</option>
+			    		<option  name="sharecolor"  value="하늘" >하늘</option>						
 			    	</select>
 			
 				<span style="font-size : 12px; color : red;">&nbsp;&nbsp; ※ 비슷한 색상으로 선택하셔도 좋습니다 😊 </span>
@@ -147,9 +147,9 @@
 		<tr>
 			<th>성별</th>
 			<td>
-				<input type="checkbox" name="productGender" id="G1" value="남" onclick='checkOnlyTwo(this)' ><label for="G1"> 남 &nbsp;</label>		
-				<input type="checkbox" name="productGender" id="G2" value="여" onclick='checkOnlyTwo(this)' ><label for="G2"> 여 &nbsp;</label>
-				<input type="checkbox" name="productGender" id="G3" value="공용" onclick='checkOnlyTwo(this)' ><label for="G3"> 공용 &nbsp;</label>		
+				<input type="checkbox" name="productGender" id="G1" value="남" onclick='checkOnlyTwo(this)' ><label for="G1">남</label>		
+				<input type="checkbox" name="productGender" id="G2" value="여" onclick='checkOnlyTwo(this)' ><label for="G2">여</label>
+				<input type="checkbox" name="productGender" id="G3" value="공용" onclick='checkOnlyTwo(this)' ><label for="G3">공용</label>		
 			</td>
 		<tr>
 			<th>스타일</th>
