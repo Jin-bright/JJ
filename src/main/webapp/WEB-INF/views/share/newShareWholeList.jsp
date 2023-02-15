@@ -193,14 +193,14 @@
 </section>
 <div id='pagebar' >${pagebar}</div> 
 
-
-<!--  검색용 더보기 버튼
-<div id='btn-more-container'>
-	<button id="btn-more" value="" > 더보기( <span id="pageaj"></span> / <span id="totalPage">검색시토탈페이지</span> ) </button>
+<!--  검색용 더보기 버튼 1  -->
+<div id="fipage" >
+	<span id="page" name="page" >1</span> <span style="margin-left:10px"> >>  </span>
 </div>
--->
-
-
+<!--  검색용 더보기 버튼 2 -->
+<div id="cspage" >
+	<span id="page" name="page" >1</span> <span style="margin-left:10px"> >> </span>
+</div>
 
 <script>
 //메뉴토글
@@ -225,28 +225,57 @@ items.forEach(item => item.addEventListener('click', toggleAccordion));
 
 
 
-<%---- 비동기 - 옷 & 성별 검색 필터 검색시작 !!!!! --%>
+<%---- 비동기 ---- 일단  옷 & 성별 검색 필터만 해당 !!!!! --%>
 <script>
+// 현재페이지 + 더보기,, 누르면 다시 계속나오게 
+const divpage = document.querySelector("#fipage");
+divpage.addEventListener('click', () => {
+	
+	const page = document.querySelector("#page");
+	page.innerText = Number(page.innerText)+parseInt(1)
+	
+	$('input:checkbox[name=searchKeyword]').each(function (index) {
+		if($(this).is(":checked")==true){
+	    	console.log( document.querySelector("#page") )
+	    	searchClothes( (this) );	  
+	    }
+	})	 
+});
+
+
+const cspage = document.querySelector("#cspage");
+cspage.addEventListener('click', () => {
+	
+	const page = document.querySelector("#page");
+	page.innerText = Number(page.innerText)+parseInt(1)
+	
+	$('input:checkbox[name=searchKeyword]').each(function (index) {
+		if($(this).is(":checked")==true){
+	    	console.log( document.querySelector("#page") )
+	    	searchColorStyle( (this) );	  
+	    }
+	})	 
+});
+// 옷/성별 카테고리 검색 
 const searchClothes = (e) => {
 
 	const searchKeyword = document.getElementsByName("searchKeyword");
-	//const page = document.querySelector("#pageaj");
-	
+
 	searchKeyword.forEach((cb) => {
 	    cb.checked = false;
 	})
 	  
 	e.checked = true; 
-	//$(e).attr('name','color');
-
 	console.log ( e );
 	
+	const page = document.querySelector("#page").innerText;	
 	const searchdata = e.value; //이걸로찾을거야
 
 	$.ajax({
 		url:"${pageContext.request.contextPath}/share/findShareWholeListClothes",
 		method : "get",
-		data : {searchKeyword : searchdata},
+		data : {page,
+				searchKeyword : searchdata},
 		success(data){
 			console.log( data )
 
@@ -265,7 +294,22 @@ const searchClothes = (e) => {
 			const tr3 =  document.createElement("tr");
 			tbody.append( tr3 );
 		
+			
+			
 			for( let i=0; i<data.shareAttachments.length; i++ ){
+
+				
+				if(  data.shareAttachments.length >= 12 ){
+					const p =  document.querySelector("#fipage");
+					p.style.display = "block";
+				}
+				if( data.shareAttachments.length < 12 ){
+					const p =  document.querySelector("#fipage");
+					p.style.display = "none";
+				}
+				
+				
+				
 				//카테고리
 				let v = data.shareboards[i].subcategoryId;
 				if(v == 'T1'){ v = "패딩" }
@@ -345,7 +389,8 @@ const searchClothes = (e) => {
 		complete(data){
 			document.querySelector("#pagebar").innerHTML = "";
 			document.querySelector("#countFilter").innerHTML  = "1" ;
-			document.querySelector("#deleteAll").innerHTML += "모두삭제";
+			document.querySelector("#deleteAll").innerHTML = "모두삭제";
+			document.querySelector("#page").innerHTML=1;
 
 		}
 	});//end-ajax	
@@ -354,7 +399,7 @@ const searchClothes = (e) => {
 
 
 
-<%---- 비동기 - 색깔 검색 필터 검색시작 !!!!! --%>
+<%---- 비동기 - 색깔 && 스타일  검색 필터 검색시작 !!!!! --%>
 <script>
 const searchColorStyle = (e) => {
 
@@ -367,13 +412,15 @@ const searchColorStyle = (e) => {
 	e.checked = true; 
 
 	console.log ( e );
-
+	
+	const page = document.querySelector("#page").innerText;	
 	const searchdata = e.value; //이걸로찾을거야
 
 	$.ajax({
 		url:"${pageContext.request.contextPath}/share/findShareWholeListColor",
 		method : "get",
-		data : {searchKeyword : searchdata},
+		data : {page,
+				searchKeyword : searchdata},
 		success(data){
 			console.log( data )
 
@@ -393,6 +440,17 @@ const searchColorStyle = (e) => {
 			tbody.append( tr3 );
 		
 			for( let i=0; i<data.shareAttachments.length; i++ ){
+				
+				
+				if(  data.shareAttachments.length >= 12 ){
+					const p =  document.querySelector("#cspage");
+					p.style.display = "block";
+				}
+				if( data.shareAttachments.length < 12 ){
+					const p =  document.querySelector("#cspage");
+					p.style.display = "none";
+				}
+				
 				//카테고리
 				let v = data.shareboards[i].subcategoryId;
 				if(v == 'T1'){ v = "패딩" }
@@ -473,7 +531,7 @@ const searchColorStyle = (e) => {
 			document.querySelector("#pagebar").innerHTML = "";
 			document.querySelector("#countFilter").innerHTML  = "1";
 			document.querySelector("#deleteAll").innerHTML = "모두삭제";
-
+			document.querySelector("#page").innerHTML=1;
 		}
 	});//end-ajax	
 }
