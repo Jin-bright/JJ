@@ -1,3 +1,4 @@
+<%@page import="com.sh.obtg.member.model.dto.Member"%>
 <%@page import="com.sh.obtg.share.model.dto.NshareAttachment"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,8 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shareView.css" /> 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@100;400;700&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-
+<%-- <%
+	Member loginMember = (Member) session.getAttribute("loginMember"); 
+%>
+ --%>
 
 <section>
 
@@ -23,7 +26,7 @@
 
 	<div id="contentDiv" >
 		<div id="con">
-			<img  src="<%=request.getContextPath()%>/uploadshares/carrot.png" alt="carrot" style=" width:16px; height:16px; margin-left: 630px" />
+			<img  src="${pageContext.request.contextPath}/uploadshares/carrot.png" alt="carrot" style=" width:16px; height:16px; margin-left: 630px" />
 			<h4>${shareBoard.getProductStatus()}</h4>	
 			  <br/><br />
 			<h1> ${shareBoard.getProductName()}</h1><br /><br />
@@ -47,6 +50,39 @@
 			<button id="viewProfile" onclick="open_pop('${shareBoard.getMemberId()}')" > 판매자 프로필 조회</button>
 			<button id="writeMessage" > 쪽지하기 </button>
 		</div>
+		<!--  쪽지하기 모달창  -->
+		<div id="frmwrapper">			
+			<form id="frmPopCh" name="frmPopCh" action="${pageContext.request.contextPath}/chat/MessageMain"  method="post">
+				<input type="hidden" name="no" value="${shareBoard.getProductId()}" />
+				<h1 style="font-weight:900; margin : 0 auto; text-align:center; padding-bottom:10px "> MESSAGE </h1>
+				<table id="msgTable" style= "margin-top : 0px;" >
+				<tr>
+					<th class="msgtg"> TO.🙆 </th>
+					<td class="msgtd" ><input type="text" id="receiver" name="receiver" style="width:220px; line-height:20px" value="${shareBoard.getMemberId()}" readonly > <!--  받는 사람  --> 	</td>
+				</tr>
+				
+				<tr>
+					<th  class="msgtg" > FROM.🙋‍♀️ </th>
+					<td class="msgtd" ><input type="text" id="sender" name="sender"  style="width:220px;  line-height:20px" value="<%--=loginMember.getMemberId() --%>" readonly>  <!--  보내는 사람  --></td>
+				</tr>
+				
+				<tr>
+					<th  class="msgtg" > 제목 </th>
+					<td class="msgtd" ><input type="text" id="msgTitle" name="msgTitle"  style="width:220px;  line-height:20px" ></td>
+				</tr>
+				
+				<tr>
+					<th  class="msgtg" > 내용 </th>
+					<td class="msgtd" ><textarea id="msgContent" name="msgContent" style="width:220px" required></textarea></td>
+				</tr>
+				</table>
+				<input class="msgbt"  id="msgsubmit" type="submit" value="SEND"   >
+				<span id="msgclose" class="msgclose"> CANCEL </span>		
+			</form>	
+					
+		</div>
+		
+		
 		<!-- 등록일 ~ 텍스트 까지출력되는 테이블  -->
 		<table id = "contentTable">
 		<tbody>
@@ -149,7 +185,37 @@ function open_pop( ${shareBoard.getMemberId()} ){
 
 
 
+<%-- 쪽지 추가  --%>
+<script >
 
+//쪽지제출 후 alert()
+$(document).ready(function() {
+    $("#msgsubmit").on('click', function(){
+    alert("쪽지가 성공적으로 발송되었습니다😊");
+    self.close();
+	});
+});
+</script>
+
+<script>
+const  msgbox = document.querySelector("#writeMessage");
+msgbox.addEventListener('click', () => {
+//	const frm = document.frmPopCh;
+	const  div = document.querySelector("#frmwrapper");
+	div.style.visibility = "visible";
+});
+</script>
+
+<script>
+//닫혀라 쪽지야
+const  msgclose = document.querySelector("#msgclose");
+
+msgclose.addEventListener('click', () => {
+//	const frm = document.frmPopCh;
+	const div = document.querySelector("#frmwrapper");
+	div.style.visibility = "hidden";
+});
+</script>
 
 
 
