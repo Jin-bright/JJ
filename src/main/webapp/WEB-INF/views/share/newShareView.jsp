@@ -58,9 +58,9 @@
 			</tr>
 			<tr>
 				<td class="textd"><span style="color:#727272; margin-right: 100px">추천성별 </span>
-				 	 남<input type="checkbox" ${shareBoard.getProductGender()=='남  ' ? 'checked' : ''} onclick="return false;" />
-					 여<input type="checkbox" ${shareBoard.getProductGender()=='여  ' ? 'checked' : ''} onclick="return false;" /> 
-					 공용<input type="checkbox" ${shareBoard.getProductGender()=='공용  ' ? 'checked' : ''} onclick="return false;" /> </td>		
+				 	 남<input type="checkbox" ${shareBoard.getProductGender()=='남' ? 'checked' : ''} onclick="return false;" />
+					 여<input type="checkbox" ${shareBoard.getProductGender()=='여' ? 'checked' : ''} onclick="return false;" /> 
+					 공용<input type="checkbox" ${shareBoard.getProductGender()=='공용' ? 'checked' : ''} onclick="return false;" /> </td>		
 			</tr>
 			<tr>
 				<td><span style="color:#727272; font-family: 'Noto Sans KR', sans-serif; font-weight: 100; font-size: 15px; margin-right: 115px">추천룩</span>

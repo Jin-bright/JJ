@@ -331,17 +331,17 @@ public class ShareService {
 
 
 //카테고리 - 상의로  찾기 - select 
-	public List<NshareAttachment> findNShareAttachment(Map<String, Integer> param, String searchKeyword) {
+	public List<NshareAttachment> findNShareAttachment(Map<String, Integer> param, String searchKeyword, String searchType) {
 		Connection conn = getConnection();
-		List<NshareAttachment>  attachmenns = shareBoardDao.findNShareAttachment( conn, param, searchKeyword);
+		List<NshareAttachment>  attachmenns = shareBoardDao.findNShareAttachment( conn, param, searchKeyword, searchType);
 		close(conn);
 		return attachmenns;
 	}
 
 //카테고리 - 상의로  찾기 - select - 글만 
-	public List<NshareBoard> findNShareBoards(Map<String, Integer> param, String searchKeyword) {
+	public List<NshareBoard> findNShareBoards(Map<String, Integer> param, String searchKeyword , String searchType) {
 		Connection conn = getConnection();
-		List<NshareBoard>  shareboards = shareBoardDao.findNShareBoards( conn, param, searchKeyword);
+		List<NshareBoard>  shareboards = shareBoardDao.findNShareBoards( conn, param, searchKeyword, searchType);
 		close(conn);
 		return shareboards;
 	}

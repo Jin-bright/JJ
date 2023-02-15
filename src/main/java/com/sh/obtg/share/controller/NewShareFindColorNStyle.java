@@ -17,20 +17,16 @@ import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.service.ShareService;
 
 /**
- * Servlet implementation class NewShareFindTops
+ * Servlet implementation class NewShareFindColorNStyle
  */
-@WebServlet("/share/findShareWholeListClothes")
-public class NewShareFindClothes extends HttpServlet {
+@WebServlet("/share/findShareWholeListColor")
+public class NewShareFindColorNStyle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ShareService shareService = new ShareService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//카테고리 & 성별 % 스타일은 다 이걸로 가능
-//  4*3열  더보기로 하기 - 하쒸안되네
-// 쿼리 : select * from ( select  rank() over(order by b.product_id desc)rnum, b.* from NSHARE_BOARD b where subcategory_id like '%T%' )		
 
 		//1. 사용자입력값 
 		
@@ -52,22 +48,21 @@ public class NewShareFindClothes extends HttpServlet {
 		param.put("end", end);
 		
 		
-		String searchKeyword = request.getParameter("searchKeyword"); //하드코딩했따^^
+		String searchKeyword = request.getParameter("searchKeyword"); 
 		String searchType = null;
-		// 찾는값 : T B A S  && 여 /남  
-		System.out.println("searchKeyword : " + searchKeyword);
-		if( searchKeyword.equals("T") || searchKeyword.equals("A") || searchKeyword.equals("S") || searchKeyword.equals("B")) {
-			searchType = "B.SUBCATEGORY_ID";
+		// 찾는값 : 하드코딩했ㄷ ㅏ^^
+		System.out.println("★★★searchKeyword : " + searchKeyword);
+		String colors = "빨강,검정,파랑,하얀,초록,주황,노랑,하늘,베이지,보라";
+
+		
+		if( colors.contains(searchKeyword)){
+			searchType = "B.PRODUCT_COLOR";
 		}
-		else if( searchKeyword.equals("여") || searchKeyword.equals("남") ) {
-			searchType = "B.PRODUCT_GENDER";
+		
+		else {
+		  searchType = "B.STYLE_NAME";			
 		}
-		else if( searchKeyword.equals("여") || searchKeyword.equals("남") ) {
-			searchType = "B.PRODUCT_GENDER";
-		}
-		else if( searchKeyword.contains("SN") ) {
-			searchType = "B.STYLE_NAME";
-		}
+			
 		
 		System.out.println("■ searchType : " + searchType);
 		
@@ -78,7 +73,7 @@ public class NewShareFindClothes extends HttpServlet {
 		shareAttachments = shareService.findNShareAttachment(param, searchKeyword, searchType);
 		shareboards = shareService.findNShareBoards(param, searchKeyword, searchType );
 		
-//		System.out.println(  shareboards   );
+		//System.out.println(  shareboards   );
 		
 		Map<String,Object> shareboardandAttach = new HashMap<>();
 		shareboardandAttach.put("shareAttachments", shareAttachments);
@@ -86,7 +81,6 @@ public class NewShareFindClothes extends HttpServlet {
 		
 		
 		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(shareboardandAttach, response.getWriter());
-	}
+		new Gson().toJson(shareboardandAttach, response.getWriter());	}
 
 }
