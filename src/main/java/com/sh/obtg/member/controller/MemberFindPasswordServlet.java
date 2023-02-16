@@ -71,6 +71,7 @@ public class MemberFindPasswordServlet extends HttpServlet {
 			else {
 				request.getRequestDispatcher("/WEB-INF/views/member/findPassword.jsp").forward(request, response);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -41,7 +41,7 @@
 	</c:if>
 	<c:if test="${loginMember != null}">
 		<tr class="login_nav">
-			<td onclick="location.href = '${pageContext.request.contextPath}/member/memberView';">MY</td>
+			<td onclick="location.href = '${pageContext.request.contextPath}/member/myPage';">MY</td>
 			<c:if test="${loginMember.memberRole == MemberRole.A}">
 				<td onclick="location.href = '${pageContext.request.contextPath}/admin/memberList';">MANAGER</td>
 			</c:if>

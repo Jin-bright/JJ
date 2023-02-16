@@ -20,7 +20,7 @@ import com.sh.obtg.member.model.dto.Style;
 import com.sh.obtg.member.model.service.MemberService;
 
 @WebServlet("/member/memberEnroll")
-public class MemberEnroll extends HttpServlet {
+public class MemberEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
        

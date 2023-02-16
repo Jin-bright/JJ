@@ -133,7 +133,7 @@
 	text-align: center;
 	margin-bottom: 20px;
 }
-.enroll_text {
+.enroll_text, .enroll_txt {
 	width: 98%;
 	line-height: 18px;
 	border-style: none;
@@ -181,6 +181,23 @@
 .check {
 	visibility: visible;
 }
+.profile_box {
+	display: flex;
+	flex-wrap: wrap;
+}
+.profile_img {
+	padding: 0 5px;
+}
+.profile_img > input {
+	transform : translate(12px, -10px);
+}
+.img_viewer {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+/* 숨기기용 */
 .hidden {
 	display: none;
 }

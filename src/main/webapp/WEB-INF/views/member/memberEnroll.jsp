@@ -76,9 +76,12 @@
 					<input type="radio" name="gender" id="gender1" value="F">
 					<label for="gender1">여</label>
 				</div>
-				<div class="enroll_box">
+				<div class="enroll_box profile_box">
 					<h4>프로필 사진</h4>
-					<input type="file" name="profile" accept="image/*"/>
+					<div class="profile_img">
+						<img src="${pageContext.request.contextPath}/image/망그러진곰.jpeg" class="img_viewer" />
+						<input type="file" name="profile" id="profile" accept="image/*"/>
+					</div>
 				</div>
 				<div class="enroll_box">
 					<h4>닉네임</h4>
@@ -97,6 +100,22 @@
 	</div>
 </section>
 <script>
+/* 프로필 미리보기 */
+document.querySelector("#profile").addEventListener('change', (e) => {
+	const img = e.target;
+	
+	if(img.files[0]){
+		const fr = new FileReader();
+		fr.readAsDataURL(img.files[0]);
+		fr.onload = (e) => {
+			document.querySelector(".img_viewer").src = e.target.result; // result속성은 dataUrl임
+		};
+	}
+	else {
+		document.querySelector(".img_viewer").src = "${pageContext.request.contextPath}/image/망그러진곰.jpeg";
+	}
+});
+
 /* 필수 입력값 확인 */
 document.querySelectorAll(".enroll_text").forEach((text) => {
 	text.onblur = (e) => {
@@ -209,6 +228,7 @@ document.querySelector("#phone").addEventListener('keyup', (e) => {
 
 /* 필수정보 -> 선택정보 */
 document.querySelector(".next_btn").addEventListener('click', (e) => {
+	console.log("1");
 	/* 선호하는 스타일 유효성검사 */
 	const styles = document.querySelectorAll(".style");
 	const styleMsg = document.querySelector("#style_error");
