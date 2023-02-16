@@ -707,7 +707,7 @@ from ( select  rank() over(order by b.product_id desc)rnum, a.*
                 
 -------------
 select * from NSHARE_BOARD
-where STYLE_NAME   like  'S1'
+where style_name    like  'S1'
 
 SELECT * FROM FASHIONSTYLE
 

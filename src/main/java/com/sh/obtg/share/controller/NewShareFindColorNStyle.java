@@ -47,6 +47,7 @@ public class NewShareFindColorNStyle extends HttpServlet {
 		param.put("start", start);
 		param.put("end", end);
 		
+		System.out.println("page : " + page);
 		
 		String searchKeyword = request.getParameter("searchKeyword"); 
 		String searchType = null;

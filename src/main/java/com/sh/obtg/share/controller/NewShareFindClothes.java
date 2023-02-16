@@ -36,12 +36,13 @@ public class NewShareFindClothes extends HttpServlet {
 		
 		
 		//페이지구하기 
-		int page = 1;
+		int page = Integer.parseInt( request.getParameter("page"));
+//		int page = 1;
 		int limit = 12;
-		try {
-			page = Integer.parseInt( request.getParameter("page")); //1페이지, 2페이지, 3페이지	
-		} catch (NumberFormatException e) {
-		}
+//		try {
+//			page = Integer.parseInt( request.getParameter("pageaj")); //1페이지, 2페이지, 3페이지	
+//		} catch (NumberFormatException e) {
+//		}
 		
 		int start = (page-1) * limit + 1;    // 스타트 페이지 : 1 2345  6    11  이걸 서블릿에서 어떻게 구해 ? 
 		int end  = page * limit;
@@ -50,7 +51,7 @@ public class NewShareFindClothes extends HttpServlet {
 		Map<String, Integer> param = new HashMap<>(); //
 		param.put("start", start);
 		param.put("end", end);
-		
+		System.out.println( "page : " + page );
 		
 		String searchKeyword = request.getParameter("searchKeyword"); //하드코딩했따^^
 		String searchType = null;
@@ -62,12 +63,8 @@ public class NewShareFindClothes extends HttpServlet {
 		else if( searchKeyword.equals("여") || searchKeyword.equals("남") ) {
 			searchType = "B.PRODUCT_GENDER";
 		}
-		else if( searchKeyword.equals("여") || searchKeyword.equals("남") ) {
-			searchType = "B.PRODUCT_GENDER";
-		}
-		else if( searchKeyword.contains("SN") ) {
-			searchType = "B.STYLE_NAME";
-		}
+		
+		
 		
 		System.out.println("■ searchType : " + searchType);
 		

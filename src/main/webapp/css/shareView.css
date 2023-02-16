@@ -234,10 +234,125 @@ h4{
   display: none;
 }
 
+/* ///////////구매전필독 끝///////////////// */
+
+/* 쪽지 모달창 css 효과  */
+#frmPopCh {
+    position: fixed; 
+    top: 50%; left: 50%;  
+    transform: translate(-50%, -50%); 
+    width: 24em; 
+    height: 25em; 
+    padding: 10px;
+    border: none;
+    background: white;
+    border-radius: 1em;
+    z-index : 999;
+}
+
+
+#msgTable {
+	width: 330px;
+	height: 320px;
+    background-color: F5F5DC;
+	margin : 0 auto;
+	border : 2px solid black; 
+	border-collapse:collapse;  
+	padding : 10px;
+	padding-top : 20px;
+}
+
+
+#msgContent {
+	width: 150px;
+	height: 150px;
+}
+
+.msgtg {
+	width: 90px;
+	padding: 5px 5px 5px 10px;
+}
+
+.msgtd {
+	height: 30px;
+}
+
+
+#msgsubmit{
+	margin-top : -3px;
+	margin-left : 10px;	
+	background-color  : black;
+	border : 3px solid black;
+	color: white;
+	font-size:16px;
+}
 
 
 
-/* ///////////구매전필독 ///////////////// */
+#msgsubmit:hover {
+	background-color : orange;
+}
+
+
+#msgclose:hover {
+	background-color : red;
+}
+
+#frmwrapper{
+    position: fixed; 
+    top: 50%; 
+    left: 50%;  
+    transform: translate(-50%, -50%); 
+    width: 26em; 
+    height: 27.5em; 
+    padding: 10px;
+    border: 1px solid grey;
+    background: white;
+    border-radius: 1em;
+    visibility: hidden;
+	z-index: 999;
+    border : 2px solid #008000;
+}
+
+#msgsubmit{
+	width:100px;
+	height : 30px;
+	margin-left : 80px;
+	margin-top : 4px;
+}
+
+#msgclose{
+ 	display:table-cell;
+	position : absolute;
+	top:385px;
+	left: 210px;
+	display: inline-block;
+	height :30px;
+	width:100px;
+	padding-top: 5px;
+	text-align : center;
+	background-color  : black;
+	border : 3px solid black;
+	color: white;
+	padding-bottom: 7px;
+	font-size : 16px;
+	z-index:1
+}
+
+/* /////////////// */
+
+
+
+
+
+
+
+
+
+
+
+
+
 .ootdnav {
     display: inline-block;
     font: 13px Helvetica, Tahoma, serif;

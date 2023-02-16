@@ -325,6 +325,47 @@ table tr{
 	margin-bottom: 30px;
 }
 
+#fipage{
+	margin-left : 200px; 
+	margin-bottom : 20px;
+	text-align:center; 
+	vertical-align:middle; 
+	width : 140px; 
+	font-size:16px; 
+	height:30px; 
+	background-color: #ececec;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: 200;
+	display: none;
+}
+
+#fipage:hover{
+	background-color: #c0c0c0;
+	font-weight: 500
+}
+
+#cspage{
+	margin-left : 200px; 
+	margin-bottom : 20px;
+	text-align:center; 
+	vertical-align:middle; 
+	width : 140px; 
+	font-size:16px; 
+	height:30px; 
+	background-color: #ececec;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: 200;
+	display: none;
+}
+
+#cspage:hover{
+	background-color: #c0c0c0;
+	font-weight: 500
+}
+
+
 /**
 #eachimg:hover {
     transform: scale(1.1);
@@ -382,30 +423,6 @@ table tr{
 }
 
 
-@keyframes glowing {
-  0% { box-shadow: 0 0 -10px #c4a300; }
-  40% { box-shadow: 0 0 20px #c4a300; }
-  60% { box-shadow: 0 0 20px #c4a300; }
-  100% { box-shadow: 0 0 -10px #c4a300; }
-}
-
-/* #deal{
-	background-color : black;
- 	font-family: Audiowide;
-  	animation: neon5 1s ease-in-out infinite alternate;
-}	
-
-@keyframes neon5 {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff9900,
-      0 0 70px #ff9900, 0 0 80px #ff9900, 0 0 100px #ff9900, 0 0 150px #ff9900;
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff9900,
-      0 0 35px #ff9900, 0 0 40px #ff9900, 0 0 50px #ff9900, 0 0 75px #ff9900;
-  }
-}
- */
 
 
 
