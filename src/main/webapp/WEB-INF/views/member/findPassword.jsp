@@ -33,6 +33,15 @@
 	</div>
 </section>
 <script>
+/* 필수 입력값 확인 */
+document.querySelectorAll(".find_input").forEach((find) => {
+	find.onblur = (e) => {
+		if(e.target.value.length === 0){
+			e.target.nextElementSibling.classList.add("check");
+		}
+	};
+});
+
 const findPwd = () => {
 	const id = document.querySelector("#memberId");
 	const email = document.querySelector("#email");
@@ -41,12 +50,12 @@ const findPwd = () => {
 	
 	/* 유효성검사 */
 	if(!/^[A-Za-z0-9]{4,}$/.test(id.value)){
-		idMsg.style.visibility = "visible";
+		idMsg.classList.add("check");
 		id.select();
 		return false;
 	}
 	if(!/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/.test(email.value)){
-		emailMsg.style.visibility = "visible";
+		emailMsg.classList.add("check");
 		email.select();
 		return false;
 	}
@@ -67,18 +76,18 @@ const findPwd = () => {
 			const div1 = document.createElement("div");
 			div1.classList.add('after_box');
 			const span = document.createElement("span");
-			/* 회원정보 일치에 따른 처리 */
+			/* 회원정보 일치에 따른 분기처리 */
 			if(data.member == 1) span.innerText = "비밀번호 찾기에 성공하였습니다.";				
 			else span.innerText = "비밀번호 찾기에 실패하였습니다.";
 			
 			const div2 = document.createElement("div");
 			div2.classList.add('find_info');
 			const p = document.createElement("p");
-			/* 회원정보 일치에 따른 처리 */
+			/* 회원정보 일치에 따른 분기처리 */
 			if(data.member == 1) p.innerText = "임시비밀번호";
 			else p.innerText = "";
 			const h4 = document.createElement("h4");
-			/* 회원정보 일치에 따른 처리 */
+			/* 회원정보 일치에 따른 분기처리 */
 			if(data.member == 1) h4.append(data.tempPwd);
 			else h4.innerText = "일치하는 회원정보를 찾을 수 없습니다.";
 			
@@ -91,7 +100,7 @@ const findPwd = () => {
 			a2.href = "${pageContext.request.contextPath}/member/login";
 			a2.innerText = "로그인";
 			
-			/* 회원정보 일치에 따른 처리 */
+			/* 회원정보 일치에 따른 분기처리 */
 			if(data.member == 1) div3.append(a2);
 			else div3.append(a1, a2);
 			div2.append(p, h4);

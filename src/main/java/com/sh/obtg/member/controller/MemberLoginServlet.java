@@ -35,6 +35,7 @@ public class MemberLoginServlet extends HttpServlet {
 			
 			// 업무로직
 			Member member = memberService.selectOneMember(memberId);
+			System.out.println(member);
 			
 			HttpSession session = request.getSession();
 			if(member != null && memberPwd.equals(member.getPassword())) {

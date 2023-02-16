@@ -5,10 +5,12 @@ import static com.sh.obtg.common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -572,5 +574,137 @@ public class MemberDao {
 		}
 		
 		return count;
+	}
+
+	/**
+	 * 마이페이지 ootd list 조회
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyOotd(Connection conn, String memberId) {
+		String sql = prop.getProperty("selectMyOotd");
+		List<Map<String, Object>> ootdList = new ArrayList<Map<String,Object>>();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> ootd = new HashMap<>();
+					ootd.put("no", rset.getInt("OOTD_no"));
+					ootd.put("title", rset.getString("OOTD_title"));
+					ootd.put("readCount", rset.getInt("OOTD_read_count"));
+					ootd.put("img", rset.getString("renamed_filename"));
+					ootdList.add(ootd);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 ootd 목록 조회 오류👻", e);
+		}
+		
+		return ootdList;
+	}
+
+	/**
+	 * 마이페이지 share list 조회
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyShare(Connection conn, String memberId) {
+		String sql = prop.getProperty("selectMyShare");
+		List<Map<String, Object>> shareList = new ArrayList<Map<String,Object>>();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> share = new HashMap<>();
+					share.put("no", rset.getInt("product_id"));
+					share.put("name", rset.getString("product_name"));
+					share.put("readCount", rset.getInt("product_read_count"));
+					share.put("status", rset.getString("product_status"));
+					share.put("img", rset.getString("product_attachment_renamed_filename"));
+					share.put("regDate", rset.getDate("product_reg_date"));
+					shareList.add(share);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 share 목록 조회 오류👻", e);
+		}
+		
+		return shareList;
+	}
+
+	/**
+	 * 회원 정보 수정
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int updateMember(Connection conn, Map<String, String> param) {
+		// update member set # = ? where member_id = ?
+		String sql = prop.getProperty("updateMember");
+		String type = param.get("type");
+		String keyword = param.get("keyword");
+		String memberId = param.get("memberId");
+		sql = sql.replace("#", type);
+		int result = 0;
+		
+		Date birthday = null;
+		if(type.equals("birthday")) {
+			birthday = !"".equals(keyword) ? Date.valueOf(keyword) : null;
+		}
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			if(type.equals("birthday")) {
+				pstmt.setDate(1, birthday);
+			}
+			else {
+				pstmt.setString(1, keyword);
+			}
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+
+		}
+		catch (Exception e) {
+			throw new MemberException("👻회원 정보 수정 오류👻", e);
+		}
+			
+		return result;
+	}
+	
+	/**
+	 * 프로필 사진 변경
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int updateProfile(Connection conn, Map<String, String> param) {
+		// update member set original = ?, renamed = ? where member_id = ?
+		String sql = prop.getProperty("updateProfile");
+		int result = 0;
+		
+		String original = param.get("original");
+		String renamed = param.get("renamed");
+		String memberId = param.get("memberId");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, original);
+			pstmt.setString(2, renamed);
+			pstmt.setString(3, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻프로필 사진 변경 오류👻", e);
+		}
+		
+		return result;
 	}
 }

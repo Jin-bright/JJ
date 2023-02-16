@@ -33,7 +33,6 @@ public class MemberService {
 		return member;
 	}
 	
-	
 	public int updateMemberRole(String memberId, String memberRole) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -97,20 +96,7 @@ public class MemberService {
 		}
 		return result;
 	}
-	public int updateMember(Member member) {
-		int result = 0;
-		Connection conn = getConnection();
-		try {
-			result = memberDao.updateMember(conn, member);
-			commit(conn);
-		} catch(Exception e) {
-			rollback(conn);
-			throw e;
-		}finally {
-			close(conn);
-		}
-		return result;
-	}
+
 	
 	/**
 	 * 회원가입
@@ -283,4 +269,71 @@ public class MemberService {
 		close(conn);
 		return count;
 	}
+
+	/**
+	 * 마이페이지 ootd list 조회
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyOotd(String memberId) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> ootdList = memberDao.selectMyOotd(conn, memberId);
+		close(conn);
+		return ootdList;
+	}
+
+	/**
+	 * 마이페이지 share list 조회
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyShare(String memberId) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> shareList = memberDao.selectMyShare(conn, memberId);
+		close(conn);
+		return shareList;
+	}
+
+	/**
+	 * 회원 정보 수정
+	 * @param param
+	 * @return
+	 */
+	public int updateMember(Map<String, String> param) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.updateMember(conn, param);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 프로필 사진 변경
+	 * @param param
+	 * @return
+	 */
+	public int updateProfile(Map<String, String> param) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.updateProfile(conn, param);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
 }

@@ -41,8 +41,9 @@ public class MemberFindIdServlet extends HttpServlet {
 			else {
 				request.getRequestDispatcher("/WEB-INF/views/member/findId.jsp").forward(request, response);
 			}
+			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}

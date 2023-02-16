@@ -41,7 +41,7 @@
 	</c:if>
 	<c:if test="${loginMember != null}">
 		<tr class="login_nav">
-			<td onclick="location.href = '${pageContext.request.contextPath}/member/memberView';">MY</td>
+			<td onclick="location.href = '${pageContext.request.contextPath}/member/myPage';">MY</td>
 			<c:if test="${loginMember.memberRole == MemberRole.A}">
 				<td onclick="location.href = '${pageContext.request.contextPath}/admin/memberList';">MANAGER</td>
 			</c:if>
@@ -55,10 +55,10 @@
 <!-- <hr style="border: solid 1px black; margin:0;"> -->
 <nav class="menu">
 	<h1  class="main-title"  >O B T G</h1>
-	<a class="menu__item" id="i-0" href="<%=request.getContextPath()%>/index.jsp"><span class="menu__text"><b>HOME</b></span></a>	
-	<a class="menu__item" id="i-1" href="<%=request.getContextPath()%>/ootd/ootdWholeList"><span class="menu__text">OOTD</span></a>
+	<a class="menu__item" id="i-0" href="${pageContext.request.contextPath}/index.jsp"><span class="menu__text"><b>HOME</b></span></a>	
+	<a class="menu__item" id="i-1" href="${pageContext.request.contextPath}/ootd/ootdWholeList"><span class="menu__text">OOTD</span></a>
 	<a class="menu__item" id="i-2" href="${pageContext.request.contextPath}/share/newShareWholeList"><span class="menu__text">SHARE</span></a>	
-	<a class="menu__item" id="i-4" href="<%= request.getContextPath() %>/column/columnList"><span class="menu__text">COLUMN</span></a>
+	<a class="menu__item" id="i-4" href="${pageContext.request.contextPath}/column/columnList"><span class="menu__text">COLUMN</span></a>
   <div id="active"></div>
   <div id="active-2"></div>
   <div id="active-3"></div>
