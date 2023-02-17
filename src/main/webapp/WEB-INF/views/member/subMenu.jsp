@@ -7,7 +7,7 @@
 			<strong class="sub_title">게시글 정보</strong>
 			<ul>
 				<li>나의 ootd</li>
-				<li>나눔 목록</li>
+				<li><a href="${pageContext.request.contextPath}/member/myShare">나눔 목록</a></li>
 				<li>좋아요</li>
 			</ul>
 		</div>

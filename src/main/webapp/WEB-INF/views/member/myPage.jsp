@@ -72,10 +72,22 @@
 							<div class="content_box">
 								<a href="${pageContext.request.contextPath}/share/newShareView?no=${share.no}">
 									<img src="${pageContext.request.contextPath}/uploadshares/newShare/${share.img}" class="share_img" />
-									<p class="box_title">${share.name}</p>
-									<p class="box_count">${share.readCount}</p>
-									<p class="box_btn">${share.status}</p>
+									<p class="box_title">
+										<!-- 제목 길이 제어 -->
+										<c:choose>
+									        <c:when test="${fn:length(share.name) > 15}">
+									        	<c:out value="${fn:substring(share.name,0,14)}"/>...
+									        </c:when>
+									        <c:otherwise>
+								            	<c:out value="${share.name}"/>
+								            </c:otherwise> 
+								        </c:choose>
+									</p>
 								</a>
+								<div class="box_etc">
+									<p class="box_btn">${share.status}</p>
+									<p class="box_date">${share.regDate}</p>
+								</div>
 							</div>
 						</c:if>
 					</c:forEach>

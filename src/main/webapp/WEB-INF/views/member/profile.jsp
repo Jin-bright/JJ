@@ -10,7 +10,7 @@
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	List<String> myStyleList = 
 			loginMember.getStyle() != null ?
-					Arrays.asList(loginMember.getStyle()) : null;
+					Arrays.asList(loginMember.getStyle().split(",")) : null;
 	pageContext.setAttribute("myStyleList", myStyleList);
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
