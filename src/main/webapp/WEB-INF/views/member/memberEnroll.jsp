@@ -228,7 +228,6 @@ document.querySelector("#phone").addEventListener('keyup', (e) => {
 
 /* 필수정보 -> 선택정보 */
 document.querySelector(".next_btn").addEventListener('click', (e) => {
-	console.log("1");
 	/* 선호하는 스타일 유효성검사 */
 	const styles = document.querySelectorAll(".style");
 	const styleMsg = document.querySelector("#style_error");

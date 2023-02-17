@@ -12,8 +12,6 @@ import java.util.Map;
 import com.sh.obtg.member.model.dao.MemberDao;
 import com.sh.obtg.member.model.dto.Like;
 import com.sh.obtg.member.model.dto.Member;
-import com.sh.obtg.member.model.dto.MyPost;
-import com.sh.obtg.member.model.dto.MyPosts;
 import com.sh.obtg.member.model.dto.Style;
 
 public class MemberService {
@@ -148,21 +146,6 @@ public class MemberService {
 		return ootdCnt + shareCnt;
 	}
 	
-	// 내가 쓴 ootd글 조회
-	public List<MyPost> selectMyOotdPost(String memberId) {
-		Connection conn = getConnection();
-		List<MyPost> ootdBoardList = memberDao.selectMyOotdPost(conn, memberId);
-		close(conn);
-		return ootdBoardList;
-	}
-	
-	// 내가 쓴 share글 조회
-	public List<MyPosts> selectMySharePost(String memberId) {
-		Connection conn = getConnection();
-		List<MyPosts> shareBoardList = memberDao.selectMySharePost(conn, memberId);
-		close(conn);
-		return shareBoardList;
-	}
 	
 	// 내가 쓴 share글 수 조회
 	public int getMySharePostCnt(String memberId) {

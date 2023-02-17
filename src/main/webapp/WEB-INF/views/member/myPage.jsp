@@ -84,7 +84,9 @@
 			<c:if test="${empty ootdList}">
 				<div class="empty_box">
 					<p>작성한 SHARE 없습니다.</p>
-					<button class="my_btn" id="share_btn">SHARE 바로가기</button>
+					<button class="my_btn" id="share_btn">
+						<a href="${pageContext.request.contextPath}/share/newShareWholeList">SHARE 바로가기</a>
+					</button>
 				</div>
 			</c:if>
 		</div>
