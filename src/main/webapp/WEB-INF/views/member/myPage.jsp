@@ -81,7 +81,7 @@
 					</c:forEach>
 				</div>
 			</c:if>
-			<c:if test="${empty ootdList}">
+			<c:if test="${empty shareList}">
 				<div class="empty_box">
 					<p>작성한 SHARE 없습니다.</p>
 					<button class="my_btn" id="share_btn">
@@ -99,7 +99,9 @@
 				<p>추가하신 좋아요가 없습니다.</p>
 				<div class="btn_wrap">
 					<button class="my_btn" id="ootd_btn">OOTD 바로가기</button>
-					<button class="my_btn" id="share_btn">SHARE 바로가기</button>
+					<button class="my_btn" id="share_btn">
+						<a href="${pageContext.request.contextPath}/share/newShareWholeList">SHARE 바로가기</a>
+					</button>
 				</div>
 			</div>
 		</div>

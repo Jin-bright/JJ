@@ -57,10 +57,11 @@ public class MemberFindPasswordServlet extends HttpServlet {
 					
 					// 비밀번호변경
 					String password = HelloMvcUtils.getEncryptedPassword(tempPwd, id);
-					Member newMember = new Member();
-					newMember.setMemberId(id);
-					newMember.setPassword(password);
-					int result = memberService.updatePassword(newMember);
+					Map<String, String> Pwdparam = new HashMap<>();
+					Pwdparam.put("memberId", id);
+					Pwdparam.put("type", "password");
+					Pwdparam.put("keyword", password);
+					int result = memberService.updateMember(Pwdparam);
 					System.out.println("비밀번호 변경" + (result > 0 ? "성공!" : "실패ㅠ"));
 				}
 				

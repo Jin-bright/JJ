@@ -78,24 +78,6 @@ public class MemberDao {
 		member.setRenamed(rset.getString("renamed"));		
 		return member;
 	}
-	
-
-	public int updatePassword(Connection conn, Member member) {
-		int result = 0;
-		String sql = prop.getProperty("updatePassword");
-		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
-			pstmt.setString(1, member.getPassword());
-			pstmt.setString(2, member.getMemberId());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			throw new MemberException("비밀번호 수정 오류!", e);
-		}
-		return result;
-	}
-	
 
 	public int updateMemberRole(Connection conn, String memberId, String memberRole) {
 		String sql = prop.getProperty("updateMemberRole");
@@ -249,9 +231,16 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	/**
+	 * 회원 탈퇴
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
 	public int deleteMember(Connection conn, String memberId) {
-		int result = 0;
 		String sql = prop.getProperty("deleteMember");
+		int result = 0;
 
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
 			pstmt.setString(1, memberId);
@@ -263,7 +252,7 @@ public class MemberDao {
 
 		return result;
 	
-}
+	}
 	// 내가 쓴 ootd 게시글 수
 	public int selectMyOotdPostCnt(Connection conn, String memberId) {
 		// select count(*) from ootd_board where ootd_writer = ?

@@ -126,7 +126,8 @@
 										<tr>
 									</c:if>
 									<td>
-										<input type="checkbox" name="style" class="style" id="${style.name}" value="${style.name}" ${myStyleList.contains(style.name) ? "checked" : "" }/><label for="${style.name}" class="style_name">${style.name}</label>
+										<input type="checkbox" name="style" class="style" id="${style.name}" value="${style.name}" ${myStyleList.contains(style.name) ? "checked" : ""}/>
+										<label for="${style.name}" class="style_name">${style.name}</label>
 									</td>
 									<c:if test="${vs.index % 5 == 4}">
 										</tr>
