@@ -143,8 +143,8 @@ ul {
 }
 .upload_btn {
 	cursor: pointer;
-	font-size: 14px;
-	padding: 6px;
+	font-size: 13px;
+	padding: 7px;
 }
 .profile_wrap > h3 {
 	font-size: 25px;
@@ -228,6 +228,7 @@ ul {
 	text-align: center;
 }
 .sad {
+	width: 70px;
 	color: rgba(34,34,34,.5);
 	font-size: 15px;
 }

@@ -1,8 +1,18 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sh.obtg.member.model.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	List<String> myStyleList = 
+			loginMember.getStyle() != null ?
+					Arrays.asList(loginMember.getStyle()) : null;
+	pageContext.setAttribute("myStyleList", myStyleList);
+%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myPage.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css" />
@@ -27,7 +37,7 @@
 							<input type="file" name="profile" id="upload">
 						</form>
 						<label for="upload" class="upload_btn">이미지 변경</label>
-						<button class="my_btn" onclick="deleteImg(${loginMember.memberId});">삭제</button>
+						<button class="my_btn" onclick="deleteImg();">삭제</button>
 					</div>
 				</div>
 			</div>
@@ -47,7 +57,7 @@
 					<div class="modify_box">
 						<h6>이전 비밀번호</h6>
 						<input type="password" name="oldPwd" class="my_input"/>
-						<p class="error_msg">비밀번호가 일치하지 않습니다.</p>
+						<p class="error_msg pwd_msg">비밀번호가 일치하지 않습니다.</p>
 					</div>
 					<div class="modify_box">
 						<h6>새 비밀번호</h6>
@@ -55,7 +65,7 @@
 						<p class="error_msg">영문, 숫자를 포함해서 입력해주세요. (4-16자)</p>
 					</div>
 					<div class="modify_btn_box">
-						<button class="my_btn" onclick="hiddenFrm();">취소</button>
+						<button class="my_btn close">취소</button>
 						<button class="my_btn" onclick="update('password');">변경</button>
 					</div>
 				</div>
@@ -73,7 +83,7 @@
 						<p class="error_msg">이메일 주소를 정확히 입력해주세요.</p>
 					</div>
 					<div class="modify_btn_box">
-						<button class="my_btn" onclick="hiddenFrm();">취소</button>
+						<button class="my_btn close">취소</button>
 						<button class="my_btn" onclick="update('email');">변경</button>
 					</div>
 				</div>
@@ -91,8 +101,44 @@
 						<p class="error_msg">전화번호를 정확히 입력해주세요.</p>
 					</div>
 					<div class="modify_btn_box">
-						<button class="my_btn" onclick="hiddenFrm();">취소</button>
+						<button class="my_btn close">취소</button>
 						<button class="my_btn" onclick="update('phone');">변경</button>
+					</div>
+				</div>
+				<div class="info_box">
+					<h5>선호하는 스타일</h5>
+					<div class="my_info_box">
+						<p>
+							<c:forEach items="${loginMember.style}" var="style">
+								<i><sup>#</sup>${style}</i>
+							</c:forEach>
+						</p>
+						<button class="my_btn open">변경</button>
+					</div>
+				</div>
+				<div class="modify">
+					<div class="modify_box">
+						<h5>선호하는 스타일 변경</h5>
+						<form name="styleFrm" method="post">
+							<table class="style_box">
+								<c:forEach items="${styleList}" var="style" varStatus="vs">
+									<c:if test="${vs.index % 5 == 0}">
+										<tr>
+									</c:if>
+									<td>
+										<input type="checkbox" name="style" class="style" id="${style.name}" value="${style.name}" ${myStyleList.contains(style.name) ? "checked" : "" }/><label for="${style.name}" class="style_name">${style.name}</label>
+									</td>
+									<c:if test="${vs.index % 5 == 4}">
+										</tr>
+									</c:if>
+								</c:forEach>
+							</table>
+						</form>
+						<p class="error_msg style_msg">한 개 이상 선택해 주세요.</p>
+					</div>
+					<div class="modify_btn_box">
+						<button class="my_btn close">취소</button>
+						<button class="my_btn" onclick="styleUpdate();">변경</button>
 					</div>
 				</div>
 			</div>
@@ -111,7 +157,7 @@
 						<input type="text" value="${loginMember.name}" name="name" class="my_input"/>
 					</div>
 					<div class="modify_btn_box">
-						<button class="my_btn" onclick="hiddenFrm();">취소</button>
+						<button class="my_btn close">취소</button>
 						<button class="my_btn" onclick="update('name');">변경</button>
 					</div>
 				</div>
@@ -128,7 +174,7 @@
 						<input type="text" value="${loginMember.nickname}" name="nickName" class="my_input"/>
 					</div>
 					<div class="modify_btn_box">
-						<button class="my_btn" onclick="hiddenFrm();">취소</button>
+						<button class="my_btn close">취소</button>
 						<button class="my_btn" onclick="update('nickName');">변경</button>
 					</div>
 				</div>
@@ -145,8 +191,25 @@
 						<input type="date" value="${loginMember.birthday}" name="birthday" class="my_input"/>
 					</div>
 					<div class="modify_btn_box">
-						<button class="my_btn" onclick="hiddenFrm();">취소</button>
+						<button class="my_btn close">취소</button>
 						<button class="my_btn" onclick="update('birthday');">변경</button>
+					</div>
+				</div>
+				<div class="info_box">
+					<h5>소개말</h5>
+					<div class="my_info_box">
+						<p>${loginMember.introduce}</p>
+						<button class="my_btn open">변경</button>
+					</div>
+				</div>
+				<div class="modify">
+					<div class="modify_box">
+						<h5>소개말 변경</h5>
+						<input type="text" value="${loginMember.introduce}" name="introduce" class="my_input"/>
+					</div>
+					<div class="modify_btn_box">
+						<button class="my_btn close">취소</button>
+						<button class="my_btn" onclick="update('introduce');">변경</button>
 					</div>
 				</div>
 			</div>
@@ -197,6 +260,32 @@ document.querySelector("#upload").addEventListener('change', (e) => {
 	});
 });
 
+/* 프로필 사진 삭제 */
+const deleteImg = () => {
+	const frm = document.createElement("form");
+	const input = document.createElement("imput")
+	input.type = "file";
+	input.name = "profile";
+	input.value = null;
+	frm.append(input);
+	
+	const frmData = new FormData(frm);
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/member/updateProfile",
+		method : "POST",
+		dataType : "json",
+		contentType : false, 
+		processData : false, 
+		data : frmData,
+		success(data){
+			console.log(data);
+			document.querySelector(".my_profile").src = "${pageContext.request.contextPath}/image/망그러진곰.jpeg"
+		},
+		error : console.log
+	});
+};
+
 /* 수정폼 열기 */
 document.querySelectorAll(".open").forEach((open) => {
 	open.onclick = (e) => {
@@ -205,6 +294,18 @@ document.querySelectorAll(".open").forEach((open) => {
 		
 		target.classList.add("hidden");
 		target.nextElementSibling.classList.add("show");
+		
+	};
+});
+
+/* 수정폼 닫기 */
+document.querySelectorAll(".close").forEach((close) => {
+	close.onclick = (e) => {
+		const target = e.target.parentElement.parentElement;
+		console.log(target); // .modify
+		
+		target.classList.remove("show");
+		target.previousElementSibling.classList.remove("hidden");
 		
 	};
 });
@@ -238,8 +339,9 @@ const update = (keyType) => {
 	switch (keyType){
 	/* 비밀번호 */
 	case 'password' :
-		const oldPwd = document.querySelector("[name=oldPwd]");
+		const oldPwd = document.querySelector(".pwd_msg");
 		if(oldPwd.classList.contains("show2")){
+			oldPwd.previousElementSibling.select();
 			return false;
 		}
 		console.log("비밀번호 일치하지않으면 찍히면 안됨");
@@ -272,6 +374,26 @@ const update = (keyType) => {
 	frm.submit();
 };
 
+/* 스타일 유효성 검사(어려워서 따로 뻄ㅠ) */
+const styleUpdate = () => {
+	const styles = document.querySelectorAll(".style");
+	const msg = document.querySelector(".style_msg");
+	let count = 0;
+	
+	styles.forEach((style) => {
+		if(style.checked == true)
+			count++;
+	});
+	
+	if(count <= 0){
+		msg.classList.add("show2");
+		return false;		
+	}
+	else {
+		document.styleFrm.submit();
+	}
+}		
+		
 /* 회원탈퇴 */
 document.querySelector(".sad").addEventListener('click', (e) => {
 	if(confirm("정말 탈퇴하시겠습니까?🥲")){
