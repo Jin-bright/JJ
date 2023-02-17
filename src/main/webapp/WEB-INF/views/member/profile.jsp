@@ -10,7 +10,7 @@
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	List<String> myStyleList = 
 			loginMember.getStyle() != null ?
-					Arrays.asList(loginMember.getStyle()) : null;
+					Arrays.asList(loginMember.getStyle().split(",")) : null;
 	pageContext.setAttribute("myStyleList", myStyleList);
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -126,7 +126,8 @@
 										<tr>
 									</c:if>
 									<td>
-										<input type="checkbox" name="style" class="style" id="${style.name}" value="${style.name}" ${myStyleList.contains(style.name) ? "checked" : "" }/><label for="${style.name}" class="style_name">${style.name}</label>
+										<input type="checkbox" name="style" class="style" id="${style.name}" value="${style.name}" ${myStyleList.contains(style.name) ? "checked" : ""}/>
+										<label for="${style.name}" class="style_name">${style.name}</label>
 									</td>
 									<c:if test="${vs.index % 5 == 4}">
 										</tr>

@@ -72,16 +72,28 @@
 							<div class="content_box">
 								<a href="${pageContext.request.contextPath}/share/newShareView?no=${share.no}">
 									<img src="${pageContext.request.contextPath}/uploadshares/newShare/${share.img}" class="share_img" />
-									<p class="box_title">${share.name}</p>
-									<p class="box_count">${share.readCount}</p>
-									<p class="box_btn">${share.status}</p>
+									<p class="box_title">
+										<!-- 제목 길이 제어 -->
+										<c:choose>
+									        <c:when test="${fn:length(share.name) > 15}">
+									        	<c:out value="${fn:substring(share.name,0,14)}"/>...
+									        </c:when>
+									        <c:otherwise>
+								            	<c:out value="${share.name}"/>
+								            </c:otherwise> 
+								        </c:choose>
+									</p>
 								</a>
+								<div class="box_etc">
+									<p class="box_btn">${share.status}</p>
+									<p class="box_date">${share.regDate}</p>
+								</div>
 							</div>
 						</c:if>
 					</c:forEach>
 				</div>
 			</c:if>
-			<c:if test="${empty ootdList}">
+			<c:if test="${empty shareList}">
 				<div class="empty_box">
 					<p>작성한 SHARE 없습니다.</p>
 					<button class="my_btn" id="share_btn">
@@ -99,7 +111,9 @@
 				<p>추가하신 좋아요가 없습니다.</p>
 				<div class="btn_wrap">
 					<button class="my_btn" id="ootd_btn">OOTD 바로가기</button>
-					<button class="my_btn" id="share_btn">SHARE 바로가기</button>
+					<button class="my_btn" id="share_btn">
+						<a href="${pageContext.request.contextPath}/share/newShareWholeList">SHARE 바로가기</a>
+					</button>
 				</div>
 			</div>
 		</div>

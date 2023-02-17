@@ -79,22 +79,6 @@ public class MemberService {
 		}
 		return result;
 	}
-
-	public int updatePassword(Member member) {
-		Connection conn = getConnection();
-		int result = 0;
-		try {
-			result = memberDao.updatePassword(conn, member);
-			commit(conn);
-		}catch(Exception e) {
-			rollback(conn);
-			throw e;
-		}finally {
-			close(conn);
-		}
-		return result;
-	}
-
 	
 	/**
 	 * 회원가입
