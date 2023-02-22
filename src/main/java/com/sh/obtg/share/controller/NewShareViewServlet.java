@@ -1,13 +1,18 @@
 package com.sh.obtg.share.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.service.ShareService;
 
@@ -59,7 +64,23 @@ public class NewShareViewServlet extends HttpServlet {
 			NshareBoard shareBoard = shareService.selectNewOneBoard(no, hasRead); // 게시판번호( product_id)
 			System.out.println("■■ shareBoard = " + shareBoard);
 			
-			request.setAttribute("shareBoard", shareBoard);
+			
+			
+			
+			//좋아요
+			HttpSession session = request.getSession();
+			Member loginMember = (Member)session.getAttribute("loginMember");	
+			Map<String, Object> param = new HashMap<>();
+			param.put("memberId", loginMember != null ? loginMember.getMemberId() : "null");
+			param.put("boardNo", no);
+			int count = shareService.selectShareLike(param);
+			System.out.println("■■ shareLike = " + count);
+					
+			
+			// request 객체저장 
+			request.setAttribute("shareBoard", shareBoard); //게시글+사진 request객체에 저장
+			request.setAttribute("likeCnt", count);
+		
 			
 			//3.리다이렉트
 			request.getRequestDispatcher("/WEB-INF/views/share/newShareView.jsp")

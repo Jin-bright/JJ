@@ -20,7 +20,6 @@
 	Member loginMember=(Member) session.getAttribute("loginMember");
     String msg = (String) session.getAttribute("msg");  
 %>
-
 <style>
 #top,#bottom,#accessary,#shoes{
 	display : none;
@@ -29,24 +28,26 @@
 <br />
 
 <section id="board-container">
-	<h2 id="sharewrite"> SHARE 게시글 작성</h2> <br /><br /><br /><br />
+	<h2 id="sharewrite"> SHARE 게시글 수정</h2>
+	  <h6>단, 거래가 시작될 경우 해당 게시물은 수정하실 수 없습니다.</h6><br /><br /><br /><br />
 	<form
-		name="shareBoardEnrollFrm"
-		action="<%=request.getContextPath()%>/share/newShareEnroll" 
+		name="shareBoardUpdateFrm"
+		action="<%=request.getContextPath()%>/share/newShareUpdate" 
 		enctype ="multipart/form-data"
 		method="post">
+		<input type="hidden"  name ="no" value="${shareboard.productId}" />		
 		<table id="tbl-board-view">
 		<tr>
 			<th style="vertical-align: top;">상품 이미지</th>
 			<td >
 				<div id="col_img"  style="margin-top : 0px" >
-					<img id="col_img_viewer"  style="width : 255px; height : 170px; padding-right: 30px">
+					<img id="col_img_viewer" src="${pageContext.request.contextPath}/uploadshares/newShare/${shareboard.shareAttachments[0].renamedFilename}" style="width : 255px; height : 170px; padding-right: 30px">
 				</div>
 				
 				<div class="filebox">
-					<input class="upload-name"   id="upload-name1"  placeholder="첨부파일" readonly>
+					<input class="upload-name"   id="upload-name1"  placeholder="첨부파일을 다시 선택해주세요(위 사진은 이전 사진 입니다)" readonly>
 	    			<label for="upFile1">파일찾기</label>
-					<input type="file" name="upFile1" id="upFile1" accept="image/*"  required /> <br />	
+					<input type="file" name="upFile1" id="upFile1" accept="image/*" required /> <br />	
 				</div>
 				
 				<div id="imgexplain">
@@ -59,28 +60,28 @@
 		<tr >
 			<th>상품명</th>
 			<td>
-				<input style="width : 500px;" class="inputtext" type="text" name="ShareTitle" maxlength="18" placeholder="상품명을 입력해주세요." required>
-				<input class="satustext" type="text" name="ShareState" value="거래전" readonly />	
+				<input style="width : 500px;" class="inputtext" type="text" name="ShareTitle" maxlength="18" value="${shareboard.productName}" required>
+				<input class="satustext" type="text" name="ShareState" value="${shareboard.productStatus}" readonly />	
 			</td>
 		</tr>
 		
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text"  class="inputtext" name="memberId" value="${loginMember.memberId}" readonly required/>
+				<input type="text"  class="inputtext" name="memberId" value="${loginMember.memberId}"  readonly style="background-color: #e8e8e8"/>
 			</td>
 		</tr>
 		<tr>
 			<th>카테고리</th>
 			<td>
-				<select   onclick = "selectbig(this.value);">
+				<select   onclick = "selectbig(this.value);" >
 				    <option value="상의" > 상의 </option>
 				    <option  value="하의" > 하의 </option>
 				    <option  value="악세서리및기타" > 악세서리및기타 </option>
 				    <option  value="신발" > 신발 </option>
 				</select>
 			    	<select name="ShareCategory"  id="top">
-   						<option  value="" > 선택 </option>
+			    	    <option  value="" > 선택 </option>
 			    		<option  value="T1" > 패딩 </option>
 			    		<option   value="T2" > 코트 </option>
 			    		<option   value="T3" > 니트웨어 </option>
@@ -92,15 +93,15 @@
 			    		<option  value="T9" >기타</option>	
 			    	</select>
 				    <select name="ShareCategory" id="bottom">
-    					<option  value="" > 선택 </option>
-			    		<option   value="B1" > 청바지 </option>
-			    		<option   value="B2" > 슬랙스 </option>
-			    		<option value="B3" >반바지</option>
-			    		<option  value="B4" >스커트</option>
+				    		<option  value="" > 선택 </option>
+				    		<option   value="B1" > 청바지 </option>
+				    		<option   value="B2" > 슬랙스 </option>
+				    		<option value="B3" >반바지</option>
+				    		<option  value="B4" >스커트</option>
 			    	</select>	
 			    		
 			    	<select  name="ShareCategory"  id="accessary">
-   						<option  value="" > 선택 </option>
+			    		<option  value="" > 선택 </option>
 			    		<option   value="A1" >가방</option>
 			    		<option   value="A2" >시계</option>
 			    		<option   value="A3" >주얼리</option>
@@ -111,7 +112,7 @@
 			    	</select>
 			    
 			    	<select  name="ShareCategory"  id="shoes">
-   						<option  value="" > 선택 </option>
+			    		<option  value="" > 선택 </option>
 			    		<option   value="S1" >운동화</option>
 			    		<option   value="S2" >부츠</option>
 			    		<option   value="S3" >로퍼</option>
@@ -120,12 +121,12 @@
 			    		<option   value="S6" >구두</option>		
 				    	<option   value="S7" >기타</option>		
 			    	</select>
-			</td>
+			 <span style="font-size : 12px; color : red;">※ 세부카테고리까지 선택해주세요 😊</span></td>
 		</tr>
 		<tr>
 			<th> 컬러 </th>
 			<td>
-					<select name="sharecolor" id="sharecolors">
+					<select name="sharecolor" id="sharecolors" required >
 			    		<option  name="sharecolor"  value="검정" >검정</option>
 			    		<option  name="sharecolor"  value="빨강" >빨강</option>
 			    		<option  name="sharecolor"  value="주황" >주황</option>
@@ -173,13 +174,13 @@
 		<tr>
 			<th>가격</th>
 			<td>
-				<input type="number"  class="inputtext" name="productPrice"  style="width :200px" required/>원
+				<input type="number"  class="inputtext" name="productPrice"  style="width :200px" value="${shareboard.productPrice}"   required/>원
 			</td>
 		</tr>
 		<tr>
 			<th  colspan="2" style="padding : 0; border:none" >
 			<div class="summernotecontainer">
-			  <textarea colspan="2" id="summernote"  class="summernote" name ="editordata"></textarea>
+			  <textarea colspan="2" id="summernote"  class="summernote" name ="editordata">${shareboard.productContent}</textarea>
 			</div>
 			</th>
 		</tr>
@@ -368,14 +369,13 @@ function checkOnlyTwo(element) {
 
 <script>
 /**
-* shareBoardEnrollFrm 유효성 검사
+* shareBoardUpdateFrm 유효성 검사
 */
-document.shareBoardEnrollFrm.onsubmit = (e) => {
+document.shareBoardUpdateFrm.onsubmit = (e) => {
 	const title = e.target.ShareTitle;
 	const content = e.target.editordata;
 	const upload = e.target.upFile1;
 	
-	console.log(title, content);
 	
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^.+$/.test(title.value)){
