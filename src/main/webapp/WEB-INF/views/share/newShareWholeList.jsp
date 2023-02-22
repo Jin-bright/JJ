@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember"); 
-	int[] likearr = (int[])request.getAttribute("likearr");
+	int[] likearr = (int[])session.getAttribute("likearr");
 %>
 
 
@@ -357,7 +357,7 @@ const searchClothes = (e) => {
 					tr1.innerHTML += 
 				      `<td>
 						 <div style="width:280px;">
-						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 						 	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 					     </div>
@@ -375,7 +375,7 @@ const searchClothes = (e) => {
 					tr2.innerHTML += 
 					  `<td>
 						<div style="width:280px">
-							<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+							<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 							<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 							<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 						</div>
@@ -392,7 +392,7 @@ const searchClothes = (e) => {
 				if( parseInt(i/4) == 2 ){
 				  tr3.innerHTML += 
 				    `<td><div style="width:280px">
-					    <img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+					    <img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 					    <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 				  		<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a></div>
 					     <div id="categories" style="margin-left:10px;" >
@@ -498,7 +498,7 @@ const searchColorStyle = (e) => {
 					tr1.innerHTML += 
 				      `<td>
 						 <div style="width:280px;">
-						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 						 	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 					     </div>
@@ -516,7 +516,7 @@ const searchColorStyle = (e) => {
 					tr2.innerHTML += 
 					  `<td>
 						<div style="width:280px">
-							<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+							<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 							<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 							<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 						</div>
@@ -533,7 +533,7 @@ const searchColorStyle = (e) => {
 				if( parseInt(i/4) == 2 ){
 				  tr3.innerHTML += 
 				    `<td><div style="width:280px">
-					    <img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+					    <img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty"  alt="좋아요"/> <!-- 하트 -->
 					    <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 				  		<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a></div>
 					     <div id="categories" style="margin-left:10px;" >

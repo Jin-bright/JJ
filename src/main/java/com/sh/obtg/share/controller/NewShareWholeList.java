@@ -72,30 +72,36 @@ public class NewShareWholeList extends HttpServlet {
 		//좋아요
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");	
-
-
-		Map<String, Object> likeparam = new HashMap<>();
-		likeparam.put("memberId", loginMember != null ? loginMember.getMemberId() : "null");
 		
-		int boardNo = 0;
-		int likecount = 0;
+
 		int[] likearr = new int[12];
+
+		if( loginMember != null) {
 		
-		for(int i=0; i< shareboards.size(); i++) {
-			boardNo = shareboards.get(i).getProductId();
+			Map<String, Object> likeparam = new HashMap<>();
+			likeparam.put("memberId", loginMember != null ? loginMember.getMemberId() : "null");
 			
-			likeparam.put("boardNo", boardNo );
-			likecount = shareService.selectShareLike(likeparam);
+			int boardNo = 0;
+			int likecount = 0;
 			
-		//	System.out.println("■■ shareLike 여부 0 또는 1  = " + likecount);  정녕이렇게해야만 하는걸까 ?
-			likearr[i] = likecount;
+			for(int i=0; i< shareboards.size(); i++) {
+				boardNo = shareboards.get(i).getProductId();
+
+				likeparam.put("boardNo", boardNo );
+				
+				likecount = shareService.selectShareLike(likeparam);
+				
+			//	System.out.println("■■ shareLike 여부 0 또는 1  = " + likecount);  정녕이렇게해야만 하는걸까 ?
+				likearr[i] = likecount;
+			}
+
 		}
-		
+				
 		
 		request.setAttribute("shareAttachments", shareAttachments);
 		request.setAttribute("shareboards", shareboards);
 		request.setAttribute("pagebar", pagebar);
-		request.setAttribute("likearr", likearr);	
+		session.setAttribute("likearr", likearr);	
 		
 		//3. forward 연결
 		request.getRequestDispatcher("/WEB-INF/views/share/newShareWholeList.jsp").forward(request, response);

@@ -733,3 +733,7 @@ select * from  member
 
 select * from  SHARE_Likes
 where member_id = 'doghj' and board_no = 43;
+
+
+select * from NSHARE_BOARD  where subcategory_id = '';
+
