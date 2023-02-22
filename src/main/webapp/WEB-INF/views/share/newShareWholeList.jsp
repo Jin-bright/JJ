@@ -1,3 +1,4 @@
+<%@page import="com.sh.obtg.member.model.dto.Member"%>
 <%@page import="com.sh.obtg.share.model.dto.NshareAttachment"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shareWholeList.css" /> 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@100;400;700&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember"); 
+	int[] likearr = (int[])request.getAttribute("likearr");
+%>
 
 
 <div id="board-container">
@@ -119,20 +124,27 @@
 <!-- 리스트 출력 일단 서블릿만들고 실행해보기 - 페이지 전체 불러오기 비동기 시도했지만 실패했다^^ -->
 <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
 <input type="button" value="글쓰기" id="btnAdd"  onclick="location.href='<%=request.getContextPath()%>/share/newShareEnroll';"/>
-
+<%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
 <table id="itemTable" >
 	<tbody>
 
 		<c:forEach begin="0" step="1" items="${shareAttachments}" var="attach" varStatus="vs">
 		 <c:set var="board" value="${shareboards[vs.index]}"/>
-		
+		 <c:set var="like" value="${likearr[vs.index]}"/>
 		<c:if test="${vs.index %4==0 }">
 			<tr>
 		</c:if>
 				<td ><div style="width:280px;">
-			  			<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 -->
+			  		<%-- 	<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 --> --%>
+					   <c:if test="${loginMember == null || like == 0 }">
+			  			<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요" />
+					   </c:if>
+					   
+					  <c:if test="${loginMember != null && like== 1}">
+						  <img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" />
+					  </c:if>
 				    	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=${attach.productId}">
-				    	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/${attach.renamedFilename}">
+				    	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/${attach.renamedFilename}" />
 				    	</a>	
 			  		</div>
 			  		<div id="categories" style="margin-left:10px;" >
@@ -199,8 +211,18 @@
 </div>
 <!--  검색용 더보기 버튼 2 -->
 <div id="cspage" >
-	<span id="page" name="page" >1</span> <span style="margin-left:10px"> >> </span>
+	현재(<span id="page" name="page" >1</span><span style="margin-left:10px">페이지) >> </span>
 </div>
+
+<!-- <script>
+// like
+window.onload = () => {
+  const frm = document.likeFrm;
+  frm.submit();
+	
+}
+</script>
+ -->
 
 <script>
 //메뉴토글
@@ -537,6 +559,8 @@ const searchColorStyle = (e) => {
 }
 
 </script>
+
+
 
  
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

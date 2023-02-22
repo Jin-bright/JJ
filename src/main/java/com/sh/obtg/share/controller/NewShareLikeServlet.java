@@ -19,7 +19,7 @@ import com.sh.obtg.share.model.service.ShareService;
  * Servlet implementation class ShareLikeServlet
  */
 @WebServlet("/share/shareLike")
-public class ShareLikeServlet extends HttpServlet {
+public class NewShareLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ShareService shareService = new ShareService();
 
@@ -34,7 +34,7 @@ public class ShareLikeServlet extends HttpServlet {
 		String memberId = loginMember.getMemberId();
 //		System.out.println("로그인 아이디 = " + memberId);
 		int no = Integer.parseInt(request.getParameter("no"));
-//		System.out.println("게시판 번호 = " + no);
+		System.out.println("좋아요 게시판 번호 = " + no);
 		
 		Map<String, Object> param = new HashMap<>();
 		param.put("memberId", memberId);

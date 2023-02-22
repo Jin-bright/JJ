@@ -193,7 +193,7 @@ input#btnAdd{
 
 /* ///////////    상품 출력 테이블     /////////////// */
 
-.heartsempty{
+#heartsempty{
 	width:15px;
 	height:15px;
 	display: inline-block;
@@ -202,6 +202,28 @@ input#btnAdd{
 	top : 50px;
 	
 }
+
+.shareLike{
+	width:15px;
+	height:15px;
+	display: inline-block;
+	position: relative;
+	left : 220px;
+	top : 50px;
+	
+}
+
+
+#heartfull{
+	width:15px;
+	height:15px;
+	display: inline-block;
+	position: relative;
+	left : 220px;
+	top : 50px;
+	
+}
+/*  좋아요  */
 
 .search {
   width: 100%;

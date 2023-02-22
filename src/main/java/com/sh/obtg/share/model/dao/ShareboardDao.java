@@ -232,29 +232,29 @@ public class ShareboardDao {
 			
 			return shareBoard;
 		}
-//boardno로 첨부파일 테이블 조회 
-		public List<ShareAttachment> selectAttachmentByBoardNo(Connection conn, int no) {
-			String sql = prop.getProperty("selectAttachmentByBoardNo"); // select * from ootd_Attachment where board_no = ?
-			List<ShareAttachment> shareAttachments = new ArrayList<>();
+//★★★NshareAttachment 로 첨부파일 테이블 조회 
+		public List<NshareAttachment> selectAttachmentByBoardNo(Connection conn, int no) {
+			String sql = prop.getProperty("selectAttachmentByNewBoardNo"); 
+			List<NshareAttachment> shareAttachments = new ArrayList<>();
 			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 				pstmt.setInt(1, no);
 				
 				try(ResultSet rset = pstmt.executeQuery()){
 					while(rset.next()) {
-						ShareAttachment shareAttachment = new ShareAttachment();
+						NshareAttachment shareAttachment = new NshareAttachment();
 						
-						shareAttachment.setAttachNo( rset.getInt("attach_no"));
-						shareAttachment.setBoardNo( rset.getInt("board_no"));
-						shareAttachment.setOriginalFilename(rset.getString("original_filename"));
-						shareAttachment.setRenamedFilename(rset.getString("renamed_filename"));
-						shareAttachment.setRegDate( rset.getDate("reg_date"));
+						shareAttachment.setProductAttachmentNo(rset.getInt("product_attachment_no"));
+						shareAttachment.setProductId(rset.getInt("product_id"));
+						shareAttachment.setOriginalFilename(rset.getString("product_attachment_original_filename"));
+						shareAttachment.setRenamedFilename(rset.getString("product_attachment_renamed_filename"));
+						shareAttachment.setRegDate( rset.getDate("product_attachment_reg_date"));
 						
 						shareAttachments.add(shareAttachment);			
 					}
 				}
 				
 			} catch (Exception e) {
-				throw new ShareBoardException("share 게시글 한건-(첨부파일테이블) 조회 오류!", e);
+				throw new ShareBoardException("Nshare 게시글 한건-(첨부파일테이블) 조회 오류!", e);
 			}
 			
 			return shareAttachments;
@@ -821,7 +821,6 @@ public class ShareboardDao {
 			List<NshareBoard> shareboards = new ArrayList<>();
 			
 			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-//				pstmt.setString(1, searchType);
 				pstmt.setString(1, "%"+searchKeyword+"%");
 				pstmt.setInt(2, param.get("start"));
 				pstmt.setInt(3, param.get("end"));
@@ -838,6 +837,64 @@ public class ShareboardDao {
 			
 			return shareboards;
 		}
-	
+
+		///게시글 지우기 
+		public int deleteNewBoard(Connection conn, int no) {
+			String sql = prop.getProperty("deleteNewBoard");
+			int result = 0;
+			
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){ 
+				pstmt.setInt(1, no);
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				throw new ShareBoardException("게시물( only ) 삭제 오류!", e);
+			}
+			
+			return result;
+		}
+
+		///게시글만 먼저 update
+// update NSHARE_BOARD set subcategory_id = ?, style_name = ?, product_name = ?, 
+// product_content = ?, product_price = ?, product_color = ?, product_gender = ?, product_quality = ? where product_id = ?
+		public int updateNshareBoard(Connection conn, NshareBoard shareBoard) {
+			String sql = prop.getProperty("updateNshareBoard");
+			int result = 0;
+			
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, shareBoard.getSubcategoryId().toString() );
+				pstmt.setString(2, shareBoard.getStyleName().toString());
+				pstmt.setString(3, shareBoard.getProductName());
+				pstmt.setString(4, shareBoard.getProductContent());
+				pstmt.setInt(5, shareBoard.getProductPrice());
+				pstmt.setString(6, shareBoard.getProductColor() );
+				pstmt.setString(7, shareBoard.getProductGender() );
+				pstmt.setString(8, shareBoard.getProductQuality() );
+				pstmt.setInt(9, shareBoard.getProductId());
+				
+				result = pstmt.executeUpdate();
+			}catch (SQLException e) {
+				throw new ShareBoardException("Nshare 게시물(글) 수정 오류!", e);
+			}
+			return result;
+			
+		}
+//첨부파일업데이트
+		
+		public int updateNshareAttachment(Connection conn, NshareAttachment attach) {
+			String sql = prop.getProperty("updateNshareAttachment");
+			int result = 0;
+
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, attach.getOriginalFilename());
+				pstmt.setString(2,attach.getRenamedFilename());
+				pstmt.setInt(3,attach.getProductId());
+			
+				result = pstmt.executeUpdate();
+			}catch (SQLException e) {
+				throw new ShareBoardException("Nshare 게시물( 첨부파일 ) 수정 오류!", e);
+			}
+			return result;
+		}
 		
 }

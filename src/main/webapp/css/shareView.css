@@ -144,7 +144,12 @@ h4{
 	border: none;
 }
 
-.heartsempty{
+#heartsempty{
+	width : 20px;
+	height: 20px;
+}
+
+#heartfull{
 	width : 20px;
 	height: 20px;
 }
@@ -498,8 +503,8 @@ h4{
 	width : 30px;
 	display : inline;
 	position : absolute;
-	left : 805px;
-	top : 905px; 
+	left : 885px;
+	top : 480px; 
 }
 
 #tblboardview {
@@ -613,20 +618,37 @@ div.comment-container button#btn-comment-enroll1 {
 /** 수정 삭제 **/
 /*수정삭제버튼*/
 .sharemodidel{
-	float : right;
-	margin-top : 10px;
-	margin-left : 1px; 
-	display : block;
+	float:right;
+	margin-left : 11px;
+	margin-top : -50px;
 	position :relative;
-	top : -35px;
-	left : 120px;
+	top : -20px;
+	left : -228px;
 	height:26px;
 	width : 67px;
 	background-color : black;
 	color : white; 	
 }
 
+#dell{
+	float:right;
+	margin-left : 11px;
+	margin-top : -50px;
+	position :relative;
+	top : -20px;
+	left : -155px;
+	height:26px;
+	width : 67px;
+	background-color : black;
+	color : white; 		
+}
+
 .sharemodidel:hover{
+	background-color : white;
+	color : black; 	
+}
+
+#dell:hover{
 	background-color : white;
 	color : black; 	
 }

@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sh.obtg.common.HelloMvcUtils;
+import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.share.model.dto.NshareAttachment;
 import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.service.ShareService;
@@ -61,18 +63,39 @@ public class NewShareWholeList extends HttpServlet {
 		map.put("shareAttachments", shareAttachments);
 	
 		
-		int totalCount = shareService.getTotalCount();  // 	1.  dql 전체 게시글 수 구하기  (=첨부파일수랑 같음 ) 
+		int totalCount = shareService.getTotalCount();  // 	1.  dql 전체 게시글 수 구하기 (=첨부파일수랑 같음 ) 
 //		System.out.println( "■■ 토탈카운트 : " +  totalCount  );
 		String url = request.getRequestURI(); // 
 		String pagebar = HelloMvcUtils.getPagebar(page, limit, totalCount, url);
 
 
+		//좋아요
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");	
+
+
+		Map<String, Object> likeparam = new HashMap<>();
+		likeparam.put("memberId", loginMember != null ? loginMember.getMemberId() : "null");
+		
+		int boardNo = 0;
+		int likecount = 0;
+		int[] likearr = new int[12];
+		
+		for(int i=0; i< shareboards.size(); i++) {
+			boardNo = shareboards.get(i).getProductId();
+			
+			likeparam.put("boardNo", boardNo );
+			likecount = shareService.selectShareLike(likeparam);
+			
+		//	System.out.println("■■ shareLike 여부 0 또는 1  = " + likecount);  정녕이렇게해야만 하는걸까 ?
+			likearr[i] = likecount;
+		}
+		
 		
 		request.setAttribute("shareAttachments", shareAttachments);
 		request.setAttribute("shareboards", shareboards);
 		request.setAttribute("pagebar", pagebar);
-		request.setAttribute("map", map);
-
+		request.setAttribute("likearr", likearr);	
 		
 		//3. forward 연결
 		request.getRequestDispatcher("/WEB-INF/views/share/newShareWholeList.jsp").forward(request, response);

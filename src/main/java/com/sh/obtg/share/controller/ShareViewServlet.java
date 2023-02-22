@@ -68,8 +68,8 @@ public class ShareViewServlet extends HttpServlet {
 	// selectAttachmentByBoardNo = select * from attachment where board_no = ?
 //		 	select * from  OOTD_attachment	where board_no = ?
 			
-		ShareBoard shareBoard = shareService.selectOneBoard(no, hasRead); //no는 게시판 번호 (share_no) 
-		System.out.println("shareBoard = " + shareBoard);
+//		ShareBoard shareBoard = shareService.selectOneBoard(no, hasRead); //no는 게시판 번호 (share_no) 
+	//	System.out.println("shareBoard = " + shareBoard);
 		
 		//개행문자 처리 - textarea에서 필요하다 
 //				ootdboard.setOOTDContents( 	
@@ -86,7 +86,7 @@ public class ShareViewServlet extends HttpServlet {
 		int count = shareService.selectShareLike(param);
 		System.out.println("shareLike = " + count);
 				
-		request.setAttribute("shareBoard", shareBoard);
+//		request.setAttribute("shareBoard", shareBoard);
 		request.setAttribute("likeCnt", count);
 		request.getRequestDispatcher("/WEB-INF/views/share/shareView.jsp")
 		.forward(request, response);

@@ -36,11 +36,11 @@ public class ShareUpdateServlet extends HttpServlet {
 		
 		
 		//2. 업무로직 -- 어떤게시물을 수정할것인가 
-		ShareBoard shareBoard = shareService.selectOneBoard(no);
-		System.out.println( "shareBoard = "  + shareBoard );
+//		ShareBoard shareBoard = shareService.selectOneBoard(no);
+//		System.out.println( "shareBoard = "  + shareBoard );
 		
 		//3
-		request.setAttribute("shareBoard",shareBoard );
+//		request.setAttribute("shareBoard",shareBoard );
 		request.getRequestDispatcher("/WEB-INF/views/share/shareUpdate.jsp")
 		.forward(request, response);
 	}

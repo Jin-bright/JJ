@@ -616,6 +616,21 @@ CREATE TABLE NSHARE_ATTACHMENT (
 create sequence SEQ_NSHARE_ATTACHMENT_product_attachment_no;
 
 
+
+
+-- 기존 share 좋아요 테이블 재셋팅  ( 0223 혜진)
+CREATE TABLE SHARE_Likes (
+	LIKE_no	number,
+	board_no	number		NOT NULL, --product_id
+	member_id	varchar2(50)		NOT NULL,
+    CONSTRAINT PK_SHARE_LIKES PRIMARY KEY (LIKE_no),
+    CONSTRAINT FK_NSHARE_board_TO_SHARE_Likes FOREIGN KEY (board_no) REFERENCES NSHARE_BOARD (product_id),
+    CONSTRAINT FK_Member_TO_SHARE_Likes_1 FOREIGN KEY (member_id) REFERENCES Member (member_id)
+);
+
+create sequence seq_nshare_likes_no;
+
+
 --select e.* 
 --from ( select  row_number() over(order by board_no desc ) rnum, p.* from SHARE_attachment  p) e 
 --where rnum between ? and ?
@@ -641,7 +656,7 @@ select * from member
 
 commit;
 
-delete from NSHARE_ATTACHMENT where product_id = '3'
+--delete from NSHARE_ATTACHMENT where product_id = '3'
 
 --select e.* from ( select  row_number() over(order by board_no desc ) rnum, p.* from SHARE_attachment  p) e where rnum between 1 and 5 
 
@@ -705,9 +720,16 @@ from ( select  rank() over(order by b.product_id desc)rnum, a.*
                    on b.product_id = a.product_id 
                 where b.subcategory_id like '%T%' )
                 
--------------
-select * from NSHARE_BOARD
-where style_name    like  'S1'
+
+-- 각 테이블 조회 할때 참고 
+select * from NSHARE_BOARD 
+select * from NSHARE_ATTACHMENT 
+
+select * from  SHARE_Likes
+select count(*) from SHARE_Likes
 
 SELECT * FROM FASHIONSTYLE
+select * from  member
 
+select * from  SHARE_Likes
+where member_id = 'doghj' and board_no = 43;

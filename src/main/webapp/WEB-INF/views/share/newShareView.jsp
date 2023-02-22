@@ -10,10 +10,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shareView.css" /> 
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@100;400;700&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<%-- <%
+<%
 	Member loginMember = (Member) session.getAttribute("loginMember"); 
+	int likeCnt = (int)request.getAttribute("likeCnt");
 %>
- --%>
+
 
 <section>
 
@@ -46,7 +47,12 @@
 		</div>
 		<!-- 버튼들  -->
 		<div class = "buttonss">
-			<button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/></button>
+			<% if(loginMember == null || likeCnt == 0) { %>
+				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요" /></button>
+			<% } else { %>
+				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" /></button>
+			<% } %>
+			<%-- <button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/></button> --%>
 			<button id="viewProfile" onclick="open_pop('${shareBoard.getMemberId()}')" > 판매자 프로필 조회</button>
 			<button id="writeMessage" > 쪽지하기 </button>
 		</div>
@@ -63,7 +69,7 @@
 				
 				<tr>
 					<th  class="msgtg" > FROM.🙋‍♀️ </th>
-					<td class="msgtd" ><input type="text" id="sender" name="sender"  style="width:220px;  line-height:20px" value="<%--=loginMember.getMemberId() --%>" readonly>  <!--  보내는 사람  --></td>
+					<td class="msgtd" ><input type="text" id="sender" name="sender"  style="width:220px;  line-height:20px" value="${loginMember.memberId}" readonly>  <!--  보내는 사람  --></td>
 				</tr>
 				
 				<tr>
@@ -124,6 +130,13 @@
 		</table>
 	</div>
 </section>
+ 	<!--  수정 /삭제하기  -->
+	<button class ="sharemodidel"  type="submit" onclick="updateBoard()"> 수정하기 </button>
+	<button class ="sharemodidel"  id="dell" type="submit"  onclick="deleteBoard()"> 삭제하기 </button>
+<!-- 게시글 삭제하기 히든폼 ( 관리자 & 작성자에게만 노출 ) -->	
+<form action="${pageContext.request.contextPath}/share/newShareDelete" name = "boardDeleteFrm" method="post">
+	<input type="hidden" name="no" value="${shareBoard.productId}" />
+</form>
 
 		<!-- 구매전필독 -->
 
@@ -220,10 +233,43 @@ msgclose.addEventListener('click', () => {
 
 
 
+<script>
+// 게시글 수정 / 삭제 
+const deleteBoard = () => { 
+	if(confirm("정말 게시글을 삭제하시겠습니까? ")){
+	  document.boardDeleteFrm.submit();	
+	}	
+};
 
+const updateBoard = () => { 
+	location.href = "${pageContext.request.contextPath}/share/newShareUpdate?no=${shareBoard.getProductId()}";
+}
 
+const loginAlert = () => {
+	alert("로그인 후 이용할 수 있습니다.");
+	document.querySelector("#loginSignup").focus();
+};
+</script>	
 
-
+<script>
+// ★★★★ 좋아요 
+document.querySelector(".shareLike").addEventListener("click", (e) => {
+	<% if(loginMember == null){ %>
+		 loginAlert();
+	<% } else { %>
+		$.ajax({
+			url: "${pageContext.request.contextPath}/share/shareLike?no=${shareBoard.getProductId()}",
+			method: "post",
+			dataType: "json",
+			success(data){
+				if(data === 1) e.target.src="${pageContext.request.contextPath}/image/heart _over.png"
+				else e.target.src="${pageContext.request.contextPath}/image/heart.png"
+			},
+			error: console.log
+			});
+	<% } %>
+});
+</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
