@@ -737,3 +737,21 @@ where member_id = 'doghj' and board_no = 43;
 
 select * from NSHARE_BOARD  where subcategory_id = '';
 
+select * from NSHARE_BOARD
+select * from  SHARE_Likes where
+
+-- ootd 출력 0225
+select e.* 
+from ( select  row_number() over(order by board_no desc ) rnum, p.* from OOTD_attachment  p) e 
+where rnum between 1 and 10
+
+
+select e.* 
+from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* 
+             from  ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e
+where rnum between 1 and 10
+
+
+
+select ootd_no, ootd_writer, style_no, ootd_title, ootd_contents, ootd_reg_date, 
+            ootd_top, ootd_bottom, ootd_shoes, ootd_etc, attach_no, original_filename, renamed_filename from  ootd_board join ootd_attachment on ootd_board.ootd_no = ootd_attachment.board_no 

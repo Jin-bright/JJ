@@ -502,9 +502,9 @@ h4{
 .shareLike{
 	width : 30px;
 	display : inline;
-	position : absolute;
-	left : 885px;
-	top : 480px; 
+	position : relative;
+	left : 0px;
+	top : 0px; 
 }
 
 #tblboardview {

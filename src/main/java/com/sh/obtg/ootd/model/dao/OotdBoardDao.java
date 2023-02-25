@@ -636,6 +636,54 @@ public List<OotdBoardandAttachment> SearchOotdBymemberStyle(Connection conn, Map
 	
 	}
 
+
+
+public List<OotdBoardandAttachment> viewOotdBoardandAttachment(Connection conn, Map<String, Object> param) {
+	String sql = prop.getProperty("viewOotdBoardandAttachment");
+	List<OotdBoardandAttachment> ootdAttachments = new ArrayList<>();
+	
+	int page = (int)param.get("page");
+	int limit = (int)param.get("limit");
+	int start = (page -1) * limit + 1;
+	int end = page * limit;
+	
+	try( PreparedStatement pstmt = conn.prepareStatement(sql)){
+		pstmt.setInt(1, start);
+		pstmt.setInt(2, end);
+		
+		try( ResultSet rset = pstmt.executeQuery()){
+			
+			while(rset.next()) {
+				OotdBoardandAttachment ootdboardAndAttachment = new OotdBoardandAttachment();
+				
+				ootdboardAndAttachment.setOotdNo( rset.getInt("OOTD_no"));
+				ootdboardAndAttachment.setOotdWriter( rset.getString("OOTD_writer"));
+				ootdboardAndAttachment.setStyleNo(Style.valueOf( rset.getString("style_no") ));
+				ootdboardAndAttachment.setOOTDTitle(rset.getString("OOTD_title"));
+				ootdboardAndAttachment.setOOTDContents( rset.getString("OOTD_contents"));
+			
+				ootdboardAndAttachment.setOOTDRegDate( rset.getDate("OOTD_reg_date") );
+				ootdboardAndAttachment.setOOTDTop( rset.getString("OOTD_top"));
+				ootdboardAndAttachment.setOOTDBottom( rset.getString("OOTD_bottom"));
+				ootdboardAndAttachment.setOOTDShoes( rset.getString("OOTD_shoes"));
+				ootdboardAndAttachment.setOOTDEtc(rset.getString("OOTD_etc") );	
+				
+				ootdboardAndAttachment.setAttachNo( rset.getInt("attach_no"));
+				ootdboardAndAttachment.setOriginalFilename( rset.getString("original_filename"));
+				ootdboardAndAttachment.setRenamedFilename( rset.getString("renamed_filename"));
+				
+				
+				ootdAttachments.add(ootdboardAndAttachment);					
+			}
+		}
+		
+	} catch (SQLException e) {
+		throw new OotdBoardException(" 전체 사진 목록 가져오기 실패!", e); 
+	}
+	
+	return ootdAttachments;
+}
+
 	
 }
 

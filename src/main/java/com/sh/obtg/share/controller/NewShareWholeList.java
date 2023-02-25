@@ -16,6 +16,7 @@ import com.sh.obtg.common.HelloMvcUtils;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.share.model.dto.NshareAttachment;
 import com.sh.obtg.share.model.dto.NshareBoard;
+import com.sh.obtg.share.model.dto.ShareLikes;
 import com.sh.obtg.share.model.service.ShareService;
 
 /**
@@ -72,8 +73,13 @@ public class NewShareWholeList extends HttpServlet {
 		//좋아요
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");	
-		
 
+		List<ShareLikes> sharelikes = null;
+		if( loginMember != null) {
+			sharelikes = shareService.selectShareLike(loginMember);
+			System.out.println("■■ sharelikes : " + sharelikes );
+		}
+		
 		int[] likearr = new int[12];
 
 		if( loginMember != null) {
@@ -102,6 +108,7 @@ public class NewShareWholeList extends HttpServlet {
 		request.setAttribute("shareboards", shareboards);
 		request.setAttribute("pagebar", pagebar);
 		session.setAttribute("likearr", likearr);	
+		session.setAttribute("sharelikes", sharelikes);
 		
 		//3. forward 연결
 		request.getRequestDispatcher("/WEB-INF/views/share/newShareWholeList.jsp").forward(request, response);
