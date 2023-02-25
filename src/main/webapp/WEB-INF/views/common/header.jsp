@@ -63,7 +63,7 @@
 <nav class="menu">
 	<h1  class="main-title"  >O B T G</h1>
 	<a class="menu__item" id="i-0" href="${pageContext.request.contextPath}/index.jsp"><span class="menu__text"><b>HOME</b></span></a>	
-	<a class="menu__item" id="i-1" href="${pageContext.request.contextPath}/ootd/ootdWholeList"><span class="menu__text">OOTD</span></a>
+	<a class="menu__item" id="i-1" href="${pageContext.request.contextPath}/ootd/newOotdWholeList"><span class="menu__text">OOTD</span></a>
 	<a class="menu__item" id="i-2" href="${pageContext.request.contextPath}/share/newShareWholeList"><span id="share" class="menu__text">SHARE</span></a>	
 	<a class="menu__item" id="i-4" href="${pageContext.request.contextPath}/column/columnList"><span class="menu__text">COLUMN</span></a>
   <div id="active"></div>

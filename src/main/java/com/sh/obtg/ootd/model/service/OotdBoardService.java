@@ -295,4 +295,15 @@ public List<OotdBoardandAttachment> SearchOotdBymemberStyle( Map<String, String>
 	return ootdboardAndAttachmentsbyStyle;
 }
 
+
+//////////모든 ootd 첨부파일&게시글 같이  가져오기 select * from 	ootd_attachment 
+	public List<OotdBoardandAttachment> viewOotdBoardandAttachment(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<OotdBoardandAttachment> ootdAttachments = ootdBoardDao.viewOotdBoardandAttachment(conn, param);
+		close(conn);
+		
+		return ootdAttachments;
+	}
+	
+
 }

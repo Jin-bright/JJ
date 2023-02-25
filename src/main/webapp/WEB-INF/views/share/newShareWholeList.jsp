@@ -1,3 +1,4 @@
+<%@page import="com.sh.obtg.share.model.dto.ShareLikes"%>
 <%@page import="com.sh.obtg.member.model.dto.Member"%>
 <%@page import="com.sh.obtg.share.model.dto.NshareAttachment"%>
 <%@page import="java.util.List"%>
@@ -13,13 +14,14 @@
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember"); 
 	int[] likearr = (int[])session.getAttribute("likearr");
+	List<ShareLikes> sharelikes = (List<ShareLikes>) session.getAttribute("sharelikes"); 
 %>
 
 
 <div id="board-container">
 	<br /><br />
 	<h2 id = "shareboardlist" > SHARE  </h2>
-
+ 
 	<div id="menuimages">
 		<img 	style="margin-left : -20px" class="menuimgs" src="${pageContext.request.contextPath}/uploadshares/small.png"  />
 			<span class="menuimgssp" style="margin-left:-70px">아우터</span>		
@@ -46,7 +48,7 @@
 <section>
 
 <div class="sectiondivs" id="filters">
-
+	<input type="hidden" name="memberId" id="memberId" value="${loginMember.memberId}">
 	<div class="container">
 	  <h4 style="padding-top:10px" > 필터 <span id="countFilter"></span>
 	  		<a id="deleteAll" style="font-size:12px; color:gray; text-decoration:underline; padding-left:50px; display:inline-block;" href="${pageContext.request.contextPath}/share/newShareWholeList"></a><br /></h4> 
@@ -127,24 +129,25 @@
 <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
 <table id="itemTable" >
 	<tbody>
-
 		<c:forEach begin="0" step="1" items="${shareAttachments}" var="attach" varStatus="vs">
 		 <c:set var="board" value="${shareboards[vs.index]}"/>
-		 <c:set var="like" value="${likearr[vs.index]}"/>
+ 		 <c:set var="like" value="${likearr[vs.index]}"/>
+
 		<c:if test="${vs.index %4==0 }">
 			<tr>
 		</c:if>
 				<td ><div style="width:280px;">
 			  		<%-- 	<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 --> --%>
-					   <c:if test="${loginMember == null || like == 0 }">
-			  			<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요" />
-					   </c:if>
-					   
-					  <c:if test="${loginMember != null && like== 1}">
-						  <img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" />
-					  </c:if>
+					<c:if test="${loginMember == null || like == 0 }">
+						<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요" />
+					</c:if> 
+	
+		     	 	<c:if test="${loginMember != null && like== 1}">  
+					  <img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" />
+   					</c:if>
+				   
 				    	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=${attach.productId}">
-				    	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/${attach.renamedFilename}" />
+				    		<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/${attach.renamedFilename}" />
 				    	</a>	
 			  		</div>
 			  		<div id="categories" style="margin-left:10px;" >
@@ -196,7 +199,6 @@
 			</tr>
 		</c:if>
 		</c:forEach>
-
 
  </tbody>
 </table>
@@ -292,6 +294,11 @@ const searchClothes = (e) => {
 	
 	const page = document.querySelector("#page").innerText;	
 	const searchdata = e.value; //이걸로찾을거야
+	
+
+	//	 const member = document.querySelector("#memberId").value;
+	//	 console.log( member ); 	  
+
 
 	$.ajax({
 		url:"${pageContext.request.contextPath}/share/findShareWholeListClothes",
@@ -357,8 +364,8 @@ const searchClothes = (e) => {
 					tr1.innerHTML += 
 				      `<td>
 						 <div style="width:280px;">
-						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
-						 	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
+					 	 		<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 	 <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 					     </div>
 					     <div id="categories" style="margin-left:10px;" >

@@ -29,7 +29,7 @@
 
 <section id="board-container">
 	<h2 id="sharewrite"> SHARE 게시글 수정</h2>
-	  <h6>단, 거래가 시작될 경우 해당 게시물은 수정하실 수 없습니다.</h6><br /><br /><br /><br />
+	  <h6 style="color : red">! 거래가 시작될 경우 해당 게시물은 수정하실 수 없습니다.</h6><br /><br /><br /><br />
 	<form
 		name="shareBoardUpdateFrm"
 		action="<%=request.getContextPath()%>/share/newShareUpdate" 
@@ -45,7 +45,7 @@
 				</div>
 				
 				<div class="filebox">
-					<input class="upload-name"   id="upload-name1"  placeholder="첨부파일을 다시 선택해주세요(위 사진은 이전 사진 입니다)" readonly>
+					<input class="upload-name"   id="upload-name1"  placeholder="이미지를 다시 선택해주세요(위 사진은 이전에 등록된 사진 입니다)" readonly>
 	    			<label for="upFile1">파일찾기</label>
 					<input type="file" name="upFile1" id="upFile1" accept="image/*" required /> <br />	
 				</div>
@@ -121,7 +121,7 @@
 			    		<option   value="S6" >구두</option>		
 				    	<option   value="S7" >기타</option>		
 			    	</select>
-			 <span style="font-size : 12px; color : red;">※ 세부카테고리까지 선택해주세요 😊</span></td>
+			 <span style="font-size : 12px; color : red;">※ 세부 카테고리까지 선택해주세요 😊</span></td>
 		</tr>
 		<tr>
 			<th> 컬러 </th>

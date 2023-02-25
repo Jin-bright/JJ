@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.share.model.dto.NshareAttachment;
 import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.dto.ShareAttachment;
 import com.sh.obtg.share.model.dto.ShareBoard;
 import com.sh.obtg.share.model.dto.ShareBoardAndAttachment;
+import com.sh.obtg.share.model.dto.ShareLikes;
 import com.sh.obtg.share.model.dto.Style;
 import com.sh.obtg.share.model.dto.Subcategory;
 import com.sh.obtg.share.model.exception.ShareBoardException;
@@ -895,6 +897,32 @@ public class ShareboardDao {
 				throw new ShareBoardException("Nshare 게시물( 첨부파일 ) 수정 오류!", e);
 			}
 			return result;
+		}
+
+		//
+		public List<ShareLikes> selectShareLike(Connection conn, Member loginMember) {
+			String sql = prop.getProperty("selectAllShareLike");
+			List<ShareLikes> shareLikes = new ArrayList<>();
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, loginMember.getMemberId());
+				
+				try(ResultSet rset = pstmt.executeQuery()){
+					while(rset.next()) {
+						ShareLikes shareLike = new ShareLikes();
+						
+						shareLike.setLikeNo(rset.getInt("like_no"));
+						shareLike.setBoardNo( rset.getInt("board_no"));
+						shareLike.setMemberId(rset.getString("member_id"));
+
+						shareLikes.add(shareLike);			
+					}
+				}
+				
+			} catch (Exception e) {
+				throw new ShareBoardException("NEW share like 테이블  조회 오류!", e);
+			}
+			
+			return shareLikes;
 		}
 		
 }

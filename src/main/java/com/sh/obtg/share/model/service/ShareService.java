@@ -6,12 +6,14 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.share.model.dao.ShareboardDao;
 import com.sh.obtg.share.model.dto.NshareAttachment;
 import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.dto.ShareAttachment;
 import com.sh.obtg.share.model.dto.ShareBoard;
 import com.sh.obtg.share.model.dto.ShareBoardAndAttachment;
+import com.sh.obtg.share.model.dto.ShareLikes;
 
 
 public class ShareService {
@@ -403,6 +405,15 @@ public class ShareService {
 		
 		return result;
 	}
+	
+	//일단 select * from shareLIkes
+	public List<ShareLikes> selectShareLike(Member loginMember) {
+		Connection conn = getConnection();
+		List<ShareLikes>  sharelikes = shareBoardDao.selectShareLike(conn, loginMember);
+		close(conn);
+		return sharelikes;
+	}
+	
 	
 	
 	
