@@ -32,7 +32,7 @@ public class NewOotdMorePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-			final int limit = 15;
+			final int limit = 12;
 			int page  = Integer.parseInt(request.getParameter("page"));
 			
 			
@@ -45,7 +45,12 @@ public class NewOotdMorePage extends HttpServlet {
 		 	
 			// 1.  인코딩 x 사용자입력값 x  전체게시글출력 (처음 매개변수x -> 매개변수 param)
 			List<OotdBoardandAttachment> ootdAttachments = ootdBoardService.viewOotdBoardandAttachment(param);
-			System.out.println(  ootdAttachments   );
+			for(int i=0; i < ootdAttachments.size(); i++) {
+				System.out.println("출력해주세여");
+				System.out.println(  ootdAttachments.get(i).getOotdNo()  );
+			}
+		//	System.out.println(  ootdAttachments   );{
+				
 			
 			
 		//	int totalCount = ootdBoardService.getTotalCount();  // 	1.  dql 전체 게시글 수 구하기  -- int를 반환하는 dql임 (select count(*) from board 

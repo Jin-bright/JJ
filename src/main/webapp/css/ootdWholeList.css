@@ -1,5 +1,86 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
+
+/* 0226 새로 추가 */
+#itemTable{
+	margin: auto;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: 300
+}
+
+.imgdiv{
+	margin-left: 15px;
+}
+
+.itemimg{
+	width : 300px;
+	height: 450px;
+	border-radius: 10px 10px 10px 10px; 
+}
+
+#profileImg{
+	width : 25px;
+	height: 25px;
+	margin-top: 0;
+	display: inline;
+}
+
+.ootdExplainDiv{
+	margin-left: 15px;
+	margin-bottom : 20px;
+	width : 290px;
+/* 	border: 1px solid black; */
+}
+
+#writerSp{
+	display: inline-block;
+	position: relative;
+	top:-15px;
+	font-weight: 500
+}
+
+.styleSp{
+	display: inline-block;
+	position: relative;
+	top:-15px;	
+	left : 130px;
+	font-family: 'Martian Mono', monospace;
+	font-size: 14px;
+	font-weight: 600;
+	color:#00d200;
+
+}
+
+.exs{
+	position: relative;
+	left:14px;
+}
+
+#btn-more{
+	width: 180px;
+	/* border: 2px solid #00d200; */
+	text-align: center;
+	height: 52px;
+	background-color: white;
+	margin-top : 30px;
+	margin-left:800px;
+	font-family: 'Martian Mono', monospace;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 10px 10px 10px 10px; 	
+}
+
+#btn-more:hover{
+	background-color: #000000;
+	color: white;
+    transition : 0.7s;
+}
+
+
+/*-----------------------*/
+
 .search {
   width: 100%;
   position: relative;
@@ -122,7 +203,7 @@ input#btnAdd{
 	color : white;
 	height : 32px;
 	width : 70px;
-	margin-left : 1285px;
+	margin-left : 1430px;
 }
 #btnAdd:hover{
 	font-weight : 900;

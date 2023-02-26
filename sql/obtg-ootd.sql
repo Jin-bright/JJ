@@ -755,3 +755,32 @@ where rnum between 1 and 10
 
 select ootd_no, ootd_writer, style_no, ootd_title, ootd_contents, ootd_reg_date, 
             ootd_top, ootd_bottom, ootd_shoes, ootd_etc, attach_no, original_filename, renamed_filename from  ootd_board join ootd_attachment on ootd_board.ootd_no = ootd_attachment.board_no 
+            
+commit;
+
+ --
+ select * from ootd_board
+ select * from  OOTD_LIKES
+
+---
+select e.* 
+from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+where rnum between 1 and 10
+
+select ootd_no
+from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+where rnum between 1 and 10
+
+select count(*)
+from OOTD_LIKES
+where board_no in ( select ootd_no
+                                        from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+                                        where rnum between 1 and 10)
+group by board_no
+
+
+select *
+from OOTD_LIKES
+where board_no in ( select ootd_no
+                                        from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+                                        where rnum between 1 and 10)

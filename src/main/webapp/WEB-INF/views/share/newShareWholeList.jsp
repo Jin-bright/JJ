@@ -308,24 +308,26 @@ const searchClothes = (e) => {
 		success(data){
 			console.log( data )
 
-			const table = document.querySelector("#itemTable");
-			table.innerHTML = "";
+				const table = document.querySelector("#itemTable");
+				table.innerHTML = "";
+				
+				const tbody =  document.createElement("tbody");
+				table.append( tbody );
+				
+				const tr1 =  document.createElement("tr");
+				tbody.append( tr1 );
+				
+				const tr2 =  document.createElement("tr");
+				tbody.append( tr2 );
+				
+				const tr3 =  document.createElement("tr");
+				tbody.append( tr3 );
 			
-			const tbody =  document.createElement("tbody");
-			table.append( tbody );
-			
-			const tr1 =  document.createElement("tr");
-			tbody.append( tr1 );
-			
-			const tr2 =  document.createElement("tr");
-			tbody.append( tr2 );
-			
-			const tr3 =  document.createElement("tr");
-			tbody.append( tr3 );
-		
+				
 			
 			
 			for( let i=0; i<data.shareAttachments.length; i++ ){
+				
 
 				
 				if(  data.shareAttachments.length >= 12 ){
