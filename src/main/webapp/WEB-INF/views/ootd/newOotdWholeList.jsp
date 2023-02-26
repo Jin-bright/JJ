@@ -28,9 +28,13 @@ Member loginMember=(Member) session.getAttribute("loginMember");
 		<input type="button" value="글쓰기" id="btnAdd" 
 			onclick="location.href='<%=request.getContextPath()%>/ootd/ootdEnroll';"/> <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
 	<% } %>
+	
+	<div id="bigContainer">
+	
+	</div>
 
 	<div id='btn-more-container'>
-		<button id="btn-more" value="" > 더보기( <span id="page"></span> / <span id="totalPage"><%=totalPage%></span> ) </button>
+		<button id="btn-more" value="" > MORE OOTD <br/> (<span id="page"></span>/<span id="totalPage"><%=totalPage%></span>) </button>
 	</div>
 </section>
 
@@ -55,6 +59,87 @@ const getPage = (page) => {
 	
 		success(data){
 			console.log( data );
+			
+			const bigContainer =  document.querySelector("#bigContainer");
+
+			const table =  document.createElement("table");
+			table.setAttribute("id", "itemTable");
+
+			const tbody =  document.createElement("tbody");
+			table.append( tbody );
+			
+			const tr1 =  document.createElement("tr");
+			tbody.append( tr1 );
+			
+			const tr2 =  document.createElement("tr");
+			tbody.append( tr2 );
+			
+			const tr3 =  document.createElement("tr");
+			tbody.append( tr3 );
+			
+			for(let i =0; i<data.length; i++){
+				
+				
+
+				//스타일
+				let s = data[i].styleNo;
+				if(s == 'S1'){ s = "#Lovely" }
+				else if(s == 'S2'){ s = "#Dandy" }else if(s == 'S3'){ s = "#Formal" }else if(s == 'S4'){ s = "#Street" }else if(s == 'S5'){ s = "#Girlish" }
+				else if(s == 'S6'){ s = "#Retro" }else if(s == 'S7'){ s = "#Romantic" }else if(s == 'S8'){ s = "#Chic" }else if(s == 'S9'){ s = "#Amekaji" }
+
+				
+				if( parseInt(i/4) == 0){
+
+					tr1.innerHTML += 
+				      `<td>
+						 <div class = "imgdiv" >
+						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/ootdView?no=\${data[i].ootdNo}">
+					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadootds/ootd/\${data[i].renamedFilename}" /></a>
+						  </div>
+						 <div class = "ootdExplainDiv" >
+						   <img src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" id="profileImg" alt="profileImg" />
+						   <p id="writerSp">\${data[i].ootdWriter}</p> <span class="styleSp" >\${s}</span>  <br />
+						   <span class="exs">#\${data[i].OOTDTitle} #\${data[i].OOTDTop} #\${data[i].OOTDBottom} #\${data[i].OOTDShoes} </span>
+						 </div>
+					  </td>`;					
+				}
+				
+				if( parseInt(i/4) == 1){
+
+					tr2.innerHTML += 
+				      `<td>
+						 <div class = "imgdiv" >
+						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/ootdView?no=\${data[i].ootdNo}">
+					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadootds/ootd/\${data[i].renamedFilename}" /></a>
+						  </div>
+						 <div class = "ootdExplainDiv" >
+						   <img src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" id="profileImg" alt="profileImg" />
+						   <p id="writerSp">\${data[i].ootdWriter}</p> <span class="styleSp" >\${s}</span>  <br />
+						   <span class="exs">#\${data[i].OOTDTitle} #\${data[i].OOTDTop} #\${data[i].OOTDBottom} #\${data[i].OOTDShoes} </span>
+						 </div>
+					  </td>`;					
+				}
+				
+				if( parseInt(i/4) == 2){
+
+					tr3.innerHTML += 
+				      `<td>
+						 <div class = "imgdiv" >
+						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/ootdView?no=\${data[i].ootdNo}">
+					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadootds/ootd/\${data[i].renamedFilename}" /></a>
+						  </div>
+						 <div class = "ootdExplainDiv" >
+						   <img src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" id="profileImg" alt="profileImg" />
+						   <p id="writerSp">\${data[i].ootdWriter}</p> <span class="styleSp" >\${s}</span>  <br />
+						   <span class="exs">#\${data[i].OOTDTitle} #\${data[i].OOTDTop} #\${data[i].OOTDBottom} #\${data[i].OOTDShoes} </span>
+						 </div>
+					  </td>`;					
+				}
+			
+				bigContainer.append(table);
+			}
+			
+			
 		},	
 		error : console.log, 
 		complete(){

@@ -33,7 +33,7 @@ public class NewOotdWhloeListServlet extends HttpServlet {
 		int totalCount = ootdBoardService.getTotalCount();  // 	1.  dql 전체 게시글 수 구하기  -- int를 반환하는 dql임 (select count(*) from board 
 		System.out.println( "■■ totalCount(전체사진갯수) = " + totalCount   );
 		
-		final int limit = 15;
+		final int limit = 12;
 		int totalPage = (int)Math.ceil( (double)totalCount/ limit );
 		System.out.println( "■■ totalPage(전체 페이지 수) = " + totalPage   );
 		
