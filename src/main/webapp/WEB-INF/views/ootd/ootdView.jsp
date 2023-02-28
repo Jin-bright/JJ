@@ -3,11 +3,12 @@
 <%@page import="java.util.List"%>
 <%@page import="com.sh.obtg.ootd.model.dto.OotdAttachment"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ootdView.css" />
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@900&family=Solitreo&display=swap" rel="stylesheet">
-<%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --%>
 
 <%
 //String msg = (String)session.getAttribute("msg");
@@ -52,47 +53,14 @@ function open_pop(<%=ootdboard.getOotdWriter()%> ){
 
 <section id="board-container"  style="margin-left:-100px;" > <!-- 0201마진값추가 -->
 <br /><br /><br /><br /><br /><br /><br />
-	<p id="informationsp" > INFORMATION  <span id="styleinfo" ">스타일 정보</span></p>
-<%-- <ul class="ootdnav">
-	<li class="button-dropdown">
-	   	<a id="firsta" href="javascript:void(0)" class="dropdown-toggle">
-	    <img id="profileimg" src="<%=request.getContextPath()%>/uploadootds/ootd/profile.png" alt="profileimg" /> </a>
-	    
-	    <ul class="dropdown-menu">
-	  <li><a onclick = "window.open('<%=request.getContextPath() %>/profile/profileView', '', 'width=530, height=500, location=no, status=no, scrollbars=yes');">프로필보기</a></li> 
- 			<li margin-left:20px><a onclick="open_pop('<%=ootdboard.getOotdWriter()%>');">프로필보기</a></li>
-	    </ul>
-   </li>
-</ul> --%>
-
- <ul class="ootdnav" style=" display:inline; height:50px">
-	<li class="probutton-dropdown" style=" display:inline; height:50px" >
-	   	<a id="firsta" href="javascript:void(0)" class="prodropdown-toggle"  style=" display:inline; height:50px">
-	    	<img id="profileimg"  src="<%=request.getContextPath()%>/uploadootds/ootd/profile.png" alt="profileimg  /></a>
-	    
-	    <ul class="prodown-menu" style="margin-left:30px">
-   	 		<li class="plz"><a onclick="open_pop('<%=ootdboard.getOotdWriter()%>');" style="margin-left:1220px"> 프로필보기</a></li>
-  		</ul>
-   </li>
-</ul>
+<!-- 	<p id="informationsp" > INFORMATION  <span id="styleinfo" ">스타일 정보</span></p> -->
 
 <div class="imgNtableContainer">
+   <img id="profileimg"  src="<%=request.getContextPath()%>/uploadootds/ootd/profile.png" alt="profileimg  /></a>
+   <td>${ootdboard.getOotdWriter()}</td>
  <div class="box">
-	<% 
-	if(!ootdboard.getOotdAttachments().isEmpty()) {
-		for(OotdAttachment ootdAttachment : ootdboard.getOotdAttachments() ){
-	%>
-	<tr>
-		<td>
-			<%-- 첨부파일이 있을경우만, 이미지와 함께 original파일명 표시 --%>
-		<img src="<%=request.getContextPath()%>/uploadootds/ootd/<%=ootdAttachment.getRenamedFilename()%>" style="width:400px; height : 650px" >
-		</td>
-	</tr>	
-	<% 
-		}
-	} 
-	%>
-  </div>
+ 	<img src="${pageContext.request.contextPath}/uploadootds/ootd/${ootdboard.ootdAttachments.getRenamedFilename()}" style="width:400px; height : 650px" >
+ </div>
   <div class="box">
 	<table id="tblboardview">
 		<tr>
@@ -450,7 +418,7 @@ const deleteBoard = () => {
 };
 
 const updateBoard = () => { 
-	location.href = "<%=request.getContextPath()%>/ootd/ootdUpdate?no=<%=ootdboard.getOotdNo()%>";
+	location.href = "<%=request.getContextPath()%>/ootd/newOotdUpdate?no=<%=ootdboard.getOotdNo()%>";
 }
 </script>
 <%--  <% } %> --%>

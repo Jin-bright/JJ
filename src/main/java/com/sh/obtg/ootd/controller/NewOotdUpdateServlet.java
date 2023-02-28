@@ -21,8 +21,8 @@ import com.sh.obtg.ootd.model.service.OotdBoardService;
 /**
  * Servlet implementation class OotdUpdateServlet
  */
-@WebServlet("/ootd/ootdUpdate")
-public class OotdUpdateServlet extends HttpServlet {
+@WebServlet("/ootd/newOotdUpdate")
+public class NewOotdUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OotdBoardService ootdBoardService = new OotdBoardService();
 
@@ -39,7 +39,7 @@ public class OotdUpdateServlet extends HttpServlet {
 		
 		
 		request.setAttribute("ootdboard", ootdboard);
-		request.getRequestDispatcher("/WEB-INF/views/ootd/ootdUpdate.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/ootd/newOotdUpdate.jsp")
 		.forward(request, response);
 	}
 	
@@ -178,7 +178,7 @@ public class OotdUpdateServlet extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("msg", "게시글 등록중 오류가 발생했습니다.");
-			response.sendRedirect(request.getContextPath() + "/ootd/ootdWholeList");
+			response.sendRedirect(request.getContextPath() + "/ootd/newOotdWholeList");
 		}
 
 	}

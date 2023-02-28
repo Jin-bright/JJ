@@ -5,6 +5,9 @@
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ootdWholeList.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -93,7 +96,7 @@ const getPage = (page) => {
 					tr1.innerHTML += 
 				      `<td>
 						 <div class = "imgdiv" >
-						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/ootdView?no=\${data[i].ootdNo}">
+						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/newOotdView?no=\${data[i].ootdNo}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadootds/ootd/\${data[i].renamedFilename}" /></a>
 						  </div>
 						 <div class = "ootdExplainDiv" >
@@ -109,7 +112,7 @@ const getPage = (page) => {
 					tr2.innerHTML += 
 				      `<td>
 						 <div class = "imgdiv" >
-						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/ootdView?no=\${data[i].ootdNo}">
+						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/newOotdView?no=\${data[i].ootdNo}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadootds/ootd/\${data[i].renamedFilename}" /></a>
 						  </div>
 						 <div class = "ootdExplainDiv" >
@@ -125,7 +128,7 @@ const getPage = (page) => {
 					tr3.innerHTML += 
 				      `<td>
 						 <div class = "imgdiv" >
-						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/ootdView?no=\${data[i].ootdNo}">
+						   <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/ootd/newOotdView?no=\${data[i].ootdNo}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadootds/ootd/\${data[i].renamedFilename}" /></a>
 						  </div>
 						 <div class = "ootdExplainDiv" >
@@ -154,25 +157,7 @@ const getPage = (page) => {
 	});	//ajax
 }	
 </script>
-<%-- 
-<table id="tblBoard">
 
- <% for(int i=0; i<ootdAttachments.size(); i++){ 
- 		if(i%5==0){%>
- 		<tr>
- 	<% } %>
-     <td class="maketd" style= "height : 300px; width:190px;">
-     	<a class="atags" style="display :inline;" href="<%=request.getContextPath()%>/ootd/ootdView?no=<%=ootdAttachments.get(i).getBoardNo() %>">
-     	<img style=" margin-left : 7px"  src="<%=request.getContextPath()%>/uploadootds/ootd/<%=ootdAttachments.get(i).getRenamedFilename()%>" ></a><br/>
-		<p class="non">NO <span style="color : black; font-weight : light"><%=ootdAttachments.get(i).getAttachNo()%></span></p>
-		<p class="non">N  <span style=" color : black; font-weight : light"><%=ootdAttachments.get(i).getRegDate()%></span></p>
-     </td>  
-     <% if(i%5==4){%>
- 		</tr>
- 	 <% }
-   }%>
-</table>
---%>
 
 <br /><br /><br /><br />
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

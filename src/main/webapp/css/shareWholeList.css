@@ -3,6 +3,11 @@
 @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
 
+root{
+
+	widh:1920px;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -12,7 +17,9 @@
 
 /** 메뉴바 소미이지들**/ 
 #menuimages{
-	text-align:  center;
+	 text-align:  center;
+	 position: absolute;
+	 left : 230px;
 }
 
 .menuimgs{
@@ -34,9 +41,11 @@
 
 /**  필터 || 제품이미지 **/ 
 section{
+	margin-top : 20px;
 	flex-direction: row;
 	display: flex;
 	width : 1900px;
+	margin-top: 100px;
 /* 	height : 1000px */
 }
 
@@ -169,8 +178,8 @@ input#btnAdd{
 	height : 32px;
 	width : 70px;
  	position : absolute;
-	top:430px;
-	left : 1464px;
+	top:450px;
+	left : 1438px;
 }
 #btnAdd:hover{
 	font-weight : 900;
@@ -181,7 +190,7 @@ input#btnAdd{
 
 
 #itemTable{
-	margin-top : 70px;
+	margin-top : 120px;
 	height : 800px;
 }
 
@@ -190,6 +199,7 @@ input#btnAdd{
 	height : 250px;
 	border-radius: 20px 20px 20px 20px;
 }
+
 
 /* ///////////    상품 출력 테이블     /////////////// */
 

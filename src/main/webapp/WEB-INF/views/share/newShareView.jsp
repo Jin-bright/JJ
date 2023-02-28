@@ -1,3 +1,5 @@
+<%@page import="com.sh.obtg.share.model.dto.NshareBoard"%>
+<%@page import="com.sh.obtg.member.model.dto.MemberRole"%>
 <%@page import="com.sh.obtg.member.model.dto.Member"%>
 <%@page import="com.sh.obtg.share.model.dto.NshareAttachment"%>
 <%@page import="java.util.List"%>
@@ -13,6 +15,7 @@
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember"); 
 	int likeCnt = (int)request.getAttribute("likeCnt");
+	NshareBoard shareBoard =  (NshareBoard)request.getAttribute("shareBoard"); 
 %>
 
 
@@ -118,7 +121,8 @@
 			</tr>
 
 			<tr style="margin-top: 50px">
-				<td><h3>상품정보</h3>
+				<td><h3>상품정보</h3> <a id="reporta" onclick="reportFrm()"> 신고하기 </a>
+				<img src="<%= request.getContextPath() %>/image/siren.png" alt="" id="siren" />
 				<hr style="width : 700px; margin-top:10px; border : 1.5px solid lightgray" />
 				<div id="textdiv" style=" height:120px; margin-top:10px;">
 					${shareBoard.getProductContent()}
@@ -131,8 +135,17 @@
 	</div>
 </section>
  	<!--  수정 /삭제하기  -->
+ 	<%
+		boolean canEdit = loginMember != null && 
+							(loginMember.getMemberRole() == MemberRole.A ||
+								loginMember.getMemberId().equals( shareBoard.getMemberId() ));
+		if(canEdit){
+	%>
 	<button class ="sharemodidel"  type="submit" onclick="updateBoard()"> 수정하기 </button>
 	<button class ="sharemodidel"  id="dell" type="submit"  onclick="deleteBoard()"> 삭제하기 </button>
+	<% 
+		}
+	%>
 <!-- 게시글 삭제하기 히든폼 ( 관리자 & 작성자에게만 노출 ) -->	
 <form action="${pageContext.request.contextPath}/share/newShareDelete" name = "boardDeleteFrm" method="post">
 	<input type="hidden" name="no" value="${shareBoard.productId}" />
@@ -166,8 +179,66 @@
 		    							 단,거래 중 문제 발생 시 신고 기능을 적극 이용 부탁드립니다. </div>
 		  </div>
 	</div>
+ 
+<!-- 신고하기 폼(누르면 나타나용) -->
+<% if(loginMember != null){ %>
+<form 
+	class="report_container"
+	name="reportEnrollFrm"
+	method="post"
+	action="<%= request.getContextPath() %>/report/reportEnroll"
+	id="report_container">
+	<span class="close-button" onclick="closeFrm()">&times;</span>
+    <h2 style="text-align: center; margin: 5px;" id="head">신고하기</h2>
+    <hr />
+    <table id="report_wrap">
+        <thead>
+            <tr>
+                <th><label for="">신고자</label></th>
+                <td><input type="text" value="<%= loginMember.getMemberId() %>" name="reportedMemberId" readonly="readonly"/></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><label for="">게시글 번호</label></th>
+                <td><input type="text" value="S${shareBoard.productId}" name="boardNo" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><hr style="width: 95%;" /></td>
+            </tr>
+        </tbody>
+    </table>
+    <span style="margin-left: 1em; font-weight: bold;">사유선택</span>
 
-	 
+    <table id="reason_wrap">
+        <tbody>
+            <tr>
+                <th><input type="checkbox" name="reason" value="R1" onclick="checkOnlyOne(this)"></th>
+                <td>스팸홍보/도배글입니다.</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="reason" value="R2" onclick="checkOnlyOne(this)"></th>
+                <td>불법정보를 포함하고있습니다.</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="reason" value="R3" onclick="checkOnlyOne(this)"></th>
+                <td>욕설/생명경시/혐오/차별적 표현입니다.</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="reason" value="R4" onclick="checkOnlyOne(this)"></th>
+                <td>개인정보 노출 게시물입니다.</td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="reason" value="R5" onclick="checkOnlyOne(this)"></th>
+                <td>불쾌한 표현이 있습니다.</td>
+            </tr>
+        </tbody>
+    </table> <!-- end reason_wrap -->
+    <div style="text-align: center;">
+        <input type="button" value="신고하기" onclick="reportEnroll()">
+    </div>
+</form>
+<% } %>
 
 
 
@@ -190,16 +261,61 @@ function open_pop( ${shareBoard.getMemberId()} ){
 
 
 
-
-
-
-
-
-
-
-
 <%-- 쪽지 추가  --%>
+
 <script >
+<%-- 신고  --%>
+const  siren = document.querySelector("#siren");
+siren.style.display = 'none';
+
+const  reporta = document.querySelector("#reporta");
+reporta.addEventListener('mouseenter', () => {
+	siren.style.display = 'inline';
+})
+
+reporta.addEventListener('mouseleave', () => {
+	siren.style.display = 'none';
+})
+
+
+const reportFrm = () => {
+	const frm = document.querySelector(".report_container");
+	<% if(loginMember.getMemberId() != null){ %>
+	frm.classList.toggle("showPopup");
+	
+	<% } else { %>
+	loginAlert();
+	<% } %>
+}
+
+$(function(){
+
+	$('.report_container').draggable({'cancel':'#report_wrap'});
+
+	});
+
+const closeFrm = () => {
+	const frm = document.querySelector(".report_container");
+	frm.classList.toggle("showPopup");
+}
+
+const checkOnlyOne = (e) => {
+    const checkbox = document.getElementsByName("reason");
+
+    checkbox.forEach((cb) => {
+        cb.checked = false;
+    })
+
+    e.checked = true;
+} 
+
+const reportEnroll = () => {
+	if(confirm("정말 신고하시겠습니까? ")){
+		document.reportEnrollFrm.submit();
+	} 
+	alert("신고가 접수되었습니다.")
+}
+
 
 //쪽지제출 후 alert()
 $(document).ready(function() {
