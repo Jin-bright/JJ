@@ -1,88 +1,73 @@
 @charset "UTF-8";
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
 
 /** p **/
 
 #profileimg{
-	margin-left: -400px;
-	width:40px;
-	float:right;	
+	width:45px;
+	margin-left: 18px;
+	margin-top: 5px
 }
 
-.ootdnav {
-    display: inline-block;
-    font: 13px Helvetica, Tahoma, serif;
-    text-transform: uppercase;
-    margin: 0; 
-    padding: 0;
-    font-family: 'Nanum Gothic Coding', monospace;	
-    font-size : 16px;
+#writersp{
+	position: relative;
+	top:-20px;
+	left: 8px;
+	font-weight: 300
+	
 }
 
-.ootdnav li {
-    display: inline-block;
-    list-style: none;
-    font-family: 'Nanum Gothic Coding', monospace;	
-    font-size : 16px;
-   	margin-left: 0px;
+#datep{
+	position: relative;
+	top:-20px;
+	left: 75px;
+	color: gray;
+	font-size: 16px;
 }
 
-.ootdnav .button-dropdown {
-    position: relative;
-    left : 60px;
-    top : 50px;
+
+#ootdimg{
+	width:630px; 
+	height : 780px; 
+	margin-left: 15px;
 }
 
-.ootdnav li a {
-    display: block;
-    color: #333;
-    background-color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-family: 'Nanum Gothic Coding', monospace;	
-    font-size : 14px;
-    margin-left: 50px;
+#viewProfile{
+	background-color : black;
+	color:white;
+	width:95px;
+	height:35px;
+	border-radius : 10px 10px 10px 10px;  
+	display: inline;
+	position: relative;
+	top:-20px;
+	left: 413px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bolder;
 }
 
-.ootdnav li a span {
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 10px;
-    color: #999;
+#viewProfile:hover{
+	background-color : white;
+	color:black;
+	transition : 0.4s
 }
 
-.ootdnav li a:hover, .ootdnav li a.dropdown-toggle.active {
- /*   background-color: #289dcc; */
-    color: #fff;
+
+<!-- 아이디 / 등록일자 / 이미지 담는 div  >
+#imgNtableContainer{
+	border:1px solid red;
+	height : 50px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+	font-weight: 100
 }
 
-.ootdnav li a:hover span, .ootdnav li a.dropdown-toggle.active span {
-    color: #fff;
-    font-weight : bolder;
+#bigDiv{
+	margin: 0 auto;
+	width:630px; 
 }
-
-.ootdnav li a:hover:not(#firsta){
-	background-color: gray;
-}
-
-.ootdnav li .dropdown-menu {
-    display: none;
-    position: absolute;
-    left: 70px;
-    padding: 0;
-    margin: 0;
-    margin-top: 3px;
-    text-align: left;
-}
-
-.ootdnav li .dropdown-menu.active {
-    display: block;
-}
-
-.ootdnav li .dropdown-menu a {
-    width: 150px;
-}
-
 
 /*게시글 작성/상세보기 테이블*/
 
@@ -97,18 +82,57 @@
 	margin-bottom : 20px;
 	width : 200px
 }
-
-
-.imgNtableContainer{
-  text-align: center;
-  display : flex;
-  padding-left : 500px
+#infos{
+	margin-top : 5px;
+	margin-left : 15px;
+	width: 630px;
+	
+}
+.exs{
+	margin-left : 2px;
+	padding-top: 30px;
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size: 16px;
+	
 }
 
-.box{
- flex-direction : column;
- margin-left : 20px;
+#reporta{
+	position:relative;
+	top:-60px;
+	left:570px;
+
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	display: inline;
+	color:gray;
+
 }
+
+#reporta:hover{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 900px;
+	color:red;
+	margin-bottom : 0;
+	cursor: pointer;
+}
+
+.heart{
+	width : 30px;
+	display : inline;
+	position : absolute;
+
+}
+
+/* 신고 */
+#siren {
+	width: 30px;
+	transform: translate(200px, -261px);
+	cursor: pointer;
+	position: relative;
+	top : 183px;
+	left : 308px;
+}
+
 
 #styleinfo{
 	font-weight:200; font-size:16px; color:lightgray; 	
@@ -135,14 +159,7 @@
 
 
 
-.heart{
-	margin: 30px 6px 0 0;
-	width : 30px;
-	display : inline;
-	position : absolute;
-	left : 780px;
-	top : 1050px; 
-}
+
 
 #tblboardview {
 	width:500px; 
@@ -187,12 +204,9 @@ table#tbl-board-view input[type=file] {margin: 3px 0;}
 /*수정삭제버튼*/
 .ootdmodidel{
 	float : right;
-	margin-top : 10px;
 	margin-left : 1px; 
 	display : block;
-	position :relative;
-	top : 200px;
-	left : -196px;
+
 	height:26px;
 	width : 67px;
 	background-color : black;
@@ -200,6 +214,10 @@ table#tbl-board-view input[type=file] {margin: 3px 0;}
 	
 }
 
+.ootdmodidel:hover{
+	background-color : white;
+	color : black; 	
+}
 
 
 
@@ -358,15 +376,7 @@ table#tbl-comment tr:hover button.btn-delete{display:inline;}
   }
 }
 
-/* 신고 */
-#siren {
-	width: 30px;
-	transform: translate(200px, -261px);
-	cursor: pointer;
-	position: absolute;
-	top : 1090px;
-	left : 1130px;
-}
+
 /* 신고폼 */
 #report {
 	color: white; 

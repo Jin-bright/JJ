@@ -17,8 +17,8 @@ import com.sh.obtg.ootd.model.service.OotdBoardService;
 /**
  * Servlet implementation class OotdDeleteServlet
  */
-@WebServlet("/ootd/ootdDelete")
-public class OotdDeleteServlet extends HttpServlet {
+@WebServlet("/ootd/newOotdDelete")
+public class NewOotdDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OotdBoardService ootdBoardService = new OotdBoardService();
 
@@ -49,7 +49,7 @@ public class OotdDeleteServlet extends HttpServlet {
 		
 		//3. 리다이렉트 /board/boardList 로 
 		request.getSession().setAttribute("msg", "게시글을 성공적으로 삭제했습니다.");
-		response.sendRedirect(request.getContextPath() + "/ootd/ootdWholeList");
+		response.sendRedirect(request.getContextPath() + "/ootd/newOotdWholeList");
 	}
 
 }

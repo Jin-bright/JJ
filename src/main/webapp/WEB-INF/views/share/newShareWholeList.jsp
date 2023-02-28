@@ -192,7 +192,7 @@
 						<c:if test="${board.styleName eq 'S9' }"><p class="styles"> #Amekaji</p></c:if>	
 			  			<b><fmt:formatNumber value="${board.productPrice}"	pattern="#,###" />원</b>
 			  		</div>
-			  		<br /><br /><br />
+			  		<br />
 			  	</td>
 				<td class="itemblanks"></td>
 		<c:if test="${vs.index %4==3}">
@@ -366,7 +366,7 @@ const searchClothes = (e) => {
 					tr1.innerHTML += 
 				      `<td>
 						 <div style="width:280px;">
-					 	 		<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 <!--<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 						 	 <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 					     </div>
@@ -377,14 +377,14 @@ const searchClothes = (e) => {
 					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
 					     	<p class="styles" >\${s}</p>
 					     	<p><b>\${p}원</b></p>
-					  	</div>
+					  	</div><br />
 					  </td>`;					
 				}
 				if(parseInt(i/4)== 1 ){
 					tr2.innerHTML += 
 					  `<td>
 						<div style="width:280px">
-							<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 <!--<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 							<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 							<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 						</div>
@@ -395,13 +395,13 @@ const searchClothes = (e) => {
 					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
 					     	<p class="styles" >\${s}</p>
 					     	<p><b>\${p}원</b></p>
-					  	</div>
+					  	</div><br />
 					 </td>`;
 				}
 				if( parseInt(i/4) == 2 ){
 				  tr3.innerHTML += 
 				    `<td><div style="width:280px">
-					    <img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
+					     <!--<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 					    <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 				  		<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a></div>
 					     <div id="categories" style="margin-left:10px;" >
@@ -411,7 +411,7 @@ const searchClothes = (e) => {
 					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
 					     	<p class="styles" >\${s}</p>
 					     	<b>\${p}원</b>
-					  	</div>
+					  	</div><br />
 					  </td>`;
 				}
 				
@@ -507,7 +507,7 @@ const searchColorStyle = (e) => {
 					tr1.innerHTML += 
 				      `<td>
 						 <div style="width:280px;">
-						 	<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 <!--<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 						 	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 					     	<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 					     </div>
@@ -518,14 +518,14 @@ const searchColorStyle = (e) => {
 					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
 					     	<p class="styles" >\${s}</p>
 					     	<p><b>\${p}원</b></p>
-					  	</div>
+					  	</div><br />
 					  </td>`;					
 				}
 				if(parseInt(i/4)== 1 ){
 					tr2.innerHTML += 
 					  `<td>
 						<div style="width:280px">
-							<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
+						 <!--<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요"/> <!-- 하트 -->
 							<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 							<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a>
 						</div>
@@ -536,13 +536,13 @@ const searchColorStyle = (e) => {
 					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
 					     	<p class="styles" >\${s}</p>
 					     	<p><b>\${p}원</b></p>
-					  	</div>
+					  	</div><br />
 					 </td>`;
 				}
 				if( parseInt(i/4) == 2 ){
 				  tr3.innerHTML += 
 				    `<td><div style="width:280px">
-					    <img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty"  alt="좋아요"/> <!-- 하트 -->
+					    <!--<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty"  alt="좋아요"/> 하트 -->
 					    <a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=\${data.shareboards[i].productId}">
 				  		<img class="itemimg" src="${pageContext.request.contextPath}/uploadshares/newShare/\${data.shareAttachments[i].renamedFilename}" /></a></div>
 					     <div id="categories" style="margin-left:10px;" >
@@ -552,7 +552,7 @@ const searchColorStyle = (e) => {
 					     	<p id="pn">[\${data.shareboards[i].productName}]</p>
 					     	<p class="styles" >\${s}</p>
 					     	<b>\${p}원</b>
-					  	</div>
+					  	</div><br />
 					  </td>`;
 				}
 				
