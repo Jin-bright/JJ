@@ -1,10 +1,150 @@
 @CHARSET "UTF-8";
+
+/* file custom  */
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.filebox label { 
+	/* 파일찾기   */
+    display: inline-block;
+    padding: 2px 2px 2px 2px;
+    color: #fff;
+
+    background-color: #999999;
+    cursor: pointer;
+    height: 25px;
+    margin-left: 3px;
+    font-size : 14px;
+}
+
+.filebox{
+	margin-top : 90px;
+	width: 580px;
+	height : 40px;
+}
+
+
+.upload-name{
+	border : none;
+	border-bottom:1px solid black;
+	width: 500px;
+	height: 25px;
+	color : gray;
+}
+
+/*-- 이미지 미리보기 div  */
+#col_img{
+	height: 200px;
+	margin-top : 10px;
+}
+
+#imgexplain{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#imgexplain p{
+	margin : 0;
+	font-size : 13px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight : 300;	
+	color : black;
+	
+}
 /*게시판*/
+/* ★★★★   게시글 작성/상세보기 테이블  ★★★★★*/
+
+table#tbl-board th, table#tbl-board td {
+	border:1px solid; 
+	padding: 5px 0; 
+	text-align:center;
+	font-family: 'Nanum Gothic Coding', monospace;	
+} 
+
+table#tbl-board-view {
+	margin-top : 20px;
+	margin:0 auto; 
+	border : none;
+	clear:both; 
+	width: 780px;
+	border: none;
+	border-collapse:collapse;   
+}
+table#tbl-board-view th {
+	border: none;
+	border-bottom : 1px solid #c0c0c0 ;
+
+	width: 150px; 
+	padding: 8px 15px;
+	text-align: left; 
+	vertical-align: middle;
+
+	font-family: 'Noto Sans KR', sans-serif;	
+  	font-size: 18px;
+	font-weight : 500;
+	
+} 
+table#tbl-board-view td {
+	border: none;
+	border-bottom : 1px solid #c0c0c0 ;
+	
+	padding: 15px 15px 15px 15px; 
+	text-align:left;
+	vertical-align: middle;
+	
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight : 300;	
+	width: 550px; 
+
+}
+
+
+
+
+/* enroll table에서 에서 input 태그들 */
+.inputtext{
+	width : 500px;
+	border: 1px solid #c0c0c0;
+	border-radius: 10px 10px 10px 10px;
+	vertical-align: middle;
+	padding : 0;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+	font-weight : 300;	
+	color : black;
+	
+}
+
+
+/* summernote div 
+.note-editor{
+	width : 1150px;
+	margin:0;	
+	
+}
+
+.summernote{
+	width : 1150px;
+	margin:0;	
+}
+
+.note-editor note-frame{
+	width : 1150px;
+	margin:0;	
+}
+*/
 
 #ootdwrite{
 	font-family: 'Nanum Gothic Coding', monospace;	
 	font-weight : 700;
-	margin-bottom : 40px
+	margin-bottom : 40px;
+	margin-top : 40px; 
 }
 
 .note-editable{
@@ -15,82 +155,18 @@
 
 
 section#board-container{
-	/* width:1000px; */ 
+	width:1000px; 
 	margin:0 auto; 
 	text-align:center;
-	}
-
-table#tbl-board{
-	width:100%; 
-	margin:0 auto; 
-	border:1px solid black; 
-	border-collapse:collapse; 
-	clear:both; 
 }
-	
-table#tbl-board th{
-	font-weight : 500;
-	width : 20%
-}	
-	
-table#tbl-board th, table#tbl-board td {
-	border:1px solid; 
-	padding: 5px 0; 
-	text-align:center;
-	font-family: 'Nanum Gothic Coding', monospace;	
-} 
+
 
 /*글쓰기버튼*/
 input#btn-add{float:right; margin: 0 0 15px;}
 
-/*페이지바*/
-div#pagebar{
-	margin-top:10px; 
-	text-align:center; 
-	background-color:rgba(0, 188, 212, 0.3); 
-}
-
-div#pagebar span.cPage{
-	color:black; 
-	margin-right: 5px;
-	font-size:18px;
-}
 
 
-div#pagebar a{margin-right: 5px;}
 
-div#pagebar a:hover{
-	background-color: #f98220;
-	font-size:24px;
-	font-weight: 900;
-}
-
-
-/* ★★★★   게시글 작성/상세보기 테이블  ★★★★★*/
-table#tbl-board-view {
-	width: 800px;
-	margin : 0 auto;
-	border:3px solid black; 
-	border-collapse:collapse;  
-}
-table#tbl-board-view th {
-  	font-size: 15px;
-	width: 150px; 
-	border:1px solid black; 
-	padding: 8px 15px;
-	text-align:center; 
-	
-} 
-table#tbl-board-view td {
-	border:1px solid black; 
-	padding: 5px 0 5px 15px; 
-	text-align:left;
-
-	
-}
-
-table#tbl-board-view img {width: 16px;}
-table#tbl-board-view input[type=file] {margin: 3px 0;}
 
 /*게시글 수정하기*/
 span#fname{
@@ -102,12 +178,7 @@ span#fname{
     background: #f5f5f5;
 }
 
-/* enroll table에서 에서 input 태그들 */
-.inputtext{
-	width : 600px;
-	border: none;
-    border-bottom: 2px solid grey;
-}
+
 
 
 /* enroll에서 글쓰기 - 취소  제출버튼 */
@@ -116,8 +187,11 @@ span#fname{
 	color : white;
 	width : 120px;
 	height : 33px;
-	margin-right : 100px;
-	margin-left : 60px
+	margin-right: 5px;
+}
+
+#subutton{
+	margin-left : 490px
 }
 
 .inputbuttons:hover { 

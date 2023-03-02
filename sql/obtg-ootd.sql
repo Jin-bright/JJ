@@ -784,3 +784,14 @@ from OOTD_LIKES
 where board_no in ( select ootd_no
                                         from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
                                         where rnum between 1 and 10)
+                                        
+                                        
+select* from ootd_board
+select * from ootd_attachment
+
+select* from ootd_likes where board_no = 109
+
+select* from member
+
+
+

@@ -1,9 +1,10 @@
-<%@page import="com.sh.obtg.ootd.model.dto.OotdBoard"%>
-<%@page import="com.sh.obtg.ootd.model.dto.OotdAttachment"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+    pageEncoding="UTF-8"%>    
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<%@page import="com.sh.obtg.member.model.dto.Member"%>
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <!-- 글꼴  -->
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100;300;500;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ootdEnroll.css" />
@@ -17,55 +18,52 @@
 <script src="<%=request.getContextPath()%>/summernote/summernote-lite.js"></script>
 <script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/summernote/summernote-lite.css">
-
 <%
-// 리스트 가져오는거 필요함 
-// List<OotdAttachment> ootdAttachments = (List<OotdAttachment>)request.getAttribute("ootdAttachments");
-	 OotdBoard ootdboard = (OotdBoard) request.getAttribute("ootdboard");
+	Member loginMember = (Member) session.getAttribute("loginMember");  
 %>
 <br />
 <section id="board-container">
-	<h2 id="ootdwrite" >OOTD 게시글 수정</h2>
+	<h2 id="ootdwrite" style="font-weight : 700">OOTD 게시글 작성</h2>
 	<form
 		name="ootdBoardEnrollFrm"
-		action="${pageContext.request.contextPath}/ootd/newOotdUpdate" 
+		action="${pageContext.request.contextPath}/ootd/newOotdEnroll" 
 		enctype ="multipart/form-data"
 		method="post">
 		<table id="tbl-board-view">
-		<input type="hidden" name="no"  value="<%=ootdboard.getOotdNo()%>"/>		
+		
 		<tr >
-			<th >제 목</th>
-			<td><input  class="inputtext" type="text" name="ootdtitle"  value="<%=ootdboard.getOOTDTitle() %>" placeholder="제목을 입력해주세요." required></td>
+			<th>제 목</th>
+			<td><input class="inputtext" type="text" name="ootdtitle" placeholder="제목을 입력해주세요." required></td>
 		</tr>
 		
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text"  class="inputtext" name="ootdwriter" value="<%=ootdboard.getOotdWriter() %>" readonly />
+				<input type="text"  class="inputtext" name="ootdwriter" value="<%=loginMember.getMemberId() %>" readonly required/>
 			</td>
 		</tr>
 		<tr>
 			<th>상의</th>
 			<td>
-				<input type="text" class="inputtext"  name="ootdTop" value="<%=ootdboard.getOOTDTop() %>" required/>
+				<input type="text" class="inputtext"  name="ootdTop" value="" required/>
 			</td>
 		</tr>
 		<tr>
 			<th>하의</th>
 			<td>
-				<input type="text"  class="inputtext" name="ootdBottom" value="<%=ootdboard.getOOTDBottom()%>" required/>
+				<input type="text"  class="inputtext" name="ootdBottom" value="" required/>
 			</td>
 		</tr>
 			<tr>
 			<th>신발</th>
 			<td>
-				<input type="text" class="inputtext" name="ootdShoes" value="<%=ootdboard.getOOTDShoes() %>" />
+				<input type="text" class="inputtext" name="ootdShoes" value="" />
 			</td>
 		</tr>
 			<tr>
 			<th>기타</th>
 			<td>
-				<input type="text" class="inputtext" name="ootdEtc" value="<%=ootdboard.getOOTDEtc()%> " />
+				<input type="text" class="inputtext" name="ootdEtc" value="" />
 			</td>
 		</tr>
 		<tr>
@@ -84,43 +82,33 @@
 		</tr>
 		<tr>
 			<th>첨부파일</th>
-			<td>
-			<div id="col_img"  style="margin-top : 0px" >
-			<%
-			List<OotdAttachment> ootdAttachments = ootdboard.getOotdAttachments();
-				if(!ootdAttachments.isEmpty()){
-					for( int i =0; i< ootdAttachments.size(); i++){
-						OotdAttachment attach = ootdAttachments.get(i);
-			%>
-			<img id="col_img_viewer" src="${pageContext.request.contextPath}/uploadootds/ootd/<%=attach.getRenamedFilename()%>"style="width :250px; height : 270px; padding-right: 30px">
-			</div>
-			<div class="filebox">
-				<input class="upload-name"   id="upload-name1"  placeholder="이미지를 다시 선택해주세요(위 사진은 이전에 등록된 사진 입니다)" readonly>
-    			<label for="upFile1">파일찾기</label>
-				<input type="file" name="upFile1" id="upFile1" accept="image/*" required /> <br />	
-			</div>
-			
-			<div id="imgexplain">
-				<p>- 사진은 한개만 등록가능합니다. </p>
-			</div>
-		 	</td>
-					<%							
-				}
-			}
-		%>
-
+			<td>			
+		<%-- 	<input type="file" name="upFile1" accept="image/*"  required>   --%>
+				<div id="col_img"  style="margin-top : 0px" >
+					<img id="col_img_viewer"  style="width :250px; height : 270px; padding-right: 30px">
+				</div>
 				
+				<div class="filebox">
+					<input class="upload-name"   id="upload-name1"  placeholder="첨부파일" readonly>
+	    			<label for="upFile1">파일찾기</label>
+					<input type="file" name="upFile1" id="upFile1" accept="image/*"  required /> <br />	
+				</div>
+				
+				<div id="imgexplain">
+					<p>- 사진은 한개만 등록가능합니다. </p>
+				</div>
+			</td>
 		</tr>
 		<tr>
-			<th  colspan="2" style="padding : 0; border:none">
+			<th  colspan="2" style="padding : 0; border:none" >
 			<div class="summernotecontainer">
-		  <textarea colspan="2" id="summernote"  class="summernote" name ="editordata"  value="" > </textarea>
- 		</div>
+		    <textarea colspan="2" id="summernote"  class="summernote" name ="editordata"></textarea>     
+			</div>
 			</th>
 		</tr>
 		<tr>
 			<th colspan="2">
-				<input  class ="inputbuttons" id="subutton" type="submit" value="SUBMIT">
+				<input  class ="inputbuttons" id="subutton"  type="submit" value="SUBMIT">
 				<input class ="inputbuttons"  type="button" value="CANCEL" onclick="history.go(-1);"/>
 			</th>
 		</tr>
@@ -131,6 +119,29 @@
 <br />
 <br />
 
+
+<script>
+/* 첨부파일 이미지 미리보기 */
+document.querySelector("#upFile1").addEventListener('change', (e) => {
+	const img = e.target;
+	
+	if(img.files[0]){
+		// 파일 선택한 경우
+		const fr = new FileReader(); 
+		fr.readAsDataURL(img.files[0]); 
+		fr.onload = (e) => {
+			// 읽기 작업 완료시 호출될 load이벤트핸들러
+			document.querySelector("#col_img_viewer").src = e.target.result; 
+			document.querySelector("#upload-name1").value = document.querySelector("#upFile1").value;
+		};
+	}
+	else {
+		// 파일 선택 취소한 경우
+		document.querySelector("#col_img_viewer").src = "";
+	}
+});
+
+</script>
 
 <script>
 function checkOnlyOne(element) {
@@ -144,26 +155,6 @@ function checkOnlyOne(element) {
 	  
 	  element.checked = true;
 }
-</script>
-
-<script>
-/* 첨부파일 이미지 미리보기 */
-document.querySelector("#upFile1").addEventListener('change', (e) => {
-	const img = e.target;
-	
-	if(img.files[0]){
-		// 파일 선택한 경우
-		const fr = new FileReader(); // html5 api
-		fr.readAsDataURL(img.files[0]); // 
-		fr.onload = (e) => {
-			document.querySelector("#col_img_viewer").src = e.target.result; // result속성은 dataUrl임
-		};
-	}
-	else {
-		// 파일 선택 취소한 경우
-		document.querySelector("#col_img_viewer").src = "";
-	}
-});
 </script>
 
 <script>	
@@ -184,8 +175,6 @@ document.querySelector("#upFile1").addEventListener('change', (e) => {
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    // 줄간격
 			    ['height', ['height']],
-			    // 그림첨부, 링크만들기, 동영상첨부
-			 //   ['insert',['picture','link','video']],
 			    // 코드보기, 확대해서보기, 도움말
 			    ['view', ['codeview','fullscreen', 'help']]
 			  ];

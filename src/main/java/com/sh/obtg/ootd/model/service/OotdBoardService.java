@@ -304,6 +304,14 @@ public List<OotdBoardandAttachment> SearchOotdBymemberStyle( Map<String, String>
 		
 		return ootdAttachments;
 	}
+
+	//총 좋아요수 
+	public int selectOotdWholeLikes(int no) {
+		Connection conn = getConnection();
+		int likes = ootdBoardDao.selectOotdWholeLikes(conn, no);
+		close(conn);
+		return likes;
+	}
 	
 
 }
