@@ -204,11 +204,17 @@ input#btnAdd{
 	height : 32px;
 	width : 70px;
 	margin-left : 1430px;
+	border-radius : 10px 10px 10px 10px;  
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bolder;
 }
+
+
 #btnAdd:hover{
-	font-weight : 900;
-	font-size : 14px;
 	cursor : pointer;
+	background-color : white;
+	color:black;
+	transition : 0.4s
 }
 
 

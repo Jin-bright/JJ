@@ -55,6 +55,22 @@
 }
 
 
+#likesco{
+	position : relative;
+	left:-35px;
+	top:25px;
+	padding-bottom : 3px;
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size: 15px;
+	display: inline;
+}
+
+#likescounts{
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size: 15px;
+	font-weight: 700;
+}
+
 <!-- 아이디 / 등록일자 / 이미지 담는 div  >
 #imgNtableContainer{
 	border:1px solid red;
@@ -90,10 +106,9 @@
 }
 .exs{
 	margin-left : 2px;
-	padding-top: 30px;
+	padding-top: 42px;
 	font-family: 'Nanum Gothic Coding', monospace;
 	font-size: 16px;
-	
 }
 
 #reporta{
@@ -120,8 +135,16 @@
 	width : 30px;
 	display : inline;
 	position : absolute;
-
 }
+
+#comt{
+	width : 30px;
+	display : inline;
+	position : relative;
+	left : 40px;
+	
+}
+
 
 /* 신고 */
 #siren {
@@ -249,7 +272,7 @@ div.comment-container button#btn-comment-enroll1 {
 #cmttitle{
 	margin-left : 518px;
 	height : 85px;
-	width : 950px;
+	width : 600px;
 	background-color : rgb(0, 0, 0);
 	font-size : 28px;	
 	padding : 20px;
@@ -259,7 +282,7 @@ div.comment-container button#btn-comment-enroll1 {
 .comment-editor{
 	margin-left : 518px;
 	height : 85px;
-	width : 950px;
+	width : 600px;
 	background-color : white;
 	font-size : 28px;	color : #000040;
 	padding : 10px;
@@ -290,19 +313,26 @@ div.comment-container button#btn-comment-enroll1 {
 }
 
 table#tbl-comment{
-	width : 950px;
-	margin-left : 518px;
+	width : 638px;
+	margin-left : 541px;
 	border-collapse:collapse;
 	background-color : rgb(255, 255, 255);	
 } 
 table#tbl-comment tr td{
+	height : 20px;
 	border-bottom:1px solid; 
 	border-top:1px solid; 
 	padding:5px; 
 	text-align:left; 
-	line-height:120%;
 	font-weight : 100;
 
+}
+#cmtprofileimg{
+	width : 30px;
+	margin-top : 15px;
+	margin-left: -20px;
+	margin-right: 10px;
+	
 }
 
 table#tbl-comment tr td #text{
@@ -313,7 +343,7 @@ font-weight : 100;
 
 
 
-table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
+table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px; height : 20px;}
 table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
 table#tbl-comment button.btn-reply{display:none;}
 table#tbl-comment tr:hover {background:lightgray;}
@@ -321,9 +351,12 @@ table#tbl-comment tr:hover button.btn-reply{display:inline;}
 table#tbl-comment sub.comment-writer {
 	color:navy; 
 	font-size:14px;
-	margin-right : 40px	
+	margin-right : 40px;
+	margin-top: -40px;
 }
-table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
+table#tbl-comment sub.comment-date {
+	color:tomato; font-size:10px
+}
 
 table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
 table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
@@ -358,23 +391,7 @@ table#tbl-comment button.btn-delete:hover{
 
 table#tbl-comment tr:hover button.btn-delete{display:inline;}
 
-/* 네온효과추가 */
-#cmttitle {
-  font-family: Vampiro One;
-  animation: neon6 1.5s ease-in-out infinite alternate;
-}
 
-
-@keyframes neon6 {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de,
-      0 0 50px #ff00de, 0 0 50px #ff00de, 0 0 50px #ff00de;
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de,
-      0 0 35px #ff00de,  0 0 40px #ff00de, 0 0 45px #ff00de;
-  }
-}
 
 
 /* 신고폼 */

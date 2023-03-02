@@ -51,10 +51,7 @@ public class NewOotdUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 0. MultipartRequest객체 생성 - 요청메세지에서 파일을 읽어서(=input) 서버컴퓨터에서 저장 (=output) 까지 처리해준다 
-		// -- (HttpServletRequest arg0, String arg1, int arg2, String arg3, FileRenamePolicy arg4) throws IOException 
-		// 1. HttpServletRequest자리 / 2. String saveDirectory(실제저장할파일경로)/ 3.업로드할수있는파일최대크기 (꼭정해야됨) 일반파일은 10mb정도/ 4.인코딩(utf-8) / 5.파일이름정책객체? - 중복파일이 있는경우 어떻게할거냐  
-
+	
 		try {
 			String saveDirectory = getServletContext().getRealPath("/uploadootds/ootd"); //application 객체 반환  //  / <-- webroot를 가리킨다
 			int maxPostSize = 10*1024*1024;  //바이트단위로 줘야됨 (1kb = 1024byte  1mb - 1024*1kb ? )  
@@ -174,7 +171,7 @@ public class NewOotdUpdateServlet extends HttpServlet {
 	    	}
 		**/	
 	    	// 3. 리다이렉트
-			response.sendRedirect(request.getContextPath()+"/ootd/ootdView?no=" + ootdBoard.getOotdNo() );
+			response.sendRedirect(request.getContextPath()+"/ootd/newOotdView?no=" + ootdBoard.getOotdNo() );
 		}catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("msg", "게시글 등록중 오류가 발생했습니다.");

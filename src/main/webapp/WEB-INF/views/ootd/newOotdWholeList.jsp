@@ -29,7 +29,7 @@ Member loginMember=(Member) session.getAttribute("loginMember");
 
 	<% if(loginMember != null){ %>
 		<input type="button" value="글쓰기" id="btnAdd" 
-			onclick="location.href='<%=request.getContextPath()%>/ootd/ootdEnroll';"/> <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
+			onclick="location.href='<%=request.getContextPath()%>/ootd/newOotdEnroll';"/> <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
 	<% } %>
 	
 	<div id="bigContainer">
