@@ -1,10 +1,10 @@
 @charset "UTF-8";
+/**
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
 
 /** p **/
-
 #profileimg{
 	width:45px;
 	margin-left: 18px;
@@ -256,18 +256,26 @@ span#fname{
 #del_file+label{font-size:.8em; position:relative; top:-3px;}
 
 /*댓글등록버튼*/
-div.comment-container button#btn-comment-enroll1 {
-	width:55px; 
-	height:50px; 
+#btn-comment-enroll1 {
+	width:35px; 
+	height:35px; 
 	color:white; 
 	font-weight : bold;
 	background-color : black; 
 	position:relative; 
-	top:-20px;
+	top:-10px;
 	left : -5px;
+	border-radius: 10px 10px 10px 10px;
 }
 
-/*댓글테이블*/
+#btn-comment-enroll1:hover {
+	background-color: white;
+	color:black;
+	transition : 0.4s;
+}
+
+
+/*댓글테이블
 
 #cmttitle{
 	margin-left : 518px;
@@ -277,6 +285,11 @@ div.comment-container button#btn-comment-enroll1 {
 	font-size : 28px;	
 	padding : 20px;
 	bolder : 1px solid black;
+}*/
+
+.comEnrollBox{
+	width: 700px;
+	padding-left: 300px
 }
 
 .comment-editor{
@@ -290,12 +303,18 @@ div.comment-container button#btn-comment-enroll1 {
 }
 
 #cmtcontent{
-	height : 50px;
-	width : 863px;
+	height : 35px;
+	width : 600px;
 	background-color : rgb(255, 255, 255);
 	font-size : 16px;	
 	color : #000040;
-	padding : 10px
+	border-radius: 30px 30px 30px 30px;
+	
+}
+
+#formcmt{
+	width: 650px; 
+	margin-left: 540px;
 }
 
 .maketd :hover{
@@ -304,79 +323,131 @@ div.comment-container button#btn-comment-enroll1 {
 
 #cmtcmtcontent{ 
 /* 대댓글 */
-	height : 40px;
-	width : 800px;
-	background-color : #fef3de;
-	font-size : 16px;	
+	width : 550px;
+	font-size : 15px;	
 	color : #000040;
 	padding : 10px;
+	height:35px; 
+	color:black; 
+	background-color : white; 
+	border-radius: 10px 10px 10px 10px;
+	
 }
 
 table#tbl-comment{
-	width : 638px;
+	width : 640px;
 	margin-left : 541px;
 	border-collapse:collapse;
 	background-color : rgb(255, 255, 255);	
+	border: none;
 } 
 table#tbl-comment tr td{
 	height : 20px;
-	border-bottom:1px solid; 
-	border-top:1px solid; 
 	padding:5px; 
 	text-align:left; 
 	font-weight : 100;
-
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 14px;
 }
+
 #cmtprofileimg{
 	width : 30px;
-	margin-top : 15px;
-	margin-left: -20px;
-	margin-right: 10px;
+	height : 30px;
+	margin : 0;
+	display: inline;	
 	
 }
 
 table#tbl-comment tr td #text{
-	
-	
-font-weight : 100;
+	font-weight : 100;
 }
 
 
 
-table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px; height : 20px;}
-table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
-table#tbl-comment button.btn-reply{display:none;}
+table#tbl-comment tr td:first-of-type{
+	padding: 5px 5px 5px 50px; 
+	height : 10px;
+}
+/**
+table#tbl-comment tr td:last-of-type {
+	text-align:right; 
+	width: 100px;
+}
+**/
+table#tbl-comment button.btn-reply{
+	border-radius: 10px 10px 10px 10px;
+	margin-left:-110px;
+	display:none;
+	background-color: black;
+	color:white;	
+}
+
+table#tbl-comment button.btn-reply:hover{
+	background-color: white;
+	color:black;
+	transition : 0.4s;
+		
+}
+
 table#tbl-comment tr:hover {background:lightgray;}
 table#tbl-comment tr:hover button.btn-reply{display:inline;}
-table#tbl-comment sub.comment-writer {
+/*-- 댓글 td --*/
+table#tbl-comment span.comment-writer {
 	color:navy; 
 	font-size:14px;
-	margin-right : 40px;
+	margin-right : 10px;
 	margin-top: -40px;
-}
-table#tbl-comment sub.comment-date {
-	color:tomato; font-size:10px
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 100
 }
 
-table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
-table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
-table#tbl-comment tr.level2 sub.comment-writer {color:#8e8eff; font-size:14px}
-table#tbl-comment tr.level2 sub.comment-date {color:#ff9c8a; font-size:10px}
+table#tbl-comment span.comment-date {
+	color:tomato; 
+	font-size:10px
+}
+
+table#tbl-comment tr.level2 {
+	color:gray; 
+	font-size: 14px;
+	height: 30px;
+}
+
+
+table#tbl-comment tr.level2 span.cocomment-writer {
+	color:#8e8eff; 
+	font-size:14px
+}
+
+table#tbl-comment tr.level2 span.cocomment-date {
+	color:#ff9c8a; 
+	font-size:10px;
+	position: relative;
+	top:-10px;
+	left: 5px;
+}
 
 /*댓글 --- 대댓 답글관련*/
 table#tbl-comment textarea{margin: 4px 0 0 0;}
 table#tbl-comment button.btn-comment-enroll2{
 	width:45px; 
-	height:40px; 
+	height:35px; 
 	color:white; 
 	background:black;
 	position:relative; 
 	top:-15px; 
 	left:1px;
+	border-radius: 10px 10px 10px 10px;
+}
+
+table#tbl-comment button.btn-comment-enroll2:hover{
+	background-color: white;
+	color:black;
+	transition : 0.4s;
 }
 
 /* 삭제버튼관련 */
 table#tbl-comment button.btn-delete{
+	border-radius: 10px 10px 10px 10px;
 	background:black; 
 	color:white; 
 	display:none;
@@ -389,7 +460,11 @@ table#tbl-comment button.btn-delete:hover{
 }
 
 
-table#tbl-comment tr:hover button.btn-delete{display:inline;}
+table#tbl-comment tr:hover button.btn-delete{
+	width:35px; 
+	display:inline;
+	margin: 0
+}
 
 
 

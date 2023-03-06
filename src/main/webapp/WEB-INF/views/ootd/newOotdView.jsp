@@ -1,5 +1,5 @@
-<%@page import="com.sh.obtg.member.model.dto.MemberRole"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.sh.obtg.member.model.dto.MemberRole"%>
 <%@page import="com.sh.obtg.member.model.dto.Member"%>
 <%@page import="com.sh.obtg.ootd.model.dto.OotdBoardComment"%>
 <%@page import="com.sh.obtg.ootd.model.dto.OotdBoard"%>
@@ -10,7 +10,8 @@
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ootdView.css" />
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@900&family=Solitreo&display=swap" rel="stylesheet">
+<!-- 
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@900&family=Solitreo&display=swap" rel="stylesheet" />-->
 
 <%
 //String msg = (String)session.getAttribute("msg");
@@ -63,7 +64,7 @@
 		<c:if test="${ootdboard.getStyleNo()=='S9'}"><span id="forStyle" >#아메카지</span></c:if>
 		<br />
 		<a id="reporta" onclick="reportFrm()"> 신고하기 </a>
-		<img src="<%= request.getContextPath() %>/image/siren.png" alt="" id="siren" />
+		<%-- <img src="<%= request.getContextPath() %>/image/siren.png" alt="" id="siren" /> --%>
 		
 		<hr style="margin-top: 10px"/><br />
 		${ootdboard.getOOTDContents()}<br />
@@ -83,9 +84,33 @@
 	</div>
 </div>	
 <!-- 코멘트 -->
-	<div style="margin-left : 518px;">
-		<br /><p  style="margin-left : 50px;">댓글</p>
+	<div style="padding : 10px 0; margin-left : 518px; vertical-align: middle; ">
+		<p style="margin-left : 25px;">댓글</p>
 	</div>
+	<%-- 댓글쓰는 창  --%>
+	<div class="comEnrollBox" >
+       <form id="formcmt" action="<%=request.getContextPath()%>/ootd/ootdCommentEnroll" method="post" name="boardCommentFrm"  >  <!-- 댓글등록폼 -->
+         <input type="hidden" name="boardNo" value="<%= ootdboard.getOotdNo() %>" />
+    	 <input type="hidden" name="writer" value="<%= loginMember != null ? (loginMember.getMemberId()) : ""%>" /> 
+         <input type="hidden" name="commentLevel" value="1" />
+         <input type="hidden" name="commentRef" value="0" />    
+         <textarea id="cmtcontent" name="content" cols="60" rows="3" placeholder="&nbsp;&nbsp; 댓글을 남겨주세요😊 "></textarea>
+         <button type="submit" id="btn-comment-enroll1">등록</button>
+       </form>
+     </div>
+	  <%
+       	if(comments.isEmpty() ){
+       %>
+    	<div style="text-align: center">
+    	<br />
+    	<p style="color:gray"> 아직 등록된 댓글이 없습니다! 
+    	댓글을 작성해 주세요😊 </p><br />
+    	
+    	</div>
+	 <%
+       	}
+	 %>
+	
       <%
        	if(!comments.isEmpty() ){
        %>
@@ -96,14 +121,15 @@
             %>
             <%-- 댓글인 경우 tr.level1 --%>
             <tr class="level1">
-    	         <td>
-	    	        <img id="cmtprofileimg"  src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" alt="profileimg" />
-                    <sub class="comment-writer" style="font-weight:bolder"><b><%=bc.getMemberId() %></b></sub>
-                    <sub class="comment-date" style="font-weight:bolder" ><b><%=bc.getCmtRegDate()%></b></sub>
-                    <br />
-                    <%-- 댓글내용 --%>
-                    <%=bc.getCmtContent()%>
-                </td>
+            	<td style="padding:0; width: 30px">
+               		<img id="cmtprofileimg"  src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" alt="profileimg" />
+            	</td >
+            	<td style="width: 550px" >
+            		<span><b><%=bc.getMemberId()%></b></span>
+            		<span style="font-weight: lighter;"><%=bc.getCmtContent()%></span><br />
+            		<span class="comment-date" style="font-weight:bolder"><%=bc.getCmtRegDate()%></span>
+
+            	</td>
                 <td>
                     <button class="btn-reply" value="<%= bc.getCmtNo()%>" >답글</button>
                     <% if( loginMember != null && 
@@ -117,14 +143,15 @@
             %>
             <%-- 대댓글인 경우 tr.level2 --%>
             <tr class="level2">
-                <td>
-   	    	        <img id="cmtprofileimg"  src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" alt="profileimg" />
-                    <sub class=comment-writer><b><%=bc.getMemberId()%></b></sub>
-                    <sub class=comment-date><b><%=bc.getCmtRegDate()%></b></sub>
-                <br />
-                    <%-- 대댓글 내용 --%>
-                    <%=bc.getCmtContent()%>
-                </td>
+	            <td style="padding:0; width: 40px">
+	            </td>
+            	<td class="cocoment"  style="height: 20px">
+              		<img id="cmtprofileimg"  src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" alt="profileimg" />
+            		<span class="cocomment-writer" style="font-weight:bolder; margin-left:10px; margin-right:10px; vertical-align:top;"><b><%=bc.getMemberId()%></b></span>
+            		<span style="vertical-align: top;"><%=bc.getCmtContent()%></span><br />
+            		<span class="cocomment-date" style="font-weight:bolder; margin-left: 40px; vertical-align: text-top; "><%=bc.getCmtRegDate()%></span>
+
+            	</td>
                 <td> 
 	                <% if( loginMember != null && 
 	                		 ( ( loginMember.getMemberId()).equals( bc.getMemberId()) || (loginMember.getMemberRole() == MemberRole.A ))) {%>
@@ -218,7 +245,7 @@
 	</form>
 <% } %>
 <script>
-	const  siren = document.querySelector("#siren");
+	/* const  siren = document.querySelector("#siren");
 	siren.style.display = 'none';
 	
 	const  reporta = document.querySelector("#reporta");
@@ -228,7 +255,7 @@
 	
 	reporta.addEventListener('mouseleave', () => {
 		siren.style.display = 'none';
-	})
+	}) */
 	
 	
 	const loginAlert = () => {
@@ -292,8 +319,6 @@ document.querySelector(".heart").addEventListener("click", (e) => {
 		});
 	<% } %>
 });
-
-
 </script>
 
 <script>
@@ -314,6 +339,56 @@ window.onload = () => {
 }
 
 </script>
+<script>
+// 댓글 아이콘
+
+const comEnrollBox = document.querySelector(".comEnrollBox");
+comEnrollBox.style.display = 'none';
+
+document.querySelector("#comt").addEventListener("click", (e) => {
+	e.target.style.cursor = 'pointer';
+
+	<% if(loginMember == null){ %>
+		 loginAlert();
+	<% } else { %>
+	comEnrollBox.style.display = 'inline';	
+	<% } %>
+});
+
+	
+// 댓글 
+//textarea에대한 핸들링 	
+document.boardCommentFrm.addEventListener('submit', (e) => {
+
+	console.log( "타켓" + e.target.value );
+	if(e.target.name === 'boardCommentFrm'){
+
+		<% if(loginMember == null ){%>
+			loginAlert();
+			e.preventDefault();
+			return; // 조기리턴
+		<% } %>
+			
+		//유효성검사 
+		const content = e.target.content;
+		if(!/^(.|\n)+$/.test(content.value)){
+			e.preventDefault();
+			alert("내용을 작성해주세요");
+			content.focus();
+		}	
+	}
+	
+});
+
+
+document.boardCommentFrm.content.addEventListener('focus', (e) => {
+	<% if(loginMember == null ){%>
+		loginAlert();		
+	<% } %>
+});	
+	
+</script>
+
 
 <script>
 /* 신고 */
@@ -356,17 +431,17 @@ button.onclick = (e) => {
 	console.log(e.target.value);
 
 	<% if(loginMember == null){ %>
-		loginAlert();
-	<% } else { %>
+			loginAlert();
+	<%   } else{ %>
 
 	
 	const tr = `
 	<tr>
-		<td colspan="2" style="text-align:left">
+		<td colspan="2" style="text-align:left; width:650px; padding-left:20px">
 			<form
 				action="<%=request.getContextPath()%>/ootd/ootdCommentEnroll" method="post" name="boardCommentFrm">
                 <input type="hidden" name="boardNo" value="<%= ootdboard.getOotdNo() %>" />
-	            <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" /> 
+ 	            <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" /> 
                 <input type="hidden" name="commentLevel" value="2" />
                 <input type="hidden" name="commentRef" value="\${e.target.value}" />    
 				<textarea id="cmtcmtcontent"  name="content" cols="58" rows="1"></textarea>
@@ -375,15 +450,16 @@ button.onclick = (e) => {
       	</td>
     </tr>
 	`;
+
 	
 	const target = e.target.parentElement.parentElement; // tr
 	console.log( e.target );
 	console.log( target);
 	target.insertAdjacentHTML('afterend', tr);
-	
 	button.onclick = null; // 이벤트핸들러 제거
 
- 	<% } %>  
+	 <% } %>  
+	 
 	};
 });
 

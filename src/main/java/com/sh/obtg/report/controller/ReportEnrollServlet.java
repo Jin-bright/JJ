@@ -74,10 +74,10 @@ public class ReportEnrollServlet extends HttpServlet {
 			
 			// 게시판에 따라 리다이렉트
 			if(board.equals("O")) {
-				response.sendRedirect(request.getContextPath() + "/ootd/ootdView?no=" + num);				
+				response.sendRedirect(request.getContextPath() + "/ootd/newOotdView?no=" + num);				
 			}
 			else if(board.equals("S")) {
-				response.sendRedirect(request.getContextPath() + "/share/shareView?no=" + num);
+				response.sendRedirect(request.getContextPath() + "/share/newShareView?no=" + num);
 			}
 			
 		} catch (Exception e) {
