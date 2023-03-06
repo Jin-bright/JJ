@@ -13,6 +13,8 @@ grant connect, resource to obtg;
 ---------------------------------------------------------------------------------
 
 select * from member;
+select * from report_reason;
+
 
 CREATE TABLE Member (
 	member_id	varchar2(50),
@@ -792,6 +794,10 @@ select * from ootd_attachment
 select* from ootd_likes where board_no = 109
 
 select* from member
+select * from report 
+select * from comment
+
+select * from fashionstyle
 
 
 
