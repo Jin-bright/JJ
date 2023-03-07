@@ -276,6 +276,41 @@ ul {
 .search_filter {
 	margin-top: 20px;
 }
+#search {
+	padding: 4px;
+	border-style: none;
+}
+.share td {
+	padding: 8px;
+}
+.share_content {
+	margin: 40px 0;
+	min-height: 520px;
+}
+.pagebar {
+	text-align: center;
+	letter-spacing: 5px;
+}
+
+/* My ootd */
+.img_area, .info_area {
+	text-align: center;
+}
+.info_area {
+	margin-bottom: 10px;
+}
+.info_area p:first-child {
+	font-weight: 900;
+	font-size: 20px;
+}
+.info_area p:last-child {
+	font-size: 14px;
+}
+.ootd_content {
+	border-top: 1px solid #ebebeb;
+	padding-top: 25px;
+}
+
 /* 기타 */
 .show {
 	display: block;

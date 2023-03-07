@@ -8,18 +8,22 @@ ws.addEventListener('open', (e) => {
 
 ws.addEventListener('message', (e) => {
 	console.log('message : ', e);
-	const bell = document.querySelector(".bell");
-	const reportWrap = document.querySelector("#report_wrap");
+	const alarm = document.querySelector(".alarm_box");
+	const alarmWrap = document.querySelector(".alarm_container");
+	const alarmLog = document.querySelector(".alarm_log");
+	const newAlarm = document.querySelector(".new_alarm");
 	
 	const {message, messageType, datetime, sender, receiver} = JSON.parse(e.data);
 	console.log(message, messageType, datetime, sender, receiver);
 	
 	switch(messageType){
-		case "NOTIFICATION" : 
-			bell.classList.remove('bell-hiden');
-			bell.classList.add('bell-twinkle');
-			bell.addEventListener('click', () => {
-				reportWrap.insertAdjacentHTML('beforeend', `<div class="report">${message}</div>`);
+		case "NOTIFICATION" : 	
+			newAlarm.classList.remove('alarm_hidden');		
+			alarm.addEventListener('click', (e) => {
+				alarm.classList.add("alarm_opacity");
+				alarmWrap.classList.remove('alarm_hidden');
+				
+				alarmLog.insertAdjacentHTML('beforeend', `<div class="report">${message}</div>`);
 				
 				const report = document.querySelectorAll(".report");
 				report.forEach((r) => {
@@ -32,9 +36,13 @@ ws.addEventListener('message', (e) => {
 							data : {receiver},
 							success(data){
 								if(data > 0){
-									const bell = document.querySelector(".bell");
-									bell.classList.remove('bell-twinkle');
-									bell.classList.add('bell-hiden');
+									const alarm = document.querySelector(".alarm_box");
+									const alarmWrap = document.querySelector(".alarm_log");
+									const newAlarm = document.querySelector(".new_alarm");
+									
+									alarmWrap.classList.add('alarm_hidden');
+									alarm.classList.remove('alarm_opacity');
+									newAlarm.classList.add('alarm_hidden');
 									//alert("읽음 처리 완료")
 								}
 								else

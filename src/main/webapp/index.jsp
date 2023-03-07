@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
-<%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
-
-
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />  
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/about.css" />
 
 <section class="swiper-container loading">
@@ -285,9 +283,8 @@ input#img-3:checked ~ .nav-dots label#img-dot-3,
            <div class="overlay-box"></div>
        </div>
 </div><br /><br /><br /><br /><br />
-</section>
 
-
+<jsp:include page="/WEB-INF/views/common/alarm.jsp" />
 
 <script>
 
@@ -338,4 +335,4 @@ mySwiper.init();
 </script>
 
 			
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

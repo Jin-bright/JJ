@@ -133,4 +133,64 @@ public class HelloMvcUtils {
 		return str.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
 
+	/**
+	 * 페이지바 오버로딩
+	 * @param page
+	 * @param limit
+	 * @param totalCount
+	 * @param url
+	 * @param status
+	 * @return
+	 */
+	public static String getPagebar(int page, int limit, int totalCount, String url, String status) {
+		StringBuilder pagebar = new StringBuilder();
+		if(status == null) {
+			url += "?page=";
+		}
+		else {
+			url += "&page=";
+		}
+		
+		int totalPage = (int) Math.ceil((double) totalCount / limit); // 11.4  -> 12.0 -> 12
+		
+		int pagebarSize = 5;
+		int pageStart = ((page - 1) / pagebarSize) * pagebarSize + 1; // page, pagebarSize
+		int pageEnd = pageStart + pagebarSize - 1; // 1 - 5, 6 - 10
+		
+		int pageNo = pageStart;
+		
+		// 1. 이전 영역
+		if(pageNo == 1) {
+			// 1 2 3 4 5 이므로 이동할 이전페이지 없음.
+		//	pagebar.append("<span> 이전 </span>\n"); // 현재페이지가 6인 경우 /mvc/admin/memberList?page=5
+
+		}
+		else {
+			pagebar.append("<a href='" + url + (pageNo - 1) + "'>이전</a>\n");
+		}
+		
+		// 2. pageNo 영역
+		while(pageNo <= pageEnd && pageNo <= totalPage) {
+			if(pageNo == page) {
+				// 현재페이지 링크인 경우
+				pagebar.append("<span class='cPage'>" + pageNo + "</span>\n");
+			}
+			else {
+				// 현재페이지 링크가 아닌 경우
+				pagebar.append("<a href='" + url + pageNo + "'>" + pageNo + "</a>\n");
+			}
+			pageNo++;
+		}
+		
+		// 3. 다음 영역
+		if(pageNo > totalPage) {
+			// 마지막페이지이후는 다음 버튼이 필요 없음.
+		}
+		else {
+			pagebar.append("<a href='" + url + pageNo + "'>다음<a/>\n");
+		}
+		
+		return pagebar.toString();
+	}
+
 }

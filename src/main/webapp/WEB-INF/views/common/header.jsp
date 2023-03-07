@@ -21,13 +21,14 @@
 
 <title>OBTG Semi-Project</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" /> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" /> 
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css" />
-<script src="<%=request.getContextPath()%>/js/jquery-3.6.1.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css" />
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.1.js"></script>
 <% if(loginMember != null){ %>
-<script src="<%= request.getContextPath() %>/js/ws.js"></script>
+<script src="${pageContext.request.contextPath}/js/ws.js"></script>
 <% } %>
 
 <style>

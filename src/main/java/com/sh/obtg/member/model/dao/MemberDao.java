@@ -637,4 +637,169 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	/**
+	 * 마이페이지 share 요소
+	 * @param rset
+	 * @return
+	 * @throws SQLException
+	 */
+	private Map<String, Object> handleShareResultSet(ResultSet rset) throws SQLException {
+		Map<String, Object> share = new HashMap<>();
+		share.put("no", rset.getInt("product_id"));
+		share.put("name", rset.getString("product_name"));
+		share.put("readCount", rset.getInt("product_read_count"));
+		share.put("status", rset.getString("product_status"));
+		share.put("img", rset.getString("attach"));
+		share.put("regDate", rset.getDate("product_reg_date"));
+		return share;
+	}
+	
+	/**
+	 * 마이페이지 나눔 목록 조회
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyShare(Connection conn, Map<String, Object> param) {
+		String sql = prop.getProperty("selectMyShare2");
+		List<Map<String, Object>> shareList = new ArrayList<Map<String,Object>>();
+		
+		String memberId = (String)param.get("memberId");
+		String sort = (String)param.get("sort");
+		
+		sql = sql.replace("@", sort);
+		
+		int page = (int) param.get("page"); 
+		int limit = (int) param.get("limit");
+		
+		int start = (page - 1) * limit + 1;
+		int end = page * limit;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> share = new HashMap<>();
+					share = handleShareResultSet(rset);
+					shareList.add(share);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 share 목록 조회 오류👻", e);
+		}
+		
+		return shareList;
+	}
+	
+	/**
+	 * 마이페이지 나눔 목록 총 개수 조회
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public int myShareTotalCount(Connection conn, String memberId) {
+		// select count(*) from NSHARE_BOARD where member_id = ?
+		String sql = prop.getProperty("myShareTotalCount");
+		int totalCount = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 share 목록 총 개수 조회 오류👻", e);
+		}
+		
+		return totalCount;
+	}
+
+	/**
+	 * 마이페이지 나눔 목록 검색
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> searchSharedList(Connection conn, Map<String, Object> param) {
+		String sql = prop.getProperty("searchSharedList");
+		List<Map<String, Object>> shareList = new ArrayList<>();
+		
+		// 값 꺼내기
+		String memberId = (String)param.get("memberId");
+		String keyType = (String)param.get("keyType");
+		String keyword = (String)param.get("keyword");
+		String sort = (String)param.get("sort");
+		int page = (int) param.get("page"); 
+		int limit = (int) param.get("limit");
+		
+		sql = sql.replace("#", keyType);
+		sql = sql.replace("@", sort);
+		
+		int start = (page - 1) * limit + 1;
+		int end = page * limit;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, keyword);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> share = new HashMap<>();
+					share = handleShareResultSet(rset);
+					shareList.add(share);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 share 목록 검색 오류👻", e);
+		}
+		
+		return shareList;
+	}
+
+	/**
+	 * 나눔 목록 검색 총 개수
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int myShareTotalCount(Connection conn, Map<String, String> param) {
+		// select count(*) from NSHARE_BOARD where member_id = ? and # = ?
+		String sql = prop.getProperty("myShareTotalCount2");
+		int totalCount = 0;
+		
+		// 값 꺼내기
+		String memberId = param.get("memberId");
+		String keyType = param.get("keyType");
+		String keyword = param.get("keyword");
+		System.out.println("keyType : " + keyType);
+		sql = sql.replace("#", keyType);
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, keyword);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 share 목록 검색 총 개수 조회 오류👻", e);
+		}
+		
+		return totalCount;
+	}
 }
