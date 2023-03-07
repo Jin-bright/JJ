@@ -55,7 +55,6 @@
 			<% } else { %>
 				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" /></button>
 			<% } %>
-			<%-- <button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/></button> --%>
 			<button id="viewProfile" onclick="open_pop('${shareBoard.getMemberId()}')" > 판매자 프로필 조회</button>
 			<button id="writeMessage" > 쪽지하기 </button>
 		</div>
@@ -122,7 +121,7 @@
 
 			<tr style="margin-top: 50px">
 				<td><h3>상품정보</h3> <a id="reporta" onclick="reportFrm()"> 신고하기 </a>
-				<img src="<%= request.getContextPath() %>/image/siren.png" alt="" id="siren" />
+	<%-- 			<img src="<%= request.getContextPath() %>/image/siren.png" alt="" id="siren" /> --%>
 				<hr style="width : 700px; margin-top:10px; border : 1.5px solid lightgray" />
 				<div id="textdiv" style=" height:120px; margin-top:10px;">
 					${shareBoard.getProductContent()}

@@ -684,6 +684,27 @@ public List<OotdBoardandAttachment> viewOotdBoardandAttachment(Connection conn, 
 	return ootdAttachments;
 }
 
+
+//총좋아요수
+	public int selectOotdWholeLikes(Connection conn, int no) {
+		String sql = prop.getProperty("selectOotdWholeLikes");
+		int likes = 0;
+		
+		try( PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setInt(1, no);
+			
+		
+			try (ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					likes = rset.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new OotdBoardException("ootd게시판 > 총 좋아요수 오류!", e);
+		}
+		return likes;
+	}
+
 	
 }
 

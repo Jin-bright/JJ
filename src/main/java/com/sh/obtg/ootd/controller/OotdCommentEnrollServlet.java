@@ -45,7 +45,7 @@ public class OotdCommentEnrollServlet extends HttpServlet {
 		
 		//3. redirect - /board/boardView?no=~~ 
 		request.setAttribute("boardComment", boardComment);
-		response.sendRedirect(request.getContextPath() + "/ootd/ootdView?no="+boardComment.getBoardNo());
+		response.sendRedirect(request.getContextPath() + "/ootd/newOotdView?no="+boardComment.getBoardNo());
 		
 	}
 

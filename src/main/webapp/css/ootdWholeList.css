@@ -3,6 +3,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
 
 /* 0226 새로 추가 */
+
+.ootdsmallImg{
+	border-radius: 50px; 
+	width:64px; 
+ 	height: 64px;
+ 	margin-right: 20px;
+}
+
+.ootdspan{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	margin-right: 55px;
+	font-weight: 200
+}
 #itemTable{
 	margin: auto;
 	font-family: 'Noto Sans KR', sans-serif;
@@ -204,11 +218,17 @@ input#btnAdd{
 	height : 32px;
 	width : 70px;
 	margin-left : 1430px;
+	border-radius : 10px 10px 10px 10px;  
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bolder;
 }
+
+
 #btnAdd:hover{
-	font-weight : 900;
-	font-size : 14px;
 	cursor : pointer;
+	background-color : white;
+	color:black;
+	transition : 0.4s
 }
 
 

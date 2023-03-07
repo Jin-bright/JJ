@@ -63,11 +63,6 @@ public class NewOotdViewServlet extends HttpServlet {
 		}
 		
 		// 2. 업무로직 - 게시판/첨부파일테이블 조회
-// selectOneBoard = select * from board where no = ?
-//		select * from OOTD_board where OOTD_no = ?
-// selectAttachmentByBoardNo = select * from attachment where board_no = ?
-// 	select * from  OOTD_attachment	where board_no = ?
-		
 		OotdBoard ootdboard = ootdBoardService.selectOneBoard(no, hasRead);
 		System.out.println("■■ ootdboard = " + ootdboard);
 		

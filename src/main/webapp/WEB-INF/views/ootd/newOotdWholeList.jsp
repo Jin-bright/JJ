@@ -25,11 +25,35 @@ Member loginMember=(Member) session.getAttribute("loginMember");
 
 <section id="board-container">
 	<h2 id = "ootdboardlist" > Outfit Of The Day </h2>
-	<br /><br /><br /><br /><br /><br />
-
+	<br /><br /><br /><br />
+	
+	<div style="text-align: center; ">
+		<img src="${pageContext.request.contextPath}/uploadootds/lovely.png" alt="" class="ootdsmallImg"/>
+		<img src="${pageContext.request.contextPath}/uploadootds/dandy.png" alt="" class="ootdsmallImg"/>
+		<img src="${pageContext.request.contextPath}/uploadootds/formal.png" alt="" class="ootdsmallImg"  />
+		<img src="${pageContext.request.contextPath}/uploadootds/street.png" alt="" class="ootdsmallImg"   />
+		<img src="${pageContext.request.contextPath}/uploadootds/girl.png" alt="" class="ootdsmallImg" />
+		<img src="${pageContext.request.contextPath}/uploadootds/retro.png" alt="" class="ootdsmallImg" />
+		<img src="${pageContext.request.contextPath}/uploadootds/roman.png" alt="" class="ootdsmallImg" />		
+		<img src="${pageContext.request.contextPath}/uploadootds/chik.png" alt="" class="ootdsmallImg"/>
+		<img src="${pageContext.request.contextPath}/uploadootds/ame.png" alt="" class="ootdsmallImg"/>
+	</div>
+	<div style="text-align: center; margin-bottom: 70px; ">
+		<span class="ootdspan"  style="margin-left: 58px; margin-right: 50px; ">#러블리</span>		
+		<span class="ootdspan" style="margin-right: 50px; ">#댄디</span>	
+		<span class="ootdspan" >#포멀</span>
+		<span class="ootdspan" style="margin-right: 40px; " >#스트릿</span>
+		<span class="ootdspan" style="margin-right: 40px; "  > #걸리쉬</span>
+		<span class="ootdspan" style="margin-right: 45px; " >#레트로</span>
+		<span class="ootdspan" >#로맨틱</span>
+		<span class="ootdspan" >#시크</span>
+		<span class="ootdspan" >#아메카지</span>
+	</div>
+	
+	
 	<% if(loginMember != null){ %>
 		<input type="button" value="글쓰기" id="btnAdd" 
-			onclick="location.href='<%=request.getContextPath()%>/ootd/ootdEnroll';"/> <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
+			onclick="location.href='<%=request.getContextPath()%>/ootd/newOotdEnroll';"/> <%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
 	<% } %>
 	
 	<div id="bigContainer">
