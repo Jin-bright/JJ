@@ -42,9 +42,9 @@
 				%>
 				<td>
 				<% if(board.equals("O")) { %>
-					<a href="<%= request.getContextPath() %>/ootd/ootdView?no=<%= num %>"  class="reportNo"><%= report.getBoardNo() %></a>
+					<a href="<%= request.getContextPath() %>/ootd/newOotdView?no=<%= num %>"  class="reportNo"><%= report.getBoardNo() %></a>
 				<% } else { %>
-					<a href="<%= request.getContextPath() %>/share/shareView?no=<%= num %>" class="reportNo"><%= report.getBoardNo() %></a>
+					<a href="<%= request.getContextPath() %>/share/newShareView?no=<%= num %>" class="reportNo"><%= report.getBoardNo() %></a>
 				<% } %>
 				</td>
 				<%

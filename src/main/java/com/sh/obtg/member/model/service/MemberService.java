@@ -14,6 +14,8 @@ import com.sh.obtg.member.model.dto.Like;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.dto.Style;
 
+import oracle.net.aso.c;
+
 public class MemberService {
 	
 	private MemberDao memberDao = new MemberDao();
@@ -301,6 +303,44 @@ public class MemberService {
 		}
 		
 		return result;
+	}
+
+	public List<Map<String, Object>> selectMyShare(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> shareList = memberDao.selectMyShare(conn, param);
+		close(conn);
+		return shareList;
+	}
+
+	public int myShareTotalCount(String memberId) {
+		Connection conn = getConnection();
+		int totalCount = memberDao.myShareTotalCount(conn, memberId);
+		close(conn);
+		return totalCount;
+	}
+
+	/**
+	 * 마이페이지 나눔 목록 검색
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> searchShareList(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> sharList = memberDao.searchSharedList(conn, param);
+		close(conn);
+		return sharList;
+	}
+
+	/**
+	 * 마이페이지 나눔 목록 총 개수 
+	 * @param keyParam
+	 * @return
+	 */
+	public int myShareTotalCount(Map<String, String> param) {
+		Connection conn = getConnection();
+		int totalCount = memberDao.myShareTotalCount(conn, param);
+		close(conn);
+		return totalCount;
 	}
 
 }

@@ -56,7 +56,9 @@
 			<c:if test="${empty ootdList}">
 				<div class="empty_box">
 					<p>작성한 OOTD가 없습니다.</p>
-					<button class="my_btn" id="ootd_btn">OOTD 바로가기</button>
+					<button class="my_btn" id="ootd_btn">
+						<a href="${pageContext.request.contextPath}/ootd/newOotdWholeList">OOTD 바로가기</a>
+					</button>
 				</div>
 			</c:if>
 		</div>
