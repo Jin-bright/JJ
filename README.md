@@ -79,8 +79,10 @@ Service： Googledocument
 
 
 </br>
---- English ver-
-Semi-Project </br></br>
+ --- English ver-
+ 
+ 
+ # Semi-Project </br></br>
 ■ Project Name : OBTG
 ■
 ■ Team Member : 김혜진, 서정은</br>
