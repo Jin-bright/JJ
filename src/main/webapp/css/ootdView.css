@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/**
+
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700&family=Nanum+Gothic+Coding:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;400;500;900&family=Shrikhand&family=Solitreo&family=Yanone+Kaffeesatz:wght@300;400;500;600&display=swap');
@@ -61,14 +61,21 @@
 	top:25px;
 	padding-bottom : 3px;
 	font-family: 'Nanum Gothic Coding', monospace;
+	font-weight: 600;
 	font-size: 15px;
 	display: inline;
+}
+
+#cmtp{
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size: 15px;
+	font-weight: 600;
 }
 
 #likescounts{
 	font-family: 'Nanum Gothic Coding', monospace;
 	font-size: 15px;
-	font-weight: 700;
+	font-weight: 900;
 }
 
 <!-- 아이디 / 등록일자 / 이미지 담는 div  >
@@ -117,6 +124,7 @@
 	left:570px;
 
 	font-family: 'Noto Sans KR', sans-serif;
+	font-weight : 900;
 	font-size: 16px;
 	display: inline;
 	color:gray;
@@ -345,8 +353,8 @@ table#tbl-comment tr td{
 	height : 20px;
 	padding:5px; 
 	text-align:left; 
-	font-weight : 100;
-	font-family: 'Noto Sans KR', sans-serif;
+	font-weight : 200;
+	font-family: 'Nanum Gothic Coding', monospace;
 	font-size: 14px;
 }
 
@@ -414,7 +422,7 @@ table#tbl-comment tr.level2 {
 
 
 table#tbl-comment tr.level2 span.cocomment-writer {
-	color:#8e8eff; 
+	color:green; 
 	font-size:14px
 }
 
@@ -454,9 +462,9 @@ table#tbl-comment button.btn-delete{
 }
 
 table#tbl-comment button.btn-delete:hover{
-	background:red; 
-	color:black; 
-	display:none;
+	background-color: white;
+	color:black;
+	transition : 0.4s;
 }
 
 

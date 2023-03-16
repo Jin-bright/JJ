@@ -50,7 +50,7 @@
 		<img src="<%= request.getContextPath() %>/image/heart _over.png" class="heart" alt="좋아요" />
 	<% } %>
 	<img src="<%= request.getContextPath() %>/image/comment.png" id="comt" alt="댓글"/>
-	<p id="likesco" >좋아요 <span id="likescounts" style="font-weight: bolder"> </span>개</p>
+	<p id="likesco" >좋아요 <span id="likescounts" style="font-weight: bolder"></span>개</p>
 	<br/><br /><br />
 	<span class="exs">#${ootdboard.OOTDTitle} #${ootdboard.OOTDTop} #${ootdboard.OOTDBottom} #${ootdboard.OOTDShoes}</span>
 		<c:if test="${ootdboard.getStyleNo()=='S1'}"><span id="forStyle" >#러블리</span></c:if>
@@ -85,7 +85,7 @@
 </div>	
 <!-- 코멘트 -->
 	<div style="padding : 10px 0; margin-left : 518px; vertical-align: middle; ">
-		<p style="margin-left : 25px;">댓글</p>
+		<p style="margin-left: 30px" id="cmtp">댓글</p>
 	</div>
 	<%-- 댓글쓰는 창  --%>
 	<div class="comEnrollBox" >

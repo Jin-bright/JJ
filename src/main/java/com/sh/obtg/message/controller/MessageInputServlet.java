@@ -64,7 +64,7 @@ public class MessageInputServlet extends HttpServlet {
 			System.out.println(notiResult > 0 ? "알림 내역 저장 성공" : "알림 내역 저장 실패");
 			
 			if(no > 0) {
-				response.sendRedirect(request.getContextPath()+"/share/shareView?no="+no);
+				response.sendRedirect(request.getContextPath()+"/share/newShareView?no="+no);
 			}
 			else {
 				response.sendRedirect(request.getContextPath()+"/message/messageList");
@@ -74,7 +74,7 @@ public class MessageInputServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "게시글 등록중 오류가 발생했습니다." );
 			e.printStackTrace();
 			if(no > 0) {
-				response.sendRedirect(request.getContextPath()+"/share/shareView?no="+no);
+				response.sendRedirect(request.getContextPath()+"/share/newShareView?no="+no);
 			}
 			else {
 				response.sendRedirect(request.getContextPath()+"/message/messageList");

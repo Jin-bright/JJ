@@ -19,9 +19,40 @@ public class OotdBoardandAttachment {
 	private int attachNo;
 	private String originalFilename;
 	private String renamedFilename;
+	private int ootdReadCount;
 	
-	
-	
+	//readcount 넣어서 하나더 추가 
+	public OotdBoardandAttachment(int ootdNo, String ootdWriter, Style styleNo, String oOTDTitle, String oOTDContents,
+			Date oOTDRegDate, String oOTDTop, String oOTDBottom, String oOTDShoes, String oOTDEtc, int attachNo,
+			String originalFilename, String renamedFilename, int ootdReadCount) {
+		super();
+		this.ootdNo = ootdNo;
+		this.ootdWriter = ootdWriter;
+		this.styleNo = styleNo;
+		OOTDTitle = oOTDTitle;
+		OOTDContents = oOTDContents;
+		OOTDRegDate = oOTDRegDate;
+		OOTDTop = oOTDTop;
+		OOTDBottom = oOTDBottom;
+		OOTDShoes = oOTDShoes;
+		OOTDEtc = oOTDEtc;
+		this.attachNo = attachNo;
+		this.originalFilename = originalFilename;
+		this.renamedFilename = renamedFilename;
+		this.ootdReadCount = ootdReadCount;
+	}
+
+
+	public int getOotdReadCount() {
+		return ootdReadCount;
+	}
+
+
+	public void setOotdReadCount(int ootdReadCount) {
+		this.ootdReadCount = ootdReadCount;
+	}
+
+
 	//기본생성자 
 	public OotdBoardandAttachment() {
 		super();

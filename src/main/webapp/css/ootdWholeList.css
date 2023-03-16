@@ -55,6 +55,11 @@
 	font-weight: 500
 }
 
+#countView{
+	
+	
+}
+
 .styleSp{
 	display: inline-block;
 	position: relative;
@@ -66,6 +71,21 @@
 	color:#00d200;
 
 }
+
+.ootdspantw{
+	display: inline-block;
+	position: relative;
+	top:-2px;	
+	left : -10px;
+	font-family: 'Nanum Gothic Coding', monospace;	
+	font-size: 20px;
+	font-weight: 700;
+	color: black;
+
+}
+
+
+
 
 .exs{
 	position: relative;
@@ -90,6 +110,44 @@
 	background-color: #000000;
 	color: white;
     transition : 0.7s;
+}
+
+
+#btn-more-two{
+	width: 180px;
+	/* border: 2px solid #00d200; */
+	text-align: center;
+	height: 52px;
+	background-color: white;
+	margin-top : 30px;
+	margin-left:800px;
+	font-family: 'Nanum Gothic Coding', monospace;	
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 10px 10px 10px 10px; 	
+}
+
+#btn-more-two:hover{
+	background-color: #000000;
+	color: white;
+    transition : 0.7s;
+}
+
+#countView, #defaultView{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+
+#countView:hover{
+	cursor: pointer;
+	font-weight: 900;
+}
+
+#defaultView:hover{
+	cursor: pointer;
+	font-weight: 900;
 }
 
 
@@ -148,9 +206,22 @@
     border-radius: 10px 10px 10px 10px;
   }
 
+
+.ootdsmallImg:hover  {
+    transform: scale(1.1);
+    background-color: orange;
+    transition : 0.5s;
+    text-decoration : white;
+    border-radius: 10px 10px 10px 10px;
+    cursor:pointer;
+  }
+  
+	
+  
+
 #ootdboardlist{
 	margin:0 auto; 	
-	margin-left : 160px;
+	margin-left : 70px;
 	font-weight : 900;
 	font-family: 'Nanum Gothic Coding', monospace;		
 	text-align:center;
@@ -215,9 +286,12 @@ a > img{
 input#btnAdd{
 	background-color : black;
 	color : white;
+	position : absolute;
+	top : 550px;
+	left: 200px;
 	height : 32px;
 	width : 70px;
-	margin-left : 1430px;
+/*  	margin-left : -1295px;  */
 	border-radius : 10px 10px 10px 10px;  
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: bolder;
@@ -231,6 +305,26 @@ input#btnAdd{
 	transition : 0.4s
 }
 
+#scrtop{
+	margin-left : 475px; 
+	margin-top : 80px;
+	background-color : white;
+	border: none;
+	border-radius : 50px 50px 50px 50px;
+}
+#scrtopimg{
+	border: none;
+	width:20px; 
+	height: 20px; 
+	border-radius : 50px 50px 50px 50px;
+}
+
+
+
+
+#scrtop:hover{
+	background-color : #e6e6e6;	
+}
 
 
 
