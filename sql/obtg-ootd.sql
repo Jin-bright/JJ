@@ -799,5 +799,20 @@ select * from comment
 
 select * from fashionstyle
 
+select e.* 
+from ( select  row_number() over(order by board_no desc ) rnum, 
+                         b.*, 
+                        a.* 
+            from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+where style_no = 'S2'
 
 
+ select e.* 
+ from ( select  row_number() over(order by  ootd_read_count desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+ 
+ where rnum between 1 and 10
+ 
+ 
+select e.* 
+from ( select  row_number() over(order by ootd_read_count desc) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e where rnum between 1 and 10
+ 

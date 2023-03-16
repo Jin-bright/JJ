@@ -51,9 +51,9 @@
 		<!-- 버튼들  -->
 		<div class = "buttonss">
 			<% if(loginMember == null || likeCnt == 0) { %>
-				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요" /></button>
+				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/mark_emp.png" class="shareLike" id="heartsempty" alt="좋아요" /></button>
 			<% } else { %>
-				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" /></button>
+				<button id="likesbt"><img src="${pageContext.request.contextPath}/image/mark_full.png" class="shareLike" id="heartfull"  alt="좋아요" /></button>
 			<% } %>
 			<button id="viewProfile" onclick="open_pop('${shareBoard.getMemberId()}')" > 판매자 프로필 조회</button>
 			<button id="writeMessage" > 쪽지하기 </button>
@@ -263,7 +263,7 @@ function open_pop( ${shareBoard.getMemberId()} ){
 <%-- 쪽지 추가  --%>
 
 <script >
-<%-- 신고  --%>
+<%-- 신고 
 const  siren = document.querySelector("#siren");
 siren.style.display = 'none';
 
@@ -275,7 +275,7 @@ reporta.addEventListener('mouseenter', () => {
 reporta.addEventListener('mouseleave', () => {
 	siren.style.display = 'none';
 })
-
+ --%>
 
 const reportFrm = () => {
 	const frm = document.querySelector(".report_container");
@@ -377,8 +377,8 @@ document.querySelector(".shareLike").addEventListener("click", (e) => {
 			method: "post",
 			dataType: "json",
 			success(data){
-				if(data === 1) e.target.src="${pageContext.request.contextPath}/image/heart _over.png"
-				else e.target.src="${pageContext.request.contextPath}/image/heart.png"
+				if(data === 1) e.target.src="${pageContext.request.contextPath}/image/mark_full.png"
+				else e.target.src="${pageContext.request.contextPath}/image/mark_emp.png"
 			},
 			error: console.log
 			});

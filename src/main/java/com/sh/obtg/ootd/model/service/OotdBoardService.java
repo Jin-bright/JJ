@@ -312,6 +312,24 @@ public List<OotdBoardandAttachment> SearchOotdBymemberStyle( Map<String, String>
 		close(conn);
 		return likes;
 	}
+
+	// 스타일별 옷찾기
+	public List<OotdBoardandAttachment> findOotdBoardandAttachment(String searchKeyword) {
+		Connection conn = getConnection();
+		List<OotdBoardandAttachment> findootdAll = ootdBoardDao.findOotdBoardandAttachment(conn, searchKeyword);
+		close(conn);
+		
+		return findootdAll;
+	}
+
+	//최신순조회
+	public List<OotdBoardandAttachment> viewOotdBoardandAttachmentByread(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<OotdBoardandAttachment> ootdAttachmentsByRead = ootdBoardDao.viewOotdBoardandAttachmentByread(conn, param);
+		close(conn);
+		
+		return ootdAttachmentsByRead;
+	}
 	
 
 }

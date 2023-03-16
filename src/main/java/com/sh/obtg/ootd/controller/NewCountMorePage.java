@@ -21,8 +21,8 @@ import com.sh.obtg.ootd.model.service.OotdBoardService;
 /**
  * Servlet implementation class BoardListServlet
  */
-@WebServlet("/ootd/morePage")
-public class NewOotdMorePage extends HttpServlet {
+@WebServlet("/ootd/countMorePage")
+public class NewCountMorePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OotdBoardService ootdBoardService = new OotdBoardService();
 
@@ -42,11 +42,11 @@ public class NewOotdMorePage extends HttpServlet {
 		 	System.out.println( limit );
 		 	
 			// 1.  인코딩 x 사용자입력값 x  전체게시글출력 (처음 매개변수x -> 매개변수 param)
-			List<OotdBoardandAttachment> ootdAttachments = ootdBoardService.viewOotdBoardandAttachment(param);
-			System.out.println( ootdAttachments);
+			List<OotdBoardandAttachment> ootdAttachmentsByRead = ootdBoardService.viewOotdBoardandAttachmentByread(param);
+			System.out.println( ootdAttachmentsByRead);
 			
 			response.setContentType("application/json; charset=utf-8");
-			new Gson().toJson(ootdAttachments, response.getWriter());
+			new Gson().toJson(ootdAttachmentsByRead, response.getWriter());
 	}
 
 }

@@ -139,11 +139,11 @@
 				<td ><div style="width:280px;">
 			  		<%-- 	<img src="${pageContext.request.contextPath}/image/heart.png" class="heartsempty" alt="좋아요"/> <!-- 하트 --> --%>
 					<c:if test="${loginMember == null || like == 0 }">
-						<img src="${pageContext.request.contextPath}/image/heart.png" class="shareLike" id="heartsempty" alt="좋아요" />
+						<img src="${pageContext.request.contextPath}/image/mark_emp.png" class="shareLike" id="heartsempty" alt="좋아요" />
 					</c:if> 
 	
 		     	 	<c:if test="${loginMember != null && like== 1}">  
-					  <img src="${pageContext.request.contextPath}/image/heart _over.png" class="shareLike" id="heartfull"  alt="좋아요" />
+					  <img src="${pageContext.request.contextPath}/image/mark_full.png" class="shareLike" id="heartfull"  alt="좋아요" />
    					</c:if>
 				   
 				    	<a style="display:inline; margin-left: 150px" href="${pageContext.request.contextPath}/share/newShareView?no=${attach.productId}">
