@@ -26,7 +26,7 @@ public class MessageList extends HttpServlet {
 	private MessageService messageService = new MessageService();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 메시지 리스트 get요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {			

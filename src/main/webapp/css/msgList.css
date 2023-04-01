@@ -37,17 +37,24 @@ hr{
 #msg-container {
 	min-height: 830px;
 	margin: 0 auto;
-	padding-top: 100px;
 	text-align: center;
 }
+#msg-container h2 {
+	text-align: left;
+	font-size: 25px;
+    border-bottom: 3px solid #222;
+    padding-bottom: 16px;
+}
 #msg-wrap {
-	width: 800px;
+    border-collapse: collapse;
+    width: 100%;
 }
 #msg-wrap th {
-	background: #ffa5003b;
-	border-style: none;
-	border-top: 1px solid;
-	border-bottom: 1px solid;
+    background: #F2F3F6;
+    border-style: none;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 42px;
 }
 #msg-wrap td {
 	border-bottom: 1px solid dimgrey;
@@ -60,15 +67,15 @@ hr{
 	width: 120px;
 }
 #tit {
-	width: 480px;
+	width: 545px;
 }
 #pagebar {
-/* 	background: #ffa5003b; */
-	margin-top: 20px;
-	cursor: pointer;
+	margin-top: 50px;
+    font-size: 18px
 }
-#pagebar:hover {
-	color: orange;
+.page:hover {
+	color: #579BB1;
+	cursor: pointer;
 }
 #msgBtn {
 	border-style: none;
@@ -78,6 +85,19 @@ hr{
 #msgBtn :hover {
 	background: dimgrey;
 }
+.delete-btn {
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    background-color: #fff;
+    color: rgba(34,34,34,.8);
+    padding: 3px;
+    transition-duration: 0.3s;
+}
+.delete-btn:hover {
+	background-color: #F2F3F6;
+	transition-duration: 0.3s;
+}
+
 /* 모달창 */
 .frmPopRe{
  	position: fixed; 
