@@ -47,11 +47,16 @@ public class MessageService {
 		return totalCount;
 	}
 
-	public int deleteMsg(int no) {
+	/**
+	 * 메시지 삭제하기
+	 * @param no
+	 * @return
+	 */
+	public int deleteMsg(int[] noArr) {
 		Connection conn = getConnection(); 
 		int result = 0;
 		try {
-			result = messageDao.deleteMsg(conn, no);
+			result = messageDao.deleteMsg(conn, noArr);
 			commit(conn);
 		}catch (Exception e) {
 			rollback(conn);

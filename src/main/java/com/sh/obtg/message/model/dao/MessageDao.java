@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -123,18 +124,28 @@ public class MessageDao {
 		return totalCount;
 	}
 
-	public int deleteMsg(Connection conn, int no) {
-		// delete message where no = ?
+	/**
+	 * 메시지 삭제하기
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public int deleteMsg(Connection conn, int[] noArr) {
+		// delete message where no in (?)
 		String sql = prop.getProperty("deleteMsg");
 		int result = 0;
 		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, no);
-			
-			result = pstmt.executeUpdate();
-			
+		String[] placeholders = new String[noArr.length];
+		Arrays.fill(placeholders, "?");
+		String sqlWithPlaceholders = sql.replace("?", String.join(",", placeholders));
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sqlWithPlaceholders)) {
+		    for (int i = 0; i < noArr.length; i++) {
+		        pstmt.setInt(i+1, noArr[i]);
+		    }
+		    result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new MessageException("👻 쪽지 삭제 오류 👻", e);
+		    throw new MessageException("👻 쪽지 삭제 오류 👻", e);
 		}
 		
 		return result;
