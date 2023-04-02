@@ -74,6 +74,12 @@
  <h5> ◆ 시퀀스 다이어그램  </h5>
 
  <h5> ◆ ER 다이어그램  </h5>
+ *전체 <br>
+ 
+ *ootd 게시판 <br>
+ 
+ 
+ *share 게시판 <br>
  <img src="https://user-images.githubusercontent.com/77500290/229373802-0d81871d-288c-4c49-bfc5-c8e73ed44eff.png" width="500"/>
 
 <hr>
