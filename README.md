@@ -38,7 +38,6 @@
 - Language : JAVA, JSP, HTML5, CSS3, JavaScript, jQuery
 - Middelware : TOMCAT
 - DBMS : Oracle
-- API :  ???
 - Service：Discord
 
 
@@ -61,7 +60,6 @@
  + 쪽지
  + 마이페이지
  + 관리자페이지
- + API 넣을까 
 
 
 
@@ -91,14 +89,3 @@
 
 
 
-
-
-</br>
- --- English ver-
- 
- 
- # Semi-Project </br></br>
-■ Project Name : OBTG
-■
-■ Team Member : 김혜진, 서정은</br>
-■ Team Member : 김혜진, 서정은
