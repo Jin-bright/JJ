@@ -73,12 +73,7 @@
 
  <h5> ◆ ER 다이어그램  </h5>
  *전체 <br>
- 
- *ootd 게시판 <br>
- 
- 
- *share 게시판 <br>
- <img src="https://user-images.githubusercontent.com/77500290/229373802-0d81871d-288c-4c49-bfc5-c8e73ed44eff.png" width="500"/>
+ <img src="https://user-images.githubusercontent.com/77500290/231704547-0f9a9ec4-f2d0-4537-adb3-69058814eb07.png" width="500"/>
 
 <hr>
 <b>5.ppt</b>
