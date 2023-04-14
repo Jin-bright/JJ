@@ -489,57 +489,6 @@ public class OotdBoardDao {
 	}
 
 
-// 게시글 구해오기 : search type : 
-// param.put("searchType", searchType);
-// param.put("searchKeyword", searchKeyword);
-// select * from ootd_attachment where board_no = ?
-// 기존 쿼리  :searchMember = select * from member where # like ?
-// select * from ootd_board where member_Id = ? tiger -> 검색해서나오는건 ? 그 ootd_board 정보  1개 
-// select * from ootd_attachment where board_no = ? 
-	
-// select *from ootd_board where style_no = 로맨틱이면 S1, 이렇게 변경 작업 필요한데  ? 
-// dql 	
-/**
-	public List<OotdBoard> SearchOotdBymemberId(Connection conn, Map<String, String> param) {
-		String sql = prop.getProperty("SearchOotdBymemberId");
-		
-		String searchType = param.get("searchType"); // member_id | member_name | gender
-		String searchKeyword = param.get("searchKeyword"); // #
-		
-		List<OotdBoard> findootdBoardsById =  new ArrayList<>();
-		sql = sql.replace("#", searchType);
-		//  select * from ootd_board where member_Id(=searchtype = #)  like  ? (keyword) 
-		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setString(1, "%"+searchKeyword+"%");
-			
-			try(ResultSet rset = pstmt.executeQuery() ){
-				while(rset.next()) {
-					OotdBoard ootdboard = new OotdBoard();
-				
-					ootdboard.setOotdNo( rset.getInt("OOTD_no"));
-					ootdboard.setOotdWriter( rset.getString("OOTD_writer"));
-					ootdboard.setStyleNo(Style.valueOf( rset.getString("style_no") ));
-					ootdboard.setOOTDTitle(rset.getString("OOTD_title"));
-					ootdboard.setOOTDContents( rset.getString("OOTD_contents"));
-					ootdboard.setOOTDReadCount( rset.getInt("OOTD_read_count"));
-					ootdboard.setOOTDRegDate( rset.getDate("OOTD_reg_date") );
-					ootdboard.setOOTDTop( rset.getString("OOTD_top"));
-					ootdboard.setOOTDBottom( rset.getString("OOTD_bottom"));
-					ootdboard.setOOTDShoes( rset.getString("OOTD_shoes"));
-					ootdboard.setOOTDEtc(rset.getString("OOTD_etc") );	
-					
-					findootdBoardsById.add(ootdboard);
-				}
-			}
-			}catch (SQLException e) {
-				throw new OotdBoardException("게시글 by memberid 찾기 오류!", e);
-			}	
-		return findootdBoardsById;
-	
-	}//
-**/
-	
 	
 //조인쿼리도전
 	
@@ -588,10 +537,6 @@ public class OotdBoardDao {
 	
 	
 // 쿼리길다 
-// select e.*from ( select ootd_no, ootd_writer, style_no, ootd_title, ootd_contents, ootd_reg_date, ootd_top, ootd_bottom, ootd_shoes, ootd_etc, attach_no, original_filename, renamed_filename,
-// row_number() over(order by ootd_no  desc ) rnum from  ootd_board join ootd_attachment on ootd_board.ootd_no = ootd_attachment.board_no
-// where # = ?) e   where rnum between ? and ?
-// select * from  ootd_board  join ootd_attachment on ootd_board.ootd_no = ootd_attachment.board_no where # = ?
 public List<OotdBoardandAttachment> SearchOotdBymemberStyle(Connection conn, Map<String, String> paramss) {
 
 		String sql = prop.getProperty("SearchOotdBymemberStyle");
@@ -705,13 +650,20 @@ public List<OotdBoardandAttachment> viewOotdBoardandAttachment(Connection conn, 
 		return likes;
 	}
 
-	//스타일별 옷찾기 
-	public List<OotdBoardandAttachment> findOotdBoardandAttachment(Connection conn, String searchKeyword) {
+	// new 스타일별 옷찾기 
+	public List<OotdBoardandAttachment> findOotdBoardandAttachment(Connection conn, String searchKeyword, Map<String, Object> param) {
 		String sql = prop.getProperty("findOotdBoardandAttachment");
 		List<OotdBoardandAttachment> findootdAll = new ArrayList<>();
 		
+		int page = (int)param.get("page");
+		int limit = (int)param.get("limit");
+		int start = (page -1) * limit + 1;
+		int end = page * limit;
+		
 		try( PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, searchKeyword);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 		
 			try( ResultSet rset = pstmt.executeQuery()){
 				

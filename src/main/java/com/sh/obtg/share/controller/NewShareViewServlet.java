@@ -44,7 +44,7 @@ public class NewShareViewServlet extends HttpServlet {
 					String name = cookie.getName();
 					String value = cookie.getValue();
 					
-					if("board".equals(name)) {
+					if("shareboard".equals(name)) {
 						boardCookieVal  = value; // board = "[84][22]" 이런식으로 담김 
 						if(value.contains("[" + no + "]" )){
 							hasRead = true;
@@ -55,7 +55,7 @@ public class NewShareViewServlet extends HttpServlet {
 			
 			//응답쿠키
 			if(!hasRead) {
-				Cookie cookie = new Cookie("board", boardCookieVal + "[" + no + "]" );
+				Cookie cookie = new Cookie("shareboard", boardCookieVal + "[" + no + "]" );
 				cookie.setMaxAge(365*24*60*60);
 				cookie.setPath(request.getContextPath() + "/share/newShareView");
 				response.addCookie(cookie);

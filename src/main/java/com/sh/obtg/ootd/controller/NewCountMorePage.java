@@ -19,7 +19,7 @@ import com.sh.obtg.ootd.model.service.OotdBoardService;
 
 
 /**
- * Servlet implementation class BoardListServlet
+ * 조회수로 나타내는 비동기 04
  */
 @WebServlet("/ootd/countMorePage")
 public class NewCountMorePage extends HttpServlet {

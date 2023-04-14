@@ -235,17 +235,27 @@ CREATE TABLE SHARE_Likes (
 create sequence seq_share_likes_no;
 
 
+-- 수정 0404
 CREATE TABLE OOTD_Likes (
 	LIKE_no	number,
 	board_no	number		NOT NULL,
 	member_id	varchar2(50)		NOT NULL,
     CONSTRAINT PK_OOTD_LIKES PRIMARY KEY (LIKE_no),
-    CONSTRAINT FK_OOTD_board_TO_OOTD_Likes_1 FOREIGN KEY (board_no)REFERENCES OOTD_board (OOTD_no),
-    CONSTRAINT FK_Member_TO_OOTD_Likes_1 FOREIGN KEY (member_id)REFERENCES Member (member_id)
+    CONSTRAINT FK_OOTD_board_TO_OOTD_Likes_1 FOREIGN KEY (board_no)REFERENCES OOTD_board (OOTD_no) on delete cascade,
+    CONSTRAINT FK_Member_TO_OOTD_Likes_1 FOREIGN KEY (member_id)REFERENCES Member (member_id) on delete cascade
 );
 
 create sequence seq_ootd_likes_no;
 
+commit
+
+delete from ootd_board where ootd_no in(2,3,4)
+
+select * from ootd_board
+order by ootd_no;
+
+select *  from ootd_attachment
+order by board_no
 
 
 CREATE TABLE ootd_find (
@@ -603,6 +613,8 @@ where product_id in( 11,16,2,26,15,13,5,27,18,12,25);
 --alter table NSHARE_ATTACHMENT drop column member_id;
 
 --4) 새로만든 share  첨부파일 테이블 
+select * from NSHARE_ATTACHMENT
+select * from nsubcategory
 
 CREATE TABLE NSHARE_ATTACHMENT (
 	product_attachment_no	number	 not NULL, --pk
@@ -620,7 +632,7 @@ create sequence SEQ_NSHARE_ATTACHMENT_product_attachment_no;
 
 
 
--- 기존 share 좋아요 테이블 재셋팅  ( 0223 혜진)
+--5)  기존 share 좋아요 테이블 재셋팅  ( 0223 혜진)
 CREATE TABLE SHARE_Likes (
 	LIKE_no	number,
 	board_no	number		NOT NULL, --product_id
@@ -814,5 +826,90 @@ where style_no = 'S2'
  
  
 select e.* 
-from ( select  row_number() over(order by ootd_read_count desc) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e where rnum between 1 and 10
+from ( select  row_number() over(order by ootd_read_count desc) rnum, b.*, a.* 
+            from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e 
+where rnum between 1 and 10
  
+ select to_char(sysdate, 'yyyy-mm-dd hh:mi:ss') from dual
+ 
+ 
+
+create table test(
+    id number,
+    new date default sysdate 
+);
+
+insert into test values(1, TO_CHAR(SYSDATE + 9/24,'YYYYMMDD HH24MISS'))           -- 9시간 후
+
+
+insert into test values(1, SYSDATE + 9/24)           -- 9시간 후
+
+
+select * from ootd_board 
+where style_no = 'S7'
+order by ootd_no
+
+select * from fashionstyle
+
+select * from ootd_attachment  
+where style_no = 'S4'
+order by ootd_no
+
+
+select * from nShare_board
+
+
+--
+select * from ootd_board 
+where style_no  = 'S1'
+
+select * from ootd_attachment  
+where board_no = 36
+
+select * from ootd_board
+where ootd_no = 36
+d
+delete 
+from ootd_board
+where ootd_no = 36
+
+commit;
+
+-- 한국시간으로 출력 -- 0403 
+ alter session set time_zone = '+09:00'; 
+SELECT CURRENT_DATE, CURRENT_TIMESTAMP, LOCALTIMESTAMP FROM DUAL
+
+ select e.* from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e where rnum between ? and ?
+ 
+ 
+ 
+---
+select * from ootd_board
+delete from ootd_board where ootd_no = 38
+select * from member
+
+select * from SHARE_FIND
+select * from SHARE_LIKES
+select * from blacklist 
+
+select * from ootd_attachment
+where board_no = 38
+
+commit
+
+update ootd_board
+set style_no = 'S1'
+where ootd_no in ( 8,17,15,23,24,41)
+
+15개 만들기 
+원래 s8
+
+
+select v.*
+from( 
+     select e.*,   row_number() over(order by rnum ) renum
+     from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* 
+                 from ootd_board b join ootd_attachment a 
+                        on b.ootd_no = a.board_no ) e 
+    where style_no = 'S1'  )v
+where renum between 1 and 12
