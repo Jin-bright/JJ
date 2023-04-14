@@ -82,7 +82,7 @@ import com.sh.obtg.ootd.model.dto.OotdBoardandAttachment;
 	public OotdBoard selectOneBoard(int no, boolean hasRead) {
 		Connection conn = getConnection();
 		//조회수 증가시키기 
-		
+		System.out.println("hasread 여부 : " + hasRead );
 		if(!hasRead) updateReadCount(no, conn);
 		
 			
@@ -314,9 +314,9 @@ public List<OotdBoardandAttachment> SearchOotdBymemberStyle( Map<String, String>
 	}
 
 	// 스타일별 옷찾기
-	public List<OotdBoardandAttachment> findOotdBoardandAttachment(String searchKeyword) {
+	public List<OotdBoardandAttachment> findOotdBoardandAttachment(String searchKeyword, Map<String, Object> param ) {
 		Connection conn = getConnection();
-		List<OotdBoardandAttachment> findootdAll = ootdBoardDao.findOotdBoardandAttachment(conn, searchKeyword);
+		List<OotdBoardandAttachment> findootdAll = ootdBoardDao.findOotdBoardandAttachment(conn, searchKeyword, param);
 		close(conn);
 		
 		return findootdAll;

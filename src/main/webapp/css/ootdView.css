@@ -70,6 +70,7 @@
 	font-family: 'Nanum Gothic Coding', monospace;
 	font-size: 15px;
 	font-weight: 600;
+	margin-top: 40px;
 }
 
 #likescounts{
@@ -152,6 +153,15 @@
 	left : 40px;
 	
 }
+
+#comt:hover{
+	cursor: pointer;
+}
+
+.heart:hover{
+	cursor: pointer;
+}
+
 
 
 /* 신고 */
@@ -322,7 +332,7 @@ span#fname{
 
 #formcmt{
 	width: 650px; 
-	margin-left: 540px;
+	margin-left: 5px;
 }
 
 .maketd :hover{
@@ -344,18 +354,18 @@ span#fname{
 
 table#tbl-comment{
 	width : 640px;
-	margin-left : 541px;
+	margin-left : 10px;
 	border-collapse:collapse;
 	background-color : rgb(255, 255, 255);	
 	border: none;
 } 
 table#tbl-comment tr td{
-	height : 20px;
-	padding:5px; 
-	text-align:left; 
-	font-weight : 200;
-	font-family: 'Nanum Gothic Coding', monospace;
-	font-size: 14px;
+    height: 35px;
+    padding: 9px;
+    text-align: left;
+    font-weight: 200;
+    font-family: 'Nanum Gothic Coding', monospace;
+    font-size: 14px;
 }
 
 #cmtprofileimg{
@@ -363,6 +373,7 @@ table#tbl-comment tr td{
 	height : 30px;
 	margin : 0;
 	display: inline;	
+	
 	
 }
 
@@ -417,7 +428,7 @@ table#tbl-comment span.comment-date {
 table#tbl-comment tr.level2 {
 	color:gray; 
 	font-size: 14px;
-	height: 30px;
+	height: 20px;
 }
 
 
@@ -442,10 +453,11 @@ table#tbl-comment button.btn-comment-enroll2{
 	color:white; 
 	background:black;
 	position:relative; 
-	top:-15px; 
+	top:-12px; 
 	left:1px;
 	border-radius: 10px 10px 10px 10px;
 }
+
 
 table#tbl-comment button.btn-comment-enroll2:hover{
 	background-color: white;
@@ -538,3 +550,20 @@ table#tbl-comment tr:hover button.btn-delete{
 }
 
 
+#contentsDiv{
+	height: 180px;
+}
+
+#boardCommentFrm{
+	width: 620px;
+    display: inline-block;
+    height: 48px;
+}
+
+.cocoment{
+	width: 520px;
+}
+
+#cocodel{
+	margin-right: 20px
+}

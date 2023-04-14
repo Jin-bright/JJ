@@ -17,7 +17,7 @@ import com.sh.obtg.share.model.dto.NshareBoard;
 import com.sh.obtg.share.model.service.ShareService;
 
 /**
- * Servlet implementation class NewShareFindColorNStyle
+ *  newshare - ajax - color로 찾기 (확인46)
  */
 @WebServlet("/share/findShareWholeListColor")
 public class NewShareFindColorNStyle extends HttpServlet {
@@ -51,7 +51,7 @@ public class NewShareFindColorNStyle extends HttpServlet {
 		
 		String searchKeyword = request.getParameter("searchKeyword"); 
 		String searchType = null;
-		// 찾는값 : 하드코딩했ㄷ ㅏ^^
+		// 찾는값 
 		System.out.println("★★★searchKeyword : " + searchKeyword);
 		String colors = "빨강,검정,파랑,하얀,초록,주황,노랑,하늘,베이지,보라";
 
@@ -76,10 +76,17 @@ public class NewShareFindColorNStyle extends HttpServlet {
 		
 		//System.out.println(  shareboards   );
 		
+		System.out.println("end"+ end);
+		int colorstyletotalPage = (int)(end%12) + 1;
+		System.out.println("뭔데 : " + colorstyletotalPage);
+	
+		
 		Map<String,Object> shareboardandAttach = new HashMap<>();
 		shareboardandAttach.put("shareAttachments", shareAttachments);
 		shareboardandAttach.put("shareboards", shareboards);
+		shareboardandAttach.put("colorstyletotalPage", colorstyletotalPage);
 		
+		//start가 13개면 /12했을때 나머지가 1이면 총 2페이지
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(shareboardandAttach, response.getWriter());	}

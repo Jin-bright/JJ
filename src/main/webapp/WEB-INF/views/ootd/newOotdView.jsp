@@ -67,7 +67,9 @@
 		<%-- <img src="<%= request.getContextPath() %>/image/siren.png" alt="" id="siren" /> --%>
 		
 		<hr style="margin-top: 10px"/><br />
+		<div id="contentsDiv">
 		${ootdboard.getOOTDContents()}<br />
+		</div>
 		<hr />
 		<%
 			boolean canEdit = loginMember != null && 
@@ -82,10 +84,10 @@
 			}
 		%>
 	</div>
-</div>	
+
 <!-- 코멘트 -->
-	<div style="padding : 10px 0; margin-left : 518px; vertical-align: middle; ">
-		<p style="margin-left: 30px" id="cmtp">댓글</p>
+	<div style="padding : 10px 0;  vertical-align: middle; ">
+		<p style="margin-left: 12px" id="cmtp">댓글</p>
 	</div>
 	<%-- 댓글쓰는 창  --%>
 	<div class="comEnrollBox" >
@@ -120,7 +122,7 @@
             		if(bc.getCmtLevel() == 1 ){
             %>
             <%-- 댓글인 경우 tr.level1 --%>
-            <tr class="level1">
+            <tr class="level1" style="height: 48px;">
             	<td style="padding:0; width: 30px">
                		<img id="cmtprofileimg"  src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" alt="profileimg" />
             	</td >
@@ -142,20 +144,19 @@
           		}  else {
             %>
             <%-- 대댓글인 경우 tr.level2 --%>
-            <tr class="level2">
+            <tr class="level2" style="padding: 5px; max-height: 48px; height: 48px" >
 	            <td style="padding:0; width: 40px">
 	            </td>
-            	<td class="cocoment"  style="height: 20px">
+            	<td class="cocoment" style="padding:5px 0 0 0; width: 500px;">
               		<img id="cmtprofileimg"  src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" alt="profileimg" />
             		<span class="cocomment-writer" style="font-weight:bolder; margin-left:10px; margin-right:10px; vertical-align:top;"><b><%=bc.getMemberId()%></b></span>
             		<span style="vertical-align: top;"><%=bc.getCmtContent()%></span><br />
             		<span class="cocomment-date" style="font-weight:bolder; margin-left: 40px; vertical-align: text-top; "><%=bc.getCmtRegDate()%></span>
-
             	</td>
-                <td> 
+                <td style="padding: 5px 0 0 0; width: 50px">  
 	                <% if( loginMember != null && 
 	                		 ( ( loginMember.getMemberId()).equals( bc.getMemberId()) || (loginMember.getMemberRole() == MemberRole.A ))) {%>
-						<button class="btn-delete"  value="<%= bc.getCmtNo()%>"> 삭제</button>
+						<button class="btn-delete" id="cocodel"  value="<%= bc.getCmtNo()%>"> 삭제</button>
 					<% } %>   	
 				</td>
             </tr>
@@ -168,6 +169,7 @@
         <%
         	}
         %>
+</div>	<%-- bigdiv --%>        
 <form action="<%= request.getContextPath() %>/ootd/ootdCommentDelete"  name="boardCommentDelFrm" method="POST">
 	<input type="hidden" name="no" />
 	<input type="hidden" name="boardNo" value="<%=ootdboard.getOotdNo() %>"/>
@@ -437,9 +439,9 @@ button.onclick = (e) => {
 	
 	const tr = `
 	<tr>
-		<td colspan="2" style="text-align:left; width:650px; padding-left:20px">
+		<td colspan="2" style="text-align:left; width:650px; padding-left:10px; padding-bottom:10px">
 			<form
-				action="<%=request.getContextPath()%>/ootd/ootdCommentEnroll" method="post" name="boardCommentFrm">
+				action="<%=request.getContextPath()%>/ootd/ootdCommentEnroll" method="post" name="boardCommentFrm" id="boardCommentFrm">
                 <input type="hidden" name="boardNo" value="<%= ootdboard.getOotdNo() %>" />
  	            <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" /> 
                 <input type="hidden" name="commentLevel" value="2" />
