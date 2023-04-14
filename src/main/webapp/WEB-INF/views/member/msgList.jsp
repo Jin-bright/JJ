@@ -12,7 +12,7 @@
 <jsp:include page="/WEB-INF/views/member/subMenu.jsp" />
 	<div class="content_area">	
 		<div id="msg-container">
-			<h2>메시지</h2>
+			<h3>메시지</h3>
 			<div>
 			<table id="msg-wrap">
 				<thead>
@@ -52,7 +52,7 @@
 					</c:if>
 					<c:if test="${empty msgList}">
 						<tr>
-							<td colspan="4">도착한 쪽지가 없어요!</td>
+							<td colspan="4">도착한 메시지가 없습니다.</td>
 						</tr>	
 					</c:if>
 				</tbody>

@@ -1,7 +1,6 @@
 package com.sh.obtg.message.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,12 +20,13 @@ public class MessageDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 사용자 입력값
+			// 사용자 입력값 - 문자열로 받아온 값
 			String noList = request.getParameter("delNo");
-			noList = noList.replaceAll("undefined,", "");
+			noList = noList.replaceAll("undefined,", ""); // undefined 제거
 			String[] strArray = noList.split(",");
+			
+			// 메시지가 여러개일 경우 해당 메시지 번호를 int 배열에 담아 전달
 			int[] noArr = new int[strArray.length];
-
 			for (int i = 0; i < strArray.length; i++) {
 			    noArr[i] = Integer.parseInt(strArray[i]);
 			}

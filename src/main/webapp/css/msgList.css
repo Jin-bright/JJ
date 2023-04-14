@@ -39,13 +39,14 @@ hr{
 	margin: 0 auto;
 	text-align: center;
 }
-#msg-container h2 {
+#msg-container h3 {
 	text-align: left;
 	font-size: 25px;
     border-bottom: 3px solid #222;
     padding-bottom: 16px;
 }
 #msg-wrap {
+	margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
 }

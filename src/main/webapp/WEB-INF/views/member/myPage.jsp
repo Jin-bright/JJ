@@ -35,7 +35,7 @@
 		</div>
 		<div class="title_box">
 			<h4>나의 OOTD</h4>
-			<a href="">더보기</a>
+			<a href="${pageContext.request.contextPath}/member/myOotd">더보기</a>
 		</div>
 		<div class="content_container">
 			<c:if test="${not empty ootdList}">
@@ -64,7 +64,7 @@
 		</div>
 		<div class="title_box">
 			<h4>나눔 목록</h4>
-			<a href="">더보기</a>
+			<a href="${pageContext.request.contextPath}/member/myShare">더보기</a>
 		</div>
 		<div class="content_container">
 			<c:if test="${not empty shareList}">
@@ -105,16 +105,13 @@
 			</c:if>
 		</div>
 		<div class="title_box">
-			<h4>좋아요</h4>
+			<h4>관심 물품</h4>
 			<a href="">더보기</a>
 		</div>
 		<div class="content_container">
 			<div class="empty_box">
-				<p>추가하신 좋아요가 없습니다.</p>
+				<p>현재 등록된 관심 물품이 없습니다.</p>
 				<div class="btn_wrap">
-					<button class="my_btn" id="ootd_btn">
-						<a href="${pageContext.request.contextPath}/ootd/newOotdWholeList">OOTD 바로가기</a>
-					</button>
 					<button class="my_btn" id="share_btn">
 						<a href="${pageContext.request.contextPath}/share/newShareWholeList">SHARE 바로가기</a>
 					</button>

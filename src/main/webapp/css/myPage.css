@@ -67,6 +67,7 @@ ul {
 .my_info {
 	display: flex;
 	flex-direction: column;
+	margin-left: 15px;
 }
 .my_btn, .upload_btn {
 	border: 1px solid #d3d3d3;
@@ -160,6 +161,68 @@ ul {
 }
 .btn_wrap button {
 	margin: 12px 5px;
+}
+.my_ootd_section, .my_like_section {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.ootd_select {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 32px 0;
+    padding-bottom: 32px;
+    border-bottom: 1px solid;
+}
+.board, .like {
+	cursor: pointer;
+}
+.my_count {
+	font-weight: 600;
+}
+.my_ootd_box {
+    display: inline-block;
+    margin: 0 10px 25px;
+}
+.ootd_img_box {
+	padding-bottom: 5px;
+}
+.ootd_img_box img {
+    width: 265px;
+    height: 450px;
+    border-radius: 10px;
+}
+.ootd_info_box {
+	display: flex;
+	justify-content: space-between;
+    font-weight: 300;
+}
+.heart_box {
+	width: 35px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.heart_box img {
+    width: 20px;
+    height: auto;
+}
+.heart_box img:hover {
+	cursor: pointer;
+}
+.my_like_section {
+	display: none;
+}
+#btn-post-more, #btn-like-more {
+    width: 100px;
+    height: 40px;
+    color: #4D5159;
+    border: 1px solid #868B94;
+	border-radius: 5px;
+	background-color: #F2F3F6;
+	transition-duration: 0.3s;
+}
+#btn-post-more:hover, #btn-like-more:hover {
+	background-color: #868b9470;
+	transition-duration: 0.3s;
 }
 
 /* 프로필 정보 */
@@ -293,6 +356,14 @@ ul {
 }
 
 /* My ootd */
+.ootd_wrap > h3 {
+	font-size: 25px;
+	border-bottom: 3px solid #222;
+	padding-bottom: 16px;
+}
+.img_area {
+    margin-top: 45px;
+}
 .img_area, .info_area {
 	text-align: center;
 }
