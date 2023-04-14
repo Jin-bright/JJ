@@ -33,7 +33,7 @@
 <b>2. 사용기술 및 개발환경 </b>
 </br></br>
 
-- OS : window10
+- OS : window
 - IDE : Eclipse
 - Language : JAVA, JSP, HTML5, CSS3, JavaScript, jQuery
 - Middelware : TOMCAT
@@ -66,7 +66,7 @@
 <hr>
 <b> 4.설계</b>
  <h5> ◆ ER 다이어그램  </h5>
- <img src="https://user-images.githubusercontent.com/77500290/231704547-0f9a9ec4-f2d0-4537-adb3-69058814eb07.png" width="500"/>
+ <img src="https://user-images.githubusercontent.com/77500290/231704547-0f9a9ec4-f2d0-4537-adb3-69058814eb07.png" width="700"/>
 
 <hr>
 <b>5.ppt</b>
