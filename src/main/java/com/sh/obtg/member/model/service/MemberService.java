@@ -149,22 +149,6 @@ public class MemberService {
 		return ootdCnt;
 	}
 	
-	// 나의 ootd 좋아요 조회
-	public List<Like> selectOotdLike(String memberId) {
-		Connection conn = getConnection();
-		List<Like> ootdLikes = memberDao.selectOotdLike(conn, memberId);
-		close(conn);
-		return ootdLikes;
-	}
-	
-	// 나의 share 좋아요 조회
-	public List<Like> selectShareLike(String memberId) {
-		Connection conn = getConnection();
-		List<Like> ootdLikes = memberDao.selectShareLike(conn, memberId);
-		close(conn);
-		return ootdLikes;
-	}
-	
 	// 이메일 조회
 	public int selectEmail(String memberEmailId) {
 		int result = 0;
@@ -178,6 +162,7 @@ public class MemberService {
 		}
 		return result;
 	}
+	
 	public int selectBlackList(String memberEmailId) {
 		int result = 0;
 		Connection conn = getConnection();
@@ -342,5 +327,53 @@ public class MemberService {
 		close(conn);
 		return totalCount;
 	}
+
+	/**
+	 * 마이페이지 ootd 총 개수
+	 * @return
+	 */
+	public int myOotdTotalCount(String memberId) {
+		Connection conn = getConnection();
+		int myOotdTotalCount = memberDao.myOotdTotalCount(conn, memberId);
+		close(conn);
+		return myOotdTotalCount;
+	}
+
+	/**
+	 * 나의 ootd 좋아요 총 개수
+	 * @param memberId
+	 * @return
+	 */
+	public int myOotdLikeCount(String memberId) {
+		Connection conn = getConnection();
+		int myOotdLikeCount = memberDao.myOotdLikeCount(conn, memberId);
+		close(conn);
+		return myOotdLikeCount;
+	}
+	
+	/**
+	 * 나의 ootd 게시물
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyOotdList(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> ootdList = memberDao.selectMyOotdList(conn, param);
+		close(conn);
+		return ootdList;
+	}
+
+	/**
+	 * 마이페이지 ootd 좋아요 조회
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> selectOotdLike(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> likeList = memberDao.selectOotdLike(conn, param);
+		close(conn);
+		return likeList;
+	}
+
 
 }

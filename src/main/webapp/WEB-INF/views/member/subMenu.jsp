@@ -8,7 +8,7 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/member/myOotd">나의 ootd</a></li>
 				<li><a href="${pageContext.request.contextPath}/member/myShare">나눔 목록</a></li>
-				<li>좋아요</li>
+				<li>관심 물품</li>
 			</ul>
 		</div>
 		<div class="sub_list">

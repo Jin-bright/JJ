@@ -1,8 +1,6 @@
 package com.sh.obtg.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,39 +8,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sh.obtg.member.model.dto.Like;
+import com.google.gson.Gson;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.service.MemberService;
 
-/**
- * Servlet implementation class MemberShareLikeServlet
- */
-@WebServlet("/member/memberShareLike")
-public class MemberShareLikeServlet extends HttpServlet {
+@WebServlet("/member/ootdLikeCnt")
+public class MyOotdLikeCountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
-	
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 현재 ootd 좋아요 수 조회
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			// 사용자 입력값
 			HttpSession session = request.getSession();
-			Member loginMember = (Member)session.getAttribute("loginMember");
-			String memberId = loginMember.getMemberId();
+			Member logiMember = (Member)session.getAttribute("loginMember");
+			String memberId = logiMember.getMemberId();
 			
 			// 업무로직
-			List<Like> shareLikes = memberService.selectShareLike(memberId);
-			System.out.println(shareLikes.toString());
+			int myOotdLikeCount = memberService.myOotdLikeCount(memberId);
 			
-			// 응답처리
-			request.setAttribute("shareLikes", shareLikes);
-			request.getRequestDispatcher("/WEB-INF/views/member/memberShareLike.jsp").forward(request, response);
-
+			// 총 페이지수
+			int limit = 6; 
+			int myLikeTotalPage = (int)Math.ceil((double)myOotdLikeCount / limit);
+			
+			response.setContentType("application/json; charset=utf-8");
+			new Gson().toJson(myLikeTotalPage, response.getWriter());	
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 }

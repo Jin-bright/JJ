@@ -17,9 +17,6 @@ import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.message.model.dto.Message;
 import com.sh.obtg.message.model.service.MessageService;
 
-/**
- * Servlet implementation class MessageList
- */
 @WebServlet("/message/messageList")
 public class MessageList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -50,10 +47,11 @@ public class MessageList extends HttpServlet {
 			System.out.println(msgList);
 			
 			int totalCount = messageService.selectTotalCount(memberId);
-			System.out.println(">>totalCnt : " +totalCount);
+			System.out.println(">>totalCnt : " + totalCount);
 			String url = request.getRequestURI();
 			String pagebar = HelloMvcUtils.getPagebar(page, limit, totalCount, url);
 
+			// view 전달
 			request.setAttribute("msgList", msgList);
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/member/msgList.jsp")
@@ -65,7 +63,6 @@ public class MessageList extends HttpServlet {
 			String referer = request.getHeader("Referer"); // http://~
 			response.sendRedirect(referer);
 		}
-		
 		
 	}
 

@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.sh.obtg.admin.model.exception.AdminException;
+import com.sh.obtg.column.model.dto.Column;
+import com.sh.obtg.column.model.exception.ColumnException;
 import com.sh.obtg.member.model.dto.Gender;
 import com.sh.obtg.member.model.dto.Like;
 import com.sh.obtg.member.model.dto.Member;
@@ -293,58 +295,6 @@ public class MemberDao {
 		}
 		
 		return count;
-	}
-	
-	// 나의 ootd 좋아요 조회
-	public List<Like> selectOotdLike(Connection conn, String memberId) {
-		String sql = prop.getProperty("selectOotdLike");
-		List<Like> ootdLikes = new ArrayList<>();
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while(rset.next()) {
-					Like like = new Like();
-					like.setNo(rset.getInt("ootd_no"));
-					like.setTitle(rset.getString("ootd_title"));
-					like.setRenamed_filename(rset.getString("renamed_filename"));
-					ootdLikes.add(like);
-				}
-				
-			}
-			
-		} catch (SQLException e) {
-			throw new MemberException("👻내가 좋아요한 ootd 조회 오류👻", e);
-		}
-		
-		return ootdLikes;
-	}
-	
-	// 나의 share 좋아요 조회
-	public List<Like> selectShareLike(Connection conn, String memberId) {
-		String sql = prop.getProperty("selectShareLike");
-		List<Like> shareLikes = new ArrayList<>();
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while(rset.next()) {
-					Like like = new Like();
-					like.setNo(rset.getInt("share_no"));
-					like.setTitle(rset.getString("sahre_title"));
-					like.setRenamed_filename(rset.getString("renamed_filename"));
-					shareLikes.add(like);
-				}
-				
-			}
-			
-		} catch (SQLException e) {
-			throw new MemberException("👻내가 좋아요한 share 조회 오류👻", e);
-		}
-		
-		return shareLikes;
 	}
 	
 	public int selectEmail(Connection conn, String memberEmailId) {
@@ -801,5 +751,136 @@ public class MemberDao {
 		}
 		
 		return totalCount;
+	}
+
+	/**
+	 * 마이페이지 ootd 총 개수
+	 * @param conn
+	 * @return
+	 */
+	public int myOotdTotalCount(Connection conn, String memberId) {
+		// select count(*) from ootd_board where member_id = ?
+		String sql = prop.getProperty("myOotdTotalCount");
+		int totalCount = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 ootd 총 개수 조회 오류👻", e);
+		}
+		
+		return totalCount;
+	}
+
+	/**
+	 * 나의 ootd 좋아요 총 개수
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public int myOotdLikeCount(Connection conn, String memberId) {
+		// select count(*) from ootd_likes where member_id = ?
+		String sql = prop.getProperty("myOotdLikeCount");
+		int totalCount = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new MemberException("👻마이페이지 ootd 좋아요 총 개수 조회 오류👻", e);
+		}
+		
+		return totalCount;
+	}
+
+	/**
+	 * 마이페이지 ootd 게시물 목록 조회
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> selectMyOotdList(Connection conn, Map<String, Object> param) {
+		// select o.*, (select count(*) from ootd_likes where board_no = o.ootd_no) like_count, (select count(*) from ootd_likes where board_no = o.ootd_no and member_id = ?) my_like, (select renamed_filename from OOTD_attachment where board_no = o.ootd_no) img from ( select row_number() over(order by ootd_no desc) rnum, o.* from OOTD_board o where ootd_writer = ? ) o where rnum between ? and ?
+		String sql = prop.getProperty("selectMyOotdList");
+		List<Map<String, Object>> ootdList = new ArrayList<Map<String,Object>>();
+
+		int start = (int)param.get("start");
+		int end = (int)param.get("end");
+		String memberId = (String)param.get("memberId");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberId);
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> ootd = new HashMap<>();
+					ootd.put("no", rset.getInt("OOTD_no"));
+					ootd.put("title", rset.getString("OOTD_title"));
+					ootd.put("likeCount", rset.getInt("like_count"));
+					ootd.put("myLike", rset.getInt("my_like"));
+					ootd.put("img", rset.getString("img"));
+					ootdList.add(ootd);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new ColumnException("👻 마이페이지 ootd 리스트 조회 오류 👻", e);
+		}
+		
+		return ootdList;
+	}
+
+	/**
+	 * 마이페이지 ootd 좋아요 목록 조회
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> selectOotdLike(Connection conn, Map<String, Object> param) {
+		// select m.*, (select renamed_filename from OOTD_attachment where board_no = m.ootd_no) img from (select row_number() over(order by like_no desc) rnum, m.* from (select * from ootd_likes l left join ootd_board b on l.board_no = b.ootd_no) m where member_id = ?) m where rnum between ? and ?
+		String sql = prop.getProperty("selectOotdLike");
+		List<Map<String, Object>> likeList = new ArrayList<Map<String,Object>>();
+
+		int start = (int)param.get("start");
+		int end = (int)param.get("end");
+		String memberId = (String)param.get("memberId");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> ootd = new HashMap<>();
+					ootd.put("no", rset.getInt("OOTD_no"));
+					ootd.put("title", rset.getString("OOTD_title"));
+					ootd.put("likeCount", rset.getInt("like_count"));
+					ootd.put("img", rset.getString("img"));
+					likeList.add(ootd);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new ColumnException("👻 마이페이지 ootd 좋아요 목록 조회 오류 👻", e);
+		}
+		
+		return likeList;
 	}
 }
