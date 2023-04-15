@@ -152,6 +152,8 @@ document.querySelectorAll("#msgBtn").forEach((btn) => {
 document.querySelectorAll("#msgclose").forEach((msg) => {
 	msg.onclick = (e) => {
 		const frm = document.querySelector(".frmwrapper");
+		document.querySelector(".readFrm").style.display = "block";
+		document.querySelector(".answerFrm").style.display = "none";
 		frm.style.visibility = "hidden";
 	};
 });
