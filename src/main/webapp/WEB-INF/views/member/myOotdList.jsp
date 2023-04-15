@@ -17,7 +17,7 @@
 			<h3>나의 OOTD</h3>
 			<div class="img_area">
 				<c:if test="${loginMember.renamed == null}">
-					<img src="${pageContext.request.contextPath}/image/망그러진곰.jpeg" class="profile" />
+					<img src="${pageContext.request.contextPath}/image/profile.png" class="profile" />
 				</c:if>
 				<c:if test="${loginMember.renamed != null}">
 					<img src="${pageContext.request.contextPath}/upload/profile/${loginMember.renamed}" class="profile" />

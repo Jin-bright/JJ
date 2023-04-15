@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sh.obtg.column.model.service.ColumnService;
 
-/**
- * Servlet implementation class ColumnListServlet
- */
 @WebServlet("/column/columnList")
 public class ColumnListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,18 +18,22 @@ public class ColumnListServlet extends HttpServlet {
 	 * 컬럼 총 페이지수
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int totalCount = columnService.getTotalCount();
-		// System.out.println("totalCount" + totalCount);
-		
-		// 전체페이지수 구하기
-		int limit = 5; // 7개만 나왔으면 좋겠다..?
-		int totalPage = (int)Math.ceil((double)totalCount / limit); // 20 / 5 = 총 4페이지다..?
-		// System.out.println("totalPage = " + totalPage);
-		
-		// 응답처리
-		request.setAttribute("totalPage", totalPage);
-		request.getRequestDispatcher("/WEB-INF/views/column/columnList.jsp")
-			.forward(request, response);
+		try {
+			int totalCount = columnService.getTotalCount();
+			
+			// 전체페이지수 구하기
+			int limit = 5; // 7개만 나왔으면 좋겠다..?
+			int totalPage = (int)Math.ceil((double)totalCount / limit); // 20 / 5 = 총 4페이지다..?
+			
+			// 리다이렉트
+			request.setAttribute("totalPage", totalPage);
+			request.getRequestDispatcher("/WEB-INF/views/column/columnList.jsp")
+				.forward(request, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }

@@ -16,6 +16,9 @@ public class AdminUpdateMemberRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 
+	/**
+	 * 사용자 권한 변경 요청
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		

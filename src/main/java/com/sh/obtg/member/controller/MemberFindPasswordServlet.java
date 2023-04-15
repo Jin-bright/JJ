@@ -25,7 +25,7 @@ public class MemberFindPasswordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 사용자 입력값 처리
+			// 사용자 입력값
 			String id = request.getParameter("id");
 			String email = request.getParameter("email");
 			
@@ -75,6 +75,7 @@ public class MemberFindPasswordServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 }

@@ -2,15 +2,15 @@
 #col_enroll {
 	margin: 100px;
 }
-table {
+.enroll-table {
 	border: 3px solid black;
 	margin: 0 auto;
 }
-th, td {
+.enroll-table  th, .enroll-table  td {
     border: 1px solid black;
     border-collapse: collapse;
 }
-th {
+.enroll-table  th {
 	text-align: center;
     font-size: 13.5px;
     padding: 8px 15px;

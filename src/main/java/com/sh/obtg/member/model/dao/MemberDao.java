@@ -60,6 +60,12 @@ public class MemberDao {
 		return member;
 	}
 	
+	/**
+	 * 사용자 정보
+	 * @param rset
+	 * @return
+	 * @throws SQLException
+	 */
 	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
 		Member member = new Member();
 		member.setMemberId(rset.getString("member_id"));
@@ -81,6 +87,13 @@ public class MemberDao {
 		return member;
 	}
 
+	/**
+	 * 사용자 권한 변경
+	 * @param conn
+	 * @param memberId
+	 * @param memberRole
+	 * @return
+	 */
 	public int updateMemberRole(Connection conn, String memberId, String memberRole) {
 		String sql = prop.getProperty("updateMemberRole");
 		int result = 0;
@@ -97,6 +110,13 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	/**
+	 * 사용자 검색
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
 	public List<Member> searchMember(Connection conn, Map<String, String> param) {
 		List<Member> members = new ArrayList<>();
 		String searchType = param.get("searchType"); // member_id | member_name | gender
@@ -120,6 +140,13 @@ public class MemberDao {
 		
 		return members;
 	}
+	
+	/**
+	 * 전체 사용자 조회
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
 	public List<Member> selectAllMember(Connection conn, Map<String, Object> param) {
 		String sql = prop.getProperty("selectAllMember"); // select * from (select row_number() over(order by enroll_date desc) rnum, m.* from member m) where rnum between ? and ?
 		List<Member> members = new ArrayList<>();
@@ -140,13 +167,18 @@ public class MemberDao {
 				}
 			}
 			
-			
 		} catch (SQLException e) {
 			throw new MemberException("관리자 회원목록조회 오류!", e);
 		}
 				
 		return members;
 	}
+	
+	/**
+	 * 전체 사용자수 조회
+	 * @param conn
+	 * @return
+	 */
 	public int selectTotalCount(Connection conn) {
 		String sql = prop.getProperty("selectTotalCount"); // select count(*) from member
 		int totalCount = 0;
@@ -164,6 +196,13 @@ public class MemberDao {
 		
 		return totalCount;
 	}	
+	
+	/**
+	 * 사용자 탈퇴처리
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
 	public int deleteMemberAD(Connection conn, String memberId) {
 		String sql = prop.getProperty("deleteMemberAD");
 		int result = 0;
@@ -177,6 +216,13 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * 사용자 정보 변경
+	 * @param conn
+	 * @param member
+	 * @return
+	 */
 	public int updateMember(Connection conn, Member member) {
 		String sql = prop.getProperty("updateMember");
 		int result = 0;
@@ -201,6 +247,7 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
 	/**
 	 * 회원가입
 	 * @param conn
@@ -254,93 +301,6 @@ public class MemberDao {
 
 		return result;
 	
-	}
-	// 내가 쓴 ootd 게시글 수
-	public int selectMyOotdPostCnt(Connection conn, String memberId) {
-		// select count(*) from ootd_board where ootd_writer = ?
-		String sql = prop.getProperty("selectMyOotdPostCnt");
-		int count = 0;
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while(rset.next())
-					count = rset.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			throw new MemberException("👻내가 쓴 ootd 게시글 수 조회 오류👻", e);
-		}
-		
-		return count;
-	}
-	
-	// 내가 쓴 share 게시글 수
-	public int selectMySharePostCnt(Connection conn, String memberId) {
-		// select count(*) from share_board where member_id = ?
-		String sql = prop.getProperty("selectMySharePostCnt");
-		int count = 0;
-		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, memberId);
-			
-			try (ResultSet rset = pstmt.executeQuery()) {
-				while(rset.next())
-					count = rset.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			throw new MemberException("👻내가 쓴 share 게시글 수 조회 오류👻", e);
-		}
-		
-		return count;
-	}
-	
-	public int selectEmail(Connection conn, String memberEmailId) {
-		int result =0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectEmail");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberEmailId);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				result=rset.getInt("count(*)");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new AdminException("블랙리스트 조회 실패",e);
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return result;
-	}
-	public int selectBlackList(Connection conn, String memberEmailId) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectBlackList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberEmailId);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				result=rset.getInt("count(*)");
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new AdminException("블랙리스트 조회 실패",e);
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return result;
 	}
 
 	// 리팩토링 ver. [made by 정은]
@@ -606,7 +566,7 @@ public class MemberDao {
 	}
 	
 	/**
-	 * 마이페이지 나눔 목록 조회
+	 * 마이페이지 share 목록 조회
 	 * @param conn
 	 * @param param
 	 * @return
@@ -647,7 +607,7 @@ public class MemberDao {
 	}
 	
 	/**
-	 * 마이페이지 나눔 목록 총 개수 조회
+	 * 마이페이지 share 목록 총 개수 조회
 	 * @param conn
 	 * @param memberId
 	 * @return
@@ -674,7 +634,7 @@ public class MemberDao {
 	}
 
 	/**
-	 * 마이페이지 나눔 목록 검색
+	 * 마이페이지 share 목록 검색
 	 * @param conn
 	 * @param param
 	 * @return
@@ -719,7 +679,7 @@ public class MemberDao {
 	}
 
 	/**
-	 * 나눔 목록 검색 총 개수
+	 * 마이페이지 share 목록 검색 총 개수
 	 * @param conn
 	 * @param param
 	 * @return
@@ -882,5 +842,131 @@ public class MemberDao {
 		}
 		
 		return likeList;
+	}
+
+	/**
+	 * 마이페이지 share상태 변경
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public int updateShareStatus(Connection conn, int no) {
+		// update NSHARE_BOARD set product_status = ? where product_id = ?
+		String sql = prop.getProperty("updateShareStatus");
+		int result = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, "거래완료");
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+
+		}
+		catch (Exception e) {
+			throw new MemberException("👻 나눔 상태변경 오류 👻", e);
+		}
+			
+		return result;
+	}
+
+	/**
+	 * 마이페이지 관심목록 조회
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> selectWishList(Connection conn, Map<String, Object> param) {
+		// select s.*, (select product_attachment_renamed_filename from nshare_attachment where product_id = s.product_id) img from (select row_number() over(order by like_no desc) rnum, s.* from (select * from share_likes l left join nshare_board b on l.board_no = b.product_id where l.member_id = ?) s) s where  rnum between ? and ?
+		String sql = prop.getProperty("selectWishList");
+		List<Map<String, Object>> wishList = new ArrayList<Map<String,Object>>();
+		
+		int page = (int) param.get("page"); 
+		int limit = (int) param.get("limit");
+		
+		int start = (page - 1) * limit + 1;
+		int end = page * limit;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, (String)param.get("memberId"));
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> wish = new HashMap<>();
+					wish.put("likeNo", rset.getInt("like_no"));
+					wish.put("boardNo", rset.getInt("board_no"));
+					wish.put("name", rset.getString("product_name"));
+					wish.put("price", rset.getInt("product_price"));
+					wish.put("img", rset.getString("img"));
+					wishList.add(wish);
+				}
+			}
+			
+		} catch (Exception e) {
+			throw new MemberException("👻 마이페이지 관심목록 조회 오류 👻", e);
+		}
+		
+		return wishList;
+	}
+
+	/**
+	 * 마이페지이 관심목록 총개수
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public int myWishListTotalCount(Connection conn, String memberId) {
+		// select count(*) from share_likes where member_id = ?
+		String sql = prop.getProperty("myWishListTotalCount");
+		int totalCount = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					totalCount = rset.getInt(1);
+				}
+			}
+			
+		} catch (Exception e) {
+			throw new MemberException("👻마이페이지 관심목록 총개수 조회 오류👻", e);
+		}
+		
+		return totalCount;
+	}
+
+	/**
+	 * 마이페이지(메인) 관심목록 조회
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectWish(Connection conn, String memberId) {
+		// select s.*, (select product_attachment_renamed_filename from nshare_attachment where product_id = s.product_id) img from (select * from share_likes l left join nshare_board b on l.board_no = b.product_id where l.member_id = ?) s
+		String sql = prop.getProperty("selectWish");
+		List<Map<String, Object>> wishList = new ArrayList<Map<String,Object>>();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					Map<String, Object> wish = new HashMap<>();
+					wish.put("likeNo", rset.getInt("like_no"));
+					wish.put("boardNo", rset.getInt("board_no"));
+					wish.put("name", rset.getString("product_name"));
+					wish.put("price", rset.getInt("product_price"));
+					wish.put("img", rset.getString("img"));
+					wishList.add(wish);
+				}
+			}
+			
+		} catch (Exception e) {
+			throw new MemberException("👻 마이페이지(메인) 관심목록 조회 오류 👻", e);
+		}
+		
+		return wishList;
 	}
 }

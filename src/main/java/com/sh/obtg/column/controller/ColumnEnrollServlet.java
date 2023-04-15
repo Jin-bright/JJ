@@ -13,16 +13,13 @@ import com.sh.obtg.column.model.dto.Column;
 import com.sh.obtg.column.model.service.ColumnService;
 import com.sh.obtg.common.HelloMvcFileRenamePolicy;
 
-/**
- * Servlet implementation class ColumnEnrollServlet
- */
 @WebServlet("/column/columnEnroll")
 public class ColumnEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ColumnService columnService = new ColumnService();
 	
 	/**
-	 * column 작성폼 get 요청
+	 * column 작성폼 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/column/columnEnroll.jsp")
@@ -30,7 +27,7 @@ public class ColumnEnrollServlet extends HttpServlet {
 	}
 
 	/**
-	 * column 저장 post 요청(아직 완성아님 - mutipartRequest 객체 생성해야함)
+	 * column 저장 post 요청
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -42,7 +39,7 @@ public class ColumnEnrollServlet extends HttpServlet {
 			FileRenamePolicy  policy = new HelloMvcFileRenamePolicy();
 			MultipartRequest multiReq = new MultipartRequest(request, saveDircetory, maxPostSize, encoding, policy);
 			
-			// 사용자 입력값 처리
+			// 사용자 입력값
 			String title = multiReq.getParameter("col_title");
 			String subtitle = multiReq.getParameter("col_subtitle");
 			String writer = multiReq.getParameter("col_writer");
@@ -63,7 +60,7 @@ public class ColumnEnrollServlet extends HttpServlet {
 			int result = columnService.insertColumn(column);
 			System.out.println(result > 0 ? "성공" : "실패");
 			
-			// 3. 리다이렉트 - 작성한 글로
+			// 리다이렉트 - 작성한 글로
 			response.sendRedirect(request.getContextPath() + "/column/columnList");
 			
 		} catch (IOException e) {

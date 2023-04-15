@@ -15,30 +15,13 @@ import com.sh.obtg.common.HelloMvcUtils;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.service.MemberService;
 
-/**
- * 페이징
- * 1. content 영역
- * 	- sql문
- *  - 현재페이지 page
- *  - 한페이지당 게시물수 limit
- *  - stard ~ end
- *  
- * 2. pagebar 영역
- * 	- 총게시물수
- *  - 페이지수
- *  - 페이바의 크기
- *  - 현재페이지
- *  - 한페이지당 게시물수
- *  - url
- * 
- */
 @WebServlet("/admin/memberList")
 public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 전체 사용자 정보 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력값 처리
@@ -75,8 +58,3 @@ public class AdminMemberListServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-

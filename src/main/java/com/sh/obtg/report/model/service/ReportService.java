@@ -55,21 +55,6 @@ public class ReportService {
 		return totalCount;
 	}
 
-	// 알림 등록
-//	public int insertNoti(Notification noti) {
-//		Connection conn = getConnection();
-//		int result = 0;
-//		try {
-//			result = reportDao.insertNoti(conn, noti);
-//			commit(conn);
-//		} catch (Exception e) {
-//			rollback(conn);
-//			throw e;
-//		}
-//		
-//		return result;
-//	}
-
 	/**
 	 * 신고 처리
 	 * @param reportNo

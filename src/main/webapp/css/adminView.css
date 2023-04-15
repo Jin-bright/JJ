@@ -89,15 +89,10 @@ i {
 
 .admin__sidepanel {
   position: absolute;
-  top: 53px;
   left: 0;
   z-index: 999;
   width: 200px;
-  height: 948px;
   padding: 25px 0;
-  background: #f9f4d2;
-  margin-top: 235px;
-  border-right: 2px solid;
 }
 
 .admin__sidepanel ul li {
@@ -110,7 +105,7 @@ i {
 }
 
 .admin__sidepanel ul li:hover {
-  background: rgb(253, 187, 51);
+  background: RGB(211, 211, 211);
   cursor: pointer;
 }
 

@@ -22,6 +22,7 @@ public class CheckDuplicate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			// 사용자 입력값
 			String memberId = request.getParameter("memberId");
 			System.out.println("memberId : " + memberId);
 			String email = request.getParameter("email");

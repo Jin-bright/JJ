@@ -18,14 +18,14 @@ public class MemberLoginServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
 	
 	/**
-	 * 로그인폼 doGet요청
+	 * 로그인폼 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 	}
 
 	/**
-	 * 로그인 doPost요청
+	 * 로그인 요청
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

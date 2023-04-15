@@ -4,12 +4,15 @@
 	text-align:center; 
 	padding-left: 200px; 
 }
+.title-box, #pagebar {
+	padding-right: 130px;
+}
 #report_wrap, #report_wrap td, #report_wrap th {
 	border-collapse: collapse;
 }
 #report_wrap {
 	width: 85%;
-    margin: 0 0 10px 35px;
+    margin: 0 0 80px 35px;
     padding: 3px;
 }
 #report_wrap thead tr{

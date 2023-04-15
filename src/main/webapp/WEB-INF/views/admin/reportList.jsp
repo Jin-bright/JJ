@@ -10,12 +10,14 @@
 	List<Report> reports = (List<Report>)request.getAttribute("reports");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ include file="/WEB-INF/views/common/adminView.jsp" %>
+<%@ include file="/WEB-INF/views/admin/adminView.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/reportList.css" />
 <section id="report-container">
 	<br /><br /><br /><br />
-	<h1 style="font-size: 30px;">신고관리</h1>
-	<p style="font-size: 13px;">게시번호를 클릭하여 이동해 보세요!</p>
+	<div class="title-box">
+		<h1 style="font-size: 30px;">신고관리</h1>
+		<p style="font-size: 13px;">게시번호를 클릭하여 이동해 보세요!</p>
+	</div>
 	<br /><br /><br />
 	<table id="report_wrap">
 		<thead>
@@ -89,7 +91,7 @@
 		</tbody>
 	</table>
 
-<div id="pagebar"  style="margin-top : 390px; cursor: pointer;">
+<div id="pagebar"  style="cursor: pointer;">
 	<%= request.getAttribute("pagebar") %>
 </div>
 </section>

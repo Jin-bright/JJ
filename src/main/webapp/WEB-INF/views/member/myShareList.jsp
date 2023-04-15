@@ -10,20 +10,12 @@
 <jsp:include page="/WEB-INF/views/member/subMenu.jsp" />
 	<div class="content_area">
 		<div class="share_wrap">
-			<h3>나눔 목록</h3>
+			<h3>상품 목록</h3>
 			<div class="search_wrap">
                 <div class="status_filter">
                 	<button class="my_btn status_btn" data-status = "거래전">거래전</button>
-                	<button class="my_btn status_btn" data-status = "거래완">거래완료</button>
+                	<button class="my_btn status_btn" data-status = "거래완료">거래완료</button>
                 </div>
-                <!-- 
-                <div class="search_filter">
-	                <select name="search" id="search" required>
-	                    <option value="desc" selected>최신순</option>
-	                    <option value="asc">오래된순</option>
-	                </select>
-                </div> 
-                -->
 			</div>
 			<div class="share_content">
 				<c:if test="${not empty shareList}">
@@ -48,7 +40,7 @@
 									</p>
 								</a>
 								<div class="box_etc">
-									<p class="box_btn">${share.status}</p>
+									<p class="box_btn" data-name="${share.name}" data-no="${share.no}">${share.status}</p>
 									<p class="box_date">${share.regDate}</p>
 								</div>
 							</td>
@@ -73,11 +65,44 @@
 		</div>
 	</div>
 </section>
+<!-- 나눔상태 업데이트 히든폼 -->
+<form name="shareStatusUpdateFrm" method="post" action="${pageContext.request.contextPath}/member/shareStatusUpdate">
+	<input type="hidden" name="no" id="no">
+</form>
 <script>
+/* 거래전 | 거래상태 - 상태 선택해 모아보기 */
 document.querySelectorAll(".status_btn").forEach((btn) => {
 	btn.onclick = (e) => {
 		console.log("거래상태 : ", e.target.dataset.status);
 		location.href = "${pageContext.request.contextPath}/member/shareSearch?status=" + e.target.dataset.status;
+	};
+});
+
+/* 거래 상태 변경 */
+document.querySelectorAll(".box_btn").forEach((btn) => {
+	btn.onclick = (e) => {
+		const no = e.target.dataset.no;
+		const status = e.target.innerText;
+		// 물품이름 길이제어
+		const _name = e.target.dataset.name;
+		let name;
+		if(_name.length > 15){
+			name = _name.substr(0,14) + "...";
+		}
+		else name = _name;
+		
+		// 이미 거래가 완료된 물품은 상태를 변경할 수 없음
+		if(status == '거래완료') {
+			alert("이미 거래가 완료된 상품입니다.");
+			return;
+		}
+		
+		// 상태변경전 재확인
+		if(confirm(`[\${name}]의 상태를 거래완료로 변경하시겠습니까?
+거래완료된 상품은 거래전으로 상태를 변경할 수 없습니다.`)){
+			document.querySelector("#no").value = no;
+			document.shareStatusUpdateFrm.submit();
+		}
 	};
 });
 </script>

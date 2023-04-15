@@ -7,8 +7,8 @@
 			<strong class="sub_title">게시글 정보</strong>
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/member/myOotd">나의 ootd</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/myShare">나눔 목록</a></li>
-				<li>관심 물품</li>
+				<li><a href="${pageContext.request.contextPath}/member/myShare">상품 목록</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/myWishList">관심 상품</a></li>
 			</ul>
 		</div>
 		<div class="sub_list">

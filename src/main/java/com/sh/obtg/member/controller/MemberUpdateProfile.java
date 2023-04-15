@@ -24,7 +24,7 @@ public class MemberUpdateProfile extends HttpServlet {
 	private MemberService memberService = new MemberService();
 
 	/**
-	 * 프로필 사진 변경 doPost요청
+	 * 프로필 사진 변경
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -36,7 +36,7 @@ public class MemberUpdateProfile extends HttpServlet {
 			FileRenamePolicy  policy = new HelloMvcFileRenamePolicy();
 			MultipartRequest multiReq = new MultipartRequest(request, saveDircetory, maxPostSize, encoding, policy);
 			
-			// 1. 사용자 입력값 처리
+			// 사용자 입력값
 			Member member = (Member)request.getSession().getAttribute("loginMember");
 			String memberId = member.getMemberId();
 			String original = multiReq.getOriginalFileName("profile");
@@ -47,6 +47,7 @@ public class MemberUpdateProfile extends HttpServlet {
 			param.put("original", original);
 			param.put("renamed", renamed);
 			
+			// 업무로직
 			int result = memberService.updateProfile(param);
 			
 			if(result > 0) {
@@ -63,6 +64,7 @@ public class MemberUpdateProfile extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 

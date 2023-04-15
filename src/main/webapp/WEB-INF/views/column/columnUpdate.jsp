@@ -16,7 +16,7 @@
 <%
 	Column column = (Column)request.getAttribute("column");
 %>
-<section id="col_update">
+<section id="col_enroll">
 	<h2 style="text-align: center; padding: 20px; font-weight: bold">컬럼 수정폼</h2>
 	<form 
 		name="columnUpdateFrm"
@@ -24,7 +24,7 @@
 		enctype="multipart/form-data"
 		method="post"		
 	>
-		<table>
+		<table class="enroll-table">
 			<tbody>
 				<tr>
                     <th style="text-align: center;">제목</th>
@@ -154,16 +154,11 @@ $(document).ready(function() {
 		['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
 		// 글자색
 		['color', ['forecolor','color']],
-		// 표만들기
-		['table', ['table']],
 		// 글머리 기호, 번호매기기, 문단정렬
 		['para', ['ul', 'ol', 'paragraph']],
 		// 줄간격
 		['height', ['height']],
-		// 그림첨부, 링크만들기, 동영상첨부
-		['insert',['picture','link','video']],
-		// 코드보기, 확대해서보기, 도움말
-		['view', ['codeview','fullscreen', 'help']]
+
 	];
 
 	var setting = {
