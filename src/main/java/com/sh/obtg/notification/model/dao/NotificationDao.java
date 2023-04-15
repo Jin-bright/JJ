@@ -30,6 +30,12 @@ public class NotificationDao {
 			System.out.println("notification 쿼리 로드 완료! - " + prop);
 		}
 	
+		/**
+		 * 알림 내역
+		 * @param rset
+		 * @return
+		 * @throws SQLException
+		 */
 		public Notification handleNotiResultSet(ResultSet rset) throws SQLException {
 			Notification noti = new Notification();
 			noti.setNo(rset.getInt("no"));
@@ -41,7 +47,6 @@ public class NotificationDao {
 						null);
 			return noti;
 		}
-		
 		
 		/**
 		 * 알림 내역 조회

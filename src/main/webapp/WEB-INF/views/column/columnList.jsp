@@ -5,12 +5,13 @@
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/columnList.css" />  
-
 	<% 
 		if(loginMember != null 
 			&& loginMember.getMemberRole() == MemberRole.A){ 
 	%>
-	<img src="<%= request.getContextPath() %>/image/quill-pen.png" alt="" class="pen" />
+	<div class="btn-box">
+		<button class="pen my_btn">글쓰기</button>
+	</div>
 	<% } %>
 	<section id="col_container">
 	</section>
@@ -24,12 +25,14 @@ window.addEventListener('load', () => {
 	getPage(1);
 });
 
+/* 더보기 클릭시 */
 document.querySelector("#btn-more").addEventListener('click', () =>{
 	const page = document.querySelector("#page");
 	
 	getPage(Number(page.innerText) + 1); // Number("1") + 1 -> "2"
 });
 
+/* 새로운 컬럼 불러오기 */
 const getPage = (page) => {
 	$.ajax({
 		url : "<%= request.getContextPath() %>/column/morePage",

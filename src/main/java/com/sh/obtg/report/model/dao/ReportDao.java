@@ -123,25 +123,6 @@ private Properties prop = new Properties();
 		return totalCount;
 	}
 
-//	// 알림 등록
-//	public int insertNoti(Connection conn, Notification noti) {
-//		// insert into noti(no, receiver, message) values (seq_noti_no.nextval, ?, ?)
-//		String sql = prop.getProperty("insertNoti");
-//		int result = 0;
-//		
-//		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//			pstmt.setString(1, noti.getReceiver());
-//			pstmt.setString(2, noti.getMessage());
-//			
-//			result = pstmt.executeUpdate();
-//			
-//		} catch (SQLException e) {
-//			throw new ReportException("👻신고처리결과 알림 등록 오류👻", e);
-//		}
-//		
-//		return result;
-//	}
-
 	/**
 	 * 신고 처리
 	 * @param conn

@@ -33,6 +33,12 @@ public class MemberService {
 		return member;
 	}
 	
+	/**
+	 * 사용자 권한 변경
+	 * @param memberId
+	 * @param memberRole
+	 * @return
+	 */
 	public int updateMemberRole(String memberId, String memberRole) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -48,6 +54,11 @@ public class MemberService {
 		return result;
 	}
 	
+	/**
+	 * 사용자 검색
+	 * @param param
+	 * @return
+	 */
 	public List<Member> searchMember(Map<String, String> param) {
 		Connection conn = getConnection();
 		List<Member> members = memberDao.searchMember(conn, param);
@@ -55,6 +66,11 @@ public class MemberService {
 		return members;
 	}
 	
+	/**
+	 * 모든 사용자 조회
+	 * @param param
+	 * @return
+	 */
 	public List<Member> selectAllMember(Map<String, Object> param) {
 		Connection conn = getConnection();
 		List<Member> members = memberDao.selectAllMember(conn, param);
@@ -62,12 +78,22 @@ public class MemberService {
 		return members;
 	}
 	
+	/**
+	 * 모든 사용자수 조회
+	 * @return
+	 */
 	public int selectTotalCount() {
 		Connection conn = getConnection();
 		int totalCount = memberDao.selectTotalCount(conn);
 		close(conn);
 		return totalCount;
 	}
+	
+	/**
+	 * 사용자 탈퇴처리
+	 * @param memberId
+	 * @return
+	 */
 	public int deleteMemberAD(String memberId) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -99,63 +125,22 @@ public class MemberService {
 		} finally {
 			close(conn);
 		}
-		
 		return result;
 	}
 	
-	
+	/**
+	 * 사용자 탈퇴
+	 * @param memberId
+	 * @return
+	 */
 	public int deleteMember(String memberId) {
 		int result = 0;
-		// 1. Connection객체 생성
 		Connection conn = getConnection();
 		try {
-			// 2. dao 요청
 			result = memberDao.deleteMember(conn, memberId);
-			// 3. 트랜잭션 처리
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
-			throw e; // controller 통보용
-		} finally {
-			// 4. Connection객체 반환
-			close(conn);
-		}
-		return result;
-	}
-	
-	// 내가 쓴 글이 몇개인가 조회(ootd + share)
-	public int getMyPostTotalCount(String memberId) {
-		Connection conn = getConnection();
-		int ootdCnt = memberDao.selectMyOotdPostCnt(conn, memberId);
-		int shareCnt = memberDao.selectMySharePostCnt(conn, memberId);
-		close(conn);
-		return ootdCnt + shareCnt;
-	}
-	
-	
-	// 내가 쓴 share글 수 조회
-	public int getMySharePostCnt(String memberId) {
-		Connection conn = getConnection();
-		int shareCnt = memberDao.selectMySharePostCnt(conn, memberId);
-		close(conn);
-		return shareCnt;
-	}
-	
-	// 내가 쓴 ootd글 수 조회
-	public int getMyOotdPostCnt(String memberId) {
-		Connection conn = getConnection();
-		int ootdCnt = memberDao.selectMyOotdPostCnt(conn, memberId);
-		close(conn);
-		return ootdCnt;
-	}
-	
-	// 이메일 조회
-	public int selectEmail(String memberEmailId) {
-		int result = 0;
-		Connection conn = getConnection();
-		try {
-			result = memberDao.selectEmail(conn, memberEmailId);
-		} catch (Exception e) {
 			throw e;
 		} finally {
 			close(conn);
@@ -163,19 +148,6 @@ public class MemberService {
 		return result;
 	}
 	
-	public int selectBlackList(String memberEmailId) {
-		int result = 0;
-		Connection conn = getConnection();
-		try {
-			result = memberDao.selectBlackList(conn, memberEmailId);
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close(conn);
-		}
-		return result;
-	}
-
 	/**
 	 * 아이디 찾기
 	 * @param email
@@ -249,7 +221,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 회원 정보 수정
+	 * 마이페이지 회원 정보 수정
 	 * @param param
 	 * @return
 	 */
@@ -270,7 +242,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 프로필 사진 변경
+	 * 마이페이지 프로필 사진 변경
 	 * @param param
 	 * @return
 	 */
@@ -290,6 +262,11 @@ public class MemberService {
 		return result;
 	}
 
+	/**
+	 * 마이페이지 share 목록 조회
+	 * @param param
+	 * @return
+	 */
 	public List<Map<String, Object>> selectMyShare(Map<String, Object> param) {
 		Connection conn = getConnection();
 		List<Map<String, Object>> shareList = memberDao.selectMyShare(conn, param);
@@ -297,6 +274,11 @@ public class MemberService {
 		return shareList;
 	}
 
+	/**
+	 * 마이페이지 share 목록 총 개수
+	 * @param memberId
+	 * @return
+	 */
 	public int myShareTotalCount(String memberId) {
 		Connection conn = getConnection();
 		int totalCount = memberDao.myShareTotalCount(conn, memberId);
@@ -305,7 +287,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 마이페이지 나눔 목록 검색
+	 * 마이페이지 share 목록 검색
 	 * @param param
 	 * @return
 	 */
@@ -317,7 +299,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 마이페이지 나눔 목록 총 개수 
+	 * 마이페이지 share 목록 검색 총 개수 
 	 * @param keyParam
 	 * @return
 	 */
@@ -352,7 +334,7 @@ public class MemberService {
 	}
 	
 	/**
-	 * 나의 ootd 게시물
+	 * 마이페이지 ootd 목록 조회
 	 * @param param
 	 * @return
 	 */
@@ -376,7 +358,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 마이페이지 나눔상태 변경
+	 * 마이페이지 share 상태변경
 	 * @param no
 	 * @return
 	 */

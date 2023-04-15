@@ -28,15 +28,22 @@ public class ColumnUpdateServlet extends HttpServlet {
 	 * 컬럼 수정폼 get요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 사용자 입력값
-		int no = Integer.parseInt(request.getParameter("no"));
-		// System.out.println(no);
-		
-		Column column = columnService.selectOneColumn(no);
-		
-		request.setAttribute("column", column);
-		request.getRequestDispatcher("/WEB-INF/views/column/columnUpdate.jsp")
-			.forward(request, response);
+		try {
+			// 사용자 입력값
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			// 업무로직
+			Column column = columnService.selectOneColumn(no);
+			
+			// forward
+			request.setAttribute("column", column);
+			request.getRequestDispatcher("/WEB-INF/views/column/columnUpdate.jsp")
+				.forward(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 

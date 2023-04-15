@@ -23,7 +23,7 @@ public class MemberProfileServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
 
 	/**
-	 * 프로필 조회 doGet요청
+	 * 프로필폼 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -45,7 +45,7 @@ public class MemberProfileServlet extends HttpServlet {
 	}
 
 	/**
-	 * 프로필 수정 doPost요청
+	 * 프로필 수정 요청
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

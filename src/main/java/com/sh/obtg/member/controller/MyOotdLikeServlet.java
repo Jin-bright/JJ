@@ -26,12 +26,11 @@ public class MyOotdLikeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 사용자정보
+			// 사용자입력값
 			HttpSession session = request.getSession();
 			Member logiMember = (Member)session.getAttribute("loginMember");
 			String memberId = logiMember.getMemberId();
 			
-			// 사용자입력값 처리
 			int page = Integer.parseInt(request.getParameter("page"));
 			int limit = 6;
 			
@@ -53,6 +52,7 @@ public class MyOotdLikeServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 

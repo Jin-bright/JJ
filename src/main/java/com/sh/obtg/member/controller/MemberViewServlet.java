@@ -20,10 +20,11 @@ public class MemberViewServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
 
 	/**
-	 * 마이페이지 doGet요청
+	 * 마이페이지 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			// 사용자 입력값
 			HttpSession session = request.getSession();
 			Member logiMember = (Member)session.getAttribute("loginMember");
 			String memberId = logiMember.getMemberId();
@@ -40,9 +41,10 @@ public class MemberViewServlet extends HttpServlet {
 			List<Map<String, Object>> wishList = memberService.selectWish(memberId);
 			System.out.println(wishList);
 			
-			// forward
+			// 프로필 변경 후 정보 업데이트를 위해
 			Member member = memberService.selectOneMember(memberId);
 			
+			// forward
 			request.setAttribute("loginMember", member);
 			request.setAttribute("ootdList", ootdList);
 			request.setAttribute("shareList", shareList);
@@ -52,6 +54,7 @@ public class MemberViewServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}

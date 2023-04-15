@@ -16,7 +16,7 @@ public class MemberFindIdServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
 
 	/**
-	 * 아이디찾기폼 doGet요청
+	 * 아이디찾기 폼 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -44,6 +44,7 @@ public class MemberFindIdServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}

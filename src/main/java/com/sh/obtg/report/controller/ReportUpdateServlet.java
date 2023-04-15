@@ -11,9 +11,6 @@ import com.sh.obtg.notification.model.dto.Notification;
 import com.sh.obtg.notification.model.service.NotificationService;
 import com.sh.obtg.report.model.service.ReportService;
 
-/**
- * Servlet implementation class ReportUpdateServlet
- */
 @WebServlet("/report/reportUpdate")
 public class ReportUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +18,7 @@ public class ReportUpdateServlet extends HttpServlet {
 	private NotificationService notificationService = new NotificationService();
 	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 신고 처리 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {

@@ -25,26 +25,28 @@ public class MemberEnrollServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
        
 	/**
-	 * 회원가입 폼 doGet요청
+	 * 회원가입 폼 요청
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// style 테이블 조회
+			// 업무로직 -  style 테이블 조회
 			List<Style> styleList = memberService.selectStyleList();
 			System.out.println(styleList);
 			
+			// forward
 			request.setAttribute("styleList", styleList);
 			request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp")
 				.forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}
 
 	/**
-	 * 회원정보 입력 doPost요청
+	 * 회원 정보 저장
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -82,7 +84,6 @@ public class MemberEnrollServlet extends HttpServlet {
 			System.out.println("회원가입" + (result > 0 ? "성공!" : "실패ㅠ"));
 			
 			// 리다이렉트
-			// 이거 왜.. session으로 하면 되고 request로 하면 안되는걸깜..?
 			request.getSession().setAttribute("msg", "OBTG의 회원이 되신걸 환영합니다!");
 			response.sendRedirect(request.getContextPath() + "/");
 			

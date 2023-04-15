@@ -26,7 +26,7 @@ public class MyShareListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 사용자 입력값 처리
+			// 사용자 입력값
 			Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 			final int limit = 8;
 			int page = 1; // 기본값
@@ -43,7 +43,7 @@ public class MyShareListServlet extends HttpServlet {
 			param.put("memberId", loginMember.getMemberId());
 			System.out.println("param = " + param);
 					
-			// 2. 업무로직
+			// 업무로직
 			List<Map<String, Object>> shareList = memberService.selectMyShare(param);
 			System.out.println(shareList);
 			
@@ -53,10 +53,9 @@ public class MyShareListServlet extends HttpServlet {
 			String url = request.getRequestURI();
 			String pagebar = HelloMvcUtils.getPagebar(page, limit, totalCount, url);
 			
+			// forward
 			request.setAttribute("shareList", shareList);
 			request.setAttribute("pagebar", pagebar);
-			
-			// 3. jsp 포워딩
 			request.getRequestDispatcher("/WEB-INF/views/member/myShareList.jsp")
 					.forward(request, response);
 			

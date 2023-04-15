@@ -16,14 +16,6 @@
                 	<button class="my_btn status_btn" data-status = "거래전">거래전</button>
                 	<button class="my_btn status_btn" data-status = "거래완료">거래완료</button>
                 </div>
-                <!-- 
-                <div class="search_filter">
-	                <select name="search" id="search" required>
-	                    <option value="desc" selected>최신순</option>
-	                    <option value="asc">오래된순</option>
-	                </select>
-                </div> 
-                -->
 			</div>
 			<div class="share_content">
 				<c:if test="${not empty shareList}">

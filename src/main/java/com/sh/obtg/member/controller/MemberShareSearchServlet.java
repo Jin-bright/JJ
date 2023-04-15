@@ -21,11 +21,11 @@ public class MemberShareSearchServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
 
 	/**
-	 * 
+	 * 나눔목록 상태에 따른 검색
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 사용자 입력값 처리
+			// 사용자 입력값
 			Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 			String status = null;
 			try {
@@ -46,7 +46,7 @@ public class MemberShareSearchServlet extends HttpServlet {
 			if(sort == null) sort = "desc";
 			
 			String query = request.getQueryString();
-			// &page= 가 반복적으로 나오는걸 방지 - 이렇게 하는게 맞남ㅎ,,
+			// &page= 가 반복적으로 나오는걸 방지
 			if(query.contains("&page=" + page)) {
 				query = query.replace("&page=" + page, "");
 			}
@@ -59,7 +59,7 @@ public class MemberShareSearchServlet extends HttpServlet {
 			param.put("memberId", loginMember.getMemberId());
 			param.put("sort", sort);
 			
-			// 2. 업무로직
+			// 업무로직
 			int totalCount = 0;
 			List<Map<String, Object>> shareList = null;
 			
@@ -78,22 +78,18 @@ public class MemberShareSearchServlet extends HttpServlet {
 				totalCount = memberService.myShareTotalCount(keyParam);
 			}
 			
-			// 정렬만 넘어왔을때
-//			if(status == null && sort != null) {
-//				shareList = memberService.selectMyShare(param);
-//			}
-			
 			String pagebar = HelloMvcUtils.getPagebar(page, limit, totalCount, url, status);
 			
 			request.setAttribute("shareList", shareList);
 			request.setAttribute("pagebar", pagebar);
 			
-			// 3. jsp 포워딩
+			// forward
 			request.getRequestDispatcher("/WEB-INF/views/member/myShareList.jsp")
 				.forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 

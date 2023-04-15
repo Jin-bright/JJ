@@ -47,13 +47,24 @@
 	font-size: 1em;
 	padding-top: .5em;
 }
-
-.pen {
-	display: inline-block;
-	width: 40px;
-	height: 50px;
-	margin: 1em 0 0 90em;
-	cursor: pointer;
+.btn-box {
+    position: absolute;
+    right: 100px;
+}
+.my_btn {
+	border: 1px solid #d3d3d3;
+	color: rgba(34,34,34,.8);
+	margin-top: 12px;
+	height: 33px;
+	line-height: 34px;
+	border-radius: 10px;
+	padding: 0 14px;
+	background-color: #fff;
+	transition-duration: 0.2s;
+}
+.my_btn:hover {
+	transition-duration: 0.2s;
+	background-color: #d3d3d3;
 }
 #btn-more {
 	border-style: none;
@@ -66,5 +77,5 @@
 	font-weight: 500;
 }
 #btn-more:hover {
-	background: #fa807266;
+	background: #F2F3F6;
 }

@@ -16,7 +16,9 @@ public class AdminMemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 
-	
+	/**
+	 * 사용자 탈퇴 처리
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 입력값
 		String memberId = request.getParameter("memberId");
@@ -36,6 +38,5 @@ public class AdminMemberDeleteServlet extends HttpServlet {
 		String referer = request.getHeader("Referer");
 		response.sendRedirect(referer);
 	}
-
 
 }

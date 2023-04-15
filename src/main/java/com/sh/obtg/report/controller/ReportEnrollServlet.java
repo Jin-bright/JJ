@@ -11,16 +11,13 @@ import com.sh.obtg.report.model.dto.Reason;
 import com.sh.obtg.report.model.dto.Report;
 import com.sh.obtg.report.model.service.ReportService;
 
-/**
- * Servlet implementation class ReportEnrollServlet
- */
 @WebServlet("/report/reportEnroll")
 public class ReportEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ReportService reportService = new ReportService();
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 신고내역 등록
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -29,8 +26,6 @@ public class ReportEnrollServlet extends HttpServlet {
 			
 			// ootd게시판인지 share 게시판인지 구분용
 			String no = request.getParameter("boardNo");
-//			String n = String.valueOf(_no);
-//			int no = Integer.parseInt(n.substring(3));
 			System.out.println("신고가 접수된 번호 = " + no);
 			
 			String _reason = request.getParameterValues("reason")[0];
@@ -82,6 +77,7 @@ public class ReportEnrollServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}	
 	}
 

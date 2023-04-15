@@ -34,11 +34,13 @@ public class MyOotdLikeCountServlet extends HttpServlet {
 			int limit = 6; 
 			int myLikeTotalPage = (int)Math.ceil((double)myOotdLikeCount / limit);
 			
+			// 응답처리 - json
 			response.setContentType("application/json; charset=utf-8");
 			new Gson().toJson(myLikeTotalPage, response.getWriter());	
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 

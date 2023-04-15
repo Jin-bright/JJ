@@ -24,7 +24,7 @@
 			<div class="user_profile">
 				<div class="img_box">
 					<c:if test="${loginMember.renamed == null}">
-						<img src="${pageContext.request.contextPath}/image/망그러진곰.jpeg" class="my_profile"/>
+						<img src="${pageContext.request.contextPath}/image/profile.png" class="my_profile"/>
 					</c:if>
 					<c:if test="${loginMember.renamed != null}">
 						<img src="${pageContext.request.contextPath}/upload/profile/${loginMember.renamed}" class="my_profile"/>

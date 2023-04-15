@@ -15,38 +15,33 @@ import com.google.gson.Gson;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.notification.model.service.NotificationService;
 
-/**
- * Servlet implementation class NotificationUpdate
- */
 @WebServlet("/notification/notificationUpdate")
 public class NotificationUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NotificationService notificationService = new NotificationService();
 	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 알림 읽음 처리
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			System.out.println("읽음 처리하러 왔니?");
+			// 사용자 입력값
 			String memberId = request.getParameter("receiver");
-			System.out.println("[알림]" + memberId);
 			
+			// 업무로직
 			int result = notificationService.updateNoti(memberId);
 			//System.out.println(result > 0 ? "알림 업뎃 성공" : "알림 업뎃 실패");
-		
-			
 
 			Map<String, Object> map = new HashMap<>();
 			map.put("result", "알림 업뎃 성공");
 			
-			
+			// 응답처리 - json
 			response.setContentType("application/json; charset=utf-8");
 			new Gson().toJson(result, response.getWriter());
-
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}

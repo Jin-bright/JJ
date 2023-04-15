@@ -11,16 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.sh.obtg.column.model.dto.Column;
 import com.sh.obtg.column.model.service.ColumnService;
 
-/**
- * Servlet implementation class ColumnDeleteServlet
- */
 @WebServlet("/column/columnDelete")
 public class ColumnDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ColumnService columnService = new ColumnService();
 
 	/**
-	 * 컬럼 삭제 post요청
+	 * 컬럼 삭제 요청
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -29,7 +26,6 @@ public class ColumnDeleteServlet extends HttpServlet {
 			
 			// 업무로직 delete obtg_column where no = ?
 			String delImg = columnService.selectOneColumn(no).getRenamedFilename();
-			
 			int result = columnService.deleteColumn(no);
 			System.out.println(result > 0 ? "컬럼 삭제 완료!" : "컬럼 삭제 실패!");
 			
@@ -40,12 +36,12 @@ public class ColumnDeleteServlet extends HttpServlet {
 				System.out.println(bool ? "이미지 삭제 완료!" : "이미지 삭제 실패!");
 			}
 			
-			// view단 처리
+			// 리다이렉트
 			response.sendRedirect(request.getContextPath() + "/column/columnList");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		} 
 	}
-
 }

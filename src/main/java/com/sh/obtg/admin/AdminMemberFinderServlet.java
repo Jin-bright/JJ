@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.service.MemberService;
 
-
 @WebServlet("/admin/memberFinder")
 public class AdminMemberFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 	
-
+	/**
+	 * 사용자 검색
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력값 가져오기 - searchType, searchKeyword
 		String searchType = request.getParameter("searchType");

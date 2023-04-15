@@ -21,7 +21,7 @@
 		enctype="multipart/form-data"
 		method="post"		
 	>
-		<table>
+		<table class="enroll-table">
 			<tbody>
 				<tr>
                     <th style="text-align: center;">제목</th>
@@ -87,7 +87,6 @@ document.querySelector("#col_file").addEventListener('change', (e) => {
 	}
 });
 
-
 /* 유효성검사 - 글자수제어하기 성공하면 같이 넣어 놓자,,, */
 document.columnFrm.addEventListener('submit', (e) => {
 	const title = e.target.col_title; // name 값을 입력해줘야하나보다
@@ -149,16 +148,10 @@ $(document).ready(function() {
 		['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
 		// 글자색
 		['color', ['forecolor','color']],
-		// 표만들기
-		['table', ['table']],
 		// 글머리 기호, 번호매기기, 문단정렬
 		['para', ['ul', 'ol', 'paragraph']],
 		// 줄간격
 		['height', ['height']],
-		// 그림첨부, 링크만들기, 동영상첨부
-		['insert',['picture','link','video']],
-		// 코드보기, 확대해서보기, 도움말
-		['view', ['codeview','fullscreen', 'help']]
 	];
 
 	var setting = {
