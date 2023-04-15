@@ -75,7 +75,7 @@
                         </div>
                         <div class="text">패션을 통해 자신을 드러내는 세상. <br/>쇼핑몰 사이트는 넘쳐나는데 오늘 입은 옷을 공유하고 나의 소소한 생각을 공유하는 사이트는 다소 부족합니다. <br />
                         	저희 OBTG는 이러한 생각에 착안하여 누구나 쉽게 관심가지고 즐길 수 있는 패션을 다양한 사람들과 공유할 수 있는 사이트를 개발하였습니다. </div>
-                        <div class="email"><span class="theme_color" style="font-size:20px; color:orange"><a style = "color:orange" href="<%=request.getContextPath()%>/ootd/ootdWholeList"><b>OOTD</b></a></span>로 이동</div>
+                        <div class="email"><span class="theme_color" style="font-size:20px; color:orange"><a style = "color:orange" href="<%=request.getContextPath()%>/ootd/newOotdWholeList"><b>OOTD</b></a></span>로 이동</div>
 <!--                         <a href="about.html" class="theme-btn btn-style-three">Read More</a> -->
                     </div>
                 </div>
@@ -109,7 +109,7 @@
 	                 </p>
                  </div>
                  <div class="email"><span class="theme_color2" style="margin-left : 400px; width:200px">
-                 	<a href="<%=request.getContextPath()%>/share/shareWholeList" style="color:orange"><b>&nbsp;&nbsp;SHARE&nbsp; </b></a></span> 로 이동
+                 	<a href="<%=request.getContextPath()%>/share/newShareWholeList" style="color:orange"><b>&nbsp;&nbsp;SHARE&nbsp; </b></a></span> 로 이동
                  </div><br /><br />
        </div>
   </div>
@@ -226,6 +226,7 @@ input#img-3:checked ~ .nav-dots label#img-dot-3,
 }
  
  </style> 
+ <%-- 
   <ul class="slides" style="margin-left: 500px; margin-top : 50px; bolor: 2px solid black">
   
     <input type="radio" name="radio-btn" id="img-1" checked />
@@ -282,8 +283,9 @@ input#img-3:checked ~ .nav-dots label#img-dot-3,
        	<img src="<%=request.getContextPath()%>/image/ootd_sample24.png" style="width : 400px; height:700px">
            <div class="overlay-box"></div>
        </div>
-</div><br /><br /><br /><br /><br />
-
+</div>
+--%>
+<br /><br /><br /><br /><br />
 <jsp:include page="/WEB-INF/views/common/alarm.jsp" />
 
 <script>

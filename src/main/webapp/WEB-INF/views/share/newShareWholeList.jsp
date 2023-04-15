@@ -209,11 +209,11 @@
 
 <!--  검색용 더보기 버튼 1  -->
 <div id="fipage" >
-	<span id="page" name="page" >1</span> <span style="margin-left:10px"> >>  </span>
+	<span id="page" name="page" >1</span> <span style="margin-left:10px"> 더보기  </span>
 </div>
 <!--  검색용 더보기 버튼 2 -->
 <div id="cspage" >
-	현재(<span id="page" name="page" >1</span><span style="margin-left:10px">페이지) >> </span>
+	<span id="page" name="page" >1</span><span style="margin-left:10px"> 더보기 </span>
 </div>
 
 <!-- <script>
@@ -335,6 +335,10 @@ const searchClothes = (e) => {
 					p.style.display = "block";
 				}
 				if( data.shareAttachments.length < 12 ){
+					const p =  document.querySelector("#fipage");
+					p.style.display = "none";
+				}
+				if(  data.toalPage == 1 ){
 					const p =  document.querySelector("#fipage");
 					p.style.display = "none";
 				}
@@ -481,6 +485,11 @@ const searchColorStyle = (e) => {
 					const p =  document.querySelector("#cspage");
 					p.style.display = "none";
 				}
+				if(  data.colorstyletotalPage == 1 ){
+					const p =  document.querySelector("#cspage");
+					p.style.display = "none";
+				}
+
 				
 				//카테고리
 				let v = data.shareboards[i].subcategoryId;

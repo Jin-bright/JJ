@@ -131,20 +131,20 @@
 			</tr>
 		</tbody>
 		</table>
-	</div>
-</section>
- 	<!--  수정 /삭제하기  -->
+		 	<!--  수정 /삭제하기  -->
  	<%
 		boolean canEdit = loginMember != null && 
 							(loginMember.getMemberRole() == MemberRole.A ||
 								loginMember.getMemberId().equals( shareBoard.getMemberId() ));
 		if(canEdit){
 	%>
-	<button class ="sharemodidel"  type="submit" onclick="updateBoard()"> 수정하기 </button>
+	<button class ="sharemodidel" id="modii" type="submit" onclick="updateBoard()"> 수정하기 </button>
 	<button class ="sharemodidel"  id="dell" type="submit"  onclick="deleteBoard()"> 삭제하기 </button>
 	<% 
 		}
 	%>
+	</div>
+</section>	
 <!-- 게시글 삭제하기 히든폼 ( 관리자 & 작성자에게만 노출 ) -->	
 <form action="${pageContext.request.contextPath}/share/newShareDelete" name = "boardDeleteFrm" method="post">
 	<input type="hidden" name="no" value="${shareBoard.productId}" />
@@ -245,6 +245,7 @@
 <form name="frmPopup">
 	<input type="hidden" name="memberID" >
 </form>
+
 <script>
 function open_pop( ${shareBoard.getMemberId()} ){
     const frmPop= document.frmPopup;
@@ -255,7 +256,7 @@ function open_pop( ${shareBoard.getMemberId()} ){
     frmPop.target = 'popupView'; //
     frmPop.memberID.value = ${shareBoard.getMemberId()};
     frmPop.submit();    
-}
+};
 </script>
 
 

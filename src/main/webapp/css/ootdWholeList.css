@@ -4,6 +4,16 @@
 
 /* 0226 새로 추가 */
 
+
+#divWriteView{
+    width: 1297px;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: auto;
+    justify-content: space-between;
+}
+
+
 .ootdsmallImg{
 	border-radius: 50px; 
 	width:64px; 
@@ -11,12 +21,14 @@
  	margin-right: 20px;
 }
 
+/*
 .ootdspan{
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 16px;
 	margin-right: 55px;
 	font-weight: 200
 }
+*/
 #itemTable{
 	margin: auto;
 	font-family: 'Noto Sans KR', sans-serif;
@@ -94,16 +106,15 @@
 
 #btn-more{
 	width: 180px;
-	/* border: 2px solid #00d200; */
 	text-align: center;
 	height: 52px;
 	background-color: white;
-	margin-top : 30px;
-	margin-left:800px;
 	font-family: 'Martian Mono', monospace;
 	font-size: 15px;
 	font-weight: 600;
-	border-radius: 10px 10px 10px 10px; 	
+	border-radius: 10px 10px 10px 10px; 
+	margin-top: 30px;
+    margin : auto;	
 }
 
 #btn-more:hover{
@@ -115,16 +126,16 @@
 
 #btn-more-two{
 	width: 180px;
-	/* border: 2px solid #00d200; */
 	text-align: center;
 	height: 52px;
 	background-color: white;
 	margin-top : 30px;
-	margin-left:800px;
+	margin : auto;	
 	font-family: 'Nanum Gothic Coding', monospace;	
 	font-size: 15px;
 	font-weight: 600;
 	border-radius: 10px 10px 10px 10px; 	
+
 }
 
 #btn-more-two:hover{
@@ -208,12 +219,9 @@
 
 
 .ootdsmallImg:hover  {
-    transform: scale(1.1);
-    background-color: orange;
-    transition : 0.5s;
     text-decoration : white;
-    border-radius: 10px 10px 10px 10px;
     cursor:pointer;
+    border : 3px solid #11D226;
   }
   
 	
@@ -284,17 +292,14 @@ a > img{
 
 /*글쓰기버튼*/
 input#btnAdd{
-	background-color : black;
-	color : white;
-	position : absolute;
-	top : 550px;
-	left: 200px;
-	height : 32px;
-	width : 70px;
-/*  	margin-left : -1295px;  */
-	border-radius : 10px 10px 10px 10px;  
-	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: bolder;
+	background-color: black;
+    color: white;
+	height: 32px;
+    width: 70px;
+
+    border-radius: 10px 10px 10px 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bolder;
 }
 
 
@@ -379,4 +384,67 @@ p.non{
 	color : orange;
 	font-weight : bolder;
 	margin-bottom : 0;
+}
+
+.countpcl{
+	float: right;
+}
+
+.inputcls{
+	width: 70px;
+    height: 32px;
+    color: white;
+    background: black;
+    border-radius: 10px;
+    font-weight : bolder;	
+   	border-radius: 10px 10px 10px 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.inputcls:hover {
+	background-color : white;
+	color:black;	
+    cursor: pointer;
+}
+
+#stdiv1{
+	display: flex;
+	justify-content: center;
+    margin-bottom: 76px;
+	
+}
+
+#stdiv1 div{
+	width : 130px;	
+}
+
+#search-btn-more{
+	text-align: center;
+	height: 52px;
+	background-color: white;
+	font-family: 'Martian Mono', monospace;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 10px 10px 10px 10px; 
+	margin-top: 30px;
+    margin : auto;
+    border: 1px solid black;
+    width: 160px;
+    padding-left: 21px
+
+}
+
+#search-btn-more:hover{
+	background-color: #000000;
+	color: white;
+    transition : 0.7s;
+}
+
+#searchPage{
+	color:white;
+}
+
+#search-btn-more:hover #searchPage{
+	color:black;
+   transition : 0.7s;
 }
