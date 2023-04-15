@@ -883,4 +883,29 @@ public class MemberDao {
 		
 		return likeList;
 	}
+
+	/**
+	 * 마이페이지 나눔 상태변경
+	 * @param conn
+	 * @param no
+	 * @return
+	 */
+	public int updateShareStatus(Connection conn, int no) {
+		// update NSHARE_BOARD set product_status = ? where product_id = ?
+		String sql = prop.getProperty("updateShareStatus");
+		int result = 0;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, "거래완료");
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+
+		}
+		catch (Exception e) {
+			throw new MemberException("👻 나눔 상태변경 오류 👻", e);
+		}
+			
+		return result;
+	}
 }

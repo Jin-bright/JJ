@@ -375,5 +375,25 @@ public class MemberService {
 		return likeList;
 	}
 
+	/**
+	 * 마이페이지 나눔상태 변경
+	 * @param no
+	 * @return
+	 */
+	public int updateShareStatus(int no) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.updateShareStatus(conn, no);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 
 }

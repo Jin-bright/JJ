@@ -14,9 +14,6 @@ import javax.servlet.http.HttpSession;
 import com.sh.obtg.member.model.dto.Member;
 import com.sh.obtg.member.model.service.MemberService;
 
-/**
- * Servlet implementation class MemberDeleteServlet
- */
 @WebServlet("/member/memberDelete")
 public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
