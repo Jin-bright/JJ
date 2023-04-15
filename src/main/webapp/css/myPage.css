@@ -13,7 +13,7 @@ ul {
 	list-style: none;
 }
 .sub_area {
-	width: 180px;
+	min-width: 134px;
 	margin-right: 20px;
 }
 .sub_area h3 {
@@ -96,6 +96,16 @@ ul {
 	font-size: 13px;
 	color: rgba(34,34,34,.5);
 }
+.ootd_text {
+	display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+.ootd_text > .box_count {
+	font-size: 13px;
+    color: rgba(34,34,34,.5);
+} 
+
 /* ootd */
 .content_container {
 	padding: 6px 0;
@@ -380,6 +390,27 @@ ul {
 .ootd_content {
 	border-top: 1px solid #ebebeb;
 	padding-top: 25px;
+}
+
+/* 관심목록 */
+.wish_wrap > h3 {
+	font-size: 25px;
+	border-bottom: 3px solid #222;
+	padding-bottom: 16px;
+}
+.wish-content {
+	margin: 40px 0;
+    min-height: 520px;
+}
+.wish-info {
+	display: flex;
+    justify-content: center;
+}
+.wish-info img {
+    width: 20px;
+    height: auto;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 /* 기타 */

@@ -43,10 +43,12 @@
 					<c:forEach items="${ootdList}" var="ootd" varStatus="vs">
 						<c:if test="${vs.index <= 3}">
 							<div class="content_box">
-								<a href="${pageContext.request.contextPath}/ootd/ootdView?no=${ootd.no}">
+								<a href="${pageContext.request.contextPath}/ootd/newOotdView?no=${ootd.no}">
 									<img src="${pageContext.request.contextPath}/uploadootds/ootd/${ootd.img}" class="ootd_img" />
-									<p class="box_title">${ootd.title}</p>
-									<p class="box_count">${ootd.readCount}</p>
+									<div class="ootd_text">
+										<p class="box_title">#${ootd.title}</p>
+										<p class="box_count">조회수 | ${ootd.readCount}</p>
+									</div>
 								</a>
 							</div>
 						</c:if>
@@ -106,17 +108,49 @@
 		</div>
 		<div class="title_box">
 			<h4>관심 물품</h4>
-			<a href="">더보기</a>
+			<a href="${pageContext.request.contextPath}/member/myWishList">더보기</a>
 		</div>
 		<div class="content_container">
-			<div class="empty_box">
-				<p>현재 등록된 관심 물품이 없습니다.</p>
-				<div class="btn_wrap">
-					<button class="my_btn" id="share_btn">
-						<a href="${pageContext.request.contextPath}/share/newShareWholeList">SHARE 바로가기</a>
-					</button>
+			<c:if test="${not empty wishList}">
+				<div class="content_wrap share">
+					<c:forEach items="${wishList}" var="wish" varStatus="vs">
+						<c:if test="${vs.index <= 3}">
+							<div class="content_box">
+								<a href="${pageContext.request.contextPath}/share/newShareView?no=${wish.boardNo}">
+									<img src="${pageContext.request.contextPath}/uploadshares/newShare/${wish.img}" class="share_img"/>
+								</a>
+								<div class="wish-info">
+									<p class="box_title">
+										<!-- 제목 길이 제어 -->
+										<c:choose>
+									        <c:when test="${fn:length(wish.name) > 12}">
+									        	<c:out value="${fn:substring(wish.name,0,11)}"/>...
+									        </c:when>
+									        <c:otherwise>
+								            	<c:out value="${wish.name}"/>
+								            </c:otherwise> 
+								        </c:choose>
+									</p>
+									<img src="${pageContext.request.contextPath}/image/mark_full.png" class="wish" data-board-no="${wish.boardNo}">
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
-			</div>
+				<div class='pagebar'>
+					${pagebar}
+				</div>
+			</c:if>
+			<c:if test="${empty wishList}">
+				<div class="empty_box">
+					<p>현재 등록된 관심 물품이 없습니다.</p>
+					<div class="btn_wrap">
+						<button class="my_btn" id="share_btn">
+							<a href="${pageContext.request.contextPath}/share/newShareWholeList">SHARE 바로가기</a>
+						</button>
+					</div>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </section>
@@ -147,11 +181,33 @@ document.querySelectorAll(".box_btn").forEach((btn) => {
 		
 		// 상태변경전 재확인
 		if(confirm(`[\${name}]의 상태를 거래완료로 변경하시겠습니까?
-거래완료된 물품은 거래전으로 상태를 변경할 수 없습니다.`)){
+거래완료된 상품은 거래전으로 상태를 변경할 수 없습니다.`)){
 			document.querySelector("#no").value = no;
 			document.shareStatusUpdateFrm.submit();
 		}
 	};
+});
+</script>
+</c:if>
+<c:if test="${not empty wishList}">
+<script>
+/* 관심 */
+document.querySelectorAll(".wish").forEach((wish) => {
+	wish.onclick = (e) => {
+		console.log(e.target);
+		const no = e.target.dataset.boardNo;
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/share/shareLike?no=' + no,
+			method: "post",
+			dataType: "json",
+			success(data){
+				if(data === 1) e.target.src="${pageContext.request.contextPath}/image/mark_full.png"
+				else e.target.src="${pageContext.request.contextPath}/image/mark_emp.png"
+			},
+			error : console.log
+		});
+	};	
 });
 </script>
 </c:if>

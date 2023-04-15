@@ -36,9 +36,9 @@ public class MemberViewServlet extends HttpServlet {
 			List<Map<String, Object>> shareList = memberService.selectMyShare(memberId);
 			System.out.println(shareList);
 			
-			// likeList 조회
-//			List<Map<String, Object>> likeList = memberService.selectMyLike(member.getMemberId());
-//			System.out.println(likeList);
+			// wishList 조회
+			List<Map<String, Object>> wishList = memberService.selectWish(memberId);
+			System.out.println(wishList);
 			
 			// forward
 			Member member = memberService.selectOneMember(memberId);
@@ -46,7 +46,7 @@ public class MemberViewServlet extends HttpServlet {
 			request.setAttribute("loginMember", member);
 			request.setAttribute("ootdList", ootdList);
 			request.setAttribute("shareList", shareList);
-//			request.setAttribute("likeList", likeList);
+			request.setAttribute("wishList", wishList);
 			request.getRequestDispatcher("/WEB-INF/views/member/myPage.jsp")
 				.forward(request, response);
 			

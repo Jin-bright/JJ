@@ -64,64 +64,69 @@
 		</div>
 	</div>
 	<!-- 읽는 폼 -->
-	<div class="frmwrapper">			
-		<form class="frmPopRe">
-			<h1 style="font-weight:900; margin : 0 auto; text-align:center; padding-bottom:10px "> MESSAGE </h1>
-			<table id="msgTable" style= "margin-top : 0px;" >
-				<tr>
-					<th class="msgtg"> TO.🙆 </th>
-					<td class="msgtd" ><input type="text" id="receiver" style="width:220px; line-height:20px" readonly > <!--  받는 사람  --> 	</td>
-				</tr>
-			
-				<tr>
-					<th  class="msgtg" > FROM.🙋‍♀️ </th>
-					<td class="msgtd" ><input type="text" id="sender" style="width:220px;  line-height:20px" readonly>  <!--  보내는 사람  --></td>
-				</tr>
-				<tr>
-					<th  class="msgtg" > 제목 </th>
-					<td class="msgtd" ><input type="text" id="msgTitle" style="width:220px;  line-height:20px" readonly></td>
-				</tr>
-				<tr>
-					<th  class="msgtg" > 내용 </th>
-					<td class="msgtd" ><textarea id="msgContent" style="width:220px" readonly></textarea></td>
-				</tr>
-			</table>
-			<input class="msgbt" id="msgsubmit" type="button" value="✔️답장하기" data-answer/>
-			<span id="msgclose" onclick="closeMsg();"> 취소 </span>			
-		</form>
+	<div class="frmwrapper">
+		<div class="readFrm">			
+			<form class="frmPopRe">
+				<h1 style="font-weight:900; margin : 0 auto; text-align:center; padding-bottom:10px "> MESSAGE </h1>
+				<table id="msgTable" style= "margin-top : 0px;" >
+					<tr>
+						<th class="msgtg"> TO.🙆 </th>
+						<td class="msgtd" ><input type="text" id="receiver" style="width:220px; line-height:20px" readonly > <!--  받는 사람  --> 	</td>
+					</tr>
+					<tr>
+						<th  class="msgtg" > FROM.🙋‍♀️ </th>
+						<td class="msgtd" ><input type="text" id="sender" style="width:220px;  line-height:20px" readonly>  <!--  보내는 사람  --></td>
+					</tr>
+					<tr>
+						<th  class="msgtg" > 제목 </th>
+						<td class="msgtd" ><input type="text" id="msgTitle" style="width:220px;  line-height:20px" readonly></td>
+					</tr>
+					<tr>
+						<th  class="msgtg" > 내용 </th>
+						<td class="msgtd" ><textarea id="msgContent" style="width:220px" readonly></textarea></td>
+					</tr>
+				</table>
+				<div class="btn_box">
+					<input class="msgbt msgsubmit" id="msgsubmit" type="button" value="✔️답장하기" data-answer/>
+					<span id="msgclose"> 취소 </span>			
+				</div>
+			</form>
+		</div>
+		<!-- 답장하기 폼 -->
+		<div class="answerFrm">
+			<form class="frmPopAn" name="answerFrm" action="${pageContext.request.contextPath}/chat/MessageMain" method="post">
+				<h1 style="font-weight:900; margin : 0 auto; text-align:center; padding-bottom:10px "> MESSAGE </h1>
+				<table id="msgTable" style= "margin-top : 0px;" >
+					<tr>
+						<th class="msgtg"> TO.🙆 </th>
+						<td class="msgtd" ><input type="text" id="anwerReceiver" name="receiver" style="width:220px; line-height:20px" readonly > <!--  받는 사람  --> 	</td>
+					</tr>
+					<tr>
+						<th  class="msgtg" > FROM.🙋‍♀️ </th>
+						<td class="msgtd" ><input type="text" id="anwerSender" name="sender" value="${loginMember.memberId}"  style="width:220px;  line-height:20px" readonly>  <!--  보내는 사람  --></td>
+					</tr>
+					<tr>
+						<th  class="msgtg" > 제목 </th>
+						<td class="msgtd" ><input type="text" id="title" name="msgTitle"  style="width:220px;  line-height:20px" required></td>
+					</tr>
+					<tr>
+						<th  class="msgtg" > 내용 </th>
+						<td class="msgtd" ><textarea id="content" name="msgContent" style="width:220px" required></textarea></td>
+					</tr>
+				</table>
+				<div class="btn_box">
+					<input class="msgbt msgsubmit" id="msgAnswer" type="submit" value="✔️보내기">
+					<span id="msgclose"> 취소 </span>	
+				</div>		
+			</form>
+		</div>
 	</div>			
-	<!-- 답장하는 폼 -->
-	<div class="frmwrapper">			
-		<form class="frmPopAn" name="answerFrm" action="${pageContext.request.contextPath}/chat/MessageMain" method="post">
-			<h1 style="font-weight:900; margin : 0 auto; text-align:center; padding-bottom:10px "> MESSAGE </h1>
-			<table id="msgTable" style= "margin-top : 0px;" >
-				<tr>
-					<th class="msgtg"> TO.🙆 </th>
-					<td class="msgtd" ><input type="text" id="anwerReceiver" name="receiver" style="width:220px; line-height:20px" readonly > <!--  받는 사람  --> 	</td>
-				</tr>
-				<tr>
-					<th  class="msgtg" > FROM.🙋‍♀️ </th>
-					<td class="msgtd" ><input type="text" id="anwerSender" name="sender" value="${loginMember.memberId}"  style="width:220px;  line-height:20px" readonly>  <!--  보내는 사람  --></td>
-				</tr>
-				<tr>
-					<th  class="msgtg" > 제목 </th>
-					<td class="msgtd" ><input type="text" id="title" name="msgTitle"  style="width:220px;  line-height:20px" ></td>
-				</tr>
-				<tr>
-					<th  class="msgtg" > 내용 </th>
-					<td class="msgtd" ><textarea id="content" name="msgContent" style="width:220px" required></textarea></td>
-				</tr>
-			</table>
-			<input class="msgbt"  id="msgsubmit" type="submit" value="✔️보내기"   >
-			<span id="msgclose" onclick="closeAns();"> 취소 </span>			
-		</form>
-	</div>
 </section>
 <script>
 /* 읽기 모달에 내용 전달 */
 document.querySelectorAll("#msgBtn").forEach((btn) => {
 	btn.onclick = (e) => {
-		const frm = document.querySelector(".frmPopRe");
+		const frm = document.querySelector(".frmwrapper");
 		const receiver = document.querySelector("#receiver")
 		const sender = document.querySelector("#sender")
 		const msgTitle = document.querySelector("#msgTitle")
@@ -138,46 +143,35 @@ document.querySelectorAll("#msgBtn").forEach((btn) => {
 		e.target.answer = e.target.dataset.sender;
 		console.log(e.target.answer);
 		
-		frm.classList.toggle("showPopRe");
+		frm.style.visibility = "visible";
 		
 	}
 });
 
+/* 쪽지 닫기 */
+document.querySelectorAll("#msgclose").forEach((msg) => {
+	msg.onclick = (e) => {
+		const frm = document.querySelector(".frmwrapper");
+		frm.style.visibility = "hidden";
+	};
+});
+
+/* 답장하기 폼 */
 document.querySelector("#msgsubmit").addEventListener('click', (e) => {
-	const answerFrm = document.querySelector(".frmPopAn");
-	const readFrm = document.querySelector(".frmPopRe");
-	
-	readFrm.classList.toggle("showPopRe");
-	answerFrm.classList.toggle("showPopAn");
-	
+	document.querySelector(".readFrm").style.display = "none";
+	document.querySelector(".answerFrm").style.display = "block";
 });
 
 /* 답장하기 */
 document.answerFrm.addEventListener('submit', (e) => {
 	e.preventDefault();
+	
+	
+	
 	if(confirm("답장을 보내시겠습니까?")){
 		document.querySelector(".frmPopAn").submit();
 	}
 });
-
-/* 모달창 움직이기(약간 허접ㅎ,,,) */
-/* $(function(){
-	$('.frmPopRe').draggable({'cancel':'#msgTable'});
-});
-$(function(){
-	$('.frmPopRe').draggable({'cancel':'#msgTable'});
-}); */
-
-/* 읽기 폼 닫기 */
-const closeMsg = () => {
-	const frm = document.querySelector(".frmPopRe");
-	frm.classList.toggle("showPopRe");
-}
-/* 답장 폼 닫기 */
-const closeAns = () => {
-	const frm = document.querySelector(".frmPopAn");
-	frm.classList.toggle("showPopAn");
-}
 
 /* 체크박스 제어 */
 function fnCheckAll(){
@@ -207,16 +201,6 @@ const msgDelete = () => {
 		document.msgDeleteFrm.submit();
 	}
 };
-
-/* const checkOnlyOne = (e) => {
-    const checkbox = document.getElementsByName("selectMsg");
-
-    checkbox.forEach((cb) => {
-        cb.checked = false;
-    })
-
-    e.checked = true;
-}  */
 
 </script>
 <form action="${pageContext.request.contextPath}/message/messageDelete" method="post" name="msgDeleteFrm">

@@ -10,11 +10,11 @@
 <jsp:include page="/WEB-INF/views/member/subMenu.jsp" />
 	<div class="content_area">
 		<div class="share_wrap">
-			<h3>나눔 목록</h3>
+			<h3>상품 목록</h3>
 			<div class="search_wrap">
                 <div class="status_filter">
                 	<button class="my_btn status_btn" data-status = "거래전">거래전</button>
-                	<button class="my_btn status_btn" data-status = "거래완">거래완료</button>
+                	<button class="my_btn status_btn" data-status = "거래완료">거래완료</button>
                 </div>
                 <!-- 
                 <div class="search_filter">
@@ -101,13 +101,13 @@ document.querySelectorAll(".box_btn").forEach((btn) => {
 		
 		// 이미 거래가 완료된 물품은 상태를 변경할 수 없음
 		if(status == '거래완료') {
-			alert("이미 거래가 완료된 물품입니다.");
+			alert("이미 거래가 완료된 상품입니다.");
 			return;
 		}
 		
 		// 상태변경전 재확인
 		if(confirm(`[\${name}]의 상태를 거래완료로 변경하시겠습니까?
-거래완료된 물품은 거래전으로 상태를 변경할 수 없습니다.`)){
+거래완료된 상품은 거래전으로 상태를 변경할 수 없습니다.`)){
 			document.querySelector("#no").value = no;
 			document.shareStatusUpdateFrm.submit();
 		}

@@ -395,5 +395,40 @@ public class MemberService {
 		return result;
 	}
 
+	/**
+	 * 마이페이지 관심목록 조회
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectWishList(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> wishList = memberDao.selectWishList(conn, param);
+		close(conn);
+		return wishList;
+	}
+
+	/**
+	 * 마이페이지 관심목록 총개수
+	 * @param memberId
+	 * @return
+	 */
+	public int myWishListTotalCount(String memberId) {
+		Connection conn = getConnection();
+		int myWishListTotalCount = memberDao.myWishListTotalCount(conn, memberId);
+		close(conn);
+		return myWishListTotalCount;
+	}
+
+	/**
+	 * 마이페이지(메인) 관심목록 조회
+	 * @param memberId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectWish(String memberId) {
+		Connection conn = getConnection();
+		List<Map<String, Object>> wishList = memberDao.selectWish(conn, memberId);
+		close(conn);
+		return wishList;
+	}
 
 }
