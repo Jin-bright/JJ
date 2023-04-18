@@ -15,7 +15,7 @@
 
 4.설계
 
-5.ppt
+
 
 
 <hr>
@@ -76,9 +76,6 @@
  <h5> ◆ ER 다이어그램  </h5>
  <img src="https://user-images.githubusercontent.com/77500290/231704547-0f9a9ec4-f2d0-4537-adb3-69058814eb07.png" width="700"/>
 
-<hr>
-<b>5.ppt</b>
-<hr>
 
 
 
