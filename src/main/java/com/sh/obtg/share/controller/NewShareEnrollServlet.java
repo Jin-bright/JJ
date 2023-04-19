@@ -58,16 +58,7 @@ public class NewShareEnrollServlet extends HttpServlet {
 		    // 1. 사용자입력값 처리
 			String _subcategoryId = "";
 			_subcategoryId = multiReq.getParameter("real");
-			/*
-			 * if ( multiReq.getParameter("ShareCategory") != null ){ _subcategory_id =
-			 * multiReq.getParameter("ShareCategory"); System.out.println( _subcategory_id
-			 * ); }else if(multiReq.getParameter("ShareCategorybt") != null ) {
-			 * _subcategory_id = multiReq.getParameter("ShareCategorybt");
-			 * System.out.println( _subcategory_id ); }else
-			 * if(multiReq.getParameter("ShareCategoryac") != null ) { _subcategory_id =
-			 * multiReq.getParameter("ShareCategoryac"); System.out.println( _subcategory_id
-			 * ); }
-			 */
+
 		
 			System.out.println( "enum 전 : " + _subcategoryId  );
 		
@@ -135,22 +126,15 @@ public class NewShareEnrollServlet extends HttpServlet {
 				attach.setRenamedFilename(multiReq.getFilesystemName("upFile1") );
 				shareBoard.addAttachment(attach);
 			}
-			if( multiReq.getFile("upFile2") !=null ) {
-				NshareAttachment attach = new NshareAttachment();
-				attach.setOriginalFilename( multiReq.getOriginalFileName("upFile2"));
-				attach.setRenamedFilename(multiReq.getFilesystemName("upFile2") );
-				shareBoard.addAttachment(attach);
-			}
-	
-	
 			
+	
 // share게시글  -- dml -- insert문 
 // insertNShareBoard  = insert into NSHARE_BOARD values(seq_SHARE_board_no.nextval,?,?,?,?,?,?,default,?,?,?,default,?)
 			// 2-3. 업무로직 
 			int result = shareService.insertNShareBoard(shareBoard);
 		    	System.out.println( "성공 ??? " + result );
 	    	//3.리다이렉트
-//			    	response.sendRedirect(request.getContextPath()+"/ootd/boardView?no=" + board.getNo());
+				request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다 😊" );
 		    	request.setAttribute("shareBoard", shareBoard);//
 		    	response.sendRedirect(request.getContextPath()+"/share/newShareWholeList");
 		    	

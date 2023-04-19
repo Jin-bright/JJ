@@ -333,7 +333,6 @@ window.onload = () => {
 		method: "get",
 		dataType: "json",
 		success(data){
-			console.log( data );
 			counts.innerHTML = parseInt(data);
 		},
 	error: console.log
@@ -362,7 +361,6 @@ document.querySelector("#comt").addEventListener("click", (e) => {
 //textarea에대한 핸들링 	
 document.boardCommentFrm.addEventListener('submit', (e) => {
 
-	console.log( "타켓" + e.target.value );
 	if(e.target.name === 'boardCommentFrm'){
 
 		<% if(loginMember == null ){%>
@@ -430,8 +428,7 @@ document.boardCommentFrm.content.addEventListener('focus', (e) => {
 //대댓글
 document.querySelectorAll(".btn-reply").forEach((button) => {
 button.onclick = (e) => {
-	console.log(e.target.value);
-
+	
 	<% if(loginMember == null){ %>
 			loginAlert();
 	<%   } else{ %>
@@ -455,8 +452,7 @@ button.onclick = (e) => {
 
 	
 	const target = e.target.parentElement.parentElement; // tr
-	console.log( e.target );
-	console.log( target);
+//	console.log( e.target );
 	target.insertAdjacentHTML('afterend', tr);
 	button.onclick = null; // 이벤트핸들러 제거
 

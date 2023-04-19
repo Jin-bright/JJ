@@ -876,11 +876,20 @@ where ootd_no = 36
 commit;
 
 -- 한국시간으로 출력 -- 0403 
- alter session set time_zone = '+09:00'; 
+ alter session set time_zone = '+09:00';
+ alter database set time_zone = 'Asia/Seoul';
+ 
+ ALTER DATABASE SET TIME_ZONE = '+09:00' 
+ 
+ alter session set time_zone = 'Asia/seoul';
+ commit
+ 
 SELECT CURRENT_DATE, CURRENT_TIMESTAMP, LOCALTIMESTAMP FROM DUAL
 
  select e.* from ( select  row_number() over(order by board_no desc ) rnum, b.*, a.* from ootd_board b join ootd_attachment a on b.ootd_no = a.board_no) e where rnum between ? and ?
  
+ 
+ commit
  
  
 ---
@@ -913,3 +922,25 @@ from(
                         on b.ootd_no = a.board_no ) e 
     where style_no = 'S1'  )v
 where renum between 1 and 12
+
+select  *
+from nshare_board
+
+where product_id  = 85
+
+
+CREATE TABLE timeTEST(
+    REG_DT DATE DEFAULT SYSDATE
+);
+
+insert into timeTest values(default) 
+
+commit
+ 
+select  to_char(REG_DT, 'YYYY-MM-DD HH24:MI:SS') REG_DT
+from timetest
+
+ALTER DATABASE SET TIME_ZONE = '+09:00';
+SELECT DBTIMEZONE FROM DUAL;
+
+

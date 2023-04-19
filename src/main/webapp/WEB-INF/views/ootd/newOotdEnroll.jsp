@@ -214,8 +214,6 @@ document.ootdBoardEnrollFrm.onsubmit = (e) => {
 	const content = e.target.editordata;
 	const upload = e.target.upFile1;
 	
-	console.log(title, content);
-	
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^.+$/.test(title.value)){
 		alert("제목을 작성해주세요");
@@ -233,6 +231,21 @@ document.ootdBoardEnrollFrm.onsubmit = (e) => {
 	if( !upload ){ // \n은 따로 추가해줘야됨 (왜냐면 .애는 개행이 포함안되서 ) 
 		alert("사진을 첨부해주세요");
 		upload.select();
+		return false;
+	}
+	
+	const stylecheckboxes = document.getElementsByName("style");
+	let styleType;
+
+	stylecheckboxes.forEach((styleno) => {
+		if(styleno.checked == true){
+			styleType = styleno;
+		}
+	});
+	
+	if( styleType == null ){
+		e.preventDefault();
+		alert("스타일을 선택해주세요!");
 		return false;
 	}
 }
