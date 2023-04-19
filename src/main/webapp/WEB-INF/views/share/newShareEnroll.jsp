@@ -73,7 +73,7 @@
 		<tr>
 			<th>카테고리</th>
 			<td>
-				<select   onclick = "selectbig(this.value);">
+				<select name="bigs"  onclick = "selectbig(this.value);">
 				    <option value="상의" > 상의 </option>
 				    <option  value="하의" > 하의 </option>
 				    <option  value="악세서리및기타" > 악세서리및기타 </option>
@@ -197,7 +197,8 @@
 <script>
 $("select[name=ShareCategory]").change( function(){
 	$(this).attr('name', 'real');
-//	console.log( $(this).val() );
+	console.log( $(this).val() );
+	console.log( $(this) );
 })
 
 
@@ -240,7 +241,7 @@ const selectbig = (e) =>{
 		shoes.style.display = "inline-block";	
 	}
 	
-//console.log( e );
+console.log( e );
 };
 
 </script>
@@ -366,7 +367,7 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 	const title = e.target.ShareTitle;
 	const content = e.target.editordata;
 	const upload = e.target.upFile1;
-	
+	const category = e.target.real;
 	
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^.+$/.test(title.value)){
@@ -388,6 +389,12 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 		return false;
 	}
 	
+	if( category == null || !category  ){ // 카테고리 선택안했을경우
+		e.preventDefault();
+		alert("카테고리를 선택해주세요!");
+		return false;
+	}
+	
 	
 	const checkboxes = document.getElementsByName("ShareProductStatus");
 	const gendercheckboxes = document.getElementsByName("productGender");
@@ -396,6 +403,7 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 	let statusType;
 	let genderType;
 	let styleType;
+	
 	
 	checkboxes.forEach((status) => {
 		if(status.checked == true){
@@ -432,6 +440,7 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 		alert("스타일을 선택해주세요!");
 		return false;
 	}
+
 	
 }
 </script>

@@ -114,7 +114,7 @@
 		<tr>
 			<th  colspan="2" style="padding : 0; border:none">
 			<div class="summernotecontainer">
-		  <textarea colspan="2" id="summernote"  class="summernote" name ="editordata"  value="" > </textarea>
+		  <textarea colspan="2" id="summernote"  class="summernote" name ="editordata"  value="" >${ootdboard.getOOTDContents() } </textarea>
  		</div>
 			</th>
 		</tr>
@@ -131,6 +131,13 @@
 <br />
 <br />
 
+<script>
+window.addEventListener('load', () => {
+	const style = ${ootdboard.getStyleNo()};
+	$(style).attr('checked', true);
+	
+});
+</script>
 
 <script>
 function checkOnlyOne(element) {
@@ -235,13 +242,13 @@ document.ootdBoardEnrollFrm.onsubmit = (e) => {
 	}
 						   
 	//내용을 작성하지 않은 경우 폼제출할 수 없음.
-	if(!/^.|\n+$/.test(content.value)){ // \n은 따로 추가해줘야됨 (왜냐면 .애는 개행이 포함안되서 ) 
+	if(!/^.|\n+$/.test(content.value)){ // 
 		alert("내용을 작성해주세요");
 		content.select();
 		return false;
 	}
 	
-	if( !upload ){ // \n은 따로 추가해줘야됨 (왜냐면 .애는 개행이 포함안되서 ) 
+	if( !upload ){ // 사진
 		alert("사진을 첨부해주세요");
 		upload.select();
 		return false;

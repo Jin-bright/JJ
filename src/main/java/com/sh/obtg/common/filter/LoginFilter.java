@@ -25,9 +25,9 @@ import com.sh.obtg.member.model.dto.Member;
 	"/member/memberDelete", "/member/memberOotdLike", "/member/memberOotdList", 
 	"/member/memberShareLike", "/member/memberShareList", "/member/updatePassword",
 	"/member/memberUpdate", "/member/memberView",
-	"/message/*", "/chat/MessageMain","/ootd/newOotdDelete", "/ootd/ootdCommentEnroll", "/ootd/newOotdView/*",
-	"/ootd/ootdCommentDelete", "/ootd/OotdLike", "/ootd/newOotdEnroll", "/ootd/newOotdUpdate",
-	"/share/newShareWholeList","/share/shareStateUpdate", "/share/newShareEnroll", "/share/newShareDelete",
+	"/message/*", "/chat/MessageMain","/ootd/newOotdDelete", "/ootd/ootdCommentEnroll", "/ootd/newOotdView/*", "/ootd/newOotdUpdate/*",
+	"/ootd/ootdCommentDelete", "/ootd/OotdLike", "/ootd/newOotdEnroll",
+	"/share/newShareWholeList","/share/shareStateUpdate", "/share/newShareEnroll", "/share/newShareDelete", "/share/newShareView/*", "/share/newShareUpdate/*",
 	"/faq/faqEnroll", "/faq/faqUpdate", "/faq/faqDelete", 
 	
 })
