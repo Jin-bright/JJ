@@ -124,9 +124,9 @@
 
 <div class="sectiondivs"  id="sharelists">
 <!-- 리스트 출력 일단 서블릿만들고 실행해보기 - 페이지 전체 불러오기 비동기 시도했지만 실패했다^^ -->
-<%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
-<input type="button" value="글쓰기" id="btnAdd"  onclick="location.href='<%=request.getContextPath()%>/share/newShareEnroll';"/>
-<%-- get&post다있는데/ 로그인한 상태에서만 노출 되게 수정해야됨 --%> 
+<% if(loginMember.getMemberId() != null){ %>
+	<input type="button" value="글쓰기" id="btnAdd"  onclick="location.href='<%=request.getContextPath()%>/share/newShareEnroll';"/>
+<% } %>
 <table id="itemTable" >
 	<tbody>
 		<c:forEach begin="0" step="1" items="${shareAttachments}" var="attach" varStatus="vs">
@@ -260,7 +260,6 @@ divpage.addEventListener('click', () => {
 	
 	$('input:checkbox[name=searchKeyword]').each(function (index) {
 		if($(this).is(":checked")==true){
-	    	console.log( document.querySelector("#page") )
 	    	searchClothes( (this) );	  
 	    }
 	})	 
@@ -275,7 +274,6 @@ cspage.addEventListener('click', () => {
 	
 	$('input:checkbox[name=searchKeyword]').each(function (index) {
 		if($(this).is(":checked")==true){
-	    	console.log( document.querySelector("#page") )
 	    	searchColorStyle( (this) );	  
 	    }
 	})	 
@@ -290,23 +288,18 @@ const searchClothes = (e) => {
 	})
 	  
 	e.checked = true; 
-	console.log ( e );
+//	console.log ( e );
 	
 	const page = document.querySelector("#page").innerText;	
 	const searchdata = e.value; //이걸로찾을거야
 	
-
-	//	 const member = document.querySelector("#memberId").value;
-	//	 console.log( member ); 	  
-
-
 	$.ajax({
 		url:"${pageContext.request.contextPath}/share/findShareWholeListClothes",
 		method : "get",
 		data : {page,
 				searchKeyword : searchdata},
 		success(data){
-			console.log( data )
+//			console.log( data )
 
 				const table = document.querySelector("#itemTable");
 				table.innerHTML = "";
@@ -445,8 +438,7 @@ const searchColorStyle = (e) => {
 	})
 	  
 	e.checked = true; 
-
-	console.log ( e );
+//	console.log ( e );
 	
 	const page = document.querySelector("#page").innerText;	
 	const searchdata = e.value; //이걸로찾을거야
@@ -457,7 +449,7 @@ const searchColorStyle = (e) => {
 		data : {page,
 				searchKeyword : searchdata},
 		success(data){
-			console.log( data )
+//			console.log( data )
 
 			const table = document.querySelector("#itemTable");
 			table.innerHTML = "";

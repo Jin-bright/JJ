@@ -196,15 +196,8 @@
 
 <script>
 $("select[name=ShareCategory]").change( function(){
-	console.log("찍히냐");
-	console.log( $(this).val() );
-	
 	$(this).attr('name', 'real');
-	console.log( $(this) );
-
-	console.log( $(this).val() );
-	
-	
+//	console.log( $(this).val() );
 })
 
 
@@ -247,8 +240,7 @@ const selectbig = (e) =>{
 		shoes.style.display = "inline-block";	
 	}
 	
-console.log( e );
-	
+//console.log( e );
 };
 
 </script>
@@ -375,7 +367,6 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 	const content = e.target.editordata;
 	const upload = e.target.upFile1;
 	
-	console.log(title, content);
 	
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^.+$/.test(title.value)){
@@ -396,6 +387,52 @@ document.shareBoardEnrollFrm.onsubmit = (e) => {
 		upload.select();
 		return false;
 	}
+	
+	
+	const checkboxes = document.getElementsByName("ShareProductStatus");
+	const gendercheckboxes = document.getElementsByName("productGender");
+	const stylecheckboxes = document.getElementsByName("style");
+	
+	let statusType;
+	let genderType;
+	let styleType;
+	
+	checkboxes.forEach((status) => {
+		if(status.checked == true){
+			statusType = status;
+		}
+	});
+	
+	if( statusType == null ){
+		e.preventDefault();
+		alert("상품 상태를 하나 선택해주세요!");
+		return false;
+	}
+	
+	gendercheckboxes.forEach((gender) => {
+		if(gender.checked == true){
+			genderType = gender;
+		}
+	});
+	
+	if( genderType == null ){
+		e.preventDefault();
+		alert("성별을 선택해주세요!");
+		return false;
+	}
+	
+	stylecheckboxes.forEach((styleno) => {
+		if(styleno.checked == true){
+			styleType = styleno;
+		}
+	});
+	
+	if( styleType == null ){
+		e.preventDefault();
+		alert("스타일을 선택해주세요!");
+		return false;
+	}
+	
 }
 </script>
 

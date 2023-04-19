@@ -33,17 +33,8 @@ public class NewOotdEnrollServlet extends HttpServlet {
 		.forward(request, response);	
 	}
 
-	/**
-	 * 파일업로드가 포함된 post 요청 
-	 *  1. 서버컴퓨터에 파일저장 -> multipartRequest가 해줌 
-	 *  2. db에 게시판/첨부파일 정보를 저장한다 -> 이거는  우리가 직접해야됨 
-	 *  -- MultiPartRequest 객체를 사용하면 기존 request에서는 값을 더이상 꺼낼수가 없다 (request사용불가 ) 그래서 동일하게 바꿔줘야됨 
-	 *  -- 
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 0. MultipartRequest객체 생성 - 요청메세지에서 파일을 읽어서(=input) 서버컴퓨터에서 저장 (=output) 까지 처리해준다 
-		// -- (HttpServletRequest arg0, String arg1, int arg2, String arg3, FileRenamePolicy arg4) throws IOException 
-		// 1. HttpServletRequest자리 / 2. String saveDirectory(실제저장할파일경로)/ 3.업로드할수있는파일최대크기 (꼭정해야됨) 일반파일은 10mb정도/ 4.인코딩(utf-8) / 5.파일이름정책객체? - 중복파일이 있는경우 어떻게할거냐  
 
 			try {
 				String saveDirectory = getServletContext().getRealPath("/uploadootds/ootd"); //application 객체 반환  //  / <-- webroot를 가리킨다
@@ -53,9 +44,7 @@ public class NewOotdEnrollServlet extends HttpServlet {
 				String encoding = "utf-8";
 				
 				FileRenamePolicy policy = new OotdFileRenamePolicy(); //년월일_시분초밀리초_난수.tx  이렇게 만들거임 
-				//중복파일이 있는 경우, abc1.txt, abc2.txt 이런씩으로 네이밍을 다르게해줌 
-				// 이자리에 우리꺼를 써야된다 ? (파일명 변경하려면 )
-				
+
 				MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 				// 이까지 하면 파일이 서버컴텨에 저장된다 --서버저장하는거까지끝 --- 
 				// 여기까지 하고 . request가 아닌  MultipartRequest multiReq 값 꺼내는걸로 다 변경해줘야됨 
@@ -118,9 +107,7 @@ public class NewOotdEnrollServlet extends HttpServlet {
 				}
 				
 				
-
-				
-			//  이거 내가한거  	int result = boardService.insertBoardContent(title, memberId, content);
+//  이거 내가한거  	int result = boardService.insertBoardContent(title, memberId, content);
 //  - 쿼리 정하기 - dml - insert into board values(여기 sequence 맞는지확인하기 ,?,?,?,default,default); 
 //insert into OOTD_board values( seq_board_no.nextval, 'tigerhj','S1','TIGER의OOTD','오늘의ootdㅎ',default,default,'나이키','나이키','나이키','없음');
 
@@ -128,10 +115,9 @@ public class NewOotdEnrollServlet extends HttpServlet {
 			    	int result = ootdBoardService.insertOotdBoard(ootdBoard); // board에 싹다넣어서 서비스요청 코드는 이거 하나임 ★★★★★내가한방식은안돼 
 			    	System.out.println( "성공 ??? " + result );
 		    	//3.리다이렉트
-//			    	response.sendRedirect(request.getContextPath()+"/ootd/boardView?no=" + board.getNo());
+					request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다😊" );
 			    	response.sendRedirect(request.getContextPath()+"/ootd/newOotdWholeList");
 
-				
 				
 						
 				}catch( Exception e) {
@@ -141,7 +127,6 @@ public class NewOotdEnrollServlet extends HttpServlet {
 					request.getSession().setAttribute("msg", "게시글 등록중 오류가 발생했습니다." );
 					response.sendRedirect(request.getContextPath()+"/ootd/newOotdWholeList");
 				}
-			    // 리다이렉트는 : board/boardList로 가게 -  메세지는 너무 뻔한경우는 걍 쓰지마 (왜냐면 이 글은 제일 최신으로 등록되니까 바로 확인가능 )
 
 			}
 			

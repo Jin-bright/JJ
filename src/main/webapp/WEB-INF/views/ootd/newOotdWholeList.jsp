@@ -148,7 +148,7 @@ Member loginMember=(Member) session.getAttribute("loginMember");
 			dataType : "json",
 		
 			success(data){
-				console.log( data );
+//				console.log( data );
 				
 				const bigContainer =  document.querySelector("#bigContainer");
 	
@@ -189,7 +189,7 @@ Member loginMember=(Member) session.getAttribute("loginMember");
 							 <div class = "ootdExplainDiv" >
 							   <img src="${pageContext.request.contextPath}/uploadootds/ootd/profile.png" id="profileImg" alt="profileImg" />
 							   <p id="writerSp">\${data[i].ootdWriter}</p> <span class="styleSp" >\${s}</span>  <br />
-							   <span class="exs">#\${data[i].OOTDTitle} #\${data[i].OOTDTop} #\${data[i].OOTDBottom} #\${data[i].OOTDShoes} </span>
+							   <span class="exs">#\${data[i].OOTDTitle} #\${data[i].OOTDTop} #\${data[i].OOTDBottom} #\${ data[i].OOTDShoes != null ? data[i].OOTDShoes : "맞춰보세요💚"} </span>
 							   <p  align="right" style="margin-top:10px; font-size : 13px; color : gray"> 조회수 | \${data[i].ootdReadCount}</p>
 							 </div>
 						  </td>`;					
@@ -260,15 +260,8 @@ Member loginMember=(Member) session.getAttribute("loginMember");
 
 
 <script>
-/* 
-document.querySelector("#btn-more").addEventListener('click', () => {
-	const page = document.querySelector("#page");
-	findStyle(Number(page.innerText) + 1); //Number("1") + 1  -> 2 
-}); */
-
 // 스타일 클릭하면 
 const findStyle = (e) =>{
-	console.log( e )
 
 	//클릭시 색깔바꾸기
 	let imgtag =  e; 
@@ -285,7 +278,7 @@ const findStyle = (e) =>{
 
 	// 현재페이지는 1 
 	let searchPage = document.querySelector("#searchPage").innerHTML;	
-	console.log( "searchPage : ", searchPage );
+//	console.log( "searchPage : ", searchPage );
 	
 	
 	$.ajax({
@@ -295,7 +288,7 @@ const findStyle = (e) =>{
 					searchKeyword : e.dataset.style,
 				},
 		success(data){
-			console.log( data );
+//			console.log( data );
 			
 			//스타일
 			let s = e.dataset.style;
@@ -344,7 +337,7 @@ const findStyle = (e) =>{
 
 			//////////			
 			for(let i =0; i<data.findootdAll.length; i++){
-				console.log( data.findootdAll[i] )
+//				console.log( data.findootdAll[i] )
 				
 				//스타일
 				let s = data.findootdAll[i].styleNo;
@@ -485,7 +478,7 @@ const getCountViewPage = (page) => {
 		dataType : "json",
 	
 		success(data){
-			console.log( data );
+//			console.log( data );
 			
 			const bigContainer =  document.querySelector("#bigContainer");
 

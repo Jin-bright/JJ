@@ -95,7 +95,9 @@
 		<table id = "contentTable">
 		<tbody>
 			<tr>
-				<td class="textd"><span style="color:#727272; margin-right: 120px">등록일</span>${shareBoard.getProductRegDate()}</td>		
+				<td class="textd"><span style="color:#727272; margin-right: 120px">등록일</span>
+					<fmt:formatDate value="${shareBoard.getProductRegDate()}" pattern="yyyy-MM-dd HH시 mm분"/>	
+				</td>		
 			</tr>
 			<tr>
 				<td class="textd"><span style="color:#727272; margin-right: 132px">컬러</span><span style="color:black">${shareBoard.getProductColor()}</span></td>		
@@ -133,12 +135,14 @@
 		</table>
 		 	<!--  수정 /삭제하기  -->
  	<%
-		boolean canEdit = loginMember != null && 
+		boolean canEdit = loginMember != null &&
 							(loginMember.getMemberRole() == MemberRole.A ||
 								loginMember.getMemberId().equals( shareBoard.getMemberId() ));
 		if(canEdit){
 	%>
-	<button class ="sharemodidel" id="modii" type="submit" onclick="updateBoard()"> 수정하기 </button>
+	<c:if test="${shareBoard.getProductStatus() != '거래완료'}">
+		<button class ="sharemodidel" id="modii" type="submit" onclick="updateBoard()"> 수정하기 </button>
+	</c:if>
 	<button class ="sharemodidel"  id="dell" type="submit"  onclick="deleteBoard()"> 삭제하기 </button>
 	<% 
 		}
@@ -185,8 +189,7 @@
 	class="report_container"
 	name="reportEnrollFrm"
 	method="post"
-	action="<%= request.getContextPath() %>/report/reportEnroll"
-	id="report_container">
+	action="<%= request.getContextPath() %>/report/reportEnroll">
 	<span class="close-button" onclick="closeFrm()">&times;</span>
     <h2 style="text-align: center; margin: 5px;" id="head">신고하기</h2>
     <hr />
@@ -264,20 +267,6 @@ function open_pop( ${shareBoard.getMemberId()} ){
 <%-- 쪽지 추가  --%>
 
 <script >
-<%-- 신고 
-const  siren = document.querySelector("#siren");
-siren.style.display = 'none';
-
-const  reporta = document.querySelector("#reporta");
-reporta.addEventListener('mouseenter', () => {
-	siren.style.display = 'inline';
-})
-
-reporta.addEventListener('mouseleave', () => {
-	siren.style.display = 'none';
-})
- --%>
-
 const reportFrm = () => {
 	const frm = document.querySelector(".report_container");
 	<% if(loginMember.getMemberId() != null){ %>
@@ -288,11 +277,6 @@ const reportFrm = () => {
 	<% } %>
 }
 
-$(function(){
-
-	$('.report_container').draggable({'cancel':'#report_wrap'});
-
-	});
 
 const closeFrm = () => {
 	const frm = document.querySelector(".report_container");
@@ -370,8 +354,8 @@ const loginAlert = () => {
 <script>
 // ★★★★ 좋아요 
 document.querySelector(".shareLike").addEventListener("click", (e) => {
-	<% if(loginMember == null){ %>
-		 loginAlert();
+	<% if(loginMember.getMemberId() == null){ %>
+	loginAlert();
 	<% } else { %>
 		$.ajax({
 			url: "${pageContext.request.contextPath}/share/shareLike?no=${shareBoard.getProductId()}",
