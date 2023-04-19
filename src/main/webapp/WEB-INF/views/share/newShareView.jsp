@@ -352,7 +352,7 @@ const loginAlert = () => {
 </script>	
 
 <script>
-// ★★★★ 좋아요 
+// 보관
 document.querySelector(".shareLike").addEventListener("click", (e) => {
 	<% if(loginMember.getMemberId() == null){ %>
 	loginAlert();

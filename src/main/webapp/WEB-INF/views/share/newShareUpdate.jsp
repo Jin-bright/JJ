@@ -29,7 +29,7 @@
 
 <section id="board-container">
 	<h2 id="sharewrite"> SHARE 게시글 수정</h2>
-	  <h6 style="color : red">! 거래가 시작될 경우 해당 게시물은 수정하실 수 없습니다.</h6><br /><br /><br /><br />
+	  <h6 style="color : red">! 거래가 완료될 경우 해당 게시물은 수정하실 수 없습니다.</h6><br /><br /><br /><br />
 	<form
 		name="shareBoardUpdateFrm"
 		action="<%=request.getContextPath()%>/share/newShareUpdate" 
@@ -196,6 +196,64 @@
 <br /><br /><br />
 
 <script>
+
+window.addEventListener('load', () => {
+	const style = ${shareboard.getStyleName()};
+	const gender = '${shareboard.getProductGender()}';
+	const quality = '${ shareboard.productQuality }';
+	const color = '${ shareboard.productColor }';
+	const category = '${ shareboard.subcategoryId }';
+	
+	$(style).attr('checked', true);
+
+	const qualityCheckboxes = document.getElementsByName("ShareProductStatus");
+	qualityCheckboxes.forEach((q) => {
+	   if( q.value == quality ){
+	   		$(q).attr('checked', true);
+	   }
+	})
+
+	const genderCheckboxes = document.getElementsByName("productGender");	
+	genderCheckboxes.forEach((gd) => {
+	   if( gd.value == gender ){
+	   		$(gd).attr('checked', true);
+	   }
+	})
+	
+	const colorCheckboxes = document.getElementsByName("sharecolor");	
+	colorCheckboxes.forEach((c) => {
+	   if( c.value == color ){
+	   		$(c).attr('selected', true);
+	   }
+	})
+	
+	
+//	console.log( $('#bottom option').val( category ).prop("selected",true) );
+//	  $("select[name=ShareCategory] option").val(category).prop('selected', true);  
+//	const  values = $.map( $('select[name=ShareCategory] option'), function(e) { return e.value; } );
+	if ( category.indexOf('S') ){
+		const s = $('#shoes option');
+		
+		$('#shoes').val( category ).prop("selected",true);
+	}
+	
+	else if( category.indexOf('B') ){
+		const b = $('#bottom option');
+		const ab = Array.from(b);
+		
+		for( let i =0; i < b.length; i++){
+			console.log( b );
+			console.log( ab);
+//			$('#bottom option')[i].val( category ).prop("selected",true);
+		}
+	}
+
+	
+
+	
+});
+
+ 
 $("select[name=ShareCategory]").change( function(){
 	console.log("찍히냐");
 	console.log( $(this).val() );
@@ -375,7 +433,7 @@ document.shareBoardUpdateFrm.onsubmit = (e) => {
 	const title = e.target.ShareTitle;
 	const content = e.target.editordata;
 	const upload = e.target.upFile1;
-	
+	const category = e.target.real;
 	
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^.+$/.test(title.value)){
@@ -391,9 +449,60 @@ document.shareBoardUpdateFrm.onsubmit = (e) => {
 		return false;
 	}
 	
-	if( !upload ){ // 사진하나는 꼭첨부되어야한다
-		alert("사진을 첨부해주세요");
+	if( !upload || upload.value == null ){ // 사진하나는 꼭첨부되어야한다
+		e.preventDefault();
+		alert("사진을 다시 첨부해주세요!");
 		upload.select();
+		return false;
+	}
+	
+	if( category == null || !category  ){ // 카테고리 선택안했을경우
+		e.preventDefault();
+		alert("카테고리를 선택해주세요!");
+		return false;
+	}
+	
+	const checkboxes = document.getElementsByName("ShareProductStatus");
+	const gendercheckboxes = document.getElementsByName("productGender");
+	const stylecheckboxes = document.getElementsByName("style");
+	
+	let statusType;
+	let genderType;
+	let styleType;
+	
+	checkboxes.forEach((status) => {
+		if(status.checked == true){
+			statusType = status;
+		}
+	});
+	
+	if( statusType == null ){
+		e.preventDefault();
+		alert("상품 상태를 하나 선택해주세요!");
+		return false;
+	}
+	
+	gendercheckboxes.forEach((gender) => {
+		if(gender.checked == true){
+			genderType = gender;
+		}
+	});
+	
+	if( genderType == null ){
+		e.preventDefault();
+		alert("성별을 선택해주세요!");
+		return false;
+	}
+	
+	stylecheckboxes.forEach((styleno) => {
+		if(styleno.checked == true){
+			styleType = styleno;
+		}
+	});
+	
+	if( styleType == null ){
+		e.preventDefault();
+		alert("스타일을 선택해주세요!");
 		return false;
 	}
 }
