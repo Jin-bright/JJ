@@ -47,7 +47,7 @@ const findID = () => {
 		data : {email},
 		dataType : "json",		
 		success(data){
-			console.log(data);
+			// console.log(data);
 			
 			const before = document.querySelector(".before_box");
 			before.style.display = "none";
@@ -73,8 +73,15 @@ const findID = () => {
 			const div3 = document.createElement("div");
 			div3.classList.add('success_btn_box');
 			const a1 = document.createElement("a");
-			a1.href = "${pageContext.request.contextPath}/member/findPassword";
-			a1.innerText = "비밀번호찾기";
+			/* 데이터 유무에 따른 처리 */
+			if(data != null){
+				a1.href = "${pageContext.request.contextPath}/member/findPassword";
+				a1.innerText = "비밀번호찾기";
+			}
+			else {
+				a1.href = "${pageContext.request.contextPath}/member/findId";
+				a1.innerText = "아이디찾기";
+			}
 			const a2 = document.createElement("a");
 			a2.href = "${pageContext.request.contextPath}/member/login";
 			a2.innerText = "로그인";

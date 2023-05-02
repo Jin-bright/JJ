@@ -73,7 +73,7 @@
 /* 거래전 | 거래상태 - 상태 선택해 모아보기 */
 document.querySelectorAll(".status_btn").forEach((btn) => {
 	btn.onclick = (e) => {
-		console.log("거래상태 : ", e.target.dataset.status);
+		// console.log("거래상태 : ", e.target.dataset.status);
 		location.href = "${pageContext.request.contextPath}/member/shareSearch?status=" + e.target.dataset.status;
 	};
 });

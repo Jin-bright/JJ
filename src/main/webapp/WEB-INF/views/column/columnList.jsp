@@ -35,7 +35,7 @@ document.querySelector("#btn-more").addEventListener('click', () =>{
 /* 새로운 컬럼 불러오기 */
 const getPage = (page) => {
 	$.ajax({
-		url : "<%= request.getContextPath() %>/column/morePage",
+		url : "${pageContext.request.contextPath}/column/morePage",
 		data : {page},
 		dataType : "json",		
 		success(data){
@@ -52,10 +52,10 @@ const getPage = (page) => {
 				div2.classList.add('col_wrap');
 				
 				const a = document.createElement("a");
-				a.href = "<%= request.getContextPath() %>/column/columnView?no=" + column.no;
+				a.href = "${pageContext.request.contextPath}/column/columnView?no=" + column.no;
 				
 				const img = document.createElement("img");
-				img.src = "<%= request.getContextPath() %>/upload/column/" + column.renamedFilename;
+				img.src = "${pageContext.request.contextPath}/upload/column/" + column.renamedFilename;
 				
 				const hr = document.createElement("hr");
 				hr.style.width = "100px";
@@ -102,8 +102,8 @@ const getPage = (page) => {
 %>
 <script>
 document.querySelector(".pen").addEventListener("click", (e) => {
-	location = "<%= request.getContextPath() %>/column/columnEnroll";
+	location = "${pageContext.request.contextPath}/column/columnEnroll";
 });
 </script>
 <% } %>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
