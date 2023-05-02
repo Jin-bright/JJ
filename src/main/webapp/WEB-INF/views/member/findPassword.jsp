@@ -66,7 +66,7 @@ const findPwd = () => {
 		data : {id : id.value, email : email.value},
 		dataType : "json",		
 		success(data){
-			console.log(data);
+			// console.log(data);
 
 			const before = document.querySelector(".before_box");
 			before.style.display = "none";

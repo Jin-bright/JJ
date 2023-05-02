@@ -243,7 +243,7 @@ document.querySelector("#upload").addEventListener('change', (e) => {
 	};
 	
 	const frm = document.profileFrm;
-	console.log(frm);
+	// console.log(frm);
 	
 	const frmData = new FormData(frm);
 	
@@ -255,7 +255,7 @@ document.querySelector("#upload").addEventListener('change', (e) => {
 		processData : false, 
 		data : frmData,
 		success(data){
-			console.log(data);
+			// console.log(data);
 		},
 		error : console.log
 	});
@@ -280,8 +280,8 @@ const deleteImg = () => {
 		processData : false, 
 		data : frmData,
 		success(data){
-			console.log(data);
-			document.querySelector(".my_profile").src = "${pageContext.request.contextPath}/image/망그러진곰.jpeg"
+			// console.log(data);
+			document.querySelector(".my_profile").src = "${pageContext.request.contextPath}/image/profile.png"
 		},
 		error : console.log
 	});
@@ -291,8 +291,6 @@ const deleteImg = () => {
 document.querySelectorAll(".open").forEach((open) => {
 	open.onclick = (e) => {
 		const target = e.target.parentElement.parentElement;
-		console.log(target);
-		
 		target.classList.add("hidden");
 		target.nextElementSibling.classList.add("show");
 		
@@ -303,8 +301,6 @@ document.querySelectorAll(".open").forEach((open) => {
 document.querySelectorAll(".close").forEach((close) => {
 	close.onclick = (e) => {
 		const target = e.target.parentElement.parentElement;
-		console.log(target); // .modify
-		
 		target.classList.remove("show");
 		target.previousElementSibling.classList.remove("hidden");
 		
@@ -317,7 +313,6 @@ document.querySelector("[name=oldPwd]").addEventListener('blur' ,(e) => {
 		url : "${pageContext.request.contextPath}/member/checkDuplicate",
 		data : {password : e.target.value},
 		success(data){
-			console.log(data);
 			if(data == 1) {
 				console.log(e.target.nextElementSibling);
 				e.target.nextElementSibling.classList.remove("show2");
@@ -345,7 +340,6 @@ const update = (keyType) => {
 			oldPwd.previousElementSibling.select();
 			return false;
 		}
-		console.log("비밀번호 일치하지않으면 찍히면 안됨");
 		
 		if(!/^[A-Za-z0-9!@#$%]{4,}$/.test(keyword.value)){
 			keyword.nextElementSibling.classList.add("show2");

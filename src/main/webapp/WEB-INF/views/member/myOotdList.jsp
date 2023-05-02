@@ -210,13 +210,17 @@ document.querySelector(".like").addEventListener('click', (e) => {
 	// 좋아요가 있을경우
 	if(checkPage > 0){
 		document.querySelector(".my_like_container").innerHTML = ''; // 초기화	
+		// 더보기 버튼 활성화
+		const button = document.querySelector("#btn-like-more");
+		button.disabled = false; 
+		button.style.cursor = "pointer";
 		
 		// 내 게시글에서 좋아요 수정했을시 대비
 		$.ajax({
 			url : '${pageContext.request.contextPath}/member/ootdLikeCnt',
 			dataType : "json",		
 			success(data){
-				console.log("좋아요 총 페이지수 : ", data);
+				// console.log("좋아요 총 페이지수 : ", data);
 				document.querySelector("#like-totalpage").innerHTML = data;
 			},
 			error : console.log
@@ -244,6 +248,10 @@ document.querySelector(".board").addEventListener('click', (e) => {
 	// 게시물이 있을경우
 	if(checkPage > 0){
 		document.querySelector(".my-ootd-container").innerHTML = ''; // 초기화		
+		// 더보기 버튼 활성화
+		const button = document.querySelector("#btn-post-more");
+		button.disabled = false; 
+		button.style.cursor = "pointer";
 		getPostPage(1);
 	}
 	
@@ -343,6 +351,7 @@ const getLikePage = (page) => {
 			
 			// 마지막페이지인 경우 더보기버튼 비활성화처리
 			if(page == endPage){
+				console.log("좋아요 page : ", page, "좋아요 마지막페이지 : ", endPage);
 				const button = document.querySelector("#btn-like-more");
 				button.disabled = true; // 버튼 비활성화
 				button.style.cursor = "not-allowed";

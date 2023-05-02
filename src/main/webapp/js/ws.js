@@ -2,19 +2,18 @@
 const ws = new WebSocket(`ws://${location.host}/OBTG/websocket`);
 
 ws.addEventListener('open', (e) => {
-	console.log('open : ', e);
+	// console.log('open : ', e);
 });
 
-
 ws.addEventListener('message', (e) => {
-	console.log('message : ', e);
+	// console.log('message : ', e);
 	const alarm = document.querySelector(".alarm_box");
 	const alarmWrap = document.querySelector(".alarm_container");
 	const alarmLog = document.querySelector(".alarm_log");
 	const newAlarm = document.querySelector(".new_alarm");
 	
 	const {message, messageType, datetime, sender, receiver} = JSON.parse(e.data);
-	console.log(message, messageType, datetime, sender, receiver);
+	// console.log(message, messageType, datetime, sender, receiver);
 	
 	switch(messageType){
 		case "NOTIFICATION" : 	

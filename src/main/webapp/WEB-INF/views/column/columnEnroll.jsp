@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/columnEnroll.css" />
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/columnEnroll.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -9,15 +9,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- 서머노트를 위해 추가해야할 부분 -->
-<script src="<%=request.getContextPath()%>/summernote/summernote-lite.js"></script>
-<script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/summernote/summernote-lite.css">
+<script src="${pageContext.request.contextPath}/summernote/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/summernote/summernote-lite.css">
 
 <section id="col_enroll">
 	<h2 style="text-align: center; padding: 20px; font-weight: bold">컬럼 작성폼</h2>
 	<form 
 		name="columnFrm"
-		action="<%= request.getContextPath() %>/column/columnEnroll" 
+		action="${pageContext.request.contextPath}/column/columnEnroll" 
 		enctype="multipart/form-data"
 		method="post"		
 	>
@@ -201,4 +201,4 @@ document.columnFrm.addEventListener("submit", (e) => {
 }); */
 </script>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

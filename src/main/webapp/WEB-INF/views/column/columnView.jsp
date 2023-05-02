@@ -14,7 +14,7 @@
     	</div>
         <h2><%= column.getTitle() %></h2>
         <h3><%= column.getSubtitle() %></h3>
-        <img src="<%= request.getContextPath() %>/upload/column/<%= column.getRenamedFilename() %>" alt="" style="width: 500px;">
+        <img src="${pageContext.request.contextPath}/upload/column/<%= column.getRenamedFilename() %>" alt="" style="width: 500px;">
         <p><%= column.getContent() %></p>
         <span id="editor">editor.<%= column.getWriter() %></span>
     </section>
@@ -27,7 +27,7 @@
     	<input type="button" value="delete" onclick="deleteColumn()"/>
     </div>
 <form 
-	action="<%= request.getContextPath() %>/column/columnDelete"
+	action="${pageContext.request.contextPath}/column/columnDelete"
 	method="post"
 	name="columnDeleteFrm">
 	<input type="hidden" name="no" value="<%= column.getNo() %>"/>
@@ -35,7 +35,7 @@
 <script>
 /* 컬럼 수정폼 요청 */
 const updateColumn = () => {
-	location.href = "<%= request.getContextPath() %>/column/columnUpdate?no=<%= column.getNo() %>";
+	location.href = "${pageContext.request.contextPath}/column/columnUpdate?no=<%= column.getNo() %>";
 };
 
 /* 컬럼 삭제 요청 */

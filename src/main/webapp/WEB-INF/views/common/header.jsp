@@ -27,9 +27,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.1.js"></script>
-<%-- <% if(loginMember != null){ %>
-<script src="${pageContext.request.contextPath}/js/ws.js"></script>
-<% } %> --%>
 
 <style>
 .menu__text:hover{

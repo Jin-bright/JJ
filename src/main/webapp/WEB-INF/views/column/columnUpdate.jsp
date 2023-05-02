@@ -130,7 +130,7 @@ document.columnUpdateFrm.addEventListener('submit', (e) => {
 		return false;
 	}
 	
-	// 이미지를 등록하지 않은 경우 폼제출 불가 - 이것도 왜 안되는데,,,,
+	// 이미지를 등록하지 않은 경우 폼제출 불가
 	if(img.src = ""){
 		alert("이미지를 등록해주세요.");
 		return false;

@@ -64,7 +64,7 @@
 /* 관심 */
 document.querySelectorAll(".wish").forEach((wish) => {
 	wish.onclick = (e) => {
-		console.log(e.target);
+		// console.log(e.target);
 		const no = e.target.dataset.boardNo;
 		
 		$.ajax({
